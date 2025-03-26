@@ -72,7 +72,25 @@ pander(head(df), digits = 6)
 ```
 
 ```{R}
+#| code-summary: print table
+library(dplyr)
+library(tidyr)
 
+# Ensure the result value column is numeric (coerce if needed)
+df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
+
+# Create a table that, for each combination of Organization.ID and Monitoring.Location.ID,
+# shows 1 if any non-NA DEP.Result.Value.Number exists for that DEP.Analyte.Name, 0 otherwise.
+presence_table <- df %>%
+  group_by(Organization.ID, Monitoring.Location.ID, DEP.Analyte.Name) %>%
+  summarize(presence = ifelse(any(!is.na(DEP.Result.Value.Number)), 1, 0),
+            .groups = "drop") %>%
+  pivot_wider(names_from = DEP.Analyte.Name,
+              values_from = presence,
+              values_fill = list(presence = 0))
+
+# Print the resulting table
+print(presence_table)
 ```
 
 TODO: 
