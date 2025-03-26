@@ -63,7 +63,7 @@ df <- read.table(text = full_text,
 
 ```
 ```{R}
-# # Print the first few rows of the dataframe
+#| code-summary: Print the first few rows of the dataframe
 # head(df)
 
 library(pander)
