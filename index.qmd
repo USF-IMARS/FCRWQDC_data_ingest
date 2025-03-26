@@ -2,6 +2,58 @@
 title: "WIN_data_ingest"
 ---
 
-This is a Quarto website.
+Data ingestion and initial analysis from FL WIN water quality database.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+```{R}
+#| code-summary: read in the WIN txt pipe-delimited file
+# Read the file into lines
+all_lines <- readLines("data/_WIN_WAVES_OTIS_D_1_21FLBROW.txt")
+
+# Locate the header line (assumes it starts with "Organization ID")
+header_index <- grep('^"Organization ID"', all_lines)[1]
+header_line <- all_lines[header_index]
+
+# Determine the expected number of columns based on the header line
+expected_cols <- length(strsplit(header_line, "\\|")[[1]])
+
+# All remaining lines after the header are data (but some may be split across lines)
+raw_data_lines <- all_lines[(header_index + 1):length(all_lines)]
+
+# Combine lines until each record has the expected number of delimiters (expected_cols - 1)
+combined_rows <- character(0)
+temp_row <- ""
+
+for (line in raw_data_lines) {
+  # If temp_row is empty, start with the current line; else, append with a newline separator.
+  temp_row <- if (temp_row == "") line else paste(temp_row, line, sep = "\n")
+  
+  # Count the number of delimiters in the current temp_row.
+  # (Each complete row should have one less delimiter than the number of columns.)
+  n_delim <- length(gregexpr("\\|", temp_row)[[1]])
+  
+  if (n_delim == (expected_cols - 1)) {
+    # When we have the right number of delimiters, assume the record is complete.
+    combined_rows <- c(combined_rows, temp_row)
+    temp_row <- ""  # Reset for the next record
+  }
+}
+# In case a record is left over
+if (temp_row != "") {
+  combined_rows <- c(combined_rows, temp_row)
+}
+
+# Reassemble a complete text block including the header
+full_text <- paste(c(header_line, combined_rows), collapse = "\n")
+
+# Now read the reassembled data using read.table
+df <- read.table(text = full_text,
+                 sep = "|",
+                 header = TRUE,
+                 quote = "\"",
+                 fill = TRUE,
+                 stringsAsFactors = FALSE)
+
+# Print the first few rows of the dataframe
+head(df)
+```
+
