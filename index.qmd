@@ -60,8 +60,13 @@ df <- read.table(text = full_text,
                  fill = TRUE,
                  stringsAsFactors = FALSE)
 
-# Print the first few rows of the dataframe
-head(df)
 
 ```
+```{R}
+# # Print the first few rows of the dataframe
+# head(df)
 
+library(pander)
+
+pander(head(df), digits = 6)
+```
