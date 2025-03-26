@@ -244,68 +244,411 @@ The following data met your selection criteria</code></pre>
 <span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>                 <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>                 <span class="at">quote =</span> <span class="st">"</span><span class="sc">\"</span><span class="st">"</span>,</span>
 <span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>                 <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first few rows of the dataframe</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>                 <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Organization.ID Monitoring.Location.ID  WBID       Activity.ID Activity.Type
-1        21FLBROW                     31  3283  200220-12:00-31S        Sample
-2        21FLBROW                    121  3276 170503-11:40-121S        Sample
-3        21FLBROW                    124  3281 190304-08:20-124S        Sample
-4        21FLBROW                     20 3277A  190905-12:50-20S        Sample
-5        21FLBROW                      8  3270   190909-13:15-8S        Sample
-6        21FLBROW                    124  3281 180625-09:10-124S        Sample
-  Activity.Start.Date.Time                Matrix Sample.Collection.Type
-1      02/20/2020 12:00:00 AQUEOUS-Surface Water      Intermediate Grab
-2      05/03/2017 11:40:00 AQUEOUS-Surface Water      Intermediate Grab
-3      03/04/2019 08:20:00 AQUEOUS-Surface Water      Intermediate Grab
-4      09/05/2019 12:50:00 AQUEOUS-Surface Water      Intermediate Grab
-5      09/09/2019 13:15:00 AQUEOUS-Surface Water      Intermediate Grab
-6      06/25/2018 09:10:00 AQUEOUS-Surface Water      Intermediate Grab
-  Sampling.Agency.Name Activity.Depth Activity.Depth.Unit Activity.Top.Depth
-1   BROWARD COUNTY DEP            0.5                   m                 NA
-2   BROWARD COUNTY DEP            0.5                   m                 NA
-3   BROWARD COUNTY DEP            0.5                   m                 NA
-4   BROWARD COUNTY DEP            0.5                   m                 NA
-5   BROWARD COUNTY DEP            0.5                   m                 NA
-6   BROWARD COUNTY DEP            0.5                   m                 NA
-  Activity.Bottom.Depth Activity.Depth.Top.Bottom.Unit DEP.Result.ID
-1                    NA                             NA       6430405
-2                    NA                             NA       6424852
-3                    NA                             NA       6424842
-4                    NA                             NA       6429682
-5                    NA                             NA       6424203
-6                    NA                             NA       6427055
-          DEP.Analyte.Name DEP.Result.Value.Number DEP.Result.Value.Text
-1                Turbidity                   0.550                    NA
-2              Ammonia (N)                   0.024                    NA
-3      Nitrate-Nitrite (N)                   0.202                    NA
-4 Nitrogen- Total Kjeldahl                   1.250                    NA
-5 Nitrogen- Total Kjeldahl                   1.170                    NA
-6                Turbidity                   2.600                    NA
-  DEP.Result.Unit DEP.MDL DEP.PQL Value.Qualifier Sample.Fraction Lab.ID
-1             NTU   0.080   0.080                                 E46053
-2            mg/L   0.016   0.064               I       Dissolved E46053
-3            mg/L   0.006   0.024                       Dissolved E46053
-4            mg/L   0.087   0.348                           Total E46053
-5            mg/L   0.087   0.348                           Total E46053
-6             NTU   0.100   0.400                                 E46053
-                                                                                                                                   Result.Comments
-1                                                                                                                                                 
-2 A J qualifier is assigned to TPO4 due to a batch duplicate recovery outside acceptable limits (observed 35.%, limits -24.1%, reference PAL#276).
-3                                                                                                                                                 
-4                                                                                                                                                 
-5                                                                                                                                                 
-6                                                                                                                                                 
-  Audit.Censored.Decisions
-1                       NA
-2                       NA
-3                       NA
-4                       NA
-5                       NA
-6                       NA</code></pre>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Print the first few rows of the dataframe</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># head(df)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(<span class="fu">head</span>(df), <span class="at">digits =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 11%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Organization.ID</th>
+<th style="text-align: center;">Monitoring.Location.ID</th>
+<th style="text-align: center;">WBID</th>
+<th style="text-align: center;">Activity.ID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">21FLBROW</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">3283</td>
+<td style="text-align: center;">200220-12:00-31S</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">21FLBROW</td>
+<td style="text-align: center;">121</td>
+<td style="text-align: center;">3276</td>
+<td style="text-align: center;">170503-11:40-121S</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">21FLBROW</td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">3281</td>
+<td style="text-align: center;">190304-08:20-124S</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">21FLBROW</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">3277A</td>
+<td style="text-align: center;">190905-12:50-20S</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">21FLBROW</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">3270</td>
+<td style="text-align: center;">190909-13:15-8S</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">21FLBROW</td>
+<td style="text-align: center;">124</td>
+<td style="text-align: center;">3281</td>
+<td style="text-align: center;">180625-09:10-124S</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 37%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Activity.Type</th>
+<th style="text-align: center;">Activity.Start.Date.Time</th>
+<th style="text-align: center;">Matrix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Sample</td>
+<td style="text-align: center;">02/20/2020 12:00:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sample</td>
+<td style="text-align: center;">05/03/2017 11:40:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Sample</td>
+<td style="text-align: center;">03/04/2019 08:20:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sample</td>
+<td style="text-align: center;">09/05/2019 12:50:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Sample</td>
+<td style="text-align: center;">09/09/2019 13:15:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sample</td>
+<td style="text-align: center;">06/25/2018 09:10:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 34%">
+<col style="width: 31%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Sample.Collection.Type</th>
+<th style="text-align: center;">Sampling.Agency.Name</th>
+<th style="text-align: center;">Activity.Depth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Intermediate Grab</td>
+<td style="text-align: center;">BROWARD COUNTY DEP</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Intermediate Grab</td>
+<td style="text-align: center;">BROWARD COUNTY DEP</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Intermediate Grab</td>
+<td style="text-align: center;">BROWARD COUNTY DEP</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Intermediate Grab</td>
+<td style="text-align: center;">BROWARD COUNTY DEP</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Intermediate Grab</td>
+<td style="text-align: center;">BROWARD COUNTY DEP</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Intermediate Grab</td>
+<td style="text-align: center;">BROWARD COUNTY DEP</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 29%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Activity.Depth.Unit</th>
+<th style="text-align: center;">Activity.Top.Depth</th>
+<th style="text-align: center;">Activity.Bottom.Depth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">m</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 43%">
+<col style="width: 21%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Activity.Depth.Top.Bottom.Unit</th>
+<th style="text-align: center;">DEP.Result.ID</th>
+<th style="text-align: center;">DEP.Analyte.Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">6430405</td>
+<td style="text-align: center;">Turbidity</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">6424852</td>
+<td style="text-align: center;">Ammonia (N)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">6424842</td>
+<td style="text-align: center;">Nitrate-Nitrite (N)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">6429682</td>
+<td style="text-align: center;">Nitrogen- Total Kjeldahl</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">6424203</td>
+<td style="text-align: center;">Nitrogen- Total Kjeldahl</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">6427055</td>
+<td style="text-align: center;">Turbidity</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 30%">
+<col style="width: 23%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">DEP.Result.Value.Number</th>
+<th style="text-align: center;">DEP.Result.Value.Text</th>
+<th style="text-align: center;">DEP.Result.Unit</th>
+<th style="text-align: center;">DEP.MDL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.55</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NTU</td>
+<td style="text-align: center;">0.08</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.024</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.016</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.202</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.006</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1.25</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.087</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1.17</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.087</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2.6</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NTU</td>
+<td style="text-align: center;">0.1</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">DEP.PQL</th>
+<th style="text-align: center;">Value.Qualifier</th>
+<th style="text-align: center;">Sample.Fraction</th>
+<th style="text-align: center;">Lab.ID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0.08</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E46053</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.064</td>
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">Dissolved</td>
+<td style="text-align: center;">E46053</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.024</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Dissolved</td>
+<td style="text-align: center;">E46053</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.348</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E46053</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.348</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E46053</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0.4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">E46053</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Result.Comments</th>
+<th style="text-align: center;">Audit.Censored.Decisions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">A J qualifier is assigned to TPO4 due to a batch duplicate recovery outside acceptable limits (observed 35.%, limits -24.1%, reference PAL#276).</td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -404,7 +747,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/USF-IMARS\.github\.io\/WIN_data_ingest\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
