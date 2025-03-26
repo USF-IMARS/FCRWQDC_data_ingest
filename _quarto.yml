@@ -8,7 +8,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-
+      - href: https://github.com/USF-IMaRS/WIN_data_ingest
+        text: Source Code on GitHub
 format:
   html:
     theme: cosmo

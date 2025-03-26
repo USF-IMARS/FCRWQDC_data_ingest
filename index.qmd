@@ -7,7 +7,7 @@ Data ingestion and initial analysis from FL WIN water quality database.
 ```{R}
 #| code-summary: read in the WIN txt pipe-delimited file
 # Read all lines from the file
-all_lines <- readLines("data/_WIN_WAVES_OTIS_D_1_21FLBROW.txt")
+all_lines <- readLines("data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt")
 
 # Locate the header line (assumes it starts with "Organization ID")
 header_index <- grep('^"Organization ID"', all_lines)[1]
@@ -70,3 +70,19 @@ library(pander)
 
 pander(head(df), digits = 6)
 ```
+
+```{R}
+
+```
+
+TODO: 
+
+what are the parameters for each provider
+
+unique(station ids) (table w/ param presence/absence)
+
+map? maybe Tina's has lat+lon
+
+------------------------------------------------------------------
+
+If you have more visualization ideas for this data, please open a github issue [here](https://github.com/USF-IMARS/WIN_data_ingest/issues).
