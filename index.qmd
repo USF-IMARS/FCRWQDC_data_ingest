@@ -6,46 +6,53 @@ Data ingestion and initial analysis from FL WIN water quality database.
 
 ```{R}
 #| code-summary: read in the WIN txt pipe-delimited file
-# Read the file into lines
+# Read all lines from the file
 all_lines <- readLines("data/_WIN_WAVES_OTIS_D_1_21FLBROW.txt")
 
 # Locate the header line (assumes it starts with "Organization ID")
 header_index <- grep('^"Organization ID"', all_lines)[1]
+
+# Print the skipped lines (everything before the header)
+cat("Skipped lines:\n")
+cat(all_lines[1:(header_index - 1)], sep = "\n")
+cat("\n\n")
+
+# Extract the header line
 header_line <- all_lines[header_index]
 
 # Determine the expected number of columns based on the header line
 expected_cols <- length(strsplit(header_line, "\\|")[[1]])
 
-# All remaining lines after the header are data (but some may be split across lines)
+# Extract all remaining lines (which may contain multi-line records)
 raw_data_lines <- all_lines[(header_index + 1):length(all_lines)]
 
-# Combine lines until each record has the expected number of delimiters (expected_cols - 1)
+# Reassemble rows by combining lines until the number of delimiters (pipes) matches expectation.
 combined_rows <- character(0)
 temp_row <- ""
 
 for (line in raw_data_lines) {
-  # If temp_row is empty, start with the current line; else, append with a newline separator.
+  # Start a new temporary row or append to the existing one
   temp_row <- if (temp_row == "") line else paste(temp_row, line, sep = "\n")
   
-  # Count the number of delimiters in the current temp_row.
-  # (Each complete row should have one less delimiter than the number of columns.)
+  # Count the number of pipe delimiters in temp_row
   n_delim <- length(gregexpr("\\|", temp_row)[[1]])
   
+  # If the row has the expected number of delimiters (one less than columns), it's complete.
   if (n_delim == (expected_cols - 1)) {
-    # When we have the right number of delimiters, assume the record is complete.
     combined_rows <- c(combined_rows, temp_row)
     temp_row <- ""  # Reset for the next record
   }
 }
-# In case a record is left over
+
+# In case any data remains in temp_row, add it as a record
 if (temp_row != "") {
   combined_rows <- c(combined_rows, temp_row)
 }
 
-# Reassemble a complete text block including the header
+# Reassemble the complete text with header and data rows
 full_text <- paste(c(header_line, combined_rows), collapse = "\n")
 
-# Now read the reassembled data using read.table
+# Read the data from the reassembled text
 df <- read.table(text = full_text,
                  sep = "|",
                  header = TRUE,
@@ -55,5 +62,6 @@ df <- read.table(text = full_text,
 
 # Print the first few rows of the dataframe
 head(df)
+
 ```
 
