@@ -4,7 +4,7 @@ title: "WIN_data_ingest"
 
 Data ingestion and initial analysis from FL WIN water quality database.
 
-```{R}
+```{R read WIN file}
 #| code-summary: read in the WIN txt pipe-delimited file
 # Read all lines from the file
 all_lines <- readLines("data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt")
@@ -62,7 +62,7 @@ df <- read.table(text = full_text,
 
 
 ```
-```{R}
+```{R print first lines of WIN file}
 #| code-summary: Print the first few rows of the dataframe
 # head(df)
 
@@ -71,7 +71,8 @@ library(pander)
 pander(head(df), digits = 6)
 ```
 
-```{R}
+## Organization Contributions
+```{R print table of sites & params}
 #| code-summary: print table
 library(dplyr)
 library(tidyr)
@@ -90,16 +91,46 @@ presence_table <- df %>%
               values_fill = list(presence = 0))
 
 # Print the resulting table
-print(presence_table)
+# print(presence_table)
+
+library(DT)
+
+# Determine which columns correspond to analytes (i.e. presence/absence columns)
+analyte_cols <- setdiff(names(presence_table), c("Organization.ID", "Monitoring.Location.ID"))
+
+# Create an interactive datatable with pagination disabled (show all rows)
+datatable(presence_table, options = list(paging = FALSE)) %>%
+  formatStyle(
+    columns = analyte_cols,
+    backgroundColor = styleEqual(c(0, 1), c("lightcoral", "lightgreen"))
+  )
 ```
 
-TODO: 
 
-what are the parameters for each provider
 
-unique(station ids) (table w/ param presence/absence)
+```{R create map }
+#| code-summary: create map
+library(leaflet)
+library(dplyr)
 
-map? maybe Tina's has lat+lon
+# Filter out rows with missing coordinate data
+df_map <- df %>% filter(!is.na(DEP.Latitude) & !is.na(DEP.Longitude))
+
+# Create a zoomable, interactive map with clustered circle markers for improved performance
+leaflet(df_map) %>%
+  addProviderTiles(providers$OpenStreetMap) %>%  # Use OpenStreetMap tiles
+  addCircleMarkers(
+    lng = ~DEP.Longitude, 
+    lat = ~DEP.Latitude, 
+    radius = 4,
+    color = "blue",
+    fillOpacity = 0.5,
+    popup = ~paste("Organization:", Organization.ID, "<br>",
+                   "Monitoring Location:", Monitoring.Location.ID),
+    clusterOptions = markerClusterOptions()  # Enable clustering
+  )
+
+```
 
 ------------------------------------------------------------------
 
