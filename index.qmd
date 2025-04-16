@@ -6,59 +6,8 @@ Data ingestion and initial analysis from FL WIN water quality database.
 
 ```{R read WIN file}
 #| code-summary: read in the WIN txt pipe-delimited file
-# Read all lines from the file
-all_lines <- readLines("data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt")
-
-# Locate the header line (assumes it starts with "Organization ID")
-header_index <- grep('^"Organization ID"', all_lines)[1]
-
-# Print the skipped lines (everything before the header)
-cat("Skipped lines:\n")
-cat(all_lines[1:(header_index - 1)], sep = "\n")
-cat("\n\n")
-
-# Extract the header line
-header_line <- all_lines[header_index]
-
-# Determine the expected number of columns based on the header line
-expected_cols <- length(strsplit(header_line, "\\|")[[1]])
-
-# Extract all remaining lines (which may contain multi-line records)
-raw_data_lines <- all_lines[(header_index + 1):length(all_lines)]
-
-# Reassemble rows by combining lines until the number of delimiters (pipes) matches expectation.
-combined_rows <- character(0)
-temp_row <- ""
-
-for (line in raw_data_lines) {
-  # Start a new temporary row or append to the existing one
-  temp_row <- if (temp_row == "") line else paste(temp_row, line, sep = "\n")
-  
-  # Count the number of pipe delimiters in temp_row
-  n_delim <- length(gregexpr("\\|", temp_row)[[1]])
-  
-  # If the row has the expected number of delimiters (one less than columns), it's complete.
-  if (n_delim == (expected_cols - 1)) {
-    combined_rows <- c(combined_rows, temp_row)
-    temp_row <- ""  # Reset for the next record
-  }
-}
-
-# In case any data remains in temp_row, add it as a record
-if (temp_row != "") {
-  combined_rows <- c(combined_rows, temp_row)
-}
-
-# Reassemble the complete text with header and data rows
-full_text <- paste(c(header_line, combined_rows), collapse = "\n")
-
-# Read the data from the reassembled text
-df <- read.table(text = full_text,
-                 sep = "|",
-                 header = TRUE,
-                 quote = "\"",
-                 fill = TRUE,
-                 stringsAsFactors = FALSE)
+source("R/getData.R")
+df <- getData("data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt")
 
 
 ```
@@ -71,67 +20,7 @@ library(pander)
 pander(head(df), digits = 6)
 ```
 
-## Organization Contributions
-```{R print table of sites & params}
-#| code-summary: print table
-library(dplyr)
-library(tidyr)
-
-# Ensure the result value column is numeric (coerce if needed)
-df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
-
-# Create a table that, for each combination of Organization.ID and Monitoring.Location.ID,
-# shows 1 if any non-NA DEP.Result.Value.Number exists for that DEP.Analyte.Name, 0 otherwise.
-presence_table <- df %>%
-  group_by(Organization.ID, Monitoring.Location.ID, DEP.Analyte.Name) %>%
-  summarize(presence = ifelse(any(!is.na(DEP.Result.Value.Number)), 1, 0),
-            .groups = "drop") %>%
-  pivot_wider(names_from = DEP.Analyte.Name,
-              values_from = presence,
-              values_fill = list(presence = 0))
-
-# Print the resulting table
-# print(presence_table)
-
-library(DT)
-
-# Determine which columns correspond to analytes (i.e. presence/absence columns)
-analyte_cols <- setdiff(names(presence_table), c("Organization.ID", "Monitoring.Location.ID"))
-
-# Create an interactive datatable with pagination disabled (show all rows)
-datatable(presence_table, options = list(paging = FALSE)) %>%
-  formatStyle(
-    columns = analyte_cols,
-    backgroundColor = styleEqual(c(0, 1), c("lightcoral", "lightgreen"))
-  )
-```
-
-
-
-```{R create map }
-#| code-summary: create map
-library(leaflet)
-library(dplyr)
-
-# Filter out rows with missing coordinate data
-df_map <- df %>% filter(!is.na(DEP.Latitude) & !is.na(DEP.Longitude))
-
-# Create a zoomable, interactive map with clustered circle markers for improved performance
-leaflet(df_map) %>%
-  addProviderTiles(providers$OpenStreetMap) %>%  # Use OpenStreetMap tiles
-  addCircleMarkers(
-    lng = ~DEP.Longitude, 
-    lat = ~DEP.Latitude, 
-    radius = 4,
-    color = "blue",
-    fillOpacity = 0.5,
-    popup = ~paste("Organization:", Organization.ID, "<br>",
-                   "Monitoring Location:", Monitoring.Location.ID),
-    clusterOptions = markerClusterOptions()  # Enable clustering
-  )
-
-```
 
 ------------------------------------------------------------------
 
-If you have more visualization ideas for this data, please open a github issue [here](https://github.com/USF-IMARS/WIN_data_ingest/issues).
+If you have visualization ideas for this data, please open a github issue [here](https://github.com/USF-IMARS/WIN_data_ingest/issues).
