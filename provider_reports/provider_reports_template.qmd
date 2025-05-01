@@ -17,7 +17,7 @@ librarian::shelf(
 ```{R getData}
 #| code-summary: read in the WIN txt pipe-delimited file
 source(here("R/getData.R"))
-df <- getData(glue("data/_WIN_WAVES_OTIS_{params$org_id}.txt"))
+df <- getData(here(glue("data/_WIN_WAVES_OTIS_{params$org_id}.txt")))
 
 # Ensure the result value column is numeric (coerce if needed)
 df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
@@ -108,5 +108,8 @@ leaflet(df_unique_locs) %>%
     )
     # clusterOptions removed to show every point at all zoom levels
   )
-
 ```
+
+-----------
+
+[Download Data For This Provider](`{r} glue("../data/_WIN_WAVES_OTIS_{params$org_id}.txt")`)
