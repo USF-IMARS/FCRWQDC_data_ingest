@@ -1,6 +1,8 @@
 getData <- function(
-    fpath = "data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt"
+    programName
 ){
+  fpath <- glue("data/_WIN_WAVES_OTIS_{programName}.txt")
+  
   all_lines <- readLines(here(fpath))
   
   # Locate the header line (assumes it starts with "Organization ID")

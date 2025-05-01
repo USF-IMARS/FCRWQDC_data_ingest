@@ -5,7 +5,7 @@ title: "WIN_data_ingest"
 Data ingestion and initial analysis from FL WIN water quality database.
 
 ```{R read WIN file}
-#| code-summary: read in the WIN txt pipe-delimited file
+#| code-summary: read in the WIN txt pipe-delimited file for example program.
 librarian::shelf(
   dplyr,
   glue,
@@ -14,7 +14,7 @@ librarian::shelf(
 )
 
 source("R/getData.R")
-df <- getData("data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt")
+df <- getData("BBAP")
 
 
 ```
