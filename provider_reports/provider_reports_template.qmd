@@ -85,25 +85,29 @@ ggplot(heat_long,
 
 
 ```{R create map }
-#| code-summary: create map
+#| code-summary: create map with unique points (no clustering)
 library(leaflet)
 library(dplyr)
 
-# Filter out rows with missing coordinate data
-df_map <- df %>% filter(!is.na(DEP.Latitude) & !is.na(DEP.Longitude))
+# 1. Filter out rows & keep only one per unique lat/lon
+df_unique_locs <- df %>%
+  filter(!is.na(DEP.Latitude), !is.na(DEP.Longitude)) %>%
+  distinct(DEP.Latitude, DEP.Longitude, .keep_all = TRUE)
 
-# Create a zoomable, interactive map with clustered circle markers for improved performance
-leaflet(df_map) %>%
-  addProviderTiles(providers$OpenStreetMap) %>%  # Use OpenStreetMap tiles
+# 2. Plot all unique points (no clustering)
+leaflet(df_unique_locs) %>%
+  addProviderTiles(providers$OpenStreetMap) %>%
   addCircleMarkers(
-    lng = ~DEP.Longitude, 
-    lat = ~DEP.Latitude, 
-    radius = 4,
-    color = "blue",
+    lng         = ~DEP.Longitude,
+    lat         = ~DEP.Latitude,
+    radius      = 4,
+    color       = "blue",
     fillOpacity = 0.5,
-    popup = ~paste("Organization:", Organization.ID, "<br>",
-                   "Monitoring Location:", Monitoring.Location.ID),
-    clusterOptions = markerClusterOptions()  # Enable clustering
+    popup       = ~paste0(
+      "Organization: ", Organization.ID, "<br>",
+      "Monitoring Location: ", Monitoring.Location.ID
+    )
+    # clusterOptions removed to show every point at all zoom levels
   )
 
 ```
