@@ -24,7 +24,7 @@ df <- getData() %>%
 df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
 ```
 
-```{R analyte presence table}
+```{R create presence table}
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -53,7 +53,9 @@ heat_long <- presence_table %>%
     names_to  = "DEP.Analyte.Name",
     values_to = "presence"
   )
+```
 
+```{R analyte presence table, fig.width=10, fig.height= max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2)}
 # 4. Draw the heatmap with a white→steelblue gradient
 ggplot(heat_long,
        aes(x = DEP.Analyte.Name,
@@ -80,6 +82,7 @@ ggplot(heat_long,
 
 
 ```
+
 
 ```{R create map }
 #| code-summary: create map

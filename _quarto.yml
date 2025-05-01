@@ -1,5 +1,8 @@
 project:
   type: website
+  pre-render: pre_render/provider_reports.R
+  render:
+    - "*.qmd"
 
 website:
   title: "WIN_data_ingest"
@@ -7,6 +10,7 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - provider_reports/provider_reports.qmd
       - about.qmd
       - href: https://github.com/USF-IMaRS/WIN_data_ingest
         text: Source Code on GitHub

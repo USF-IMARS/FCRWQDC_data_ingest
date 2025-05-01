@@ -6,6 +6,13 @@ Data ingestion and initial analysis from FL WIN water quality database.
 
 ```{R read WIN file}
 #| code-summary: read in the WIN txt pipe-delimited file
+librarian::shelf(
+  dplyr,
+  glue,
+  here,
+  tidyr
+)
+
 source("R/getData.R")
 df <- getData("data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt")
 
