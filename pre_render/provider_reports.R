@@ -36,18 +36,11 @@ dir.create(REPORTS_DIR, showWarnings=FALSE)
 # =====================================================================
 # Set the root directory where the folders are located
 source(here("R/getData.R"))
-df <- getData()
-
-# extract and print distinct Organization.ID
-orgs <- 
-  distinct(df, `Organization.ID`) %>% 
-  pull(`Organization.ID`)
-
-print(orgs)
-
-# 
-# # Loop through each unique & render
-for (org_id in orgs) {
+# for each file in /data directory:
+data_files <- list.files(here("data"), pattern = "_WIN_WAVES_OTIS_.*\\.txt$", full.names = FALSE)
+for (file in data_files) {
+  # Extract org_id from filename using regex pattern
+  org_id <- gsub("^_WIN_WAVES_OTIS_(.+)\\.txt$", "\\1", file)
   params = list(
     org_id = org_id
   )

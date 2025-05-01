@@ -3,7 +3,7 @@ title: "21FLKNMS Report"
 author: "Tylar Murray"
 format: html
 params: 
-  org_id: 21FLKNMS
+  org_id: BROWARD
 ---
 
 ```{R setup}
@@ -17,8 +17,7 @@ librarian::shelf(
 ```{R getData}
 #| code-summary: read in the WIN txt pipe-delimited file
 source(here("R/getData.R"))
-df <- getData() %>%
-  filter(`Organization.ID` == params$org_id)
+df <- getData(glue("data/_WIN_WAVES_OTIS_{params$org_id}.txt"))
 
 # Ensure the result value column is numeric (coerce if needed)
 df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
@@ -91,15 +90,15 @@ library(dplyr)
 
 # 1. Filter out rows & keep only one per unique lat/lon
 df_unique_locs <- df %>%
-  filter(!is.na(DEP.Latitude), !is.na(DEP.Longitude)) %>%
-  distinct(DEP.Latitude, DEP.Longitude, .keep_all = TRUE)
+  filter(!is.na(Org.Decimal.Latitude), !is.na(Org.Decimal.Longitude)) %>%
+  distinct(Org.Decimal.Latitude, Org.Decimal.Longitude, .keep_all = TRUE)
 
 # 2. Plot all unique points (no clustering)
 leaflet(df_unique_locs) %>%
   addProviderTiles(providers$OpenStreetMap) %>%
   addCircleMarkers(
-    lng         = ~DEP.Longitude,
-    lat         = ~DEP.Latitude,
+    lng         = ~Org.Decimal.Longitude,
+    lat         = ~Org.Decimal.Latitude,
     radius      = 4,
     color       = "blue",
     fillOpacity = 0.5,
