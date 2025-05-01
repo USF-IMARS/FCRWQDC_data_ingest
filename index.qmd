@@ -2,7 +2,11 @@
 title: "WIN_data_ingest"
 ---
 
-Data ingestion and initial analysis from FL WIN water quality database.
+Data ingestion and initial analysis from FL WIN water quality database and  other sources.
+
+Below is a demonstration of how to load the data.
+
+For more information about the data please see "Provider Reports" in the top navigation.
 
 ```{R read WIN file}
 #| code-summary: read in the WIN txt pipe-delimited file for example program.
