@@ -26,7 +26,7 @@ REPORTS_DIR <- here(glue("{REPORT_NAME}/{REPORT_NAME}"))
 # TODO: do this using `double_param_the_yaml()`
 templ <- readLines(REPORT_TEMPLATE)
 templ <- gsub(
-  "21FLKNMS", "{{org_id}}", templ
+  "BROWARD", "{{org_id}}", templ
 )
 
 dir.create(REPORTS_DIR, showWarnings=FALSE)
@@ -36,11 +36,9 @@ dir.create(REPORTS_DIR, showWarnings=FALSE)
 # =====================================================================
 # Set the root directory where the folders are located
 source(here("R/getData.R"))
-# for each file in /data directory:
-data_files <- list.files(here("data"), pattern = "_WIN_WAVES_OTIS_.*\\.txt$", full.names = FALSE)
-for (file in data_files) {
-  # Extract org_id from filename using regex pattern
-  org_id <- gsub("^_WIN_WAVES_OTIS_(.+)\\.txt$", "\\1", file)
+
+# function to create template
+create_template <- function(org_id) {
   params = list(
     org_id = org_id
   )
@@ -50,3 +48,13 @@ for (file in data_files) {
     file.path(REPORTS_DIR, glue("{org_id}.qmd"))
   )
 }
+
+# for each WIN data file in /data directory:
+data_files <- list.files(here("data"), pattern = "_WIN_WAVES_OTIS_.*\\.txt$", full.names = FALSE)
+for (file in data_files) {
+  # Extract org_id from filename using regex pattern
+  org_id <- gsub("^_WIN_WAVES_OTIS_(.+)\\.txt$", "\\1", file)
+  create_template(org_id)
+}
+# also create template for SFER
+create_template("SFER")
