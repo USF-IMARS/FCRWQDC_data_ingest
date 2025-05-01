@@ -17,7 +17,7 @@ librarian::shelf(
 ```{R getData}
 #| code-summary: read in the WIN txt pipe-delimited file
 source(here("R/getData.R"))
-df <- getData(here(glue("data/_WIN_WAVES_OTIS_{params$org_id}.txt")))
+df <- getData(params$org_id)
 
 # Ensure the result value column is numeric (coerce if needed)
 df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
