@@ -1,5 +1,5 @@
 ---
-title: "21FLKNMS Report"
+title: "BROWARD Report"
 author: "Tylar Murray"
 format: html
 params: 
@@ -109,6 +109,51 @@ leaflet(df_unique_locs) %>%
       "Monitoring Location: ", Monitoring.Location.ID
     )
     # clusterOptions removed to show every point at all zoom levels
+  )
+```
+
+```{R visualize distribution of points through time}
+#| code-summary: visualize distribution of points through time
+library(ggplot2)
+library(lubridate)
+
+# Convert Activity.Start.Date.Time to proper datetime if it isn't already
+df$`Activity.Start.Date.Time` <- as.POSIXct(as.character(df$`Activity.Start.Date.Time`), format = "%m/%d/%Y %H:%M:%S")
+
+
+# Create a dataframe with unique sampling events
+sampling_events <- df %>%
+  distinct(`Activity.Start.Date.Time`, Monitoring.Location.ID) %>%
+  arrange(`Activity.Start.Date.Time`)
+
+# Create the time distribution plot
+ggplot(sampling_events, aes(x = `Activity.Start.Date.Time`)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white", alpha = 0.7) +
+  labs(
+    title = "Distribution of Sampling Events Over Time",
+    x = "Date",
+    y = "Number of Sampling Events"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
+
+# Create a heatmap of sampling locations over time
+ggplot(sampling_events, 
+       aes(x = `Activity.Start.Date.Time`, 
+           y = Monitoring.Location.ID)) +
+  geom_point(color = "steelblue", alpha = 0.7) +
+  labs(
+    title = "Sampling Locations Over Time",
+    x = "Date",
+    y = "Monitoring Location ID"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank()
   )
 ```
 
