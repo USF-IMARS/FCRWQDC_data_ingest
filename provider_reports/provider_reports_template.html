@@ -8,7 +8,7 @@
 
 <meta name="author" content="Tylar Murray">
 
-<title>21FLKNMS Report – WIN_data_ingest</title>
+<title>BROWARD Report – WIN_data_ingest</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,11 +113,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/leaflet-binding-2.2.2/leaflet.js"></script>
 <script src="../site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
 <script src="../site_libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
-<link href="../site_libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet">
-<link href="../site_libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet">
-<script src="../site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
-<script src="../site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
-<script src="../site_libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -149,10 +144,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Provider Reports</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="https://github.com/USF-IMaRS/WIN_data_ingest"> 
 <span class="menu-text">Source Code on GitHub</span></a>
   </li>  
@@ -175,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">21FLKNMS Report</h1>
+<h1 class="title">BROWARD Report</h1>
 </div>
 
 
@@ -198,6 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>WQ Provider Report</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -213,20 +205,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>read in the WIN txt pipe-delimited file</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Organization.ID</span><span class="st">`</span> <span class="sc">==</span> params<span class="sc">$</span>org_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Skipped lines:
 Requested report - WIN WAVES
-PROJECT ID - PROJECT NAME = PROJ-001 - Surfacewater Quality Monitoring Network | WQMP - Water Quality Monitoring Program | JTDIEOFF - Julia Tuttle Die-Off Monitoring | FKNMSFIELD - FKNMS-DEP Field Sampling | WQMP - Water Quality Monitoring Program | EPA - Water Quality Monitoring Program | SJCUD RIVER SAMPLING - Water Quality Monitoring Program | BBWQ - Biscayne Bay Water Quality | WQMP - Water Quality Monitoring Program | BBWQ - Biscayne Bay Water Quality Monitoring Program | WQMP - Water Quality Monitoring Program | ERMWQ - PBC ERM Ambient Water Quality Monitoring | WQMP - Tampa Bay Water Alafia River Watershed Water Quality Monitoring
-PROJECT INTENDED USE = Routine Monitoring | IWR Assessment/TMDL Listing | Modeling | 319 Program | BMAP | Trend Analysis | Event Response
-COUNTY = BROWARD, FLORIDA | MARTIN, FLORIDA | MIAMI-DADE, FLORIDA | MONROE, FLORIDA | PALM BEACH, FLORIDA
-DEP ANALYTE GROUP = General Physical-Chemical | Field Observation | Nutrients
-DEP ANALYTE NAME - UNIT = Ammonia (N) - mg/kg | Ammonia (N) - mg/L | Nitrogen- Total Kjeldahl - mg/kg | Nitrogen- Total Kjeldahl - mg/L | Nitrate (N) - mg/L | Nitrate-Nitrite (N) - mg/kg | Nitrate-Nitrite (N) - mg/L | Nitrite (N) - mg/kg | Nitrite (N) - mg/L | Orthophosphate (P) - mg/L | pH - SU | Phosphorus- Total - mg/kg | Phosphorus- Total - mg/L | Salinity - PSU | Carbon- Organic - mg/kg | Carbon- Organic - mg/L | Nitrogen- Total - mg/L | Silica (SiO2) - mg/L | Dissolved Oxygen - mg/L | Temperature, Water - deg C | Carbon- Total - mg/kg | Silicate - mg/L
-Report Run on MARCH 4, 2025
+ORGANIZATION ID = 21FLBROW
+PROJECT ID - PROJECT NAME = PROJ-001 - Surfacewater Quality Monitoring Network
+COUNTY = BROWARD, FLORIDA
+DEP ANALYTE GROUP = General Physical-Chemical | Biological | Nutrients
+DEP ANALYTE NAME - UNIT = Ammonia (N) - mg/L | Nitrogen- Total Kjeldahl - mg/L | Nitrate-Nitrite (N) - mg/L | Orthophosphate (P) - mg/L | pH - SU | Phosphorus- Total - mg/L | Salinity - PSU | Turbidity - NTU | Nitrogen- Total - mg/L | Dissolved Oxygen - mg/L | Temperature, Water - deg C | Chlorophyll a- corrected - ug/L | Ammonia- Un-ionized (NH3) - mg/L
+Report Run on APRIL 28, 2025
 The data you are accessing are from the WIN Warehouse.  The WIN Warehouse is refreshed on a weekly basis with new data that are submitted to WIN.  The refresh process occurs on the weekend; data uploaded to WIN through each Friday are available in the WIN Warehouse by the following Monday.  WIN replaces Florida STORET as an active data repository.  Florida STORET data are accessible through STORET Public Access (SPA).
-The following data met your selection criteria</code></pre>
+The following data met your selection criteria
+
+
+Converted 0 latitude values from DMS to decimal format.
+Converted 0 longitude values from DMS to decimal format.</code></pre>
 </div>
 <details class="code-fold">
 <summary>read in the WIN txt pipe-delimited file</summary>
@@ -304,32 +299,99 @@ The following data met your selection criteria</code></pre>
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>create map</summary>
+<summary>create map with unique points (no clustering)</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out rows with missing coordinate data</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_map <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(DEP.Latitude) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(DEP.Longitude))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a zoomable, interactive map with clustered circle markers for improved performance</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(df_map) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap) <span class="sc">%&gt;%</span>  <span class="co"># Use OpenStreetMap tiles</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng =</span> <span class="sc">~</span>DEP.Longitude, </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="sc">~</span>DEP.Latitude, </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius =</span> <span class="dv">4</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span>,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.5</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"Organization:"</span>, Organization.ID, <span class="st">"&lt;br&gt;"</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Monitoring Location:"</span>, Monitoring.Location.ID),</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">clusterOptions =</span> <span class="fu">markerClusterOptions</span>()  <span class="co"># Enable clustering</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Filter out rows &amp; keep only one per unique lat/lon</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_unique_locs <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Org.Decimal.Latitude), <span class="sc">!</span><span class="fu">is.na</span>(Org.Decimal.Longitude)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Org.Decimal.Latitude, Org.Decimal.Longitude, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Plot all unique points (no clustering)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(df_unique_locs) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap) <span class="sc">%&gt;%</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng         =</span> <span class="sc">~</span>Org.Decimal.Longitude,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat         =</span> <span class="sc">~</span>Org.Decimal.Latitude,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius      =</span> <span class="dv">4</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color       =</span> <span class="st">"blue"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity =</span> <span class="fl">0.5</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup       =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Monitoring Location: "</span>, Monitoring.Location.ID</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># clusterOptions removed to show every point at all zoom levels</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-9205adef4e9adce45d69" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-9205adef4e9adce45d69">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[24.662399976,25.223719986,25.170929986,24.892988986,24.567599986,24.889213986,24.892988986,24.626899972,24.611699972,24.692099986,24.892988986,24.892988986,24.730785986,24.614927986,24.730785986,24.730785986,25.170929986,24.561499986,24.567599986,24.892988986,24.626899972,24.730785986,25.170929986,24.662399976,25.170929986,24.626899972,24.614927986,24.654839986,24.662399976,24.730785986,24.892988986,24.662399976,25.223719986,25.170929986,24.892988986,24.730785986,24.567599986,24.611699972,24.692099986,25.170929986,24.654839986,25.223719986,24.692099986,24.614927986,24.611699972,24.626899972,25.223719986,24.889213986,24.730785986,24.565299986,24.892988986,25.170929986,24.730785986,24.567599986,24.892988986,24.654839986,24.641214986,24.889213986,24.889213986,24.626899972,24.611699972,24.626899972,24.561499986,25.170929986,24.692099986,24.641214986,24.730785986,24.889213986,24.614927986,24.892988986,24.614927986,25.170929986,24.692099986,24.641214986,25.223719986,24.561499986,24.892988986,24.730785986,24.641214986,24.641214986,24.565299986,24.889213986,25.170929986,24.641214986,24.889213986,25.223719986,24.641214986,24.654839986,24.889213986,24.641214986,25.223719986,24.654839986,24.641214986,25.170929986,24.692099986,24.892988986,24.611699972,24.662399976,24.692099986,24.654839986,24.641214986,24.662399976,24.614927986,24.641214986,24.614927986,25.223719986,24.889213986,24.892988986,24.730785986,24.692099986,25.223719986,24.611699972,24.662399976,24.614927986,24.641214986,24.654839986,24.611699972,25.170929986,25.170929986,24.565299986,24.889213986,24.889213986,24.654839986,24.626899972,24.654839986,24.889213986,24.892988986,24.889213986,24.889213986,24.730785986,25.170929986,24.654839986,24.692099986,24.692099986,24.614927986,24.654839986,24.561499986,24.565299986,24.654839986,24.626899972,24.611699972,24.662399976,24.654839986,24.614927986,24.692099986,24.692099986,24.641214986],[-82.92740000000001,-80.32739100000001,-80.36711,-80.66897,-81.7355,-80.677644,-80.66897,-82.8723,-82.8702,-81.0874,-80.66897,-80.66897,-81.028902,-81.393874,-81.028902,-81.028902,-80.36711,-81.73520000000001,-81.7355,-80.66897,-82.8723,-81.028902,-80.36711,-82.92740000000001,-80.36711,-82.8723,-81.393874,-81.36896,-82.92740000000001,-81.028902,-80.66897,-82.92740000000001,-80.32739100000001,-80.36711,-80.66897,-81.028902,-81.7355,-82.8702,-81.0874,-80.36711,-81.36896,-80.32739100000001,-81.0874,-81.393874,-82.8702,-82.8723,-80.32739100000001,-80.677644,-81.028902,-81.7351,-80.66897,-80.36711,-81.028902,-81.7355,-80.66897,-81.36896,-81.339787,-80.677644,-80.677644,-82.8723,-82.8702,-82.8723,-81.73520000000001,-80.36711,-81.0874,-81.339787,-81.028902,-80.677644,-81.393874,-80.66897,-81.393874,-80.36711,-81.0874,-81.339787,-80.32739100000001,-81.73520000000001,-80.66897,-81.028902,-81.339787,-81.339787,-81.7351,-80.677644,-80.36711,-81.339787,-80.677644,-80.32739100000001,-81.339787,-81.36896,-80.677644,-81.339787,-80.32739100000001,-81.36896,-81.339787,-80.36711,-81.0874,-80.66897,-82.8702,-82.92740000000001,-81.0874,-81.36896,-81.339787,-82.92740000000001,-81.393874,-81.339787,-81.393874,-80.32739100000001,-80.677644,-80.66897,-81.028902,-81.0874,-80.32739100000001,-82.8702,-82.92740000000001,-81.393874,-81.339787,-81.36896,-82.8702,-80.36711,-80.36711,-81.7351,-80.677644,-80.677644,-81.36896,-82.8723,-81.36896,-80.677644,-80.66897,-80.677644,-80.677644,-81.028902,-80.36711,-81.36896,-81.0874,-81.0874,-81.393874,-81.36896,-81.73520000000001,-81.7351,-81.36896,-82.8723,-82.8702,-82.92740000000001,-81.36896,-81.393874,-81.0874,-81.0874,-81.339787],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},{"showCoverageOnHover":true,"zoomToBoundsOnClick":true,"spiderfyOnMaxZoom":true,"removeOutsideVisibleBounds":true,"spiderLegPolylineOptions":{"weight":1.5,"color":"#222","opacity":0.5},"freezeAtZoom":false},null,["Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-2","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-4","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-2","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-2","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-3","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-2","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-4","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-4","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-3","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5AP0008","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-3","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0004","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0003","Organization: 21FLKNMS <br> Monitoring Location: G5WA0006","Organization: 21FLKNMS <br> Monitoring Location: G5AP0009","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-4","Organization: 21FLKNMS <br> Monitoring Location: MON-STOCKIS-3","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5AP0025","Organization: 21FLKNMS <br> Monitoring Location: G5AP0023","Organization: 21FLKNMS <br> Monitoring Location: G5AP0022","Organization: 21FLKNMS <br> Monitoring Location: G5WA0007","Organization: 21FLKNMS <br> Monitoring Location: G5AP0010","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0005","Organization: 21FLKNMS <br> Monitoring Location: G5WA0002"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[24.561499986,25.223719986],"lng":[-82.92740000000001,-80.32739100000001]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-aefad3c4540e07c3bb6d" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-aefad3c4540e07c3bb6d">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[26.13533,26.23132,25.9642,26.16428,26.10898,26.09983,26.0595,26.1733,26.12837,26.12202,26.2062,26.2511,26.13687,26.04815,26.15322,26.06812,26.21857,26.35132,25.98717,26.06768,26.13877,26.03485,26.0655,26.22162,26.17312,26.06385,26.14965,26.1289,26.06153,26.06565,26.229646,26.31338,26.19035,26.11607,26.32783,26.16392,26.3277,26.1183,26.13581667,26.09062,26.08717,26.10265,26.02595,26.26352,26.2305],[-80.20202,-80.12687,-80.31062,-80.25662,-80.15908,-80.25017,-80.14398,-80.17093,-80.17503000000001,-80.14653,-80.13263000000001,-80.08962,-80.11832,-80.15513,-80.12933,-80.1686,-80.17055000000001,-80.28333000000001,-80.12145,-80.18218,-80.10807,-80.11713,-80.11408,-80.10303,-80.18698000000001,-80.31325,-80.44182000000001,-80.11855,-80.43357,-80.21588,-80.281948,-80.0806,-80.10250000000001,-80.31659999999999,-80.20302,-80.12632000000001,-80.13158,-80.14363,-80.1942,-80.17882,-80.18547,-80.11868,-80.16338,-80.08240000000001,-80.20484999999999],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: 121","Monitoring Location: 110","Monitoring Location: 31","Monitoring Location: 14","Monitoring Location: 19","Monitoring Location: 122","Monitoring Location: 24","Monitoring Location: 11","Monitoring Location: 64","Monitoring Location: 16","Monitoring Location: 6","Monitoring Location: 35","Monitoring Location: 10","Monitoring Location: 25","Monitoring Location: 111","Monitoring Location: 26","Monitoring Location: 7","Monitoring Location: 4","Monitoring Location: 41","Monitoring Location: 128","Monitoring Location: 37","Monitoring Location: 40","Monitoring Location: 39","Monitoring Location: 5","Monitoring Location: 12","Monitoring Location: 28","Monitoring Location: 23","Monitoring Location: 125","Monitoring Location: 29","Monitoring Location: 124","Monitoring Location: 89","Monitoring Location: 33","Monitoring Location: 36","Monitoring Location: 22","Monitoring Location: 3","Monitoring Location: 112","Monitoring Location: 2","Monitoring Location: 15","Monitoring Location: 17","Monitoring Location: 123","Monitoring Location: 20","Monitoring Location: 38","Monitoring Location: 129","Monitoring Location: 34","Monitoring Location: 8"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.9642,26.35132],"lng":[-80.44182000000001,-80.0806]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<div class="cell">
+<details class="code-fold">
+<summary>visualize distribution of points through time</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert Activity.Start.Date.Time to proper datetime if it isn't already</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span><span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="fu">as.character</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span>), <span class="at">format =</span> <span class="st">"%m/%d/%Y %H:%M:%S"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe with unique sampling events</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>sampling_events <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(<span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span>, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the time distribution plot</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sampling_events, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Sampling Events Over Time"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Sampling Events"</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="provider_reports_template_files/figure-html/visualize distribution of points through time-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>visualize distribution of points through time</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap of sampling locations over time</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sampling_events, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> Monitoring.Location.ID)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sampling Locations Over Time"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Monitoring Location ID"</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="provider_reports_template_files/figure-html/visualize distribution of points through time-2.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><a href="../data/_WIN_WAVES_OTIS_BROWARD.txt">Download Data For This Provider</a></p>
 
 
 

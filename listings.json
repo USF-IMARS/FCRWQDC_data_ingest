@@ -2,14 +2,12 @@
   {
     "listing": "/provider_reports/provider_reports.html",
     "items": [
-      "/provider_reports/provider_reports/21FLBBAP.html",
-      "/provider_reports/provider_reports/21FLBROW.html",
-      "/provider_reports/provider_reports/21FLDADE.html",
-      "/provider_reports/provider_reports/21FLFWC.html",
-      "/provider_reports/provider_reports/21FLKNMS.html",
-      "/provider_reports/provider_reports/21FLMOTE.html",
-      "/provider_reports/provider_reports/21FLPBCH.html",
-      "/provider_reports/provider_reports/21FLSFWM.html"
+      "/provider_reports/provider_reports/BBAP.html",
+      "/provider_reports/provider_reports/BROWARD.html",
+      "/provider_reports/provider_reports/DERM_BBWQ.html",
+      "/provider_reports/provider_reports/FIU_WQMP.html",
+      "/provider_reports/provider_reports/PALMBEACH.html",
+      "/provider_reports/provider_reports/SFER.html"
     ]
   }
 ]

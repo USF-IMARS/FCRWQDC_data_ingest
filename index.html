@@ -131,10 +131,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Provider Reports</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="https://github.com/USF-IMaRS/WIN_data_ingest"> 
 <span class="menu-text">Source Code on GitHub</span></a>
   </li>  
@@ -174,10 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Data ingestion and initial analysis from FL WIN water quality database.</p>
+<p>Data ingestion and initial analysis from FL WIN water quality database and other sources.</p>
+<p>Below is a demonstration of how to load the data.</p>
+<p>For more information about the data please see “Provider Reports” in the top navigation.</p>
 <div class="cell">
 <details class="code-fold">
-<summary>read in the WIN txt pipe-delimited file</summary>
+<summary>read in the WIN txt pipe-delimited file for example program.</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  dplyr,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  glue,</span>
@@ -186,19 +184,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getData.R"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">"data/tina_WIN_WAVES_UDOUJ_TH_1_20250304141103_89325.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">"BBAP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Skipped lines:
 Requested report - WIN WAVES
-PROJECT ID - PROJECT NAME = PROJ-001 - Surfacewater Quality Monitoring Network | WQMP - Water Quality Monitoring Program | JTDIEOFF - Julia Tuttle Die-Off Monitoring | FKNMSFIELD - FKNMS-DEP Field Sampling | WQMP - Water Quality Monitoring Program | EPA - Water Quality Monitoring Program | SJCUD RIVER SAMPLING - Water Quality Monitoring Program | BBWQ - Biscayne Bay Water Quality | WQMP - Water Quality Monitoring Program | BBWQ - Biscayne Bay Water Quality Monitoring Program | WQMP - Water Quality Monitoring Program | ERMWQ - PBC ERM Ambient Water Quality Monitoring | WQMP - Tampa Bay Water Alafia River Watershed Water Quality Monitoring
-PROJECT INTENDED USE = Routine Monitoring | IWR Assessment/TMDL Listing | Modeling | 319 Program | BMAP | Trend Analysis | Event Response
-COUNTY = BROWARD, FLORIDA | MARTIN, FLORIDA | MIAMI-DADE, FLORIDA | MONROE, FLORIDA | PALM BEACH, FLORIDA
-DEP ANALYTE GROUP = General Physical-Chemical | Field Observation | Nutrients
-DEP ANALYTE NAME - UNIT = Ammonia (N) - mg/kg | Ammonia (N) - mg/L | Nitrogen- Total Kjeldahl - mg/kg | Nitrogen- Total Kjeldahl - mg/L | Nitrate (N) - mg/L | Nitrate-Nitrite (N) - mg/kg | Nitrate-Nitrite (N) - mg/L | Nitrite (N) - mg/kg | Nitrite (N) - mg/L | Orthophosphate (P) - mg/L | pH - SU | Phosphorus- Total - mg/kg | Phosphorus- Total - mg/L | Salinity - PSU | Carbon- Organic - mg/kg | Carbon- Organic - mg/L | Nitrogen- Total - mg/L | Silica (SiO2) - mg/L | Dissolved Oxygen - mg/L | Temperature, Water - deg C | Carbon- Total - mg/kg | Silicate - mg/L
-Report Run on MARCH 4, 2025
+ORGANIZATION ID = 21FLBBAP
+PROJECT ID - PROJECT NAME = JTDIEOFF - Julia Tuttle Die-Off Monitoring
+DEP ANALYTE GROUP = General Physical-Chemical | Biological | Nutrients
+DEP ANALYTE NAME - UNIT = Ammonia (N) - mg/L | Nitrogen- Total Kjeldahl - mg/L | Nitrate-Nitrite (N) - mg/L | pH - SU | Phosphorus- Total - mg/L | Salinity - PSU | Chlorophyll a, free of pheophytin - ug/L | Dissolved Oxygen - mg/L | Temperature, Water - deg C | Chlorophyll a- uncorrected - ug/L | Chlorophyll a- corrected - ug/L | Ammonia- Un-ionized (NH3) - mg/L
+Report Run on APRIL 30, 2025
 The data you are accessing are from the WIN Warehouse.  The WIN Warehouse is refreshed on a weekly basis with new data that are submitted to WIN.  The refresh process occurs on the weekend; data uploaded to WIN through each Friday are available in the WIN Warehouse by the following Monday.  WIN replaces Florida STORET as an active data repository.  Florida STORET data are accessible through STORET Public Access (SPA).
-The following data met your selection criteria</code></pre>
+The following data met your selection criteria
+
+
+Converted 0 latitude values from DMS to decimal format.
+Converted 0 longitude values from DMS to decimal format.</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -214,219 +215,195 @@ The following data met your selection criteria</code></pre>
 <table class="caption-top table table-sm table-striped small">
 <caption>Table continues below</caption>
 <colgroup>
-<col style="width: 24%">
-<col style="width: 41%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Organization.ID</th>
-<th style="text-align: center;">Organization.Name</th>
 <th style="text-align: center;">Monitoring.Location.ID</th>
+<th style="text-align: center;">Org.Decimal.Latitude</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">21FLKNMS</td>
-<td style="text-align: center;">FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">G5AP0022</td>
+<td style="text-align: center;">21FLBBAP</td>
+<td style="text-align: center;">WQ04</td>
+<td style="text-align: center;">25.826</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">21FLKNMS</td>
-<td style="text-align: center;">FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">G5AP0008</td>
+<td style="text-align: center;">21FLBBAP</td>
+<td style="text-align: center;">WQ02</td>
+<td style="text-align: center;">25.8533</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">21FLKNMS</td>
-<td style="text-align: center;">FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">G5AP0009</td>
+<td style="text-align: center;">21FLBBAP</td>
+<td style="text-align: center;">WQ02</td>
+<td style="text-align: center;">25.8533</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">21FLKNMS</td>
-<td style="text-align: center;">FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">G5WA0004</td>
+<td style="text-align: center;">21FLBBAP</td>
+<td style="text-align: center;">WQ04</td>
+<td style="text-align: center;">25.826</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">21FLKNMS</td>
-<td style="text-align: center;">FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">MON-STOCKIS-2</td>
+<td style="text-align: center;">21FLBBAP</td>
+<td style="text-align: center;">WQ04</td>
+<td style="text-align: center;">25.826</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">21FLKNMS</td>
-<td style="text-align: center;">FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">G5WA0003</td>
+<td style="text-align: center;">21FLBBAP</td>
+<td style="text-align: center;">WQ04</td>
+<td style="text-align: center;">25.826</td>
 </tr>
 </tbody>
 </table>
 <table class="caption-top table table-sm table-striped small">
 <caption>Table continues below</caption>
 <colgroup>
-<col style="width: 37%">
-<col style="width: 20%">
-<col style="width: 21%">
-<col style="width: 21%">
+<col style="width: 43%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Monitoring.Location.Name</th>
-<th style="text-align: center;">Primary.Type</th>
-<th style="text-align: center;">Secondary.Type</th>
-<th style="text-align: center;">DEP.Latitude</th>
+<th style="text-align: center;">Org.Latitude..DD.MM.SS.SSSS.</th>
+<th style="text-align: center;">Org.Decimal.Longitude</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">DRTO - Loggerhead Forest</td>
-<td style="text-align: center;">Surface Water</td>
-<td style="text-align: center;">Estuary</td>
-<td style="text-align: center;">24.6624</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">-80.1341</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Pennekamp (Ocean Forest)</td>
-<td style="text-align: center;">Surface Water</td>
-<td style="text-align: center;">Estuary</td>
-<td style="text-align: center;">25.2237</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">-80.1455</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Pennekamp (Garden Cove))</td>
-<td style="text-align: center;">Surface Water</td>
-<td style="text-align: center;">Estuary</td>
-<td style="text-align: center;">25.1709</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">-80.1455</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Lignumvitae Key (Indian Key Fill - Oceanside)</td>
-<td style="text-align: center;">Surface Water</td>
-<td style="text-align: center;">Estuary</td>
-<td style="text-align: center;">24.893</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">-80.1341</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Monroe-Stock Island-2</td>
-<td style="text-align: center;">Surface Water</td>
-<td style="text-align: center;">Estuary</td>
-<td style="text-align: center;">24.5676</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">-80.1341</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Lignumvitae Key (Indian Key Fill - Bayside)</td>
-<td style="text-align: center;">Surface Water</td>
-<td style="text-align: center;">Estuary</td>
-<td style="text-align: center;">24.8892</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">-80.1341</td>
 </tr>
 </tbody>
 </table>
 <table class="caption-top table table-sm table-striped small">
 <caption>Table continues below</caption>
 <colgroup>
-<col style="width: 21%">
-<col style="width: 22%">
 <col style="width: 43%">
 <col style="width: 12%">
+<col style="width: 21%">
+<col style="width: 21%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">DEP.Longitude</th>
-<th style="text-align: center;">FHD.Reach.Code</th>
-<th style="text-align: center;">STORET.Monitoring.Location.ID</th>
-<th style="text-align: center;">County</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">-82.9274</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">MONROE</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">-80.3274</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">MONROE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">-80.3671</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">MONROE</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">-80.669</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">MONROE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">-81.7355</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">MONROE</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">-80.6776</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">MONROE</td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
-<colgroup>
-<col style="width: 11%">
-<col style="width: 18%">
-<col style="width: 22%">
-<col style="width: 37%">
-</colgroup>
-<thead>
-<tr class="header">
+<th style="text-align: center;">Org.Longitude..DD.MM.SS.SSSS.</th>
 <th style="text-align: center;">WBID</th>
-<th style="text-align: center;">Project.ID</th>
 <th style="text-align: center;">Activity.ID</th>
-<th style="text-align: center;">Activity.Start.Date.Time</th>
+<th style="text-align: center;">Activity.Type</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">8072</td>
-<td style="text-align: center;">FKNMSFIELD</td>
-<td style="text-align: center;">46142G5P00222</td>
-<td style="text-align: center;">02/26/2022 15:24:00</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">3226H6</td>
+<td style="text-align: center;">WQ04-04/06/20</td>
+<td style="text-align: center;">Sample</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">6006B</td>
-<td style="text-align: center;">FKNMSFIELD</td>
-<td style="text-align: center;">42509G5P0008A</td>
-<td style="text-align: center;">02/24/2021 09:49:00</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">3226H5</td>
+<td style="text-align: center;">WQ02-05/05/20</td>
+<td style="text-align: center;">Sample</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">6006B</td>
-<td style="text-align: center;">FKNMSFIELD</td>
-<td style="text-align: center;">43481G5P0009A</td>
-<td style="text-align: center;">05/27/2021 09:09:00</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">3226H5</td>
+<td style="text-align: center;">WQ02-05/05/20</td>
+<td style="text-align: center;">Sample</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">8084</td>
-<td style="text-align: center;">FKNMSFIELD</td>
-<td style="text-align: center;">82820G5A00004</td>
-<td style="text-align: center;">08/28/2020 13:50:00</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">3226H6</td>
+<td style="text-align: center;">WQ04-04/06/20</td>
+<td style="text-align: center;">Sample</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">6014B</td>
-<td style="text-align: center;">FKNMSFIELD</td>
-<td style="text-align: center;">47034MO-STO-2</td>
-<td style="text-align: center;">05/24/2022 10:24:00</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">3226H6</td>
+<td style="text-align: center;">WQ04-04/06/20</td>
+<td style="text-align: center;">Sample</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">8077H</td>
-<td style="text-align: center;">FKNMSFIELD</td>
-<td style="text-align: center;">43186G5A00003</td>
-<td style="text-align: center;">04/29/2021 11:40:00</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">3226H6</td>
+<td style="text-align: center;">WQ04-04/06/20</td>
+<td style="text-align: center;">Sample</td>
 </tr>
 </tbody>
 </table>
 <table class="caption-top table table-sm table-striped small">
 <caption>Table continues below</caption>
 <colgroup>
-<col style="width: 40%">
+<col style="width: 35%">
+<col style="width: 31%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Activity.Start.Date.Time</th>
+<th style="text-align: center;">Matrix</th>
+<th style="text-align: center;">Sample.Collection.Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">04/06/2020 12:35:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+<td style="text-align: center;">Direct Grab</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">05/05/2020 15:00:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+<td style="text-align: center;">Direct Grab</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">05/05/2020 15:00:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+<td style="text-align: center;">Direct Grab</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">04/06/2020 12:35:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+<td style="text-align: center;">Direct Grab</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">04/06/2020 12:35:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+<td style="text-align: center;">Direct Grab</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">04/06/2020 12:35:00</td>
+<td style="text-align: center;">AQUEOUS-Surface Water</td>
+<td style="text-align: center;">Direct Grab</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 38%">
 <col style="width: 23%">
 <col style="width: 30%">
 </colgroup>
@@ -439,33 +416,33 @@ The following data met your selection criteria</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">FDEP FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">1</td>
+<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
+<td style="text-align: center;">1.691</td>
 <td style="text-align: center;">m</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">FDEP FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
+<td style="text-align: center;">1.676</td>
 <td style="text-align: center;">m</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">FDEP FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
+<td style="text-align: center;">1.676</td>
 <td style="text-align: center;">m</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">FDEP FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
+<td style="text-align: center;">1.691</td>
 <td style="text-align: center;">m</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">FDEP FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
+<td style="text-align: center;">1.691</td>
 <td style="text-align: center;">m</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">FDEP FLORIDA KEYS NATIONAL MARINE SANCTUARY</td>
-<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
+<td style="text-align: center;">1.691</td>
 <td style="text-align: center;">m</td>
 </tr>
 </tbody>
@@ -473,59 +450,109 @@ The following data met your selection criteria</code></pre>
 <table class="caption-top table table-sm table-striped small">
 <caption>Table continues below</caption>
 <colgroup>
-<col style="width: 28%">
-<col style="width: 35%">
-<col style="width: 35%">
+<col style="width: 26%">
+<col style="width: 30%">
+<col style="width: 42%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">DEP.Analyte.Name</th>
-<th style="text-align: center;">DEP.Result.Value.Number</th>
-<th style="text-align: center;">DEP.Result.Value.Text</th>
+<th style="text-align: center;">Activity.Top.Depth</th>
+<th style="text-align: center;">Activity.Bottom.Depth</th>
+<th style="text-align: center;">Activity.Depth.Top.Bottom.Unit</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Temperature, Water</td>
-<td style="text-align: center;">24.67</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Dissolved Oxygen</td>
-<td style="text-align: center;">5.09</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Dissolved Oxygen</td>
-<td style="text-align: center;">1.55</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Temperature, Water</td>
-<td style="text-align: center;">32.7</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">pH</td>
-<td style="text-align: center;">7.79</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Dissolved Oxygen</td>
-<td style="text-align: center;">6.79</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 </tr>
 </tbody>
 </table>
 <table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
 <colgroup>
-<col style="width: 25%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 25%">
+<col style="width: 22%">
+<col style="width: 37%">
+<col style="width: 37%">
 </colgroup>
 <thead>
 <tr class="header">
+<th style="text-align: center;">DEP.Result.ID</th>
+<th style="text-align: center;">DEP.Analyte.Name</th>
+<th style="text-align: center;">DEP.Result.Value.Number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">7190664</td>
+<td style="text-align: center;">Nitrate-Nitrite (N)</td>
+<td style="text-align: center;">0.007</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7187465</td>
+<td style="text-align: center;">Nitrogen- Total Kjeldahl</td>
+<td style="text-align: center;">0.28</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7186300</td>
+<td style="text-align: center;">Phosphorus- Total</td>
+<td style="text-align: center;">0.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7190134</td>
+<td style="text-align: center;">Phosphorus- Total</td>
+<td style="text-align: center;">0.011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7190741</td>
+<td style="text-align: center;">Ammonia (N)</td>
+<td style="text-align: center;">0.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7189987</td>
+<td style="text-align: center;">Nitrogen- Total Kjeldahl</td>
+<td style="text-align: center;">0.26</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<caption>Table continues below</caption>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 22%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">DEP.Result.Value.Text</th>
 <th style="text-align: center;">DEP.Result.Unit</th>
 <th style="text-align: center;">DEP.MDL</th>
 <th style="text-align: center;">DEP.PQL</th>
@@ -534,40 +561,100 @@ The following data met your selection criteria</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">deg C</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">I</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.16</td>
+<td style="text-align: center;">0.4</td>
+<td style="text-align: center;">I</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.01</td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
+<td style="text-align: center;"></td>
 <td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">0.004</td>
+<td style="text-align: center;">0.01</td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
+<td style="text-align: center;"></td>
 <td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: center;">0.005</td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">deg C</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;">mg/L</td>
+<td style="text-align: center;">0.16</td>
+<td style="text-align: center;">0.4</td>
+<td style="text-align: center;">I</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 12%">
+<col style="width: 25%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Sample.Fraction</th>
+<th style="text-align: center;">Lab.ID</th>
+<th style="text-align: center;">Result.Comments</th>
+<th style="text-align: center;">Audit.Censored.Decisions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E31780</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E31780</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">SU</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E31780</td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E31780</td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E31780</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Total</td>
+<td style="text-align: center;">E31780</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">NA</td>
 </tr>
 </tbody>
 </table>
