@@ -186,30 +186,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getData.R"</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">"BBAP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Skipped lines:
-Requested report - WIN WAVES
-ORGANIZATION ID = 21FLBBAP
-PROJECT ID - PROJECT NAME = JTDIEOFF - Julia Tuttle Die-Off Monitoring
-DEP ANALYTE GROUP = General Physical-Chemical | Biological | Nutrients
-DEP ANALYTE NAME - UNIT = Ammonia (N) - mg/L | Nitrogen- Total Kjeldahl - mg/L | Nitrate-Nitrite (N) - mg/L | pH - SU | Phosphorus- Total - mg/L | Salinity - PSU | Chlorophyll a, free of pheophytin - ug/L | Dissolved Oxygen - mg/L | Temperature, Water - deg C | Chlorophyll a- uncorrected - ug/L | Chlorophyll a- corrected - ug/L | Ammonia- Un-ionized (NH3) - mg/L
-Report Run on APRIL 30, 2025
-The data you are accessing are from the WIN Warehouse.  The WIN Warehouse is refreshed on a weekly basis with new data that are submitted to WIN.  The refresh process occurs on the weekend; data uploaded to WIN through each Friday are available in the WIN Warehouse by the following Monday.  WIN replaces Florida STORET as an active data repository.  Florida STORET data are accessible through STORET Public Access (SPA).
-The following data met your selection criteria
-
-
-Converted 0 latitude values from DMS to decimal format.
-Converted 0 longitude values from DMS to decimal format.</code></pre>
-</div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Print the first few rows of the dataframe</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(df)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(<span class="fu">head</span>(df), <span class="at">digits =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(df)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(<span class="fu">head</span>(df), <span class="at">digits =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
