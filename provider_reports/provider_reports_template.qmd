@@ -1,12 +1,12 @@
 ---
-title: "BROWARD Report"
+title: "BROWARD Data"
 author: "Tylar Murray"
 format: html
 params: 
   org_id: BROWARD  # must be BROWARD before rendering
 ---
 
-WQ Provider Report
+WQ Provider Data
 
 ```{R setup}
 librarian::shelf(
@@ -105,14 +105,13 @@ leaflet(df_unique_locs) %>%
     color       = "blue",
     fillOpacity = 0.5,
     popup       = ~paste0(
-      "Organization: ", Organization.ID, "<br>",
       "Monitoring Location: ", Monitoring.Location.ID
     )
     # clusterOptions removed to show every point at all zoom levels
   )
 ```
 
-```{R visualize distribution of points through time}
+```{R prep data through time}
 #| code-summary: visualize distribution of points through time
 library(ggplot2)
 library(lubridate)
@@ -125,8 +124,9 @@ df$`Activity.Start.Date.Time` <- as.POSIXct(as.character(df$`Activity.Start.Date
 sampling_events <- df %>%
   distinct(`Activity.Start.Date.Time`, Monitoring.Location.ID) %>%
   arrange(`Activity.Start.Date.Time`)
-
-# Create the time distribution plot
+```
+```{R time distribution plot}
+#| code-summary: Create time distribution plot
 ggplot(sampling_events, aes(x = `Activity.Start.Date.Time`)) +
   geom_histogram(bins = 30, fill = "steelblue", color = "white", alpha = 0.7) +
   labs(
@@ -140,6 +140,8 @@ ggplot(sampling_events, aes(x = `Activity.Start.Date.Time`)) +
     panel.grid.minor = element_blank()
   )
 
+```
+```{R sampling heatmap, fig.width=10, fig.height= max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2)}
 # Create a heatmap of sampling locations over time
 ggplot(sampling_events, 
        aes(x = `Activity.Start.Date.Time`, 
@@ -155,6 +157,12 @@ ggplot(sampling_events,
     axis.text.x = element_text(angle = 45, hjust = 1),
     panel.grid.minor = element_blank()
   )
+```
+
+```{R print start + end dates}
+date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
+cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
 ```
 
 -----------
