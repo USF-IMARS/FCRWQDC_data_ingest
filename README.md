@@ -1,3 +1,8 @@
+
+## Data
+Data for this repo is staged in `/data`.
+Details on data sources are below.
+
 Data from WIN is pulled manually for each program and put into `data/`.
 This data is staged at [this box.com link](https://usf.app.box.com/s/6j6ipvgh1ncu8qcmgw9o0ygxogcg8371).
 
