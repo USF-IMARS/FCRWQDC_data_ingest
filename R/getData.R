@@ -10,7 +10,7 @@ getData <- function(
     df <- align_sfer_df(df)
   } else {
     # use standardized data from WIN:
-    fpath <- here(glue("data/_WIN_WAVES_OTIS_{programName}.txt"))
+    fpath <- here(glue("data/WIN/_WIN_WAVES_OTIS_{programName}.txt"))
     
     all_lines <- readLines(here(fpath))
     
