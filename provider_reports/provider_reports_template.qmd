@@ -3,7 +3,7 @@ title: "BROWARD Data"
 author: "Tylar Murray"
 format: html
 params: 
-  org_id: BROWARD  # must be BROWARD before rendering
+  org_id: DERM_BBWQ  # must be BROWARD before rendering
 ---
 
 WQ Provider Data
@@ -125,6 +125,7 @@ sampling_events <- df %>%
   distinct(`Activity.Start.Date.Time`, Monitoring.Location.ID) %>%
   arrange(`Activity.Start.Date.Time`)
 ```
+
 ```{R time distribution plot}
 #| code-summary: Create time distribution plot
 ggplot(sampling_events, aes(x = `Activity.Start.Date.Time`)) +
@@ -141,6 +142,7 @@ ggplot(sampling_events, aes(x = `Activity.Start.Date.Time`)) +
   )
 
 ```
+
 ```{R sampling heatmap, fig.width=10, fig.height= max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2)}
 # Create a heatmap of sampling locations over time
 ggplot(sampling_events, 
