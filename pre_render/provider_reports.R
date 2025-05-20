@@ -56,5 +56,6 @@ for (file in data_files) {
   org_id <- gsub("^_WIN_WAVES_OTIS_(.+)\\.txt$", "\\1", file)
   create_template(org_id)
 }
-# also create template for SFER
+# === create templates for data providers without a WIN file:
 create_template("SFER")
+# create_template("FIU")
