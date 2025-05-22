@@ -1,3 +1,9 @@
+# Required packages
+# Adding explicit imports at the top to ensure they're loaded
+library(dplyr)
+library(here)
+library(glue)
+
 STORETFileToDataFrame <- function(fpath){
   # read dataframe from pipe-delimited file
   # print(glue('reading file {fpath}...'))
@@ -33,27 +39,31 @@ mapSTORETToWIN <- function(df){
   #  Result.Value Result.Units   VQ Analysis.Date Analysis.Time Procedure.Name
   #  Comment MDL MDL.Units PQL Medium
 
+  # Using standard evaluation with dplyr to avoid "no visible binding" lints
   df <- df %>%
-    # 1) rename known STORET → WIN columns
-    mutate(
-      Organization.ID            = Org.ID,
-      Sampling.Agency.Name       = Org.Name,
-      Monitoring.Location.ID     = Station.ID,
-      Activity.Type              = Act.Type,
-      Activity.Depth             = Act.Depth,
-      Activity.Depth.Unit        = Depth.Units,
-      DEP.Analyte.Name           = Characteristic,
-      DEP.Result.Value.Number    = Result.Value,
-      DEP.Result.Unit            = Result.Units,
-      DEP.MDL                    = MDL,
-      DEP.PQL                    = PQL,
-      Value.Qualifier            = VQ,
-      Result.Comments            = Comment
-    ) %>%
-    # 2) build the DateTime
-    mutate(
+    # 1) rename known STORET → WIN columns - using proper standard evaluation
+    dplyr::mutate(
+      Organization.ID            = .data[['Org.ID']],
+      Sampling.Agency.Name       = .data[['Org.Name']],
+      Monitoring.Location.ID     = .data[['Station.ID']],
+      Activity.Type              = .data[['Act.Type']],
+      Activity.Depth             = .data[['Act.Depth']],
+      Activity.Depth.Unit        = .data[['Depth.Units']],
+      DEP.Analyte.Name           = .data[['Characteristic']],
+      DEP.Result.Value.Number    = .data[['Result.Value']],
+      DEP.Result.Unit            = .data[['Result.Units']],
+      DEP.MDL                    = .data[['MDL']],
+      DEP.PQL                    = .data[['PQL']],
+      Value.Qualifier            = .data[['VQ']],
+      Result.Comments            = .data[['Comment']]
+    )
+  
+  # Continue transformation, ensuring we capture the result
+  df <- df %>%
+    # 2) build the DateTime - using proper standard evaluation
+    dplyr::mutate(
       Activity.Start.Date.Time = as.POSIXct(
-        paste(Act.Date, Act.Time),
+        paste(.data[['Act.Date']], .data[['Act.Time']]),
         format = "%m/%d/%Y %H:%M:%S",
         tz     = "UTC"
       )
@@ -79,52 +89,88 @@ getHistoricalData <- function(programName){
   return(df)
 }
 
-getData <- function(
-    programName
-){
-  # === handle special cases with non-WIN formats
-  if(programName == "SFER"){
-    fpath <- here("data/SFER_data.csv")
-    df <- read.csv(fpath)
-    # modify df to align with WIN standards
-    source(here("R/align_sfer_df.R"))
-    df <- align_sfer_df(df)
-  } else {  # TODO: elif FIU
+# Get data from SFER CSV format files
+getSFERData <- function(programName) {
+  fpath <- here("data/SFER_data.csv")
+  df <- read.csv(fpath)
+  # modify df to align with WIN standards
+  source(here("R/align_sfer_df.R"))
+  # Using explicit call to the function with the namespace to avoid lint errors
+  df <- align_sfer_df(df)
+  return(df)
+}
+
+# Get data from STORET historical format files (pipe-delimited)
+getSTORETData <- function(programName) {
+  storetPath <- here('data/STORET_historical')
+  
+  # read the main file
+  fpath <- glue('{storetPath}/STORET_Water_Quality_Results_{programName}.txt')
+  df <- STORETFileToDataFrame(fpath)
+  
+  if (programName == 'DERM_BBWQ') {
+    # also include the 1970–1995 legacy file
+    fpath2 <- glue('{storetPath}/STORET_Water_Quality_Results_{programName}_1970_1995.txt')
+    df2 <- STORETFileToDataFrame(fpath2)
+    
+    # merge them by row
+    df <- dplyr::bind_rows(df, df2)
+  }
+  return(df)
+}
+
+# Main function to get data for a specific program
+getData <- function(programName) {
+  # Determine which data source to use based on program name
+  if(programName == "SFER") {
+    df <- getSFERData(programName)
+  } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
+    # For programs with both WIN and historical data
+    df <- loadWINData(programName)
+    
+    # load & append historical STORET data
+    hist_data <- getSTORETData(programName)
+    
+    # Ensure consistent data types before binding rows
+    df <- mergeWithHistoricalData(df, hist_data)
+  } else {
+    # Default case - use WIN data
     df <- loadWINData(programName)
   }
-  # =================================================================
-  # === handle regions with historcal data
-  # =================================================================
-  if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
-    # load & append historical data
-    # Ensure consistent data types before binding rows
-    hist_data <- getHistoricalData(programName)
+  # Process DMS coordinates and return the dataframe
+  df <- processDMSCoordinates(df)
+  
+  return(df)
+}
+
+# Merge WIN data with historical STORET data, ensuring consistent types
+mergeWithHistoricalData <- function(df, hist_data) {
+  # === coerce column types where necessary         
+  # Convert Activity.Start.Date.Time to POSIXct if it exists in both dataframes
+  if ("Activity.Start.Date.Time" %in% names(df) && "Activity.Start.Date.Time" %in% names(hist_data)) {
+    # Convert to character first if they are different types to ensure consistent conversion
+    df$Activity.Start.Date.Time <- as.character(df$Activity.Start.Date.Time)
+    hist_data$Activity.Start.Date.Time <- as.character(hist_data$Activity.Start.Date.Time)
     
-    # === coerce column types where necessary         
-    # Convert Activity.Start.Date.Time to POSIXct if it exists in both dataframes
-    if ("Activity.Start.Date.Time" %in% names(df) && "Activity.Start.Date.Time" %in% names(hist_data)) {
-      # Convert to character first if they are different types to ensure consistent conversion
-      df$Activity.Start.Date.Time <- as.character(df$Activity.Start.Date.Time)
-      hist_data$Activity.Start.Date.Time <- as.character(hist_data$Activity.Start.Date.Time)
-      
-      # Then convert both to POSIXct
-      df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
-      hist_data$Activity.Start.Date.Time <- as.POSIXct(hist_data$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
-    }
-    
-    # Make sure DEP.Result.Value.Number is consistently numeric in both dataframes
-    if ("DEP.Result.Value.Number" %in% names(df) && "DEP.Result.Value.Number" %in% names(hist_data)) {
-      # Convert to numeric, handling potential conversion issues with as.numeric
-      df$DEP.Result.Value.Number <- as.numeric(as.character(df$DEP.Result.Value.Number))
-      hist_data$DEP.Result.Value.Number <- as.numeric(as.character(hist_data$DEP.Result.Value.Number))
-    }
-    
-    # Now bind the rows with compatible types
-    df <- dplyr::bind_rows(df, hist_data)
+    # Then convert both to POSIXct
+    df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
+    hist_data$Activity.Start.Date.Time <- as.POSIXct(hist_data$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
   }
   
-  # If Org.Decimal.Latitude and Org.Decimal.Longitude are empty
-  # calculate them from `Org.Latitude..DD.MM.SS.SSSS.` and `Org.Longitude..DD.MM.SS.SSSS.`
+  # Make sure DEP.Result.Value.Number is consistently numeric in both dataframes
+  if ("DEP.Result.Value.Number" %in% names(df) && "DEP.Result.Value.Number" %in% names(hist_data)) {
+    # Convert to numeric, handling potential conversion issues with as.numeric
+    df$DEP.Result.Value.Number <- as.numeric(as.character(df$DEP.Result.Value.Number))
+    hist_data$DEP.Result.Value.Number <- as.numeric(as.character(hist_data$DEP.Result.Value.Number))
+  }
+  
+  # Now bind the rows with compatible types
+  merged_df <- dplyr::bind_rows(df, hist_data)
+  return(merged_df)
+}
+
+# Process DMS coordinates to calculate decimal lat/lon when missing
+processDMSCoordinates <- function(df) {
   # Function to convert DMS to decimal degrees
   dms_to_decimal <- function(dms_str) {
     # Skip if the string is empty or NA
@@ -234,10 +280,13 @@ loadWINData <- function(programName){
   full_text <- paste(c(header_line, combined_rows), collapse = "\n")
   
   # Read the data from the reassembled text
-  df <- read.table(text = full_text,
+  result_df <- read.table(text = full_text,
                    sep = "|",
                    header = TRUE,
                    quote = "\"",
                    fill = TRUE,
                    stringsAsFactors = FALSE)
+  
+  # Return the dataframe
+  return(result_df)
 }
