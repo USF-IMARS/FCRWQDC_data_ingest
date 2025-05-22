@@ -8,6 +8,8 @@ STORETFileToDataFrame <- function(fpath){
     stringsAsFactors = FALSE,
     na.strings     = c("", "NA")
   )
+  df <- mapSTORETToWIN(df)
+
   return(df)
 }
 
@@ -31,9 +33,9 @@ mapSTORETToWIN <- function(df){
   #  Result.Value Result.Units   VQ Analysis.Date Analysis.Time Procedure.Name
   #  Comment MDL MDL.Units PQL Medium
 
-  df %>%
+  df <- df %>%
     # 1) rename known STORET → WIN columns
-    rename(
+    mutate(
       Organization.ID            = Org.ID,
       Sampling.Agency.Name       = Org.Name,
       Monitoring.Location.ID     = Station.ID,
@@ -46,18 +48,17 @@ mapSTORETToWIN <- function(df){
       DEP.MDL                    = MDL,
       DEP.PQL                    = PQL,
       Value.Qualifier            = VQ,
-      Result.Comments            = Comment,
-      Sample.Fraction            = Medium
+      Result.Comments            = Comment
     ) %>%
-    # 2) coerce numeric & build the DateTime
+    # 2) build the DateTime
     mutate(
-      DEP.Result.Value.Number = as.numeric(DEP.Result.Value.Number),
       Activity.Start.Date.Time = as.POSIXct(
         paste(Act.Date, Act.Time),
         format = "%m/%d/%Y %H:%M:%S",
         tz     = "UTC"
       )
     )
+  return(df)
 }
 
 getHistoricalData <- function(programName){
@@ -75,10 +76,6 @@ getHistoricalData <- function(programName){
     # merge them by row
     df <- dplyr::bind_rows(df, df2)
   }
-  
-  # TODO: map storet columns to win columns
-  
-  
   return(df)
 }
 
@@ -95,11 +92,35 @@ getData <- function(
   } else {  # TODO: elif FIU
     df <- loadWINData(programName)
   }
-  
+  # =================================================================
   # === handle regions with historcal data
+  # =================================================================
   if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
     # load & append historical data
-    df <- dplyr::bind_rows(df, getHistoricalData(programName))
+    # Ensure consistent data types before binding rows
+    hist_data <- getHistoricalData(programName)
+    
+    # === coerce column types where necessary         
+    # Convert Activity.Start.Date.Time to POSIXct if it exists in both dataframes
+    if ("Activity.Start.Date.Time" %in% names(df) && "Activity.Start.Date.Time" %in% names(hist_data)) {
+      # Convert to character first if they are different types to ensure consistent conversion
+      df$Activity.Start.Date.Time <- as.character(df$Activity.Start.Date.Time)
+      hist_data$Activity.Start.Date.Time <- as.character(hist_data$Activity.Start.Date.Time)
+      
+      # Then convert both to POSIXct
+      df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
+      hist_data$Activity.Start.Date.Time <- as.POSIXct(hist_data$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
+    }
+    
+    # Make sure DEP.Result.Value.Number is consistently numeric in both dataframes
+    if ("DEP.Result.Value.Number" %in% names(df) && "DEP.Result.Value.Number" %in% names(hist_data)) {
+      # Convert to numeric, handling potential conversion issues with as.numeric
+      df$DEP.Result.Value.Number <- as.numeric(as.character(df$DEP.Result.Value.Number))
+      hist_data$DEP.Result.Value.Number <- as.numeric(as.character(hist_data$DEP.Result.Value.Number))
+    }
+    
+    # Now bind the rows with compatible types
+    df <- dplyr::bind_rows(df, hist_data)
   }
   
   # If Org.Decimal.Latitude and Org.Decimal.Longitude are empty
