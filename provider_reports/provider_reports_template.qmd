@@ -144,27 +144,27 @@ ggplot(sampling_events, aes(x = `Activity.Start.Date.Time`)) +
 ```
 
 ```{R sampling heatmap, fig.width=10, fig.height= max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2)}
-# Create a heatmap of sampling locations over time
+  # Create a heatmap of sampling locations over time
 ggplot(sampling_events, 
-       aes(x = `Activity.Start.Date.Time`, 
-           y = Monitoring.Location.ID)) +
-  geom_point(color = "steelblue", alpha = 0.7) +
-  labs(
-    title = "Sampling Locations Over Time",
-    x = "Date",
-    y = "Monitoring Location ID"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    panel.grid.minor = element_blank()
-  )
+         aes(x = `Activity.Start.Date.Time`, 
+             y = Monitoring.Location.ID)) +
+    geom_point(color = "steelblue", alpha = 0.7) +
+    labs(
+      title = "Sampling Locations Over Time",
+      x = "Date",
+      y = "Monitoring Location ID"
+    ) +
+    theme_minimal() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      panel.grid.minor = element_blank()
+    )
 ```
 
 ```{R print start + end dates}
 date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
-cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
-cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
+  cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
+  cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
 ```
 
 -----------
