@@ -4,7 +4,10 @@ library(glue)
 library(dplyr)
 library(lubridate)
 
-# Load the source file containing the function
+# Load all the source files containing the functions
+source(here::here("R/getSFERData.R"))
+source(here::here("R/getSTORETData.R"))
+source(here::here("R/getWINData.R"))
 source(here::here("R/getData.R"))
 
 # Helper function to check basic date validity
@@ -56,14 +59,14 @@ test_that("getSTORETData can open and read STORET data", {
   check_datetime_validity(storet_data, "STORET BROWARD data")
 })
 
-# Test loadWINData function
-test_that("loadWINData can open and read WIN data", {
+# Test getWINData function
+test_that("getWINData can open and read WIN data", {
   # Test with BROWARD (which should have WIN data)
   win_file <- here::here("data/WIN/_WIN_WAVES_OTIS_BROWARD.txt")
   skip_if_not(file.exists(win_file), "WIN BROWARD data file not found")
   
   # Test that the file can be opened and read without error
-  expect_no_error(win_data <- loadWINData("BROWARD"))
+  expect_no_error(win_data <- getWINData("BROWARD"))
   
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(win_data))
