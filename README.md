@@ -14,6 +14,17 @@ Older historical data has been collected into [this box.com folder](https://usf.
 Additional historical data is provided in unique format from some providers:
 * FIU [TODO link here](?)
 
+# tests
+```bash
+Rscript -e "testthat::test_dir(here::here('tests/testthat'))"
+```
+
+or
+
+```R
+testthat::test_dir(here::here('tests/testthat'))
+
+
 # plans & TODO items
 * re-pull WIN data. it has updated
   * 6 + AOML. Miami Beach coming
