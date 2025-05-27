@@ -30,4 +30,15 @@ test_that("getData can open and read data for all program types", {
   expect_true(is.data.frame(broward_data))
   expect_gt(nrow(broward_data), 0)
   check_datetime_validity(broward_data, "getData BROWARD")
+
+  # test DERM_BBWQ
+  derm_bbwq_file <- here::here("data/WIN/_WIN_WAVES_OTIS_DERM_BBWQ.txt")
+  skip_if_not(file.exists(derm_bbwq_file), "DERM_BBWQ data file not found")
+  derm_bbwq_file2 <- here::here("data/STORET_historical/STORET_Water_Quality_Results_DERM_BBWQ.txt")
+  skip_if_not(file.exists(derm_bbwq_file2), "DERM_BBWQ historical data file not found")
+  
+  expect_no_error(derm_bbwq_data <- getData("DERM_BBWQ"))
+  expect_true(is.data.frame(derm_bbwq_data))
+  expect_gt(nrow(derm_bbwq_data), 0)
+  check_datetime_validity(derm_bbwq_data, "getData DERM_BBWQ")
 })
