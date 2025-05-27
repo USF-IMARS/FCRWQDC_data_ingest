@@ -164,6 +164,10 @@ mergeWithHistoricalData <- function(df, hist_data) {
     hist_data$DEP.Result.Value.Number <- as.numeric(as.character(hist_data$DEP.Result.Value.Number))
   }
   
+  # Convert both to character to ensure consistent type
+  df$Monitoring.Location.ID <- as.character(df$Monitoring.Location.ID)
+  hist_data$Monitoring.Location.ID <- as.character(hist_data$Monitoring.Location.ID)
+  
   # Now bind the rows with compatible types
   merged_df <- dplyr::bind_rows(df, hist_data)
   return(merged_df)
