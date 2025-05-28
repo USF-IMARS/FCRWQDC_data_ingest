@@ -49,13 +49,9 @@ create_template <- function(org_id) {
   )
 }
 
-# for each WIN data file in /data directory:
-data_files <- list.files(here("data/WIN"), pattern = "_WIN_WAVES_OTIS_.*\\.txt$", full.names = FALSE)
-for (file in data_files) {
-  # Extract org_id from filename using regex pattern
-  org_id <- gsub("^_WIN_WAVES_OTIS_(.+)\\.txt$", "\\1", file)
+source(here("R/getListOfPrograms.R"))
+org_ids <- getListOfPrograms()
+
+for (org_id in org_ids) {
   create_template(org_id)
 }
-# === create templates for data providers without a WIN file:
-create_template("SFER")
-# create_template("FIU")
