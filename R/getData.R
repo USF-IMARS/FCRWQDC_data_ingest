@@ -8,6 +8,7 @@ library(glue)
 source(here::here("R/getSFERData.R"))
 source(here::here("R/getSTORETData.R"))
 source(here::here("R/getWINData.R"))
+source(here::here("R/getMiamiBeachData.R"))
 
 # Main function to get data for a specific program
 getData <- function(programName) {
@@ -74,6 +75,8 @@ getData <- function(programName) {
     cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
     cat("----------------------\n")
     
+  } else if (programName == "MiamiBeach") {
+    df <- getMiamiBeachData()
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
@@ -93,6 +96,37 @@ getData <- function(programName) {
   } else {
     cat("No change in row count during DMS coordinate processing\n")
   }
+  
+  # Ensure consistent column types to prevent binding issues
+  cat("\n--- Standardizing Column Types ---\n")
+  # Convert DEP.Result.ID to character if it exists
+  if ("DEP.Result.ID" %in% names(df)) {
+    df$DEP.Result.ID <- as.character(df$DEP.Result.ID)
+    cat("Converted DEP.Result.ID to character type\n")
+  }
+  
+  # Convert other potential problematic columns to standardized types
+  type_standardization <- list(
+    # Column name = function to apply
+    # Character columns
+    "Activity.ID" = as.character,
+    "WBID" = as.character,
+    "Organization.ID" = as.character,
+    "Lab.ID" = as.character,
+    "Sample.Collection.Type" = as.character,
+    
+    # Numeric columns - need safe conversion
+    "DEP.Result.Value.Number" = function(x) as.numeric(as.character(x))
+  )
+  
+  # Apply type standardization to all columns that exist in the dataframe
+  for (col in names(type_standardization)) {
+    if (col %in% names(df)) {
+      df[[col]] <- type_standardization[[col]](df[[col]])
+      cat(glue("Converted {col} to standardized type\n"))
+    }
+  }
+  
   cat("===========================================\n")
   
   return(df)
