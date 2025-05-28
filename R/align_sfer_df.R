@@ -119,49 +119,21 @@ align_sfer_df <- function(df) {
     }
   }
   
-  # Step 2: Process date components if they exist separately
-  # NOTE: This section is causing the issue - it's overwriting the already correctly renamed datetime column
-  # Only run this if we DON'T already have a valid Activity.Start.Date.Time from the datetime column
+  # Only construct Activity.Start.Date.Time if it doesn't already exist from the datetime column
   if (all(c("year", "month", "day") %in% names(df)) && 
       ("Activity.Start.Date.Time" %in% names(df) && 
        all(is.na(df$"Activity.Start.Date.Time")))) {
-    # cat("Creating Activity.Start.Date.Time from year/month/day components\n")
+    # Simply concatenate year, month, day as a string without parsing
     if ("time" %in% names(df)) {
       # If time column exists, combine date and time
-      df$"Activity.Start.Date.Time" <- with(df, 
-        as.POSIXct(paste(year, month, day, time), format="%Y %m %d %H:%M:%S")
-      )
+      df$"Activity.Start.Date.Time" <- paste(df$year, df$month, df$day, df$time)
     } else {
-      # Otherwise, just use the date with time set to midday
-      df$"Activity.Start.Date.Time" <- with(df, 
-        as.Date(paste(year, month, day, "12:00:00"), format="%Y %m %d")
-      )
+      # Otherwise, just use the date
+      df$"Activity.Start.Date.Time" <- paste(df$year, df$month, df$day)
     }
   }
   
-  # Convert from YYYY-MM-DD format to MM/DD/YYYY format if Activity.Start.Date.Time exists
-  if ("Activity.Start.Date.Time" %in% names(df) && !all(is.na(df$"Activity.Start.Date.Time"))) {
-    # cat("Found non-NA values in Activity.Start.Date.Time\n")
-    
-    if (inherits(df$"Activity.Start.Date.Time", "POSIXct")) {
-      # cat("Converting from POSIXct to MM/DD/YYYY format\n")
-      # Convert from datetime object to MM/DD/YYYY format string
-      df$"Activity.Start.Date.Time" <- format(df$"Activity.Start.Date.Time", "%m/%d/%Y %H:%M:%S")
-      # cat("After conversion to MM/DD/YYYY, first few values:", head(df$"Activity.Start.Date.Time"), "\n")
-    } else if (is.character(df$"Activity.Start.Date.Time")) {
-      # Check if it's in YYYY-MM-DD format
-      if (any(grepl("^\\d{4}-\\d{2}-\\d{2}", df$"Activity.Start.Date.Time"))) {
-        # cat("Converting from YYYY-MM-DD string to MM/DD/YYYY format\n")
-        # Convert YYYY-MM-DD format to MM/DD/YYYY
-        temp_datetime <- as.POSIXct(df$"Activity.Start.Date.Time", format="%Y-%m-%d %H:%M:%S")
-        df$"Activity.Start.Date.Time" <- format(temp_datetime, "%m/%d/%Y %H:%M:%S")
-        # cat("After conversion from YYYY-MM-DD to MM/DD/YYYY, first few values:", 
-            # head(df$"Activity.Start.Date.Time"), "\n")
-      }
-    }
-  } else {
-    # cat("WARNING: Activity.Start.Date.Time column is missing or all NA values\n")
-  }
+  # No date parsing or format conversion should be done - keep Activity.Start.Date.Time as is
   
   # Step 3: Handle measurement columns - transform from wide to long format
   # First, identify which measurement columns exist in the dataframe

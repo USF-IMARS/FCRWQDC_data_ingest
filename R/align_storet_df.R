@@ -51,35 +51,10 @@ align_storet_df <- function(df) {
   
   # Continue transformation, ensuring we capture the result
   df <- df %>%
-    # 2) build the DateTime - using proper standard evaluation with improved format handling
+    # 2) Simply combine Act.Date and Act.Time into Activity.Start.Date.Time without parsing
     dplyr::mutate(
-      # First try to parse the date-time using standard format
-      temp_datetime = suppressWarnings(as.POSIXct(
-        paste(.data[['Act.Date']], .data[['Act.Time']]),
-        format = "%m/%d/%Y %H:%M:%S",
-        tz     = "UTC"
-      )),
-      
-      # If that doesn't work, try with AM/PM format
-      temp_datetime2 = suppressWarnings(as.POSIXct(
-        paste(.data[['Act.Date']], .data[['Act.Time']]),
-        format = "%m/%d/%Y %I:%M:%S %p",
-        tz     = "UTC"
-      )),
-      
-      # Combine the results, using the second attempt if the first failed
-      Activity.Start.Date.Time = ifelse(
-        is.na(temp_datetime) & !is.na(temp_datetime2),
-        temp_datetime2,
-        temp_datetime
-      )
-    ) %>%
-    # Remove temporary columns
-    dplyr::select(-temp_datetime, -temp_datetime2)
-  
-  # Convert to proper POSIXct type (it might be numeric after the ifelse)
-  if ("Activity.Start.Date.Time" %in% names(df)) {
-    df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, origin="1970-01-01", tz="UTC")
-  }
+      # Create Activity.Start.Date.Time by concatenating Act.Date and Act.Time as strings
+      Activity.Start.Date.Time = paste(.data[['Act.Date']], .data[['Act.Time']])
+    )
   return(df)
 }

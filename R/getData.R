@@ -44,18 +44,7 @@ getData <- function(programName) {
 
 # Merge WIN data with historical STORET data, ensuring consistent types
 mergeWithHistoricalData <- function(df, hist_data) {
-  # === coerce column types where necessary         
-  # Convert Activity.Start.Date.Time to POSIXct if it exists in both dataframes
-  if ("Activity.Start.Date.Time" %in% names(df) && "Activity.Start.Date.Time" %in% names(hist_data)) {
-    # Convert to character first if they are different types to ensure consistent conversion
-    df$Activity.Start.Date.Time <- as.character(df$Activity.Start.Date.Time)
-    hist_data$Activity.Start.Date.Time <- as.character(hist_data$Activity.Start.Date.Time)
-    
-    # Then convert both to POSIXct using robust date conversion to handle multiple formats
-    df$Activity.Start.Date.Time <- suppressWarnings(as.POSIXct(df$Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S", tz = "UTC"))
-    hist_data$Activity.Start.Date.Time <- suppressWarnings(as.POSIXct(hist_data$Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S", tz = "UTC"))
-  }
-  
+  # === coerce column types where necessary           
   # Make sure DEP.Result.Value.Number is consistently numeric in both dataframes
   if ("DEP.Result.Value.Number" %in% names(df) && "DEP.Result.Value.Number" %in% names(hist_data)) {
     # Convert to numeric, handling potential conversion issues with as.numeric
