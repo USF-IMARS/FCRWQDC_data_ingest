@@ -4,33 +4,21 @@ title: "WIN_data_ingest"
 
 Data ingestion and initial analysis from FL WIN water quality database and  other sources.
 
-Below is a demonstration of how to load the data.
+Below are some statistics on data across all analytes and programs.
 
-For more information about the data please see "Provider Reports" in the top navigation.
-
-```{R read WIN file}
-#| code-summary: read in the WIN txt pipe-delimited file for example program.
-librarian::shelf(
-  dplyr,
-  glue,
-  here,
-  tidyr
-)
-
-source("R/getData.R")
-df <- getData("BBAP")
-
-
-```
-```{R print first lines of WIN file}
-#| code-summary: Print the first few rows of the dataframe
-# head(df)
-
-library(pander)
-
-pander(head(df), digits = 6)
+```{R, get data across all programs}
+source(here("R/getAllData.R"))
+df <- getAllData()
 ```
 
+```{R, list all analytes}
+print(unique(df$DEP.Analyte.Name))
+```
+
+```{R, skimr on all data}
+library(skimr)
+skim(df)
+```
 
 ------------------------------------------------------------------
 
