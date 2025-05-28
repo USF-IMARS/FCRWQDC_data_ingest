@@ -50,7 +50,7 @@ create_template <- function(org_id) {
 }
 
 # for each WIN data file in /data directory:
-data_files <- list.files(here("data"), pattern = "_WIN_WAVES_OTIS_.*\\.txt$", full.names = FALSE)
+data_files <- list.files(here("data/WIN"), pattern = "_WIN_WAVES_OTIS_.*\\.txt$", full.names = FALSE)
 for (file in data_files) {
   # Extract org_id from filename using regex pattern
   org_id <- gsub("^_WIN_WAVES_OTIS_(.+)\\.txt$", "\\1", file)
