@@ -1,0 +1,79 @@
+---
+title: "Ammonia (N) Report"
+author: "Tylar Murray"
+format: html
+params:
+  analyte: "Ammonia (N)"  # must be Ammonia (N) before rendering
+---
+
+```{R, get data across all programs}
+source(here("R/getAllData.R"))
+df <- getAllData()
+```
+
+```{R, create table of means for selected analyte}
+# Print which analyte we're analyzing
+cat(paste0("Analyzing data for analyte: ", params$analyte, "\n"))
+
+# Filter data to only include the selected analyte
+analyte_df <- df %>%
+  filter(DEP.Analyte.Name == params$analyte)
+
+# Create a unique identifier by combining program and station ID
+analyte_df$id <- paste0(analyte_df$program, "_", analyte_df$Monitoring.Location.ID)
+
+# Count how many stations have data for this analyte
+station_count <- length(unique(analyte_df$id))
+cat(paste0("Found ", station_count, " stations with data for ", params$analyte, "\n"))
+
+# Create a clean analyte data table
+mean_table <- analyte_df %>%
+  # Select only the relevant columns
+  select(id, program, Monitoring.Location.ID, DEP.Result.Value.Number, DEP.Result.Unit) %>%
+  # Remove rows with missing result values
+  filter(!is.na(DEP.Result.Value.Number)) %>%
+  # Convert to numeric to ensure proper calculation
+  mutate(DEP.Result.Value.Number = as.numeric(DEP.Result.Value.Number)) %>%
+  # Group by location
+  group_by(id, program, Monitoring.Location.ID, DEP.Result.Unit) %>%
+  # Calculate mean for each group
+  summarise(
+    n_values = n(),
+    mean_value = round(mean(DEP.Result.Value.Number, na.rm = TRUE), 2),
+    .groups = "drop"
+  ) %>%
+  # Create a formatted string with the mean and unit
+  mutate(formatted_result = paste0(mean_value, " ", DEP.Result.Unit))
+
+# Display summary statistics
+cat(paste0("Total observations for ", params$analyte, ": ", sum(mean_table$n_values), "\n"))
+
+# Sort by mean value (descending) to see highest concentrations first
+sorted_mean_table <- mean_table %>%
+  arrange(desc(mean_value))
+
+# Display the table with program name for context
+result_table <- sorted_mean_table %>%
+  select(program, Monitoring.Location.ID, n_values, mean_value, DEP.Result.Unit)
+
+# Add a title to the table
+cat(paste0("\n## Mean ", params$analyte, " Concentrations by Station\n"))
+
+# Display the table using pander for better formatting
+library(pander)
+pander(result_table, digits = 2)
+
+```
+
+```{R, create histogram of means}
+
+# Create a simple histogram of the values
+if (nrow(mean_table) > 0) {
+  cat(paste0("\n## Distribution of ", params$analyte, " Concentrations\n"))
+  hist(mean_table$mean_value, 
+       main = paste0("Histogram of Mean ", params$analyte, " Values"),
+       xlab = paste0(params$analyte, " (", unique(mean_table$DEP.Result.Unit)[1], ")"),
+       col = "lightblue",
+       breaks = min(20, max(5, nrow(mean_table) %/% 5)))
+}
+```

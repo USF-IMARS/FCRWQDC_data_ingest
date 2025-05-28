@@ -10,6 +10,7 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - analyte_reports/analyte_reports.qmd
       - provider_reports/provider_reports.qmd
       - href: https://github.com/USF-IMaRS/WIN_data_ingest
         text: Source Code on GitHub
