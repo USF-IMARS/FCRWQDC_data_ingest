@@ -23,6 +23,15 @@ getData <- function(programName) {
     
     # Ensure consistent data types before binding rows
     df <- mergeWithHistoricalData(df, hist_data)
+  } else if (programName == "test") {
+    # Special case for testing with example files
+    df <- getWINData(programName)
+    
+    # Load test STORET data
+    hist_data <- getSTORETData(programName)
+    
+    # Ensure consistent data types before binding rows
+    df <- mergeWithHistoricalData(df, hist_data)
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
@@ -42,9 +51,9 @@ mergeWithHistoricalData <- function(df, hist_data) {
     df$Activity.Start.Date.Time <- as.character(df$Activity.Start.Date.Time)
     hist_data$Activity.Start.Date.Time <- as.character(hist_data$Activity.Start.Date.Time)
     
-    # Then convert both to POSIXct
-    df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
-    hist_data$Activity.Start.Date.Time <- as.POSIXct(hist_data$Activity.Start.Date.Time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
+    # Then convert both to POSIXct using robust date conversion to handle multiple formats
+    df$Activity.Start.Date.Time <- suppressWarnings(as.POSIXct(df$Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S", tz = "UTC"))
+    hist_data$Activity.Start.Date.Time <- suppressWarnings(as.POSIXct(hist_data$Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S", tz = "UTC"))
   }
   
   # Make sure DEP.Result.Value.Number is consistently numeric in both dataframes
@@ -54,9 +63,37 @@ mergeWithHistoricalData <- function(df, hist_data) {
     hist_data$DEP.Result.Value.Number <- as.numeric(as.character(hist_data$DEP.Result.Value.Number))
   }
   
-  # Convert both to character to ensure consistent type
+  # Ensure consistent character type for ID columns
   df$Monitoring.Location.ID <- as.character(df$Monitoring.Location.ID)
   hist_data$Monitoring.Location.ID <- as.character(hist_data$Monitoring.Location.ID)
+  
+  # Handle WBID column type inconsistency (character vs integer)
+  if ("WBID" %in% names(df) && "WBID" %in% names(hist_data)) {
+    df$WBID <- as.character(df$WBID)
+    hist_data$WBID <- as.character(hist_data$WBID)
+  }
+  
+  # Check for other common columns and ensure they have consistent types
+  common_cols <- intersect(names(df), names(hist_data))
+  for (col in common_cols) {
+    if (!identical(class(df[[col]]), class(hist_data[[col]]))) {
+      # Convert to character type for string columns
+      if (is.character(df[[col]]) || is.character(hist_data[[col]])) {
+        df[[col]] <- as.character(df[[col]])
+        hist_data[[col]] <- as.character(hist_data[[col]])
+      }
+      # Convert to numeric for number columns
+      else if (is.numeric(df[[col]]) || is.numeric(hist_data[[col]])) {
+        df[[col]] <- as.numeric(as.character(df[[col]]))
+        hist_data[[col]] <- as.numeric(as.character(hist_data[[col]]))
+      }
+      # Default to character for any other mismatches
+      else {
+        df[[col]] <- as.character(df[[col]])
+        hist_data[[col]] <- as.character(hist_data[[col]])
+      }
+    }
+  }
   
   # Now bind the rows with compatible types
   merged_df <- dplyr::bind_rows(df, hist_data)
