@@ -3,7 +3,7 @@ title: "BROWARD Data"
 author: "Tylar Murray"
 format: html
 params: 
-  org_id: SFER  #DERM_BBWQ  # must be BROWARD before rendering
+  org_id: BROWARD #SFER #DERM_BBWQ  # must be BROWARD before rendering
 ---
 
 WQ Provider Data
@@ -144,21 +144,29 @@ ggplot(sampling_events, aes(x = `Activity.Start.Date.Time`)) +
 ```
 
 ```{R sampling heatmap, fig.width=10, fig.height= max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2)}
-  # Create a heatmap of sampling locations over time
-ggplot(sampling_events, 
-         aes(x = `Activity.Start.Date.Time`, 
-             y = Monitoring.Location.ID)) +
-    geom_point(color = "steelblue", alpha = 0.7) +
-    labs(
-      title = "Sampling Locations Over Time",
-      x = "Date",
-      y = "Monitoring Location ID"
-    ) +
-    theme_minimal() +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      panel.grid.minor = element_blank()
-    )
+# Create a heatmap of sampling locations over time
+# drop rows with missing dates or IDs
+sampling_events <- sampling_events %>%
+  filter(!is.na(`Activity.Start.Date.Time`), !is.na(Monitoring.Location.ID))
+# if sampling_events is empty, skip this plot
+if (nrow(sampling_events) > 0) {
+  ggplot(sampling_events, 
+          aes(x = `Activity.Start.Date.Time`, 
+              y = Monitoring.Location.ID)) +
+      geom_point(color = "steelblue", alpha = 0.7) +
+      labs(
+        title = "Sampling Locations Over Time",
+        x = "Date",
+        y = "Monitoring Location ID"
+      ) +
+      theme_minimal() +
+      theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.grid.minor = element_blank()
+      )
+} else {
+  print("No sampling events with valid dates & IDs")
+}
 ```
 
 ```{R print start + end dates}
