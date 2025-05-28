@@ -127,6 +127,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./stations_report.html"> 
+<span class="menu-text">All Stations Report</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./provider_reports/provider_reports.html"> 
 <span class="menu-text">Provider Reports</span></a>
   </li>  
@@ -186,15 +190,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getData.R"</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">"BBAP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===========================================
+DATA LOADING FOR PROGRAM: BBAP===========================================
+
+=== WIN Data Loading ===
+Source: _WIN_WAVES_OTIS_BBAP.txtLoaded 30 columns--- Column statistics ---
+No columns were dropped during processing
+Final column count: 30------------------------
+
+--- Data Summary ---
+Total rows: 22524Total columns: 30------------------
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.ID to character type
+Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================</code></pre>
+</div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Print the first few rows of the dataframe</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(df)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(<span class="fu">head</span>(df), <span class="at">digits =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(df)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(<span class="fu">head</span>(df), <span class="at">digits =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
