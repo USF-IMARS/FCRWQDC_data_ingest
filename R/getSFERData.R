@@ -4,7 +4,12 @@ library(here)
 
 # Get data from SFER CSV format files
 getSFERData <- function(programName) {
-  fpath <- here("data/SFER_data.csv")
+  # Check if we're using test data
+  if (programName == "test") {
+    fpath <- here("data/test/SFER_example.csv")
+  } else {
+    fpath <- here("data/SFER_data.csv")
+  }
   df <- read.csv(fpath)
   # modify df to align with WIN standards
   source(here("R/align_sfer_df.R"))

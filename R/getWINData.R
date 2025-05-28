@@ -5,8 +5,13 @@ library(glue)
 
 # Get data from WIN format files
 getWINData <- function(programName){
-  # use standardized data from WIN:
-  fpath <- here(glue("data/WIN/_WIN_WAVES_OTIS_{programName}.txt"))
+  # Check if we're using test data
+  if (programName == "test") {
+    fpath <- here("data/test/WIN_example.csv")
+  } else {
+    # use standardized data from WIN:
+    fpath <- here(glue("data/WIN/_WIN_WAVES_OTIS_{programName}.txt"))
+  }
   
   all_lines <- readLines(here(fpath))
   
@@ -60,6 +65,10 @@ getWINData <- function(programName){
                    quote = "\"",
                    fill = TRUE,
                    stringsAsFactors = FALSE)
+  
+  # Apply the alignment function to ensure consistency with other data sources
+  source(here("R/align_win_df.R"))
+  result_df <- align_win_df(result_df)
   
   # Return the dataframe
   return(result_df)
