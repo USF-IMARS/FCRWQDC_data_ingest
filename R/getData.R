@@ -11,33 +11,89 @@ source(here::here("R/getWINData.R"))
 
 # Main function to get data for a specific program
 getData <- function(programName) {
+  cat("\n===========================================\n")
+  cat(glue("DATA LOADING FOR PROGRAM: {toupper(programName)}\n"))
+  cat("===========================================\n")
+  
   # Determine which data source to use based on program name
   if(programName == "SFER") {
     df <- getSFERData(programName)
+    
+    cat("\n--- Data Summary ---\n")
+    cat(glue("Total rows: {nrow(df)}\n"))
+    cat(glue("Total columns: {ncol(df)}\n"))
+    cat("------------------\n")
+    
   } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
     # For programs with both WIN and historical data
+    cat("\n--- Loading WIN Data ---\n")
     df <- getWINData(programName)
+    win_rows <- nrow(df)
+    win_cols <- ncol(df)
     
     # load & append historical STORET data
+    cat("\n--- Loading Historical STORET Data ---\n")
     hist_data <- getSTORETData(programName)
+    hist_rows <- nrow(hist_data)
+    hist_cols <- ncol(hist_data)
     
     # Ensure consistent data types before binding rows
+    cat("\n--- Merging Data Sources ---\n")
     df <- mergeWithHistoricalData(df, hist_data)
+    merged_rows <- nrow(df)
+    merged_cols <- ncol(df)
+    
+    cat("\n--- Merged Data Summary ---\n")
+    cat(glue("WIN records: {win_rows} rows, {win_cols} columns\n"))
+    cat(glue("STORET records: {hist_rows} rows, {hist_cols} columns\n"))
+    cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
+    cat("-------------------------\n")
+    
   } else if (programName == "test") {
     # Special case for testing with example files
+    cat("\n--- Loading Test WIN Data ---\n")
     df <- getWINData(programName)
+    win_rows <- nrow(df)
+    win_cols <- ncol(df)
     
     # Load test STORET data
+    cat("\n--- Loading Test STORET Data ---\n")
     hist_data <- getSTORETData(programName)
+    hist_rows <- nrow(hist_data)
+    hist_cols <- ncol(hist_data)
     
     # Ensure consistent data types before binding rows
+    cat("\n--- Merging Test Data Sources ---\n")
     df <- mergeWithHistoricalData(df, hist_data)
+    merged_rows <- nrow(df)
+    merged_cols <- ncol(df)
+    
+    cat("\n--- Test Data Summary ---\n")
+    cat(glue("WIN test data: {win_rows} rows, {win_cols} columns\n"))
+    cat(glue("STORET test data: {hist_rows} rows, {hist_cols} columns\n"))
+    cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
+    cat("----------------------\n")
+    
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
+    
+    cat("\n--- Data Summary ---\n")
+    cat(glue("Total rows: {nrow(df)}\n"))
+    cat(glue("Total columns: {ncol(df)}\n"))
+    cat("------------------\n")
   }
+  
   # Process DMS coordinates and return the dataframe
+  cat("\n--- Processing DMS Coordinates ---\n")
+  original_rows <- nrow(df)
   df <- processDMSCoordinates(df)
+  if (nrow(df) != original_rows) {
+    cat(glue("WARNING: Row count changed during DMS coordinate processing from {original_rows} to {nrow(df)}\n"))
+  } else {
+    cat("No change in row count during DMS coordinate processing\n")
+  }
+  cat("===========================================\n")
   
   return(df)
 }
