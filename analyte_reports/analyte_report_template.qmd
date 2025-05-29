@@ -13,6 +13,10 @@ df <- getAllData()
 ```
 
 ```{R, create table of means for selected analyte}
+# Load required libraries and functions
+source(here("R/seasonalMannKendall.R"))
+library(dplyr)
+
 # Print which analyte we're analyzing
 cat(paste0("Analyzing data for analyte: ", params$analyte, "\n"))
 

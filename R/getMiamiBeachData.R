@@ -15,55 +15,9 @@ getMiamiBeachData <- function() {
   library(here)
   library(glue)
   
-  # TODO: (?) filter to key columns of interest for efficiency
-  # NOTE: currently unused
-  # key_columns <- c(
-  #   # Station ID column
-  #   "CLIENT SAMPLE ID",
-    
-  #   # Primary parameters of interest
-  #   "Turbidity",
-  #   "Nitrogen, Ammonia",
-  #   "Nitrogen, Kjeldahl, Total",
-  #   "Nitrogen, NO2 plus NO3",
-  #   "Phosphorus, Total (as P) LL",
-    
-  #   # Secondary parameters
-  #   "Salinity",
-  #   "Oxygen, Dissolved",
-  #   "Field pH",
-  #   "Field Temperature",
-    
-  #   # Date/time and other metadata columns
-  #   "SAMPLE COLLECTION DATE",
-  #   "SAMPLE COLLECTION TIME",
-  #   "PARAMETER NAME",
-  #   "RESULT",
-  #   "UNITS"
-  # )  
   cat("\n=== Processing Miami Beach Water Quality Data ===\n")
   
-  # === Load historical data from pipe-delimited file
-  historical_file <- here("data/MiamiBeach/Discrete WQ - 4058.txt")
-  cat(glue("Loading historical data from {basename(historical_file)}\n"))
-  
-  if (file.exists(historical_file)) {
-    # Read the pipe-delimited file
-    historical_df <- read.delim(
-      file = historical_file,
-      sep = "|",  # Pipe delimiter
-      header = TRUE,
-      stringsAsFactors = FALSE,
-      na.strings = c("", "NA")
-    )
-    
-    cat(glue("Loaded {nrow(historical_df)} rows and {ncol(historical_df)} columns from historical file\n"))
-  } else {
-    cat("Historical data file not found. Starting with empty dataframe.\n")
-    historical_df <- data.frame()
-  }
-
-  # align historical data to WIN column names
+  # Define column mappings for different data sources
   # historical columns:
   # RowID|ProgramID|ProgramName|Habitat|IndicatorID|IndicatorName|
   #ParameterID|ParameterName|ParameterUnits|ProgramLocationID|AreaID|
@@ -72,47 +26,82 @@ getMiamiBeachData <- function() {
   #ValueQualifier|ValueQualifierSource|SampleFraction|ResultComments|
   #OriginalLatitude|OriginalLongitude|SEACAR_QAQCFlagCode|
   #SEACAR_QAQC_Description|Include|SEACAR_EventID|MADup|ExportVersion
-
-  # WIN columns:
-  # Monitoring.Location.ID Activity.Start.Date.Time DEP.Analyte.Name
-  # DEP.Result.Value.Number DEP.Result.Unit
-
-  historical_df <- historical_df %>%
-    dplyr::rename(
-      Monitoring.Location.ID = `ProgramLocationID`,
-      Activity.Start.Date.Time = `SampleDate`,
-      DEP.Analyte.Name = `ParameterName`,
-      DEP.Result.Value.Number = `ResultValue`,
-      DEP.Result.Unit = `ParameterUnits`
+  column_mappings <- list(
+    historical = c(
+      Monitoring.Location.ID = "ProgramLocationID",
+      Activity.Start.Date.Time = "SampleDate",
+      DEP.Analyte.Name = "ParameterName",
+      DEP.Result.Value.Number = "ResultValue",
+      DEP.Result.Unit = "ParameterUnits",
+      Org.Decimal.Latitude = "OriginalLatitude",
+      Org.Decimal.Longitude = "OriginalLongitude"
+    ),
+    excel = c(
+      Monitoring.Location.ID = "CLIENT SAMPLE ID",
+      Activity.Start.Date.Time = "SAMPLE COLLECTION DATE",
+      DEP.Analyte.Name = "ANALYTE", 
+      DEP.Result.Value.Number = "SAMPLE RESULT",
+      DEP.Result.Unit = "UNITS"
+      # NOTE: excel files do not have lat,lon !
     )
-
-
-
-  
-  # === Load 2024 data from Excel files
-  xls_directory <- here("data/MiamiBeach/2024")
-  cat(glue("Searching for Excel files in {xls_directory}\n"))
-  
-  # Find all Excel files recursively
-  excel_files <- list.files(
-    path = xls_directory,
-    pattern = "\\.xls$|\\.xlsx$",
-    recursive = TRUE,
-    full.names = TRUE
   )
   
-  cat(glue("Found {length(excel_files)} Excel files\n"))
+  # Function to load historical data
+  load_historical_data <- function(file_path) {
+    if (!file.exists(file_path)) {
+      cat("Historical data file not found. Starting with empty dataframe.\n")
+      return(data.frame())
+    }
+    
+    # Read the pipe-delimited file
+    df <- read.delim(
+      file = file_path,
+      sep = "|",  # Pipe delimiter
+      header = TRUE,
+      stringsAsFactors = FALSE,
+      na.strings = c("", "NA")
+    )
+    
+    cat(glue("Loaded {nrow(df)} rows and {ncol(df)} columns from historical file\n"))
+    return(df)
+  }
+  
+  # Function to find Excel files
+  find_excel_files <- function(directory) {
+    files <- list.files(
+      path = directory,
+      pattern = "\\.xls$|\\.xlsx$",
+      recursive = TRUE,
+      full.names = TRUE
+    )
+    cat(glue("Found {length(files)} Excel files\n"))
+    return(files)
+  }
+  
+  # Function to extract date from filename
+  extract_date_from_filename <- function(filename) {
+    patterns <- c(
+      "Results ([0-9\\-]+)",
+      "([0-9\\-]+) Data\\.xls"
+    )
+    
+    for (pattern in patterns) {
+      date_match <- regexpr(pattern, filename)
+      if (date_match > 0) {
+        extracted <- regmatches(filename, date_match)
+        # Extract the date portion from the match
+        return(gsub(pattern, "\\1", extracted))
+      }
+    }
+    return(NA)
+  }
   
   # Function to read an Excel file and process it
   read_excel_file <- function(file_path) {
     cat(glue("Processing {basename(file_path)}\n"))
     
-    # Extract date from filename for files without date columns
-    file_date <- gsub(".*Results ([0-9\\-]+).*\\.xls.*", "\\1", basename(file_path))
-    if (file_date == basename(file_path)) {
-      # Try another pattern for files like "12-30-2024 Data.xls"
-      file_date <- gsub(".*([0-9\\-]+) Data\\.xls.*", "\\1", basename(file_path))
-    }
+    # Extract date from filename
+    file_date <- extract_date_from_filename(basename(file_path))
     
     tryCatch({
       # Read the Excel file
@@ -122,7 +111,7 @@ getMiamiBeachData <- function() {
       df$source_file <- basename(file_path)
       
       # If file doesn't have date column, use filename date
-      if (!"SAMPLE COLLECTION DATE" %in% names(df) && file_date != basename(file_path)) {
+      if (!"SAMPLE COLLECTION DATE" %in% names(df) && !is.na(file_date)) {
         df$`SAMPLE COLLECTION DATE` <- file_date
       }
       
@@ -132,6 +121,16 @@ getMiamiBeachData <- function() {
       return(data.frame())
     })
   }
+  
+  # Load historical data
+  historical_file <- here("data/MiamiBeach/Discrete WQ - 4058.txt")
+  cat(glue("Loading historical data from {basename(historical_file)}\n"))
+  historical_df <- load_historical_data(historical_file)
+  
+  # Find and load Excel files
+  xls_directory <- here("data/MiamiBeach/2024")
+  cat(glue("Searching for Excel files in {xls_directory}\n"))
+  excel_files <- find_excel_files(xls_directory)
   
   # Process all Excel files and combine them
   if (length(excel_files) > 0) {
@@ -143,85 +142,94 @@ getMiamiBeachData <- function() {
     cat("No Excel files found\n")
   }
   
-  # Process data differently based on source to avoid duplicate column issues
-  
-  # Function to standardize column names across different data sources
-  standardize_columns <- function(df, source_type) {
+  # Function to map columns while preserving original columns
+  map_columns <- function(df, source_type) {
     # First check if dataframe is empty
     if (nrow(df) == 0) {
       cat(glue("No data found for {source_type}\n"))
       return(data.frame())
     }
     
-    # Get current column names
+    # Get current column names and mapping for this source type
     current_cols <- names(df)
+    mapping <- column_mappings[[source_type]]
+    
     cat(glue("Column names in {source_type} data: {paste(current_cols, collapse=', ')}\n"))
     
-    # Create a fresh dataframe with the same number of rows as the input
-    result_df <- data.frame(row_id = 1:nrow(df))
+    # Create a result dataframe with all original columns
+    result_df <- df
     
-    # Map source-specific columns to standardized column names
-    if (source_type == "historical") {
-      # Only add columns if they exist in the source data
-      if ("ProgramLocationID" %in% current_cols) {
-        result_df$Monitoring.Location.ID <- df$ProgramLocationID
-      }
-      if ("SampleDate" %in% current_cols) {
-        result_df$Activity.Start.Date.Time <- df$SampleDate
-      }
-      if ("ParameterName" %in% current_cols) {
-        result_df$DEP.Analyte.Name <- df$ParameterName
-      }
-      if ("ResultValue" %in% current_cols) {
-        result_df$DEP.Result.Value.Number <- df$ResultValue
-      }
-      if ("ParameterUnits" %in% current_cols) {
-        result_df$DEP.Result.Unit <- df$ParameterUnits
-      }
-    } else if (source_type == "excel") {
-      # Only add columns if they exist in the source data
-      if ("CLIENT SAMPLE ID" %in% current_cols) {
-        result_df$Monitoring.Location.ID <- df$`CLIENT SAMPLE ID`
-      }
-      if ("COLLECTED" %in% current_cols) {
-        result_df$Activity.Start.Date.Time <- df$COLLECTED
-      }
-      if ("ANALYTE" %in% current_cols) {
-        result_df$DEP.Analyte.Name <- df$ANALYTE
-      }
-      if ("SAMPLE RESULT" %in% current_cols) {
-        result_df$DEP.Result.Value.Number <- df$`SAMPLE RESULT`
-      }
-      if ("UNITS" %in% current_cols) {
-        result_df$DEP.Result.Unit <- df$UNITS
+    # Add standardized columns by copying from original columns
+    for (target_col in names(mapping)) {
+      source_col <- mapping[target_col]
+      if (source_col %in% current_cols) {
+        # Copy the column data to the new standardized column name
+        result_df[[target_col]] <- result_df[[source_col]]
       }
     }
     
     # Add source identifier
     result_df$data_source <- source_type
     
-    # Add additional metadata columns that might be useful for analysis
-    # Copy over source file info if it exists
-    if ("source_file" %in% current_cols) {
-      result_df$source_file <- df$source_file
-    }
-    
-    # Remove the temporary row_id column
-    result_df$row_id <- NULL
-    
     # Check if we've actually found any useful data
-    if (ncol(result_df) <= 1) {  # If only data_source column exists
-      cat(glue("No usable columns found in {source_type} data\n"))
-      return(data.frame())  # Return empty dataframe
+    required_cols <- c("Monitoring.Location.ID", "Activity.Start.Date.Time", "DEP.Analyte.Name", "DEP.Result.Value.Number")
+    missing_cols <- required_cols[!required_cols %in% names(result_df)]
+    
+    if (length(missing_cols) > 0) {
+      cat(glue("Missing required columns in {source_type} data: {paste(missing_cols, collapse=', ')}\n"))
+      cat(glue("Available columns: {paste(names(result_df), collapse=', ')}\n"))
+    } else {
+      cat(glue("Successfully converted {source_type} data to standard format\n"))
     }
     
-    cat(glue("Successfully converted {source_type} data to {ncol(result_df)} standardized columns\n"))
     return(result_df)
   }
   
-  # Apply standardization to both datasets
-  historical_standardized <- standardize_columns(historical_df, "historical")
-  excel_standardized <- standardize_columns(excel_df, "excel")
+  # Apply column mapping to both datasets (preserving original columns)
+  historical_standardized <- map_columns(historical_df, "historical")
+  excel_standardized <- map_columns(excel_df, "excel")
+  
+  # Convert data types to ensure compatibility when merging
+  prepare_for_merge <- function(df) {
+    if (nrow(df) == 0) return(df)
+    
+    # First convert all columns that should be numeric to character
+    # This is to handle cases where some values might not be convertible to numeric
+    if ("DEP.Result.Value.Number" %in% names(df)) {
+      df$DEP.Result.Value.Number <- as.character(df$DEP.Result.Value.Number)
+    }
+    
+    # Ensure all columns that need to match between datasets have the same type
+    column_types <- list(
+      Monitoring.Location.ID = as.character,
+      Activity.Start.Date.Time = as.character,
+      DEP.Analyte.Name = as.character,
+      DEP.Result.Unit = as.character
+    )
+    
+    # Apply the type conversions
+    for (col in names(column_types)) {
+      if (col %in% names(df)) {
+        df[[col]] <- column_types[[col]](df[[col]])
+      }
+    }
+    
+    # Now convert numeric columns to numeric after ensuring all are character first
+    if ("DEP.Result.Value.Number" %in% names(df)) {
+      df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
+      # Handle conversion failures by replacing NAs with 0
+      na_count <- sum(is.na(df$DEP.Result.Value.Number))
+      if (na_count > 0) {
+        cat(glue("Warning: {na_count} values could not be converted to numeric and were set to NA\n"))
+      }
+    }
+    
+    return(df)
+  }
+  
+  # Apply type conversions to both datasets
+  historical_standardized <- prepare_for_merge(historical_standardized)
+  excel_standardized <- prepare_for_merge(excel_standardized)
   
   # Combine standardized datasets
   if (nrow(historical_standardized) > 0 && nrow(excel_standardized) > 0) {
@@ -242,9 +250,9 @@ getMiamiBeachData <- function() {
   merged_df <- merged_df %>%
     dplyr::mutate(
       # Convert date/time if needed
-      Activity.Start.Date.Time = as.character(Activity.Start.Date.Time),
+      Activity.Start.Date.Time = as.character(.data$Activity.Start.Date.Time),
       # Convert result value to numeric
-      DEP.Result.Value.Number = as.numeric(as.character(DEP.Result.Value.Number)),
+      DEP.Result.Value.Number = as.numeric(as.character(.data$DEP.Result.Value.Number)),
       # Add program identifier
       program = "MIAMIBEACH"
     )
