@@ -199,6 +199,68 @@ getMiamiBeachData <- function() {
       df$DEP.Result.Value.Number <- as.character(df$DEP.Result.Value.Number)
     }
     
+    # Standardize date formats
+    if ("Activity.Start.Date.Time" %in% names(df)) {
+      # Check the data source to apply appropriate date parsing
+      if ("data_source" %in% names(df)) {
+        # Process each data source appropriately
+        historical_rows <- df$data_source == "historical"
+        excel_rows <- df$data_source == "excel"
+        
+        # For historical data (already in good format, just ensure consistency)
+        if (any(historical_rows)) {
+          # Historical dates are in ISO format: "2017-03-16 12:00:00.000"
+          hist_dates <- df$Activity.Start.Date.Time[historical_rows]
+          # Convert to POSIXct then format to standard
+          parsed_dates <- as.POSIXct(hist_dates, format = "%Y-%m-%d %H:%M:%S", tz = "UTC") 
+          if (any(!is.na(parsed_dates))) {
+            # Format to WIN standard format
+            df$Activity.Start.Date.Time[historical_rows] <- format(parsed_dates, "%m/%d/%Y %H:%M:%S")
+          }
+        }
+        
+        # For Excel data (needs more parsing)
+        if (any(excel_rows)) {
+          # Excel dates may be in formats like "1-16-2024" or similar
+          excel_dates <- df$Activity.Start.Date.Time[excel_rows]
+          
+          # Try multiple common date formats
+          date_formats <- c(
+            "%m-%d-%Y",      # 1-16-2024
+            "%m/%d/%Y",      # 1/16/2024
+            "%Y-%m-%d",      # 2024-01-16
+            "%d-%m-%Y"       # 16-1-2024
+          )
+          
+          # Try each format until we get a match
+          parsed_dates <- rep(as.POSIXct(NA), length(excel_dates))
+          for (fmt in date_formats) {
+            # Only try to parse dates that are still NA
+            still_na <- is.na(parsed_dates)
+            if (!any(still_na)) break
+            
+            # Try this format for remaining NAs
+            temp_parsed <- as.POSIXct(excel_dates[still_na], format = fmt, tz = "UTC")
+            parsed_dates[still_na] <- ifelse(!is.na(temp_parsed), temp_parsed, parsed_dates[still_na])
+          }
+          
+          # Add default time if missing (noon)
+          parsed_dates <- as.POSIXct(as.Date(parsed_dates)) + 12*60*60
+          
+          # Format to WIN standard
+          if (any(!is.na(parsed_dates))) {
+            df$Activity.Start.Date.Time[excel_rows] <- format(parsed_dates, "%m/%d/%Y %H:%M:%S")
+          }
+          
+          # Log stats about date parsing
+          na_count <- sum(is.na(parsed_dates))
+          if (na_count > 0) {
+            cat(glue("Warning: {na_count} Excel dates could not be parsed and were set to NA\n"))
+          }
+        }
+      }
+    }
+    
     # Ensure all columns that need to match between datasets have the same type
     column_types <- list(
       Monitoring.Location.ID = as.character,
