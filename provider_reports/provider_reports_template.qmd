@@ -3,7 +3,7 @@ title: "BROWARD Data"
 author: "Tylar Murray"
 format: html
 params: 
-  org_id: MiamiBeach #SFER #DERM_BBWQ  # must be BROWARD before rendering
+  org_id: BROWARD #SFER #DERM_BBWQ  # must be BROWARD before rendering
 ---
 
 Provider Data Assesment
