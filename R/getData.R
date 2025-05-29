@@ -13,7 +13,7 @@ source(here::here("R/getMiamiBeachData.R"))
 # Main function to get data for a specific program
 getData <- function(programName) {
   cat("\n===========================================\n")
-  cat(glue("DATA LOADING FOR PROGRAM: {toupper(programName)}\n"))
+  cat(glue("DATA LOADING FOR PROGRAM: {toupper(programName)} \n"))
   cat("===========================================\n")
   
   # Determine which data source to use based on program name

@@ -7,6 +7,7 @@ Data ingestion and initial analysis from FL WIN water quality database and  othe
 Below are some statistics on data across all analytes and programs.
 
 ```{R, get data across all programs}
+library("here")
 source(here("R/getAllData.R"))
 df <- getAllData()
 ```

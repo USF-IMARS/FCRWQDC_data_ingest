@@ -7,6 +7,7 @@ params:
 ---
 
 ```{R, get data across all programs}
+library('here')
 source(here("R/getAllData.R"))
 df <- getAllData()
 ```
