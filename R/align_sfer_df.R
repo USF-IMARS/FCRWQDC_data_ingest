@@ -95,6 +95,30 @@ align_sfer_df <- function(df) {
       if (!identical(temp_values, df[[new_name]])) {
         # cat("WARNING: Values don't match after renaming!\n")
       }
+      
+      # Special handling for datetime column to ensure it stays in a standard format
+      if (old_name == "datetime" && new_name == "Activity.Start.Date.Time") {
+        # Preserve the original format which is already ISO
+        cat("SFER datetime format detected - preserving values\n")
+        # Print a few values to debug
+        if (length(df[[new_name]]) > 0) {
+          cat("Sample datetime values: ", head(df[[new_name]], 3), "\n")
+          
+          # Convert to WIN standard format if needed
+          tryCatch({
+            # Parse dates to standard format
+            parsed_dates <- as.POSIXct(df[[new_name]], format="%Y-%m-%d %H:%M:%S")
+            
+            # If parsing succeeded, convert to WIN standard format (MM/DD/YYYY HH:MM:SS)
+            if (!all(is.na(parsed_dates))) {
+              df[[new_name]] <- format(parsed_dates, "%m/%d/%Y %H:%M:%S")
+              cat("Converted to WIN format: ", head(df[[new_name]], 3), "\n")
+            }
+          }, error = function(e) {
+            cat("Could not standardize datetime format: ", e$message, "\n")
+          })
+        }
+      }
     } else {
       # cat("Column", old_name, "not found in dataframe\n")
     }
