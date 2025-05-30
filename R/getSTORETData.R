@@ -55,12 +55,14 @@ getSTORETData <- function(programName=NULL, fpath=NULL) {
     fpath, 
     "data/STORET_historical/STORET_Water_Quality_Results_{programName}.txt")
   df <- STORETFileToDataFrame(fpath)
-  
-  if (programName == 'DERM_BBWQ') {
+
+  if (programName == "DERM_BBWQ") {
     # also include the 1970–1995 legacy file
-    fpath2 <- glue('{storetPath}/STORET_Water_Quality_Results_{programName}_1970_1995.txt')
+    fpath2 <- glue(
+      'data/STORET_historical/STORET_Water_Quality_Results_{programName}_1970_1995.txt'
+    )
     df2 <- STORETFileToDataFrame(fpath2)
-    
+ 
     # merge them by row
     df <- dplyr::bind_rows(df, df2)
   }

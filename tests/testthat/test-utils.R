@@ -18,7 +18,7 @@ check_datetime_validity <- function(df, source_name) {
 }
 
 # Helper function to check dataset alignment with WIN dataframe columns
-check_win_column_alignment <- function(df, source_name = "Dataset", enforce_checks = TRUE) {
+check_win_column_alignment <- function(df, source_name = "Dataset") {
   # Define core WIN column groups for checking
   win_core_columns <- list(
     # Required identification columns

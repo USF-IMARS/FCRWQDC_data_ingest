@@ -29,7 +29,7 @@ test_that("getData can open and read data from test files", {
   expect_gt(nrow(test_data), 0)
   
   # Verify the required fields in test data
-  validate_required_fields(test_data, "test")
+  check_win_column_alignment(test_data)
 })
 
 # Get the list of all programs
@@ -54,7 +54,7 @@ for (program_name in programs) {
     skip_if(nrow(program_data) == 0, glue("No data available for {program_name}"))
     
     # Validate required fields
-    validate_required_fields(program_data, program_name)
+    check_win_column_alignment(program_data)
     
     # Verify program name is added
     if ("program" %in% names(program_data)) {
