@@ -20,6 +20,13 @@ test_that("getSFERData can open and read SFER data", {
   expect_true(is.data.frame(sfer_data))
   expect_gt(nrow(sfer_data), 0)
   
-  # Check for valid dates
-  check_datetime_validity(sfer_data, "SFER data")
+  # Use the column alignment checker to validate WIN format compliance
+  cat("\n----- SFER Data Format Validation -----\n")
+  alignment_results <- check_win_column_alignment(sfer_data, source_name = "SFER")
+  
+  # Verify alignment is above acceptable threshold
+  # SFER data may have different column naming conventions, so we use a lower threshold
+  expect_gte(alignment_results$alignment_percent, 60,
+             paste0("SFER data alignment with WIN format is only ", 
+                   alignment_results$alignment_percent, "% (below 60% threshold)"))
 })

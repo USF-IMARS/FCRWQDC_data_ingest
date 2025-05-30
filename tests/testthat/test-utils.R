@@ -18,7 +18,7 @@ check_datetime_validity <- function(df, source_name) {
 }
 
 # Helper function to check dataset alignment with WIN dataframe columns
-check_win_column_alignment <- function(df, source_name = "Dataset") {
+check_win_column_alignment <- function(df, source_name = "Dataset", enforce_checks = TRUE) {
   # Define core WIN column groups for checking
   win_core_columns <- list(
     # Required identification columns
@@ -65,7 +65,7 @@ check_win_column_alignment <- function(df, source_name = "Dataset") {
     cat(glue("Column '{col}': {ifelse(has_column, 'PRESENT', 'MISSING')}\n"))
     
     # Only Monitoring.Location.ID is absolutely required
-    if (col == "Monitoring.Location.ID") {
+    if (col == "Monitoring.Location.ID" && enforce_checks) {
       expect_true(has_column, glue("{source_name} missing required column: {col}"))
     }
   }
@@ -95,20 +95,26 @@ check_win_column_alignment <- function(df, source_name = "Dataset") {
       }
     }
   }
-  expect_true(location_present, glue("{source_name} missing all location columns"))
+  if (enforce_checks) {
+    expect_true(location_present, glue("{source_name} missing all location columns"))
+  }
   
   # Check result columns
   cat("\n=== Checking Result Columns ===\n")
   for (col in win_core_columns$result_columns) {
     has_column <- col %in% names(df)
     cat(glue("Column '{col}': {ifelse(has_column, 'PRESENT', 'MISSING')}\n"))
-    expect_true(has_column, glue("{source_name} missing required column: {col}"))
+    if (enforce_checks) {
+      expect_true(has_column, glue("{source_name} missing required column: {col}"))
+    }
     
     # Check DEP.Result.Value.Number specifically for numeric type
     if (col == "DEP.Result.Value.Number" && has_column) {
       is_numeric <- is.numeric(df[[col]])
       cat(glue("  Data type check: {ifelse(is_numeric, 'NUMERIC', 'NON-NUMERIC')}\n"))
-      expect_true(is_numeric, glue("{source_name} column {col} is not numeric"))
+      if (enforce_checks) {
+        expect_true(is_numeric, glue("{source_name} column {col} is not numeric"))
+      }
     }
   }
   

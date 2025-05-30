@@ -20,14 +20,13 @@ test_that("getWINData can open and read WIN data", {
   expect_true(is.data.frame(win_data))
   expect_gt(nrow(win_data), 0)
   
-  # Check for Activity.Start.Date.Time column if it should exist
-  if("Activity.Start.Date.Time" %in% names(win_data)) {
-    check_datetime_validity(win_data, "WIN BROWARD data")
-  } else {
-    # If the column doesn't exist, make sure other essential columns are there
-    expected_cols <- c("Organization.ID", "Monitoring.Location.ID")
-    for(col in expected_cols) {
-      expect_true(col %in% names(win_data), paste("WIN data missing expected column:", col))
-    }
-  }
+  # Use the column alignment checker to validate WIN format compliance
+  # Since this is the reference WIN format, we expect very high alignment
+  cat("\n----- WIN Data Format Validation -----\n")
+  alignment_results <- check_win_column_alignment(win_data, source_name = "WIN")
+  
+  # Verify alignment is above acceptable threshold - should be very high for WIN data
+  expect_gte(alignment_results$alignment_percent, 90,
+             paste0("WIN data alignment with WIN format is only ", 
+                   alignment_results$alignment_percent, "% (below 90% threshold)"))
 })
