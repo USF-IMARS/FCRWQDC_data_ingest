@@ -7,7 +7,7 @@
 #' @importFrom here here
 #' @importFrom glue glue
 #' @export
-getMiamiBeachData <- function(programNam=null, fpath=null) {
+getMiamiBeachData <- function(programNam=NULL, fpath=NULL) {
   fpath <- getFpath(
     programName, 
     fpath, 
