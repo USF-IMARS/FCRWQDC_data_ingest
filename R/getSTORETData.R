@@ -49,7 +49,7 @@ STORETFileToDataFrame <- function(fpath){
 }
 
 # Get data from STORET historical format files (pipe-delimited)
-getSTORETData <- function(programName=None, fpath=None) {
+getSTORETData <- function(programNam=null, fpath=null) {
   fpath <- getFpath(
     programName, 
     fpath, 

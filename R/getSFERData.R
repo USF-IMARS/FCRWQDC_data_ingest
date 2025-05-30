@@ -5,7 +5,7 @@ library(glue)
 source(here("R/getFpath.R"))
 
 # Get data from SFER CSV format files
-getSFERData <- function(programName) {
+getSFERData <- function(programNam=null, fpath=null) {
   fpath <- getFpath(
     programName, 
     fpath, 
