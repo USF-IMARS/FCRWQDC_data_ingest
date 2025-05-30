@@ -5,7 +5,7 @@ library(glue)
 source(here("R/getFpath.R"))
 
 # Get data from WIN format files
-getWINData <- function(programNam=NULL, fpath=NULL){
+getWINData <- function(programName=NULL, fpath=NULL){
   fpath <- getFpath(programName, fpath, "data/WIN/_WIN_WAVES_OTIS_{programName}.txt")
 
   all_lines <- readLines(here(fpath))
