@@ -65,7 +65,7 @@ check_win_column_alignment <- function(df, source_name = "Dataset", enforce_chec
     cat(glue("Column '{col}': {ifelse(has_column, 'PRESENT', 'MISSING')}\n"))
     
     # Only Monitoring.Location.ID is absolutely required
-    if (col == "Monitoring.Location.ID" && enforce_checks) {
+    if (col == "Monitoring.Location.ID") {
       expect_true(has_column, glue("{source_name} missing required column: {col}"))
     }
   }
@@ -95,28 +95,22 @@ check_win_column_alignment <- function(df, source_name = "Dataset", enforce_chec
       }
     }
   }
-  if (enforce_checks) {
     expect_true(location_present, glue("{source_name} missing all location columns"))
-  }
   
   # Check result columns
   cat("\n=== Checking Result Columns ===\n")
   for (col in win_core_columns$result_columns) {
     has_column <- col %in% names(df)
     cat(glue("Column '{col}': {ifelse(has_column, 'PRESENT', 'MISSING')}\n"))
-    if (enforce_checks) {
       expect_true(has_column, glue("{source_name} missing required column: {col}"))
-    }
     
     # Check DEP.Result.Value.Number specifically for numeric type
     if (col == "DEP.Result.Value.Number" && has_column) {
       is_numeric <- is.numeric(df[[col]])
       cat(glue("  Data type check: {ifelse(is_numeric, 'NUMERIC', 'NON-NUMERIC')}\n"))
-      if (enforce_checks) {
         expect_true(is_numeric, glue("{source_name} column {col} is not numeric"))
       }
     }
-  }
   
   # Check metadata columns - these are important but not all required
   cat("\n=== Checking Metadata Columns ===\n")
@@ -128,6 +122,20 @@ check_win_column_alignment <- function(df, source_name = "Dataset", enforce_chec
   }
   cat(glue("Metadata columns present: {metadata_count} out of {length(win_core_columns$metadata_columns)}\n"))
   
+  # Check the MDL column
+  cat("\n\n=== Checking MDL column types across datasets ===\n")
+  mdl_types <- sapply(datasets, function(df) {
+    type <- class(df$MDL)[1]
+    cat("MDL column in dataset is of type:", type, "\n")
+    return(type)
+  })
+    
+  # Check if all MDL columns have the same type
+  consistent_mdl_type <- length(unique(mdl_types)) == 1
+  expect_true(consistent_mdl_type, 
+              paste0("MDL column has inconsistent types across datasets: ", 
+                      paste(names(mdl_types), "=", mdl_types, collapse=", ")))
+
   # Output overall summary
   all_core_columns <- unlist(win_core_columns)
   present_core_columns <- sum(all_core_columns %in% names(df))

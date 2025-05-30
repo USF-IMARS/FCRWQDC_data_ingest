@@ -2,6 +2,7 @@
 library(dplyr)
 library(here)
 library(glue)
+source(here("R/getFpath.R"))
 
 STORETFileToDataFrame <- function(fpath){
   # read dataframe from pipe-delimited file
@@ -48,16 +49,11 @@ STORETFileToDataFrame <- function(fpath){
 }
 
 # Get data from STORET historical format files (pipe-delimited)
-getSTORETData <- function(programName) {
-  # Check if we're using test data
-  if (programName == "test") {
-    # Use test data file
-    fpath <- here('data/test/STORET_example.csv')
-  } else {
-    storetPath <- here('data/STORET_historical')
-    # read the main file
-    fpath <- glue('{storetPath}/STORET_Water_Quality_Results_{programName}.txt')
-  }
+getSTORETData <- function(programName=None, fpath=None) {
+  fpath <- getFpath(
+    programName, 
+    fpath, 
+    "data/STORET_historical/STORET_Water_Quality_Results_{programName}.txt")
   df <- STORETFileToDataFrame(fpath)
   
   if (programName == 'DERM_BBWQ') {

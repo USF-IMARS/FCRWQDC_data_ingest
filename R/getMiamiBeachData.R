@@ -7,7 +7,12 @@
 #' @importFrom here here
 #' @importFrom glue glue
 #' @export
-getMiamiBeachData <- function() {
+getMiamiBeachData <- function(programName, fpath) {
+  fpath <- getFpath(
+    programName, 
+    fpath, 
+    "data/MiamiBeach/Discrete WQ - 4058.txt"
+  )
   # Load required packages
   library(readxl)
   library(dplyr)

@@ -2,17 +2,12 @@
 library(dplyr)
 library(here)
 library(glue)
+source(here("R/getFpath.R"))
 
 # Get data from WIN format files
-getWINData <- function(programName){
-  # Check if we're using test data
-  if (programName == "test") {
-    fpath <- here("data/test/WIN_example.csv")
-  } else {
-    # use standardized data from WIN:
-    fpath <- here(glue("data/WIN/_WIN_WAVES_OTIS_{programName}.txt"))
-  }
-  
+getWINData <- function(programName=None, fpath=None){
+  fpath <- getFpath(programName, fpath, "data/WIN/_WIN_WAVES_OTIS_{programName}.txt")
+
   all_lines <- readLines(here(fpath))
   
   # Locate the header line (assumes it starts with "Organization ID")
