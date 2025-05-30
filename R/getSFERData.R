@@ -1,15 +1,17 @@
 # Required packages
 library(dplyr)
 library(here)
+library(glue)
+source(here("R/getFpath.R"))
 
 # Get data from SFER CSV format files
 getSFERData <- function(programName) {
-  # Check if we're using test data
-  if (programName == "test") {
-    fpath <- here("data/test/SFER_example.csv")
-  } else {
-    fpath <- here("data/SFER_data.csv")
-  }
+  fpath <- getFpath(
+    programName, 
+    fpath, 
+    "data/SFER_data.csv"
+  )
+
   df <- read.csv(fpath)
   
   # Store the original column count

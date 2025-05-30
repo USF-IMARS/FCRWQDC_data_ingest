@@ -7,13 +7,9 @@ source(here::here("R/getMiamiBeachData.R"))
 source(here::here("tests/testthat/test-utils.R"))
 
 # Test basic loading functionality and column alignment
-test_that("getMiamiBeachData can open and read Miami Beach data", {
-  # Skip if test data folder doesn't exist
-  miamibeach_folder <- here::here("data/MiamiBeach")
-  skip_if_not(dir.exists(miamibeach_folder), "Miami Beach data folder not found")
-  
+test_that("getMiamiBeachData can open and read Miami Beach data", {  
   # Test that the data can be loaded without error
-  expect_no_error(miamibeach_data <- getMiamiBeachData())
+  expect_no_error(miamibeach_data <- getMiamiBeachData(fpath="data/test/miamiBeach.txt"))
   
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(miamibeach_data))

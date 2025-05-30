@@ -9,12 +9,9 @@ source(here::here("tests/testthat/test-utils.R"))
 
 # Test getSFERData function
 test_that("getSFERData can open and read SFER data", {
-  # Skip if test data file doesn't exist
-  sfer_file <- here::here("data/test/SFER_example.csv")
-  skip_if_not(file.exists(sfer_file), "SFER test data file not found")
   
   # Test that the file can be opened and read without error
-  expect_no_error(sfer_data <- getSFERData("test"))
+  expect_no_error(sfer_data <- getSFERData(fpath="data/test/SFER_example.csv"))
   
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(sfer_data))

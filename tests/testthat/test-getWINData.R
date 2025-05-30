@@ -8,13 +8,9 @@ source(here::here("R/getWINData.R"))
 source(here::here("tests/testthat/test-utils.R"))
 
 # Test getWINData function
-test_that("getWINData can open and read WIN data", {
-  # Test with test data instead of BROWARD
-  win_file <- here::here("data/test/WIN_example.csv")
-  skip_if_not(file.exists(win_file), "WIN test data file not found")
-  
+test_that("getWINData can open and read WIN data", {  
   # Test that the file can be opened and read without error
-  expect_no_error(win_data <- getWINData("test"))
+  expect_no_error(win_data <- getWINData(fpath="data/test/WIN_example.csv"))
   
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(win_data))
