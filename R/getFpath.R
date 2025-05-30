@@ -1,4 +1,4 @@
-getFpath <- function(programName, fpath, formatStr){
+getFpath <- function(programName=NULL, fpath=NULL, formatStr){
   # check for fpath or programName
   if (is.null(fpath) && is.null(programName)){
     stop("Must provide either fpath or programName")
