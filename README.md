@@ -30,6 +30,12 @@ testthat::test_dir(here::here('tests/testthat'))
   * 6 + AOML. Miami Beach coming
   * new one called DEP
 
+* STORET data has no lat,lon. Need to contact upstream.
+  * modifications needed once data is updated:
+    * tests/testthat/test-getSTORETData.R : re-enable test
+    * R/align_storet_df.R : add lat,lon columns
+    * getData.R : re-include STORET data
+
 * older data also available:
   * https://usf.box.com/s/m40d8rsugrp9t4joieh6ce0vo4i1vvkc
   * check alignment & merge with newer data

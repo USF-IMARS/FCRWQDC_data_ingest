@@ -47,6 +47,7 @@ align_storet_df <- function(df) {
       DEP.PQL                    = .data[['PQL']],
       Value.Qualifier            = .data[['VQ']],
       Result.Comments            = .data[['Comment']]
+      # TODO: add lat,lon columns
     )
   
   # Continue transformation, ensuring we capture the result

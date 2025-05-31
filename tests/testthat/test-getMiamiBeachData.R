@@ -5,12 +5,15 @@ library(dplyr)
 # Load necessary source files
 source(here::here("R/getMiamiBeachData.R"))
 source(here::here("tests/testthat/check_win_column_alignment.R"))
+source(here::here("tests/testthat/check_datetime_validity.R"))
+source(here::here("R/getFpath.R"))
 
 # Test basic loading functionality and column alignment
 test_that("getMiamiBeachData can open and read Miami Beach data", {  
   # Test that the data can be loaded without error
-  expect_no_error(miamibeach_data <- getMiamiBeachData(fpath="data/test/miamiBeach.txt"))
-  
+  expect_no_error(getMiamiBeachData(fpath=here("data/test/miamiBeach.txt")))
+  miamibeach_data <- getMiamiBeachData(fpath=here("data/test/miamiBeach.txt"))
+
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(miamibeach_data))
   expect_gt(nrow(miamibeach_data), 0)
