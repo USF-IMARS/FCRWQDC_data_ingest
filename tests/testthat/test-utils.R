@@ -123,19 +123,8 @@ check_win_column_alignment <- function(df, source_name = "Dataset") {
   cat(glue("Metadata columns present: {metadata_count} out of {length(win_core_columns$metadata_columns)}\n"))
   
   # Check the MDL column
-  cat("\n\n=== Checking MDL column types across datasets ===\n")
-  mdl_types <- sapply(datasets, function(df) {
-    type <- class(df$MDL)[1]
-    cat("MDL column in dataset is of type:", type, "\n")
-    return(type)
-  })
+  expect_true(is.character(df$MDL), "MDL column should be character")
     
-  # Check if all MDL columns have the same type
-  consistent_mdl_type <- length(unique(mdl_types)) == 1
-  expect_true(consistent_mdl_type, 
-              paste0("MDL column has inconsistent types across datasets: ", 
-                      paste(names(mdl_types), "=", mdl_types, collapse=", ")))
-
   # Output overall summary
   all_core_columns <- unlist(win_core_columns)
   present_core_columns <- sum(all_core_columns %in% names(df))
