@@ -76,22 +76,22 @@ check_win_column_alignment <- function(df, source_name = "Dataset") {
       }
     }
   }
-    expect_true(location_present, glue("{source_name} missing all location columns"))
+  expect_true(location_present, glue("{source_name} missing all location columns"))
   
   # Check result columns
   cat("\n=== Checking Result Columns ===\n")
   for (col in win_core_columns$result_columns) {
     has_column <- col %in% names(df)
     cat(glue("Column '{col}': {ifelse(has_column, 'PRESENT', 'MISSING')}\n"))
-      expect_true(has_column, glue("{source_name} missing required column: {col}"))
+    expect_true(has_column, glue("{source_name} missing required column: {col}"))
     
     # Check DEP.Result.Value.Number specifically for numeric type
     if (col == "DEP.Result.Value.Number" && has_column) {
       is_numeric <- is.numeric(df[[col]])
       cat(glue("  Data type check: {ifelse(is_numeric, 'NUMERIC', 'NON-NUMERIC')}\n"))
-        expect_true(is_numeric, glue("{source_name} column {col} is not numeric"))
-      }
+      expect_true(is_numeric, glue("{source_name} column {col} is not numeric"))
     }
+  }
   
   # Check metadata columns - these are important but not all required
   cat("\n=== Checking Metadata Columns ===\n")
