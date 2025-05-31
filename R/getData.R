@@ -50,31 +50,6 @@ getData <- function(programName) {
     cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
     cat("-------------------------\n")
     
-  } else if (programName == "test") {
-    # Special case for testing with example files
-    cat("\n--- Loading Test WIN Data ---\n")
-    df <- getWINData(programName)
-    win_rows <- nrow(df)
-    win_cols <- ncol(df)
-    
-    # Load test STORET data
-    cat("\n--- Loading Test STORET Data ---\n")
-    hist_data <- getSTORETData(programName)
-    hist_rows <- nrow(hist_data)
-    hist_cols <- ncol(hist_data)
-    
-    # Ensure consistent data types before binding rows
-    cat("\n--- Merging Test Data Sources ---\n")
-    df <- mergeWithHistoricalData(df, hist_data)
-    merged_rows <- nrow(df)
-    merged_cols <- ncol(df)
-    
-    cat("\n--- Test Data Summary ---\n")
-    cat(glue("WIN test data: {win_rows} rows, {win_cols} columns\n"))
-    cat(glue("STORET test data: {hist_rows} rows, {hist_cols} columns\n"))
-    cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
-    cat("----------------------\n")
-    
   } else if (programName == "MiamiBeach") {
     df <- getMiamiBeachData()
   } else {
