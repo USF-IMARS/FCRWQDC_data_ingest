@@ -7,12 +7,16 @@ params:
 ---
 
 ```{R, get data across all programs}
-library('here')
+#| code-summary: get data across all programs
+#| message: false
+#| warning: false
+#| library('here')
 source(here("R/getAllData.R"))
 df <- getAllData()
 ```
 
 ```{R, create table of means for selected analyte}
+#| codcode-summary: create table of means for selected analyte
 # Load required libraries and functions
 source(here("R/seasonalMannKendall.R"))
 library(dplyr)
