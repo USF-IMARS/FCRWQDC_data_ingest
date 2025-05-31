@@ -5,7 +5,7 @@ library(dplyr)
 
 # Load necessary source files
 source(here::here("R/getWINData.R"))
-source(here::here("tests/testthat/test-utils.R"))
+source(here::here("tests/testthat/check_win_column_alignment.R"))
 
 # Test getWINData function
 test_that("getWINData can open and read WIN data", {  

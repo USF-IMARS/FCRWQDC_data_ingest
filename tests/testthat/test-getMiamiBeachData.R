@@ -4,7 +4,7 @@ library(dplyr)
 
 # Load necessary source files
 source(here::here("R/getMiamiBeachData.R"))
-source(here::here("tests/testthat/test-utils.R"))
+source(here::here("tests/testthat/check_win_column_alignment.R"))
 
 # Test basic loading functionality and column alignment
 test_that("getMiamiBeachData can open and read Miami Beach data", {  
