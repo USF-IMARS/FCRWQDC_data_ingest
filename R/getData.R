@@ -53,7 +53,7 @@ getData <- function(programName) {
   #   cat("-------------------------\n")
     
   } else if (programName == "MiamiBeach") {
-    df <- getMiamiBeachData()
+    df <- getMiamiBeachData("MiamiBeach")
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
