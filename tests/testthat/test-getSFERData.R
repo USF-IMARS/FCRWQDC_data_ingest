@@ -6,12 +6,14 @@ library(lubridate)
 # Load necessary source files
 source(here::here("R/getSFERData.R"))
 source(here::here("tests/testthat/check_win_column_alignment.R"))
+source(here::here("tests/testthat/check_datetime_validity.R"))
 
 # Test getSFERData function
 test_that("getSFERData can open and read SFER data", {
   
   # Test that the file can be opened and read without error
-  expect_no_error(sfer_data <- getSFERData(fpath="data/test/SFER_example.csv"))
+  expect_no_error(getSFERData(fpath=here("data/test/SFER_example.csv")))
+  sfer_data <- getSFERData(fpath=here("data/test/SFER_example.csv"))
   
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(sfer_data))

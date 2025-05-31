@@ -7,7 +7,7 @@
 #' @importFrom here here
 #' @importFrom glue glue
 #' @export
-getMiamiBeachData <- function(programNam=NULL, fpath=NULL) {
+getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
   fpath <- getFpath(
     programName, 
     fpath, 
@@ -19,6 +19,8 @@ getMiamiBeachData <- function(programNam=NULL, fpath=NULL) {
   library(purrr)
   library(here)
   library(glue)
+
+  source(here("R/getFpath.R"))
   
   cat("\n=== Processing Miami Beach Water Quality Data ===\n")
   
