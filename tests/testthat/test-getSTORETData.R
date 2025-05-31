@@ -20,7 +20,7 @@ test_that("getSTORETData can open and read STORET data", {
   cat("\n----- STORET Data Format Validation -----\n")
   # We're only running a simple validation check to demonstrate the check_win_column_alignment
   # function - not enforcing specific alignment percentages
-  alignment_results <- check_win_column_alignment(storet_data, source_name = "STORET", enforce_checks = FALSE)
+  alignment_results <- check_win_column_alignment(storet_data, source_name = "STORET")
   
   # Report alignment percentage but don't enforce a threshold
   cat(paste0("STORET data alignment with WIN format: ", 

@@ -56,7 +56,8 @@ getSTORETData <- function(programName=NULL, fpath=NULL) {
     "data/STORET_historical/STORET_Water_Quality_Results_{programName}.txt")
   df <- STORETFileToDataFrame(fpath)
 
-  if (programName == "DERM_BBWQ") {
+  # if programName is given and it is DERM_BBWQ
+  if (!is.null(programName) && programName == "DERM_BBWQ") {
     # also include the 1970–1995 legacy file
     fpath2 <- glue(
       'data/STORET_historical/STORET_Water_Quality_Results_{programName}_1970_1995.txt'
