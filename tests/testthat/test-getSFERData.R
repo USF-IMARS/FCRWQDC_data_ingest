@@ -5,7 +5,7 @@ library(lubridate)
 
 # Load necessary source files
 source(here::here("R/getSFERData.R"))
-source(here::here("tests/testthat/test-utils.R"))
+source(here::here("tests/testthat/check_win_column_alignment.R"))
 
 # Test getSFERData function
 test_that("getSFERData can open and read SFER data", {

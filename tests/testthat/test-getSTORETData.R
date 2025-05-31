@@ -5,13 +5,13 @@ library(dplyr)
 
 # Load necessary source files
 source(here::here("R/getSTORETData.R"))
-source(here::here("tests/testthat/test-utils.R"))
+source(here::here("tests/testthat/check_win_column_alignment.R"))
 
 # Test getSTORETData function
-test_that("getSTORETData can open and read STORET data", {  
+test_that("getSTORETData can open and read STORET data", {
   # Test that the file can be opened and read without error
-  expect_no_error(storet_data <- getSTORETData(fpath="data/test/STORET_example.csv"))
-  
+  expect_no_error(getSTORETData(fpath=here("data/test/STORET_example.csv")))
+  storet_data <- getSTORETData(fpath=here("data/test/STORET_example.csv"))
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(storet_data))
   expect_gt(nrow(storet_data), 0)
