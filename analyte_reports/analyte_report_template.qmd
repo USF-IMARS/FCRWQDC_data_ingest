@@ -10,16 +10,18 @@ params:
 #| code-summary: get data across all programs
 #| message: false
 #| warning: false
-#| library('here')
+library('here')
 source(here("R/getAllData.R"))
 df <- getAllData()
 ```
 
-```{R, create table of means for selected analyte}
-#| codcode-summary: create table of means for selected analyte
-# Load required libraries and functions
+```{R, create table of statistics for selected analyte}
+#| code-summary: create table of statistics for selected analyte
+#| message: true
+#| warning: true
 source(here("R/seasonalMannKendall.R"))
 library(dplyr)
+library(lubridate)
 
 # Print which analyte we're analyzing
 cat(paste0("Analyzing data for analyte: ", params$analyte, "\n"))
@@ -57,20 +59,71 @@ mean_table <- analyte_df %>%
 # Display summary statistics
 cat(paste0("Total observations for ", params$analyte, ": ", sum(mean_table$n_values), "\n"))
 
+# Run Seasonal Mann-Kendall trend analysis
+cat("\n### Performing Seasonal Mann-Kendall Trend Analysis\n")
+mkr <- seasonalMannKendall(analyte_df)
+    
+# Convert the result matrix to a dataframe
+mkr_df <- as.data.frame(mkr, stringsAsFactors = FALSE)
+
+# Join the trend results with the mean table
+# First, create a mapping from id to Monitoring.Location.ID
+id_mapping <- analyte_df %>%
+  select(id, Monitoring.Location.ID) %>%
+  distinct()
+
+# Join trend results with the id mapping
+mkr_with_ids <- mkr_df %>%
+  left_join(id_mapping, by = "Monitoring.Location.ID")
+
+# Now join with the mean table
+mean_table_with_trends <- mean_table %>%
+  left_join(mkr_with_ids, by = c("id", "Monitoring.Location.ID"))
+
+# Replace NA trend slopes with "No trend" for display
+mean_table_with_trends <- mean_table_with_trends %>%
+  mutate(Trend.Slope = ifelse(is.na(Trend.Slope), NA, round(Trend.Slope, 4)),
+         Trend.Direction = case_when(
+           is.na(Trend.Slope) ~ "Insufficient Data",
+           Trend.Slope > 0 ~ "Increasing",
+           Trend.Slope < 0 ~ "Decreasing",
+           TRUE ~ "No Change"
+         ))
+
+# Convert column types
+mean_table_with_trends$Monitoring.Location.ID <- as.character(mean_table_with_trends$Monitoring.Location.ID)
+mean_table_with_trends$Trend.Slope <- as.numeric(mean_table_with_trends$Trend.Slope)
+  
+# Join the trend results with the mean table
+# First, create a mapping from id to Monitoring.Location.ID
+id_mapping <- analyte_df %>%
+  select(id, Monitoring.Location.ID) %>%
+  distinct()
+  
+# Join trend results with the id mapping
+mkr_with_ids <- mkr_df %>%
+  left_join(id_mapping, by = "Monitoring.Location.ID")
+  
+# Now join with the mean table
+mean_table_with_trends <- mean_table %>%
+  left_join(mkr_with_ids, by = c("id", "Monitoring.Location.ID"))
+  
+
 # Sort by mean value (descending) to see highest concentrations first
-sorted_mean_table <- mean_table %>%
+sorted_mean_table <- mean_table_with_trends %>%
   arrange(desc(mean_value))
 
 # Display the table with program name for context
 result_table <- sorted_mean_table %>%
-  select(program, Monitoring.Location.ID, n_values, mean_value, DEP.Result.Unit)
+  select(program, Monitoring.Location.ID, n_values, mean_value, DEP.Result.Unit, Trend.Slope, Trend.Direction)
 
 # Add a title to the table
-cat(paste0("\n## Mean ", params$analyte, " Concentrations by Station\n"))
+cat(paste0("\n## Mean ", params$analyte, " Concentrations and Trends by Station\n"))
+cat("*Note: Trend slope represents the estimated change per month from the Seasonal Mann-Kendall test*\n")
 
 # Display the table using pander for better formatting
 library(pander)
-pander(result_table, digits = 2)
+pander(result_table, digits = c(0, 0, 0, 2, 0, 4, 0))
 
 ```
 
