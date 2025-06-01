@@ -83,7 +83,7 @@ test_that("seasonalMannKendallVectorized correctly calculates trends in dplyr pi
       ),
       .groups = "drop"
     )
-  
+    
   # Tests
   # Check if we got the expected number of rows
   expect_equal(nrow(result_df), 5)
