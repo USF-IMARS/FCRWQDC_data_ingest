@@ -1,0 +1,8 @@
+---
+title: "Analyte Reports"
+description: "Reports for each analyte."
+code-fold: true
+listing:
+  contents: analyte_reports
+  type: grid
+---

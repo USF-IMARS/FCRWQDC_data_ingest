@@ -15,6 +15,43 @@ source(here("R/getAllData.R"))
 df <- getAllData()
 ```
 
+```{R, create table of stations}
+station_df <- df %>%
+  select(program, Monitoring.Location.ID) %>%
+  distinct()
+```
+
+```{R, create station statistics dataframe}
+source(here("R/seasonalMannKendallVectorized.R"))
+# create table of samples for each station
+samples_df <- df %>%
+  select(
+    program, Monitoring.Location.ID, Activity.Start.Date.Time,
+    DEP.Result.Value.Number, DEP.Result.Unit
+    ) %>%
+  distinct()
+
+# add statistics for each station
+sample_stats_df <- samples_df %>%
+  group_by(program, Monitoring.Location.ID) %>%
+  summarise(
+    n_values = n(),
+    mean_value = round(mean(DEP.Result.Value.Number, na.rm = TRUE), 2),
+    # mannKendall
+    trend = seasonalMannKendallVectorized(
+      Monitoring.Location.ID,  
+      Activity.Start.Date.Time,
+      DEP.Result.Value.Number  
+    ),
+    # more...
+    .groups = "drop"
+  )
+
+library(skimr)
+skim(sample_stats_df)
+print(head(sample_stats_df))
+```
+
 ```{R, create table of statistics for selected analyte}
 #| code-summary: create table of statistics for selected analyte
 #| message: true
@@ -62,12 +99,14 @@ cat(paste0("Total observations for ", params$analyte, ": ", sum(mean_table$n_val
 # Run Seasonal Mann-Kendall trend analysis
 cat("\n### Performing Seasonal Mann-Kendall Trend Analysis\n")
 mkr <- seasonalMannKendall(analyte_df)
-    
-# Convert the result matrix to a dataframe
+
+# Convert the result matrix to a dataframe with proper types
 mkr_df <- as.data.frame(mkr, stringsAsFactors = FALSE)
+mkr_df$Monitoring.Location.ID <- as.character(mkr_df$Monitoring.Location.ID)
+# Force conversion to numeric by first converting to character
+mkr_df$Trend.Slope <- suppressWarnings(as.numeric(as.character(mkr_df$Trend.Slope)))
 
-# Join the trend results with the mean table
-# First, create a mapping from id to Monitoring.Location.ID
+# Create a mapping from id to Monitoring.Location.ID
 id_mapping <- analyte_df %>%
   select(id, Monitoring.Location.ID) %>%
   distinct()
@@ -80,34 +119,23 @@ mkr_with_ids <- mkr_df %>%
 mean_table_with_trends <- mean_table %>%
   left_join(mkr_with_ids, by = c("id", "Monitoring.Location.ID"))
 
-# Replace NA trend slopes with "No trend" for display
+# Add the trend direction based on slope
 mean_table_with_trends <- mean_table_with_trends %>%
-  mutate(Trend.Slope = ifelse(is.na(Trend.Slope), NA, round(Trend.Slope, 4)),
-         Trend.Direction = case_when(
-           is.na(Trend.Slope) ~ "Insufficient Data",
-           Trend.Slope > 0 ~ "Increasing",
-           Trend.Slope < 0 ~ "Decreasing",
-           TRUE ~ "No Change"
-         ))
+    mutate(
+      Trend.Slope = case_when(
+        is.na(Trend.Slope) ~ NA_real_,
+        !is.numeric(Trend.Slope) ~ NA_real_,
+        TRUE ~ round(as.numeric(Trend.Slope), 4)
+      ),
+      Trend.Direction = case_when(
+        is.na(Trend.Slope) ~ "??",
+        Trend.Slope > 0 ~ "_/",
+        Trend.Slope < 0 ~ "\_",
+        TRUE ~ "--"
+      )
+    )
 
-# Convert column types
-mean_table_with_trends$Monitoring.Location.ID <- as.character(mean_table_with_trends$Monitoring.Location.ID)
-mean_table_with_trends$Trend.Slope <- as.numeric(mean_table_with_trends$Trend.Slope)
-  
-# Join the trend results with the mean table
-# First, create a mapping from id to Monitoring.Location.ID
-id_mapping <- analyte_df %>%
-  select(id, Monitoring.Location.ID) %>%
-  distinct()
-  
-# Join trend results with the id mapping
-mkr_with_ids <- mkr_df %>%
-  left_join(id_mapping, by = "Monitoring.Location.ID")
-  
-# Now join with the mean table
-mean_table_with_trends <- mean_table %>%
-  left_join(mkr_with_ids, by = c("id", "Monitoring.Location.ID"))
-  
+
 
 # Sort by mean value (descending) to see highest concentrations first
 sorted_mean_table <- mean_table_with_trends %>%
@@ -123,7 +151,52 @@ cat("*Note: Trend slope represents the estimated change per month from the Seaso
 
 # Display the table using pander for better formatting
 library(pander)
-pander(result_table, digits = c(0, 0, 0, 2, 0, 4, 0))
+
+# Print the structure of the table to help with debugging
+str(result_table)
+
+# Create a safer digits vector by checking the column types
+digits_vector <- sapply(names(result_table), function(col_name) {
+  x <- result_table[[col_name]]
+  if(is.numeric(x)) {
+    # For numeric columns, use appropriate precision
+    if(col_name == "mean_value") {
+      return(2)  # 2 decimal places for mean values
+    } else if(col_name == "Trend.Slope") {
+      return(4)  # 4 decimal places for trend slopes
+    } else if(col_name == "n_values") {
+      return(0)  # 0 decimal places for count values
+    } else {
+      return(2)  # 2 decimal places for other numeric columns
+    }
+  } else {
+    # For non-numeric columns, use NA
+    return(NA)
+  }
+})
+
+# Display the table with appropriate formatting
+tryCatch({
+  # Add column names to the digits vector
+  names(digits_vector) <- names(result_table)
+  # Print the digits vector for debugging
+  print(digits_vector)
+  # Use pander with the named digits vector
+  pander(result_table, digits = digits_vector)
+}, error = function(e) {
+  # Fallback to simpler formatting if the digits specification fails
+  cat(paste("Error in pander with digits specification:", e$message, "\n"))
+  cat("Falling back to simpler formatting...\n")
+  # Try a simpler approach with column-specific formatting
+  result_table$mean_value <- round(result_table$mean_value, 2)
+  if("Trend.Slope" %in% names(result_table)) {
+    # Only round numeric values
+    result_table$Trend.Slope <- sapply(result_table$Trend.Slope, function(x) {
+      if(is.numeric(x) && !is.na(x)) return(round(x, 4)) else return(x)
+    })
+  }
+  pander(result_table)
+})
 
 ```
 
