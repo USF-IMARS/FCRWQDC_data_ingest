@@ -26,7 +26,7 @@ seasonalMannKendallVectorized <- function(station_id, datetime, value) {
   
   # Convert inputs to appropriate types
   # We expect this to be called within group_by context, so all ids should be the same
-  station <- as.character(station_id[1])
+  # station_id is already being used directly, so no need to create a separate variable
   
   # Handle dates - convert to POSIXct if they're not already
   if (!inherits(datetime, "POSIXct")) {
@@ -67,9 +67,9 @@ seasonalMannKendallVectorized <- function(station_id, datetime, value) {
   
   # Compute monthly averages if there are multiple readings per month
   analysis_df <- df %>%
-    group_by(Year, Month) %>%
-    summarize(
-      Value = mean(Value, na.rm = TRUE),
+    dplyr::group_by(.data$Year, .data$Month) %>%
+    dplyr::summarize(
+      Value = mean(.data$Value, na.rm = TRUE),
       .groups = 'drop'
     )
   

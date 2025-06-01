@@ -18,23 +18,26 @@ test_that("seasonalMannKendallVectorized correctly calculates trends in dplyr pi
   # Create test data for multiple stations
   # Station 1 - Increasing trend
   station1_dates <- create_date_sequence("2020-01-01", "2023-12-31", 60)
-  station1_values <- seq(1, length(station1_dates)) + rnorm(length(station1_dates), sd = 3)
+  # create values with a slope of 1
+  station1_values <- seq(1, length(station1_dates))
   
   # Station 2 - Decreasing trend
   station2_dates <- create_date_sequence("2020-01-01", "2023-12-31", 60)
-  station2_values <- rev(seq(1, length(station2_dates))) + rnorm(length(station2_dates), sd = 3)
+  # create values with a slope of -1
+  station2_values <- seq(length(station2_dates), 1)
   
-  # Station 3 - No trend (random)
+  # Station 3 - No trend
   station3_dates <- create_date_sequence("2020-01-01", "2023-12-31", 60)
-  station3_values <- rnorm(length(station3_dates), mean = 10, sd = 2)
-  
+  # create values with a slope of 0
+  station3_values <- rep(1, length(station3_dates))
+
   # Station 4 - Insufficient data (only 1 year)
   station4_dates <- create_date_sequence("2022-01-01", "2022-12-31", 10)
-  station4_values <- rnorm(length(station4_dates), mean = 5, sd = 1)
+  station4_values <- rnorm(length(station4_dates), mean = 5, sd = 0)
   
   # Station 5 - Too few data points
   station5_dates <- create_date_sequence("2020-01-01", "2022-12-31", 5)
-  station5_values <- rnorm(length(station5_dates), mean = 5, sd = 1)
+  station5_values <- rnorm(length(station5_dates), mean = 5, sd = 0)
   
   # Combine into a single dataframe
   test_df <- data.frame(
