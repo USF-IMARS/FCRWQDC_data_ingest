@@ -44,7 +44,8 @@ sample_stats_df <- samples_df %>%
     trend = seasonalMannKendallVectorized(
       Activity.Start.Date.Time,
       DEP.Result.Value.Number
-    )
+    ),
+    mean = mean(DEP.Result.Value.Number)
     # TODO: std dev, more...
   )
 
@@ -68,7 +69,8 @@ library(tidyselect)  # for all_of()
 # palette  : a character vector of colours to feed to col_numeric()
 #
 color_column <- function(gt_tbl, df, column, 
-                         palette = c("red", "orange", "yellow", "green", "blue", "violet")) {
+                         palette = c("red", "orange", "yellow", "green", "blue", "violet"),
+                         domain = NULL) {
   # 1) Pull out that column’s numeric values
   vals <- df[[column]]
   if (!is.numeric(vals)) {
@@ -78,6 +80,9 @@ color_column <- function(gt_tbl, df, column,
   # 2) Compute its min and max (ignoring NA)
   min_val <- min(vals, na.rm = TRUE)
   max_val <- max(vals, na.rm = TRUE)
+  if (is.null(domain)) {
+    domain <- c(min_val, max_val)
+  }
   
   # 3) Call data_color() on the gt table for that single column
   gt_tbl %>%
@@ -85,7 +90,7 @@ color_column <- function(gt_tbl, df, column,
       columns = all_of(column),
       colors  = col_numeric(
         palette = palette,
-        domain  = c(min_val, max_val)
+        domain  = domain
       )
     )
 }
@@ -103,16 +108,18 @@ library(gt)
 gt_tbl <- sample_stats_df %>% 
   gt()
 
-# 2) Now color “trend” using the default rainbow-ish palette:
+# trend blue (-) to red (+)
+min_trend <- min(sample_stats_df$trend,  na.rm = TRUE)
+max_trend <- max(sample_stats_df$trend,  na.rm = TRUE)
+max_abs_trend <- max(abs(min_trend), abs(max_trend))
 gt_tbl <- color_column(
   gt_tbl, 
   df     = sample_stats_df, 
   column = "trend",
-  # blue (-) to red (+)
-  palette = rev(brewer.pal(11, "RdBu"))
+  palette = rev(brewer.pal(11, "RdBu")),
+  domain  = c(-max_abs_trend, max_abs_trend)
 )
 
-# 3) If you want “n_values” to use its own palette (e.g. Greens), just call again:
 gt_tbl <- color_column(
   gt_tbl, 
   df      = sample_stats_df, 
