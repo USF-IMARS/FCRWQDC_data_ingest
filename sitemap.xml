@@ -2,46 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports_template.html</loc>
-    <lastmod>2025-05-28T14:22:40.925Z</lastmod>
+    <lastmod>2025-05-29T18:34:47.677Z</lastmod>
   </url>
   <url>
     <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/PALMBEACH.html</loc>
-    <lastmod>2025-05-28T15:59:05.956Z</lastmod>
+    <lastmod>2025-06-02T19:19:11.134Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/DERM_BBWQ.html</loc>
-    <lastmod>2025-05-28T15:59:05.924Z</lastmod>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/FIU_WQMP.html</loc>
+    <lastmod>2025-06-02T19:19:11.131Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/BROWARD.html</loc>
-    <lastmod>2025-05-28T15:59:05.920Z</lastmod>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/DEP.html</loc>
+    <lastmod>2025-06-02T19:19:11.125Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/WIN_data_ingest/index.html</loc>
-    <lastmod>2025-05-01T17:23:02.214Z</lastmod>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/BBAP.html</loc>
+    <lastmod>2025-06-02T19:19:11.093Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Turbidity.html</loc>
+    <lastmod>2025-06-02T19:19:11.639Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Salinity.html</loc>
+    <lastmod>2025-06-02T19:19:11.680Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Phosphorus, Total (as P) LL.html</loc>
+    <lastmod>2025-06-02T19:19:11.678Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Orthophosphate (PO4).html</loc>
+    <lastmod>2025-06-02T19:19:11.629Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Nitrogen, Kjeldahl, Total.html</loc>
+    <lastmod>2025-06-02T19:19:11.673Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Nitrite (NO2).html</loc>
+    <lastmod>2025-06-02T19:19:11.622Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Nitrate (NO3).html</loc>
+    <lastmod>2025-06-02T19:19:11.625Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Field Temperature.html</loc>
+    <lastmod>2025-06-02T19:19:11.687Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Ammonia (N).html</loc>
+    <lastmod>2025-06-02T19:19:11.614Z</lastmod>
   </url>
   <url>
     <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports.html</loc>
     <lastmod>2025-04-16T18:46:39.552Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/WIN_data_ingest/stations_report.html</loc>
-    <lastmod>2025-05-28T15:58:44.914Z</lastmod>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports.html</loc>
+    <lastmod>2025-06-02T15:09:18.858Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/BBAP.html</loc>
-    <lastmod>2025-05-28T15:59:05.918Z</lastmod>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/index.html</loc>
+    <lastmod>2025-05-28T22:20:19.243Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/DEP.html</loc>
-    <lastmod>2025-05-28T15:59:05.922Z</lastmod>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Chlorophyll a (chl-a).html</loc>
+    <lastmod>2025-06-02T19:19:11.634Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/FIU_WQMP.html</loc>
-    <lastmod>2025-05-28T15:59:05.954Z</lastmod>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Field pH.html</loc>
+    <lastmod>2025-06-02T19:19:11.685Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Nitrate + Nitrite (NO3 + NO2).html</loc>
+    <lastmod>2025-06-02T19:19:11.627Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Nitrogen, Ammonia.html</loc>
+    <lastmod>2025-06-02T19:19:11.670Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Nitrogen, NO2 plus NO3.html</loc>
+    <lastmod>2025-06-02T19:19:11.676Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Oxygen, Dissolved.html</loc>
+    <lastmod>2025-06-02T19:19:11.682Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Phytoplankton (phaeo).html</loc>
+    <lastmod>2025-06-02T19:19:11.636Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports/Silicate (Si).html</loc>
+    <lastmod>2025-06-02T19:19:11.632Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/analyte_reports/analyte_reports_template.html</loc>
+    <lastmod>2025-06-02T18:25:13.309Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/BROWARD.html</loc>
+    <lastmod>2025-06-02T19:19:11.095Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/DERM_BBWQ.html</loc>
+    <lastmod>2025-06-02T19:19:11.127Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/MiamiBeach.html</loc>
+    <lastmod>2025-06-02T19:19:11.091Z</lastmod>
   </url>
   <url>
     <loc>https://USF-IMARS.github.io/WIN_data_ingest/provider_reports/provider_reports/SFER.html</loc>
-    <lastmod>2025-05-28T15:59:05.913Z</lastmod>
+    <lastmod>2025-06-02T19:19:11.086Z</lastmod>
   </url>
 </urlset>

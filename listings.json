@@ -7,8 +7,31 @@
       "/provider_reports/provider_reports/DEP.html",
       "/provider_reports/provider_reports/DERM_BBWQ.html",
       "/provider_reports/provider_reports/FIU_WQMP.html",
+      "/provider_reports/provider_reports/MiamiBeach.html",
       "/provider_reports/provider_reports/PALMBEACH.html",
       "/provider_reports/provider_reports/SFER.html"
+    ]
+  },
+  {
+    "listing": "/analyte_reports/analyte_reports.html",
+    "items": [
+      "/analyte_reports/analyte_reports/Ammonia (N).html",
+      "/analyte_reports/analyte_reports/Chlorophyll a (chl-a).html",
+      "/analyte_reports/analyte_reports/Field Temperature.html",
+      "/analyte_reports/analyte_reports/Field pH.html",
+      "/analyte_reports/analyte_reports/Nitrate (NO3).html",
+      "/analyte_reports/analyte_reports/Nitrate + Nitrite (NO3 + NO2).html",
+      "/analyte_reports/analyte_reports/Nitrite (NO2).html",
+      "/analyte_reports/analyte_reports/Nitrogen, Ammonia.html",
+      "/analyte_reports/analyte_reports/Nitrogen, Kjeldahl, Total.html",
+      "/analyte_reports/analyte_reports/Nitrogen, NO2 plus NO3.html",
+      "/analyte_reports/analyte_reports/Orthophosphate (PO4).html",
+      "/analyte_reports/analyte_reports/Oxygen, Dissolved.html",
+      "/analyte_reports/analyte_reports/Phosphorus, Total (as P) LL.html",
+      "/analyte_reports/analyte_reports/Phytoplankton (phaeo).html",
+      "/analyte_reports/analyte_reports/Salinity.html",
+      "/analyte_reports/analyte_reports/Silicate (Si).html",
+      "/analyte_reports/analyte_reports/Turbidity.html"
     ]
   }
 ]

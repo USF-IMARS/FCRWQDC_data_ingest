@@ -127,8 +127,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./stations_report.html"> 
-<span class="menu-text">All Stations Report</span></a>
+    <a class="nav-link" href="./analyte_reports/analyte_reports.html"> 
+<span class="menu-text">Analyte Reports</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./provider_reports/provider_reports.html"> 
@@ -175,25 +175,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Data ingestion and initial analysis from FL WIN water quality database and other sources.</p>
-<p>Below is a demonstration of how to load the data.</p>
-<p>For more information about the data please see “Provider Reports” in the top navigation.</p>
+<p>Below are some statistics on data across all analytes and programs.</p>
 <div class="cell">
 <details class="code-fold">
-<summary>read in the WIN txt pipe-delimited file for example program.</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  dplyr,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  glue,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  here,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  tidyr</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/getData.R"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="st">"BBAP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"here"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getAllData.R"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getAllData</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>
+<pre><code>Processing program: SFER
+
 ===========================================
-DATA LOADING FOR PROGRAM: BBAP===========================================
+DATA LOADING FOR PROGRAM: SFER ===========================================
+[1] "using given programName"
+
+=== SFER Data Loading ===
+Source: SFER_data.csvLoaded 43 columnsSFER datetime format detected - preserving values
+Sample datetime values:  2014-12-01 13:23:00 2014-12-01 13:32:00 2014-12-01 13:53:00 
+Converted to WIN format:  12/01/2014 13:23:00 12/01/2014 13:32:00 12/01/2014 13:53:00 
+--- Column statistics ---
+Dropped 35 columns during processing:- keyfield- cruise_id- datetime- lat_dec- lon_dec- station- station_type- depth- depth_class- depth_order- cast- nisk_start- nisk_end- temp- sal- o2_ctd- o2_disc- o2_disc_flag- nh4- nh4_flag- no2- no2_flag- no3- no3_flag- no3_no2- no3_no2_flag- po4- po4_flag- si- si_flag- avg_chl_a- avg_chl_a_flag- avg_phaeo- avg_phaeo_flag- notesFinal column count: 26------------------------
+
+--- Data Summary ---
+Total rows: 85550Total columns: 26------------------
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.ID to character type
+Converted Activity.ID to standardized typeConverted Sample.Collection.Type to standardized type</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Converted DEP.Result.Value.Number to standardized type===========================================
+Processing program: MiamiBeach
+
+===========================================
+DATA LOADING FOR PROGRAM: MIAMIBEACH ===========================================
+[1] "using given programName"
+
+=== Processing Miami Beach Water Quality Data ===
+Loading historical data from Discrete WQ - 4058.txtLoaded 23041 rows and 36 columns from historical fileSearching for Excel files in /home/tylar/repos/WIN_data_ingest/data/MiamiBeach/2024Found 23 Excel filesProcessing Results 1-16-2024.xlsProcessing Results 1-17-2024.xlsProcessing Results 2-13-2024.xlsProcessing Results 2-16-2024.xlsProcessing Results 3-12-2024.xlsProcessing Results 3-14-2024.xlsProcessing Results 4-10-2024.xlsProcessing Results 4-11-2024.xlsProcessing Results 5-14-2024.xlsProcessing Results 5-16-2024.xlsProcessing Results 6-18-2024.xlsProcessing Results 6-20-2024.xlsProcessing Results 7-17-2024.xlsProcessing Results 7-18-2024.xlsProcessing Results 08-15-2024.xlsProcessing Results 08-16-2024.xlsProcessing Results 9-18-2024.xlsProcessing Results 9-19-2024.xlsProcessing Results 10-22-2024.xlsProcessing Results 10-23-2024.xlsProcessing Results 11-19-2024.xlsProcessing Results 11-20-2024.xlsProcessing 12-30-2024 Data.xlsCombined 5925 rows from Excel filesColumn names in historical data: RowID, ProgramID, ProgramName, Habitat, IndicatorID, IndicatorName, ParameterID, ParameterName, ParameterUnits, ProgramLocationID, AreaID, ManagedAreaName, Region, ActivityType, SampleDate, ResultValue, Year, Month, ActivityDepth_m, RelativeDepth, TotalDepth_m, MDL, PQL, DetectionUnit, ValueQualifier, ValueQualifierSource, SampleFraction, ResultComments, OriginalLatitude, OriginalLongitude, SEACAR_QAQCFlagCode, SEACAR_QAQC_Description, Include, SEACAR_EventID, MADup, ExportVersionSuccessfully converted historical data to standard formatColumn names in excel data: CLIENT SAMPLE ID, LAB SAMPLE ID, MATRIX, COLLECTED, ANALYTE, SAMPLE RESULT, REPORTING LIMIT, UNITS, METHOD, DILUTION, ANALYZED, PREPARED, source_file, SAMPLE COLLECTION DATESuccessfully converted excel data to standard format</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: 993 values could not be converted to numeric and were set to NAMerged dataframe has 28966 rows and 58 columnsFinal Miami Beach dataset has 28966 rows for 97 monitoring locations================================================
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.Value.Number to standardized type===========================================
+Processing program: BBAP
+
+===========================================
+DATA LOADING FOR PROGRAM: BBAP ===========================================
+[1] "using given programName"
 
 === WIN Data Loading ===
 Source: _WIN_WAVES_OTIS_BBAP.txtLoaded 30 columns--- Column statistics ---
@@ -208,462 +245,1229 @@ No change in row count during DMS coordinate processing
 
 --- Standardizing Column Types ---
 Converted DEP.Result.ID to character type
-Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================</code></pre>
+Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================
+Processing program: BROWARD
+
+===========================================
+DATA LOADING FOR PROGRAM: BROWARD ===========================================
+[1] "using given programName"
+
+=== WIN Data Loading ===
+Source: _WIN_WAVES_OTIS_BROWARD.txtLoaded 30 columns--- Column statistics ---
+No columns were dropped during processing
+Final column count: 30------------------------
+
+--- Data Summary ---
+Total rows: 18892Total columns: 30------------------
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.ID to character type
+Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================
+Processing program: DEP
+
+===========================================
+DATA LOADING FOR PROGRAM: DEP ===========================================
+[1] "using given programName"
+
+=== WIN Data Loading ===
+Source: _WIN_WAVES_OTIS_DEP.txtLoaded 30 columns--- Column statistics ---
+No columns were dropped during processing
+Final column count: 30------------------------
+
+--- Data Summary ---
+Total rows: 146959Total columns: 30------------------
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.ID to character type
+Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================
+Processing program: DERM_BBWQ
+
+===========================================
+DATA LOADING FOR PROGRAM: DERM_BBWQ ===========================================
+[1] "using given programName"
+
+=== WIN Data Loading ===
+Source: _WIN_WAVES_OTIS_DERM_BBWQ.txtLoaded 30 columns--- Column statistics ---
+No columns were dropped during processing
+Final column count: 30------------------------
+
+--- Data Summary ---
+Total rows: 162550Total columns: 30------------------
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.ID to character type
+Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================
+Processing program: FIU_WQMP
+
+===========================================
+DATA LOADING FOR PROGRAM: FIU_WQMP ===========================================
+[1] "using given programName"
+
+=== WIN Data Loading ===
+Source: _WIN_WAVES_OTIS_FIU_WQMP.txtLoaded 30 columns--- Column statistics ---
+No columns were dropped during processing
+Final column count: 30------------------------
+
+--- Data Summary ---
+Total rows: 87788Total columns: 30------------------
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.ID to character type
+Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================
+Processing program: PALMBEACH
+
+===========================================
+DATA LOADING FOR PROGRAM: PALMBEACH ===========================================
+[1] "using given programName"
+
+=== WIN Data Loading ===
+Source: _WIN_WAVES_OTIS_PALMBEACH.txtLoaded 30 columns--- Column statistics ---
+No columns were dropped during processing
+Final column count: 30------------------------
+
+--- Data Summary ---
+Total rows: 10563Total columns: 30------------------
+
+--- Processing DMS Coordinates ---
+No change in row count during DMS coordinate processing
+
+--- Standardizing Column Types ---
+Converted DEP.Result.ID to character type
+Converted Activity.ID to standardized typeConverted WBID to standardized typeConverted Organization.ID to standardized typeConverted Lab.ID to standardized typeConverted Sample.Collection.Type to standardized typeConverted DEP.Result.Value.Number to standardized type===========================================
+Combined dataframe has 563792 rows and 90 columns</code></pre>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>Print the first few rows of the dataframe</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># head(df)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(<span class="fu">head</span>(df), <span class="at">digits =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(df<span class="sc">$</span>DEP.Analyte.Name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Temperature"                       "Salinity"                         
+ [3] "Ammonium"                          "Nitrite"                          
+ [5] "Nitrate"                           "Nitrate+Nitrite"                  
+ [7] "Phosphate"                         "Silicate"                         
+ [9] "Chlorophyll a"                     "Pheophytin"                       
+[11] "Dissolved Oxygen (Discrete)"       "Dissolved Oxygen (CTD)"           
+[13] "Dissolved Oxygen"                  "Water Temperature"                
+[15] "pH"                                "Specific Conductivity"            
+[17] "Turbidity"                         "Total Kjeldahl Nitrogen"          
+[19] "NO2+3, Filtered"                   "Total Phosphorus"                 
+[21] "Total Nitrogen"                    "Fecal Coliforms"                  
+[23] "Enterococci"                       "Field pH"                         
+[25] "Field Temperature"                 "Field Specific Conductance"       
+[27] "Oxygen, Dissolved"                 "Nitrogen, Ammonia"                
+[29] "Nitrogen, Kjeldahl, Total"         "Nitrogen, NO2 plus NO3"           
+[31] "Phosphorus, Total (as P) LL"       "Nitrate-Nitrite (N)"              
+[33] "Nitrogen- Total Kjeldahl"          "Phosphorus- Total"                
+[35] "Ammonia (N)"                       "Chlorophyll a, free of pheophytin"
+[37] "Temperature, Water"                "Orthophosphate (P)"               
+[39] "Chlorophyll a- corrected"          "Nitrite (N)"                      
+[41] "Nitrogen- Total"                   "Silica (SiO2)"                    
+[43] "Chlorophyll a- uncorrected"        "Nitrate (N)"                      </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">df</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">563792</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">62</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">logical</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 25%">
 <col style="width: 34%">
-<col style="width: 34%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Organization.ID</th>
-<th style="text-align: center;">Monitoring.Location.ID</th>
-<th style="text-align: center;">Org.Decimal.Latitude</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">21FLBBAP</td>
-<td style="text-align: center;">WQ04</td>
-<td style="text-align: center;">25.826</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">21FLBBAP</td>
-<td style="text-align: center;">WQ02</td>
-<td style="text-align: center;">25.8533</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">21FLBBAP</td>
-<td style="text-align: center;">WQ02</td>
-<td style="text-align: center;">25.8533</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">21FLBBAP</td>
-<td style="text-align: center;">WQ04</td>
-<td style="text-align: center;">25.826</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">21FLBBAP</td>
-<td style="text-align: center;">WQ04</td>
-<td style="text-align: center;">25.826</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">21FLBBAP</td>
-<td style="text-align: center;">WQ04</td>
-<td style="text-align: center;">25.826</td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
-<colgroup>
-<col style="width: 43%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Org.Latitude..DD.MM.SS.SSSS.</th>
-<th style="text-align: center;">Org.Decimal.Longitude</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">-80.1341</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">-80.1455</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">-80.1455</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">-80.1341</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">-80.1341</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">-80.1341</td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
-<colgroup>
-<col style="width: 43%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 7%">
+<col style="width: 10%">
 <col style="width: 12%">
-<col style="width: 21%">
-<col style="width: 21%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Org.Longitude..DD.MM.SS.SSSS.</th>
-<th style="text-align: center;">WBID</th>
-<th style="text-align: center;">Activity.ID</th>
-<th style="text-align: center;">Activity.Type</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">3226H6</td>
-<td style="text-align: center;">WQ04-04/06/20</td>
-<td style="text-align: center;">Sample</td>
+<td style="text-align: left;">DEP.Result.ID</td>
+<td style="text-align: right;">28966</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">457742</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">3226H5</td>
-<td style="text-align: center;">WQ02-05/05/20</td>
-<td style="text-align: center;">Sample</td>
+<td style="text-align: left;">Activity.ID</td>
+<td style="text-align: right;">28966</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">111297</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">3226H5</td>
-<td style="text-align: center;">WQ02-05/05/20</td>
-<td style="text-align: center;">Sample</td>
+<td style="text-align: left;">time</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1422</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">3226H6</td>
-<td style="text-align: center;">WQ04-04/06/20</td>
-<td style="text-align: center;">Sample</td>
+<td style="text-align: left;">Activity.Start.Date.Time</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">9950</td>
+<td style="text-align: right;">57396</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">3226H6</td>
-<td style="text-align: center;">WQ04-04/06/20</td>
-<td style="text-align: center;">Sample</td>
+<td style="text-align: left;">Monitoring.Location.ID</td>
+<td style="text-align: right;">1410</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">21629</td>
+<td style="text-align: right;">702</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">3226H6</td>
-<td style="text-align: center;">WQ04-04/06/20</td>
-<td style="text-align: center;">Sample</td>
+<td style="text-align: left;">Activity.Type</td>
+<td style="text-align: right;">28966</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Activity.Depth.Unit</td>
+<td style="text-align: right;">28966</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">24175</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Activity.Depth.Top.Bottom.Unit</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sample.Collection.Type</td>
+<td style="text-align: right;">28966</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">10452</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Value.Qualifier</td>
+<td style="text-align: right;">114516</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">245899</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Result.Comments</td>
+<td style="text-align: right;">114443</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">874</td>
+<td style="text-align: right;">394578</td>
+<td style="text-align: right;">1013</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEP.Analyte.Name</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DEP.Result.Unit</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">7873</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">program</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ProgramName</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Habitat</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IndicatorName</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ParameterName</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ParameterUnits</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ProgramLocationID</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ManagedAreaName</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Region</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ActivityType</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SampleDate</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2134</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ActivityDepth_m</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RelativeDepth</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TotalDepth_m</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MDL</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PQL</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DetectionUnit</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ValueQualifier</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ValueQualifierSource</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SampleFraction</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ResultComments</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SEACAR_QAQCFlagCode</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SEACAR_QAQC_Description</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SEACAR_EventID</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2394</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ExportVersion</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">data_source</td>
+<td style="text-align: right;">534826</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CLIENT SAMPLE ID</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LAB SAMPLE ID</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">494</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MATRIX</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">COLLECTED</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ANALYTE</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAMPLE RESULT</td>
+<td style="text-align: right;">558837</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1545</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REPORTING LIMIT</td>
+<td style="text-align: right;">560335</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">UNITS</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">METHOD</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DILUTION</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ANALYZED</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PREPARED</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">127</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">source_file</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SAMPLE COLLECTION DATE</td>
+<td style="text-align: right;">557867</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Organization.ID</td>
+<td style="text-align: right;">114516</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Org.Latitude..DD.MM.SS.SSSS.</td>
+<td style="text-align: right;">406270</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">146614</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Org.Longitude..DD.MM.SS.SSSS.</td>
+<td style="text-align: right;">406270</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">146614</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">WBID</td>
+<td style="text-align: right;">114516</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">50314</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Matrix</td>
+<td style="text-align: right;">114516</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sampling.Agency.Name</td>
+<td style="text-align: right;">114516</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEP.Result.Value.Text</td>
+<td style="text-align: right;">280367</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">272581</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sample.Fraction</td>
+<td style="text-align: right;">114516</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">181985</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lab.ID</td>
+<td style="text-align: right;">114516</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">152058</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Variable type: logical</strong></p>
 <table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
-<colgroup>
-<col style="width: 35%">
-<col style="width: 31%">
-<col style="width: 32%">
-</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Activity.Start.Date.Time</th>
-<th style="text-align: center;">Matrix</th>
-<th style="text-align: center;">Sample.Collection.Type</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: left;">count</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">04/06/2020 12:35:00</td>
-<td style="text-align: center;">AQUEOUS-Surface Water</td>
-<td style="text-align: center;">Direct Grab</td>
+<td style="text-align: left;">Activity.Top.Depth</td>
+<td style="text-align: right;">563792</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">05/05/2020 15:00:00</td>
-<td style="text-align: center;">AQUEOUS-Surface Water</td>
-<td style="text-align: center;">Direct Grab</td>
+<td style="text-align: left;">Activity.Bottom.Depth</td>
+<td style="text-align: right;">563792</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">05/05/2020 15:00:00</td>
-<td style="text-align: center;">AQUEOUS-Surface Water</td>
-<td style="text-align: center;">Direct Grab</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">04/06/2020 12:35:00</td>
-<td style="text-align: center;">AQUEOUS-Surface Water</td>
-<td style="text-align: center;">Direct Grab</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">04/06/2020 12:35:00</td>
-<td style="text-align: center;">AQUEOUS-Surface Water</td>
-<td style="text-align: center;">Direct Grab</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">04/06/2020 12:35:00</td>
-<td style="text-align: center;">AQUEOUS-Surface Water</td>
-<td style="text-align: center;">Direct Grab</td>
+<td style="text-align: left;">Audit.Censored.Decisions</td>
+<td style="text-align: right;">563792</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: left;">:</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Variable type: numeric</strong></p>
 <table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
 <colgroup>
-<col style="width: 38%">
-<col style="width: 23%">
-<col style="width: 30%">
+<col style="width: 18%">
+<col style="width: 7%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 4%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Sampling.Agency.Name</th>
-<th style="text-align: center;">Activity.Depth</th>
-<th style="text-align: center;">Activity.Depth.Unit</th>
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
-<td style="text-align: center;">1.691</td>
-<td style="text-align: center;">m</td>
+<td style="text-align: left;">year</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">2020.49</td>
+<td style="text-align: right;">2.90</td>
+<td style="text-align: right;">2014.00</td>
+<td style="text-align: right;">2018.00</td>
+<td style="text-align: right;">2021.00</td>
+<td style="text-align: right;">2023.00</td>
+<td style="text-align: right;">2024.00</td>
+<td style="text-align: left;">▃▃▃▆▇</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
-<td style="text-align: center;">1.676</td>
-<td style="text-align: center;">m</td>
+<td style="text-align: left;">month</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">6.68</td>
+<td style="text-align: right;">3.54</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">10.00</td>
+<td style="text-align: right;">12.00</td>
+<td style="text-align: left;">▇▅▅▅▇</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
-<td style="text-align: center;">1.676</td>
-<td style="text-align: center;">m</td>
+<td style="text-align: left;">day</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">14.68</td>
+<td style="text-align: right;">8.53</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">14.00</td>
+<td style="text-align: right;">22.00</td>
+<td style="text-align: right;">31.00</td>
+<td style="text-align: left;">▇▆▆▆▅</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
-<td style="text-align: center;">1.691</td>
-<td style="text-align: center;">m</td>
+<td style="text-align: left;">lat_deg</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">25.28</td>
+<td style="text-align: right;">1.07</td>
+<td style="text-align: right;">24.00</td>
+<td style="text-align: right;">24.00</td>
+<td style="text-align: right;">25.00</td>
+<td style="text-align: right;">26.00</td>
+<td style="text-align: right;">28.00</td>
+<td style="text-align: left;">▅▇▃▃▁</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
-<td style="text-align: center;">1.691</td>
-<td style="text-align: center;">m</td>
+<td style="text-align: left;">lat_min</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">30.28</td>
+<td style="text-align: right;">15.98</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">20.40</td>
+<td style="text-align: right;">33.10</td>
+<td style="text-align: right;">42.78</td>
+<td style="text-align: right;">59.83</td>
+<td style="text-align: left;">▆▅▇▇▃</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">FDEP BISCAYNE BAY AQUATIC PRESERVES</td>
-<td style="text-align: center;">1.691</td>
-<td style="text-align: center;">m</td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
-<colgroup>
-<col style="width: 26%">
-<col style="width: 30%">
-<col style="width: 42%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Activity.Top.Depth</th>
-<th style="text-align: center;">Activity.Bottom.Depth</th>
-<th style="text-align: center;">Activity.Depth.Top.Bottom.Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">Org.Decimal.Latitude</td>
+<td style="text-align: right;">28964</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">25.80</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">24.40</td>
+<td style="text-align: right;">25.43</td>
+<td style="text-align: right;">25.80</td>
+<td style="text-align: right;">26.22</td>
+<td style="text-align: right;">28.78</td>
+<td style="text-align: left;">▃▇▃▁▁</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">lon_deg</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">-81.32</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">-85.00</td>
+<td style="text-align: right;">-82.00</td>
+<td style="text-align: right;">-81.00</td>
+<td style="text-align: right;">-81.00</td>
+<td style="text-align: right;">-80.00</td>
+<td style="text-align: left;">▁▂▅▇▃</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">lon_min</td>
+<td style="text-align: right;">478242</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">27.82</td>
+<td style="text-align: right;">17.26</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">12.95</td>
+<td style="text-align: right;">24.84</td>
+<td style="text-align: right;">43.32</td>
+<td style="text-align: right;">60.00</td>
+<td style="text-align: left;">▇▇▆▅▆</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">Org.Decimal.Longitude</td>
+<td style="text-align: right;">28964</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">-80.57</td>
+<td style="text-align: right;">0.78</td>
+<td style="text-align: right;">-85.02</td>
+<td style="text-align: right;">-80.61</td>
+<td style="text-align: right;">-80.21</td>
+<td style="text-align: right;">-80.11</td>
+<td style="text-align: right;">-79.29</td>
+<td style="text-align: left;">▁▁▁▂▇</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
-<colgroup>
-<col style="width: 22%">
-<col style="width: 37%">
-<col style="width: 37%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">DEP.Result.ID</th>
-<th style="text-align: center;">DEP.Analyte.Name</th>
-<th style="text-align: center;">DEP.Result.Value.Number</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">7190664</td>
-<td style="text-align: center;">Nitrate-Nitrite (N)</td>
-<td style="text-align: center;">0.007</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">7187465</td>
-<td style="text-align: center;">Nitrogen- Total Kjeldahl</td>
-<td style="text-align: center;">0.28</td>
+<td style="text-align: left;">Activity.Depth</td>
+<td style="text-align: right;">53141</td>
+<td style="text-align: right;">0.91</td>
+<td style="text-align: right;">3.90</td>
+<td style="text-align: right;">28.11</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">2.82</td>
+<td style="text-align: right;">3355.50</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">7186300</td>
-<td style="text-align: center;">Phosphorus- Total</td>
-<td style="text-align: center;">0.01</td>
+<td style="text-align: left;">DEP.Result.Value.Number</td>
+<td style="text-align: right;">12030</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: right;">18.79</td>
+<td style="text-align: right;">681.82</td>
+<td style="text-align: right;">-0.03</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">6.55</td>
+<td style="text-align: right;">53465.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">7190134</td>
-<td style="text-align: center;">Phosphorus- Total</td>
-<td style="text-align: center;">0.011</td>
+<td style="text-align: left;">RowID</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">1009723.34</td>
+<td style="text-align: right;">798651.12</td>
+<td style="text-align: right;">486217.00</td>
+<td style="text-align: right;">514368.00</td>
+<td style="text-align: right;">534968.00</td>
+<td style="text-align: right;">1551534.00</td>
+<td style="text-align: right;">3870318.00</td>
+<td style="text-align: left;">▇▂▁▁▁</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">7190741</td>
-<td style="text-align: center;">Ammonia (N)</td>
-<td style="text-align: center;">0.01</td>
+<td style="text-align: left;">ProgramID</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">4058.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4058.00</td>
+<td style="text-align: right;">4058.00</td>
+<td style="text-align: right;">4058.00</td>
+<td style="text-align: right;">4058.00</td>
+<td style="text-align: right;">4058.00</td>
+<td style="text-align: left;">▁▁▇▁▁</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">7189987</td>
-<td style="text-align: center;">Nitrogen- Total Kjeldahl</td>
-<td style="text-align: center;">0.26</td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table table-sm table-striped small">
-<caption>Table continues below</caption>
-<colgroup>
-<col style="width: 30%">
-<col style="width: 22%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 22%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">DEP.Result.Value.Text</th>
-<th style="text-align: center;">DEP.Result.Unit</th>
-<th style="text-align: center;">DEP.MDL</th>
-<th style="text-align: center;">DEP.PQL</th>
-<th style="text-align: center;">Value.Qualifier</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">0.004</td>
-<td style="text-align: center;">0.01</td>
-<td style="text-align: center;">I</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">0.16</td>
-<td style="text-align: center;">0.4</td>
-<td style="text-align: center;">I</td>
+<td style="text-align: left;">IndicatorID</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">6.72</td>
+<td style="text-align: right;">0.64</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: left;">▆▁▇▁▂</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">0.004</td>
-<td style="text-align: center;">0.01</td>
-<td style="text-align: center;"></td>
+<td style="text-align: left;">ParameterID</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">8.84</td>
+<td style="text-align: right;">6.57</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">16.00</td>
+<td style="text-align: right;">19.00</td>
+<td style="text-align: left;">▇▅▁▂▆</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">0.004</td>
-<td style="text-align: center;">0.01</td>
-<td style="text-align: center;"></td>
+<td style="text-align: left;">AreaID</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: left;">▁▁▇▁▁</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">0.002</td>
-<td style="text-align: center;">0.005</td>
-<td style="text-align: center;"></td>
+<td style="text-align: left;">ResultValue</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">12.86</td>
+<td style="text-align: right;">41.22</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">4.89</td>
+<td style="text-align: right;">24.47</td>
+<td style="text-align: right;">5389.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">mg/L</td>
-<td style="text-align: center;">0.16</td>
-<td style="text-align: center;">0.4</td>
-<td style="text-align: center;">I</td>
-</tr>
-</tbody>
-</table>
-<table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 12%">
-<col style="width: 25%">
-<col style="width: 37%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Sample.Fraction</th>
-<th style="text-align: center;">Lab.ID</th>
-<th style="text-align: center;">Result.Comments</th>
-<th style="text-align: center;">Audit.Censored.Decisions</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Total</td>
-<td style="text-align: center;">E31780</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">NA</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Total</td>
-<td style="text-align: center;">E31780</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">Year</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">2019.17</td>
+<td style="text-align: right;">2.12</td>
+<td style="text-align: right;">2016.00</td>
+<td style="text-align: right;">2017.00</td>
+<td style="text-align: right;">2019.00</td>
+<td style="text-align: right;">2021.00</td>
+<td style="text-align: right;">2023.00</td>
+<td style="text-align: left;">▇▆▇▃▅</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Total</td>
-<td style="text-align: center;">E31780</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">Month</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">6.55</td>
+<td style="text-align: right;">3.44</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">9.00</td>
+<td style="text-align: right;">12.00</td>
+<td style="text-align: left;">▇▅▅▆▇</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Total</td>
-<td style="text-align: center;">E31780</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">OriginalLatitude</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">25.80</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">25.77</td>
+<td style="text-align: right;">25.78</td>
+<td style="text-align: right;">25.79</td>
+<td style="text-align: right;">25.81</td>
+<td style="text-align: right;">25.87</td>
+<td style="text-align: left;">▆▇▂▁▂</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Total</td>
-<td style="text-align: center;">E31780</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">OriginalLongitude</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">-80.15</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">-80.17</td>
+<td style="text-align: right;">-80.16</td>
+<td style="text-align: right;">-80.15</td>
+<td style="text-align: right;">-80.13</td>
+<td style="text-align: right;">-80.12</td>
+<td style="text-align: left;">▇▆▅▅▇</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Total</td>
-<td style="text-align: center;">E31780</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: left;">Include</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▁▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MADup</td>
+<td style="text-align: right;">540751</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▁▁▇▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DEP.MDL</td>
+<td style="text-align: right;">274400</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">50.50</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DEP.PQL</td>
+<td style="text-align: right;">274400</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">250.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 </tbody>
 </table>
