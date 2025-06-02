@@ -8,16 +8,28 @@ params:
 
 Analyte report.
 
-```{R, get data across all programs}
-#| code-summary: get data across all programs
+```{R, get data across all programs, filter for analyte}
+#| code-summary: get data across all programs, filter for analyte
 #| message: false
 #| warning: false
 library('here')
 source(here("R/getAllData.R"))
-df <- getAllData()
+df <- getAllData() %>%
+  filter(DEP.Result.Analyte.Name == params$analyte)
+```
+
+```{R, display histogram of values}
+#| code-summary: display histogram of values
+
+library(ggplot2)
+ggplot(df, aes(x = DEP.Result.Value.Number)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  labs(title = "Histogram of Values", x = "Value", y = "Count")
 ```
 
 ```{R, create station statistics dataframe}
+#| code-summary: create station statistics dataframe
+
 source(here("R/seasonalMannKendall.R"))
 library(lubridate)  # for mdy_hms()
 library(pander)  # for display
@@ -65,6 +77,7 @@ sample_stats_df <- samples_df %>%
 
 
 ```{r, display with gt}
+#| code-summary: display with gt
 
 library(gt)
 library(scales)
