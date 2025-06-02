@@ -15,200 +15,112 @@ source(here("R/getAllData.R"))
 df <- getAllData()
 ```
 
-```{R, create table of stations}
-station_df <- df %>%
-  select(program, Monitoring.Location.ID) %>%
-  distinct()
-```
-
 ```{R, create station statistics dataframe}
 source(here("R/seasonalMannKendall.R"))
+library(lubridate)  # for mdy_hms()
+library(pander)  # for display
+
 # create table of samples for each station
 samples_df <- df %>%
   select(
     program, Monitoring.Location.ID, Activity.Start.Date.Time,
     DEP.Result.Value.Number, DEP.Result.Unit
     ) %>%
-  distinct()
+  distinct() %>%
+  # parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct
+  mutate(
+    Activity.Start.Date.Time = mdy_hms(
+      Activity.Start.Date.Time,
+      tz = "UTC"
+    )
+  )
+
 
 # add statistics for each station
 sample_stats_df <- samples_df %>%
   group_by(program, Monitoring.Location.ID) %>%
-  summarise(
+  reframe(
     n_values = n(),
-    mean_value = round(mean(DEP.Result.Value.Number, na.rm = TRUE), 2),
-    # mannKendall
-    trend = seasonalMannKendall(
-      Monitoring.Location.ID,  
+    trend = seasonalMannKendallVectorized(
       Activity.Start.Date.Time,
-      DEP.Result.Value.Number  
-    ),
-    # more...
-    .groups = "drop"
+      DEP.Result.Value.Number
+    )
+    # TODO: std dev, more...
   )
 
-library(skimr)
-skim(sample_stats_df)
-print(head(sample_stats_df))
+# print(head(sample_stats_df))
+# # display sample_stats_df with pander
+# pander(sample_stats_df)
 ```
 
-```{R, create table of statistics for selected analyte}
-#| code-summary: create table of statistics for selected analyte
-#| message: true
-#| warning: true
-source(here("R/seasonalMannKendall.R"))
-library(dplyr)
-library(lubridate)
 
-# Print which analyte we're analyzing
-cat(paste0("Analyzing data for analyte: ", params$analyte, "\n"))
 
-# Filter data to only include the selected analyte
-analyte_df <- df %>%
-  filter(DEP.Analyte.Name == params$analyte)
+```{r, display with gt}
 
-# Create a unique identifier by combining program and station ID
-analyte_df$id <- paste0(analyte_df$program, "_", analyte_df$Monitoring.Location.ID)
+library(gt)
+library(scales)
+library(tidyselect)  # for all_of()
 
-# Count how many stations have data for this analyte
-station_count <- length(unique(analyte_df$id))
-cat(paste0("Found ", station_count, " stations with data for ", params$analyte, "\n"))
-
-# Create a clean analyte data table
-mean_table <- analyte_df %>%
-  # Select only the relevant columns
-  select(id, program, Monitoring.Location.ID, DEP.Result.Value.Number, DEP.Result.Unit) %>%
-  # Remove rows with missing result values
-  filter(!is.na(DEP.Result.Value.Number)) %>%
-  # Convert to numeric to ensure proper calculation
-  mutate(DEP.Result.Value.Number = as.numeric(DEP.Result.Value.Number)) %>%
-  # Group by location
-  group_by(id, program, Monitoring.Location.ID, DEP.Result.Unit) %>%
-  # Calculate mean for each group
-  summarise(
-    n_values = n(),
-    mean_value = round(mean(DEP.Result.Value.Number, na.rm = TRUE), 2),
-    .groups = "drop"
-  ) %>%
-  # Create a formatted string with the mean and unit
-  mutate(formatted_result = paste0(mean_value, " ", DEP.Result.Unit))
-
-# Display summary statistics
-cat(paste0("Total observations for ", params$analyte, ": ", sum(mean_table$n_values), "\n"))
-
-# Run Seasonal Mann-Kendall trend analysis
-cat("\n### Performing Seasonal Mann-Kendall Trend Analysis\n")
-mkr <- seasonalMannKendall(analyte_df)
-
-# Convert the result matrix to a dataframe with proper types
-mkr_df <- as.data.frame(mkr, stringsAsFactors = FALSE)
-mkr_df$Monitoring.Location.ID <- as.character(mkr_df$Monitoring.Location.ID)
-# Force conversion to numeric by first converting to character
-mkr_df$Trend.Slope <- suppressWarnings(as.numeric(as.character(mkr_df$Trend.Slope)))
-
-# Create a mapping from id to Monitoring.Location.ID
-id_mapping <- analyte_df %>%
-  select(id, Monitoring.Location.ID) %>%
-  distinct()
-
-# Join trend results with the id mapping
-mkr_with_ids <- mkr_df %>%
-  left_join(id_mapping, by = "Monitoring.Location.ID")
-
-# Now join with the mean table
-mean_table_with_trends <- mean_table %>%
-  left_join(mkr_with_ids, by = c("id", "Monitoring.Location.ID"))
-
-# Add the trend direction based on slope
-mean_table_with_trends <- mean_table_with_trends %>%
-    mutate(
-      Trend.Slope = case_when(
-        is.na(Trend.Slope) ~ NA_real_,
-        !is.numeric(Trend.Slope) ~ NA_real_,
-        TRUE ~ round(as.numeric(Trend.Slope), 4)
-      ),
-      Trend.Direction = case_when(
-        is.na(Trend.Slope) ~ "??",
-        Trend.Slope > 0 ~ "_/",
-        Trend.Slope < 0 ~ "\_",
-        TRUE ~ "--"
+# ── color_column() ─────────────────────────────────────────────────────────────
+# gt_tbl   : a gt object that you’ve already created (e.g. `sample_stats_df %>% gt()`)
+# df       : the original data.frame (must contain the column you want to color)
+# column   : a string, e.g. "trend" or "n_values"
+# palette  : a character vector of colours to feed to col_numeric()
+#
+color_column <- function(gt_tbl, df, column, 
+                         palette = c("red", "orange", "yellow", "green", "blue", "violet")) {
+  # 1) Pull out that column’s numeric values
+  vals <- df[[column]]
+  if (!is.numeric(vals)) {
+    stop(sprintf("`%s` is not numeric; data_color() requires a numeric column.", column))
+  }
+  
+  # 2) Compute its min and max (ignoring NA)
+  min_val <- min(vals, na.rm = TRUE)
+  max_val <- max(vals, na.rm = TRUE)
+  
+  # 3) Call data_color() on the gt table for that single column
+  gt_tbl %>%
+    data_color(
+      columns = all_of(column),
+      colors  = col_numeric(
+        palette = palette,
+        domain  = c(min_val, max_val)
       )
     )
-
-
-
-# Sort by mean value (descending) to see highest concentrations first
-sorted_mean_table <- mean_table_with_trends %>%
-  arrange(desc(mean_value))
-
-# Display the table with program name for context
-result_table <- sorted_mean_table %>%
-  select(program, Monitoring.Location.ID, n_values, mean_value, DEP.Result.Unit, Trend.Slope, Trend.Direction)
-
-# Add a title to the table
-cat(paste0("\n## Mean ", params$analyte, " Concentrations and Trends by Station\n"))
-cat("*Note: Trend slope represents the estimated change per month from the Seasonal Mann-Kendall test*\n")
-
-# Display the table using pander for better formatting
-library(pander)
-
-# Print the structure of the table to help with debugging
-str(result_table)
-
-# Create a safer digits vector by checking the column types
-digits_vector <- sapply(names(result_table), function(col_name) {
-  x <- result_table[[col_name]]
-  if(is.numeric(x)) {
-    # For numeric columns, use appropriate precision
-    if(col_name == "mean_value") {
-      return(2)  # 2 decimal places for mean values
-    } else if(col_name == "Trend.Slope") {
-      return(4)  # 4 decimal places for trend slopes
-    } else if(col_name == "n_values") {
-      return(0)  # 0 decimal places for count values
-    } else {
-      return(2)  # 2 decimal places for other numeric columns
-    }
-  } else {
-    # For non-numeric columns, use NA
-    return(NA)
-  }
-})
-
-# Display the table with appropriate formatting
-tryCatch({
-  # Add column names to the digits vector
-  names(digits_vector) <- names(result_table)
-  # Print the digits vector for debugging
-  print(digits_vector)
-  # Use pander with the named digits vector
-  pander(result_table, digits = digits_vector)
-}, error = function(e) {
-  # Fallback to simpler formatting if the digits specification fails
-  cat(paste("Error in pander with digits specification:", e$message, "\n"))
-  cat("Falling back to simpler formatting...\n")
-  # Try a simpler approach with column-specific formatting
-  result_table$mean_value <- round(result_table$mean_value, 2)
-  if("Trend.Slope" %in% names(result_table)) {
-    # Only round numeric values
-    result_table$Trend.Slope <- sapply(result_table$Trend.Slope, function(x) {
-      if(is.numeric(x) && !is.na(x)) return(round(x, 4)) else return(x)
-    })
-  }
-  pander(result_table)
-})
-
-```
-
-```{R, create histogram of means}
-
-# Create a simple histogram of the values
-if (nrow(mean_table) > 0) {
-  cat(paste0("\n## Distribution of ", params$analyte, " Concentrations\n"))
-  hist(mean_table$mean_value, 
-       main = paste0("Histogram of Mean ", params$analyte, " Values"),
-       xlab = paste0(params$analyte, " (", unique(mean_table$DEP.Result.Unit)[1], ")"),
-       col = "lightblue",
-       breaks = min(20, max(5, nrow(mean_table) %/% 5)))
 }
+library(dplyr)
+library(gt)
+
+# Suppose `sample_stats_df` is your data.frame:
+# sample_stats_df <- data.frame(
+#   trend      = c(-1.2, 0.5, 2.3, -0.8, 0, NA),
+#   n_values = c(10, 25, 5,  17, 30, 8),
+#   other_var  = runif(6)
+# )
+
+# 1) First build your gt table as usual:
+gt_tbl <- sample_stats_df %>% 
+  gt()
+
+# 2) Now color “trend” using the default rainbow-ish palette:
+gt_tbl <- color_column(
+  gt_tbl, 
+  df     = sample_stats_df, 
+  column = "trend",
+  # blue (-) to red (+)
+  palette = rev(brewer.pal(11, "RdBu"))
+)
+
+# 3) If you want “n_values” to use its own palette (e.g. Greens), just call again:
+gt_tbl <- color_column(
+  gt_tbl, 
+  df      = sample_stats_df, 
+  column  = "n_values", 
+  palette = scales::brewer_pal(palette = "Greens")(9)
+)
+
+# 4) Render/display:
+gt_tbl
 ```
+
