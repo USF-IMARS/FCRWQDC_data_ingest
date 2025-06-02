@@ -1,6 +1,8 @@
 project:
   type: website
-  pre-render: pre_render/provider_reports.R
+  pre-render: 
+    - pre_render/provider_reports.R
+    - pre_render/analyte_reports.R
   render:
     - "*.qmd"
 

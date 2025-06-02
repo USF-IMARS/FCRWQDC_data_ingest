@@ -8,19 +8,16 @@ getListOfAnalytes <- function(){
         "Orthophosphate (PO4)", 
         "Silicate (Si)", 
         "Chlorophyll a (chl-a)", 
-        "Phytoplankton (phaeo)"
-    
-    # Turbidity
-    # Nitrogen, Ammonia
-    # Nitrogen, Kjeldahl, Total
-    # Nitrogen, NO2 plus NO3
-    # Phosphorus, Total (as P) LL
-
-    # #These are secondary (grab as possible)
-    # Salinity
-    # Oxygen, Dissolved
-    # Field pH
-    # Field Temperature
+        "Phytoplankton (phaeo)",
+        "Turbidity",
+        "Nitrogen, Ammonia",
+        "Nitrogen, Kjeldahl, Total",
+        "Nitrogen, NO2 plus NO3",
+        "Phosphorus, Total (as P) LL",
+        "Salinity",
+        "Oxygen, Dissolved",
+        "Field pH",
+        "Field Temperature"
     )
     return(analytes)
 }

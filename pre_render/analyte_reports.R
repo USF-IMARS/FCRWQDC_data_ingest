@@ -34,18 +34,15 @@ dir.create(REPORTS_DIR, showWarnings=FALSE)
 # =====================================================================
 # === iterate through the data structure
 # =====================================================================
-# Set the root directory where the folders are located
-source(here("R/getData.R"))
-
 # function to create template
 create_template <- function(analyte) {
-  params = list(
+  params <- list(
     analyte = analyte
   )
   print(glue("=== creating template for '{analyte}' ==="))
   writeLines(
     whisker.render(templ, params),
-    file.path(REPORTS_DIR, glue("{org_id}.qmd"))
+    file.path(REPORTS_DIR, glue("{analyte}.qmd"))
   )
 }
 
