@@ -12,18 +12,18 @@ source(here::here("R/getMiamiBeachData.R"))
 
 # Main function to get data for a specific program
 getData <- function(programName) {
-  cat("\n===========================================\n")
-  cat(glue("DATA LOADING FOR PROGRAM: {toupper(programName)} \n"))
-  cat("===========================================\n")
+  # cat("\n===========================================\n")
+  # cat(glue("DATA LOADING FOR PROGRAM: {toupper(programName)} \n"))
+  # cat("===========================================\n")
   
   # Determine which data source to use based on program name
   if(programName == "SFER") {
     df <- getSFERData(programName)
     
-    cat("\n--- Data Summary ---\n")
-    cat(glue("Total rows: {nrow(df)}\n"))
-    cat(glue("Total columns: {ncol(df)}\n"))
-    cat("------------------\n")
+    # cat("\n--- Data Summary ---\n")
+    # cat(glue("Total rows: {nrow(df)}\n"))
+    # cat(glue("Total columns: {ncol(df)}\n"))
+    # cat("------------------\n")
   
   # TODO: Include STORET data once lat,lon are added
   #       Currently excluded b/c there is no lat,lon in STORET files.
@@ -58,28 +58,28 @@ getData <- function(programName) {
     # Default case - use WIN data
     df <- getWINData(programName)
     
-    cat("\n--- Data Summary ---\n")
-    cat(glue("Total rows: {nrow(df)}\n"))
-    cat(glue("Total columns: {ncol(df)}\n"))
-    cat("------------------\n")
+    # cat("\n--- Data Summary ---\n")
+    # cat(glue("Total rows: {nrow(df)}\n"))
+    # cat(glue("Total columns: {ncol(df)}\n"))
+    # cat("------------------\n")
   }
   
   # Process DMS coordinates and return the dataframe
-  cat("\n--- Processing DMS Coordinates ---\n")
+  # cat("\n--- Processing DMS Coordinates ---\n")
   original_rows <- nrow(df)
   df <- processDMSCoordinates(df)
   if (nrow(df) != original_rows) {
-    cat(glue("WARNING: Row count changed during DMS coordinate processing from {original_rows} to {nrow(df)}\n"))
+    # cat(glue("WARNING: Row count changed during DMS coordinate processing from {original_rows} to {nrow(df)}\n"))
   } else {
-    cat("No change in row count during DMS coordinate processing\n")
+    # cat("No change in row count during DMS coordinate processing\n")
   }
   
   # Ensure consistent column types to prevent binding issues
-  cat("\n--- Standardizing Column Types ---\n")
+  # cat("\n--- Standardizing Column Types ---\n")
   # Convert DEP.Result.ID to character if it exists
   if ("DEP.Result.ID" %in% names(df)) {
     df$DEP.Result.ID <- as.character(df$DEP.Result.ID)
-    cat("Converted DEP.Result.ID to character type\n")
+    # cat("Converted DEP.Result.ID to character type\n")
   }
   
   # Convert other potential problematic columns to standardized types
@@ -100,11 +100,11 @@ getData <- function(programName) {
   for (col in names(type_standardization)) {
     if (col %in% names(df)) {
       df[[col]] <- type_standardization[[col]](df[[col]])
-      cat(glue("Converted {col} to standardized type\n"))
+      # cat(glue("Converted {col} to standardized type\n"))
     }
   }
   
-  cat("===========================================\n")
+  # cat("===========================================\n")
   
   return(df)
 }
