@@ -3,7 +3,7 @@ title: "Salinity Report"
 author: "Tylar Murray"
 format: html
 params:
-  analyte: "Salinity"  # must be Ammonia (N) before rendering
+  analyte: "Salinity"  # must be Salinity before rendering
 ---
 
 Analyte report.
