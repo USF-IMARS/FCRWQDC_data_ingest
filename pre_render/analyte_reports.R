@@ -26,7 +26,7 @@ REPORTS_DIR <- here(glue("{REPORT_NAME}/{REPORT_NAME}"))
 # TODO: do this using `double_param_the_yaml()`
 templ <- readLines(REPORT_TEMPLATE)
 templ <- gsub(
-  "Ammonia (N)", "{{analyte}}", templ
+  "Salinity", "{{analyte}}", templ
 )
 
 dir.create(REPORTS_DIR, showWarnings=FALSE)
