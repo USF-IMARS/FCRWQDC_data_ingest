@@ -22,7 +22,7 @@ station_df <- df %>%
 ```
 
 ```{R, create station statistics dataframe}
-source(here("R/seasonalMannKendallVectorized.R"))
+source(here("R/seasonalMannKendall.R"))
 # create table of samples for each station
 samples_df <- df %>%
   select(
@@ -38,7 +38,7 @@ sample_stats_df <- samples_df %>%
     n_values = n(),
     mean_value = round(mean(DEP.Result.Value.Number, na.rm = TRUE), 2),
     # mannKendall
-    trend = seasonalMannKendallVectorized(
+    trend = seasonalMannKendall(
       Monitoring.Location.ID,  
       Activity.Start.Date.Time,
       DEP.Result.Value.Number  
