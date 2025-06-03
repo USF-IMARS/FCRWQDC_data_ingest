@@ -3,24 +3,123 @@ title: "WIN_data_ingest"
 ---
 
 Data ingestion and initial analysis from FL WIN water quality database and  other sources.
-
 Below are some statistics on data across all analytes and programs.
+For more information on specific analytes and providers, see the [analyte reports](analyte_reports/analyte_reports.qmd) and [provider reports](provider_reports/provider_reports.qmd).
 
 ```{R, get data across all programs}
+#| code-summary: get data across all programs
+#| message: false
+#| warning: false
 library("here")
 source(here("R/getAllData.R"))
 df <- getAllData()
 ```
 
+
+### List of Analytes:
 ```{R, list all analytes}
+#| code-summary: list all analytes
 print(unique(df$DEP.Analyte.Name))
 ```
 
+
+### Overall statistics:
 ```{R, skimr on all data}
+#| code-summary: skimr on all data
 library(skimr)
 skim(df)
 ```
+```{R, Create artistic data image}
+#| code-summary: Create artistic data image
+library(dplyr)
+library(reshape2)  # for melt()
+library(ggplot2)
+library(viridis)
+library(RColorBrewer)# for scale_fill_distiller()
 
+# 1. Extract & drop NA
+vals_raw <- df$DEP.Result.Value.Number
+vals_raw <- vals_raw[!is.na(vals_raw)]
+
+# 2. Log-transform
+v1 <- log10(vals_raw + 1)
+
+# 3. Percentile of the log-values
+pct1 <- ecdf(v1)(v1)
+
+# 4. Grid dims
+N    <- length(pct1)
+ncol <- ceiling(sqrt(N))
+nrow <- ceiling(N / ncol)
+
+# 5. Pad
+pad_len <- (nrow * ncol) - N
+p1_pad  <- c(pct1, rep(NA, pad_len))
+
+# 6. Matrix & melt
+mat_p1 <- matrix(p1_pad, nrow = nrow, ncol = ncol, byrow = TRUE)
+mat_long_p1 <- melt(mat_p1, varnames = c("row","col"), value.name = "pct_log")
+
+# 7. Plot
+ggplot(mat_long_p1, aes(x = col, y = row, fill = pct_log)) +
+  geom_tile(color = NA) +
+  scale_fill_distiller(
+    palette   = "Spectral",  # try "RdYlBu", "PuOr", "BrBG", etc.
+    direction = 1,           # reverse=FALSE so low values start at red-ish end
+    na.value  = "grey90",    # color for the padded NA cells
+    guide     = "none"       # hide the legend; remove if you want a colorbar
+  ) +
+  scale_y_reverse() +
+  theme_void() +
+  theme(legend.position = "none")
+
+```
+
+```{R, Create artistic data image}
+#| code-summary: Create artistic data image
+library(dplyr)
+library(reshape2)  # for melt()
+library(ggplot2)
+library(viridis)
+library(RColorBrewer)# for scale_fill_distiller()
+
+# 1. Extract & drop NA
+vals_raw <- df$DEP.Result.Value.Number
+vals_raw <- vals_raw[!is.na(vals_raw)]
+
+# 2. Log-transform
+v1 <- log10(vals_raw + 1)
+
+# 3. Percentile of the log-values
+pct1 <- ecdf(v1)(v1)
+
+# 4. Grid dims
+N    <- length(pct1)
+ncol <- ceiling(sqrt(N))
+nrow <- ceiling(N / ncol)
+
+# 5. Pad
+pad_len <- (nrow * ncol) - N
+p1_pad  <- c(pct1, rep(NA, pad_len))
+
+# 6. Matrix & melt
+mat_p1 <- matrix(p1_pad, nrow = nrow, ncol = ncol, byrow = TRUE)
+mat_long_p1 <- melt(mat_p1, varnames = c("row","col"), value.name = "pct_log")
+
+# 7. Plot
+ggplot(mat_long_p1, aes(x = col, y = row, fill = pct_log)) +
+  geom_tile(color = NA) +
+  scale_fill_distiller(
+    palette   = "Spectral",  # try "RdYlBu", "PuOr", "BrBG", etc.
+    direction = 1,           # reverse=FALSE so low values start at red-ish end
+    na.value  = "grey90",    # color for the padded NA cells
+    guide     = "none"       # hide the legend; remove if you want a colorbar
+  ) +
+  scale_y_reverse() +
+  theme_void() +
+  theme(legend.position = "none")
+
+```
 ------------------------------------------------------------------
 
 If you have visualization ideas for this data, please open a github issue [here](https://github.com/USF-IMARS/WIN_data_ingest/issues).
