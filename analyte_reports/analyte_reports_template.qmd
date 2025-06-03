@@ -2,7 +2,7 @@
 title: "Salinity Report"
 format: html
 params:
-  analyte: "Salinity"  # must be Salinity before rendering
+  analyte: "Dissolved Oxygen (Discrete)"  # must be "Salinity" before rendering
 ---
 
 ```{R, get data across all programs, filter for analyte}
@@ -12,8 +12,10 @@ params:
 library('here')
 library('dplyr')
 source(here("R/getAllData.R"))
-df <- getAllData() %>%
-  filter(DEP.Analyte.Name == params$analyte)
+full_df <- getAllData()
+df <- filter(full_df, DEP.Analyte.Name == params$analyte)
+# df <- filter(full_df, DEP.Analyte.Name == "Salinity")
+# unique(full_df$DEP.Analyte.Name)
 ```
 
 

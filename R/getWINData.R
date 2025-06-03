@@ -64,10 +64,10 @@ getWINData <- function(programName=NULL, fpath=NULL){
   # Store the original column count
   original_cols <- ncol(result_df)
   original_col_names <- names(result_df)
-  cat("\n")
-  cat("=== WIN Data Loading ===\n")
-  cat(glue("Source: {basename(fpath)}\n"))
-  cat(glue("Loaded {original_cols} columns\n"))
+  # cat("\n")
+  # cat("=== WIN Data Loading ===\n")
+  # cat(glue("Source: {basename(fpath)}\n"))
+  # cat(glue("Loaded {original_cols} columns\n"))
   
   # Apply the alignment function to ensure consistency with other data sources
   source(here("R/align_win_df.R"))
@@ -79,17 +79,17 @@ getWINData <- function(programName=NULL, fpath=NULL){
   dropped_cols <- setdiff(original_col_names, final_col_names)
   dropped_count <- length(dropped_cols)
   
-  cat("--- Column statistics ---\n")
-  if (dropped_count > 0) {
-    cat(glue("Dropped {dropped_count} columns during processing:\n"))
-    for (col in dropped_cols) {
-      cat(glue("  - {col}\n"))
-    }
-  } else {
-    cat("No columns were dropped during processing\n")
-  }
-  cat(glue("Final column count: {final_cols}\n"))
-  cat("------------------------\n")
+  # cat("--- Column statistics ---\n")
+  # if (dropped_count > 0) {
+  #   cat(glue("Dropped {dropped_count} columns during processing:\n"))
+  #   for (col in dropped_cols) {
+  #     cat(glue("  - {col}\n"))
+  #   }
+  # } else {
+  #   cat("No columns were dropped during processing\n")
+  # }
+  # cat(glue("Final column count: {final_cols}\n"))
+  # cat("------------------------\n")
   
   # Return the dataframe
   return(result_df)

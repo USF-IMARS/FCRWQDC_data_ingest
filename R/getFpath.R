@@ -5,9 +5,9 @@ getFpath <- function(programName=NULL, fpath=NULL, formatStr){
   } else if (!is.null(fpath) && !is.null(programName)){
     stop("Cannot provide both fpath and programName")
   } else if (!is.null(fpath)){  # programName given
-    print('using given fpath')
+    # print('using given fpath')
   } else if (!is.null(programName)){
-    print('using given programName')
+    # print('using given programName')
     fpath <- here(glue(formatStr))
   } else {
     stop('confused')

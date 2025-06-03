@@ -54,6 +54,11 @@ getData <- function(programName) {
     
   } else if (programName == "MiamiBeach") {
     df <- getMiamiBeachData("MiamiBeach")
+  } else if (programName == "FIU") {
+    df <- getWINData("FIU")
+    df2 <- getFIUData("FIU")
+    # combine dataframes
+    df <- bind_rows(df, df2)
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
@@ -103,9 +108,12 @@ getData <- function(programName) {
       # cat(glue("Converted {col} to standardized type\n"))
     }
   }
-  
+
+
+  # replace spaces, parentheses, commas in DEP.Analyte.Name
+  df$DEP.Analyte.Name <- gsub("[ \\(|,]", "_", df$DEP.Analyte.Name)
+
   # cat("===========================================\n")
-  
   return(df)
 }
 
