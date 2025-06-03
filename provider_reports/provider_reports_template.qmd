@@ -40,29 +40,35 @@ plotHeatmap(heat_long)
 
 
 ```{R create map }
-#| code-summary: create map with unique points (no clustering)
-library(leaflet)
-library(dplyr)
+#| code-summary: create map with unique points
 
-# 1. Filter out rows & keep only one per unique lat/lon
-df_unique_locs <- df %>%
-  filter(!is.na(Org.Decimal.Latitude), !is.na(Org.Decimal.Longitude)) %>%
-  distinct(Org.Decimal.Latitude, Org.Decimal.Longitude, .keep_all = TRUE)
+# check for missing lat/lon
+if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude))) {
+  cat("ERROR: All rows have missing latitude or longitude.")
+} else {
+  library(leaflet)
+  library(dplyr)
 
-# 2. Plot all unique points (no clustering)
-leaflet(df_unique_locs) %>%
-  addProviderTiles(providers$OpenStreetMap) %>%
-  addCircleMarkers(
-    lng         = ~Org.Decimal.Longitude,
-    lat         = ~Org.Decimal.Latitude,
-    radius      = 4,
-    color       = "blue",
-    fillOpacity = 0.5,
-    popup       = ~paste0(
-      "Monitoring Location: ", Monitoring.Location.ID
+  # 1. Filter out rows & keep only one per unique lat/lon
+  df_unique_locs <- df %>%
+    filter(!is.na(Org.Decimal.Latitude), !is.na(Org.Decimal.Longitude)) %>%
+    distinct(Org.Decimal.Latitude, Org.Decimal.Longitude, .keep_all = TRUE)
+
+  # 2. Plot all unique points (no clustering)
+  leaflet(df_unique_locs) %>%
+    addProviderTiles(providers$OpenStreetMap) %>%
+    addCircleMarkers(
+      lng         = ~Org.Decimal.Longitude,
+      lat         = ~Org.Decimal.Latitude,
+      radius      = 4,
+      color       = "blue",
+      fillOpacity = 0.5,
+      popup       = ~paste0(
+        "Monitoring Location: ", Monitoring.Location.ID
+      )
+      # clusterOptions removed to show every point at all zoom levels
     )
-    # clusterOptions removed to show every point at all zoom levels
-  )
+}
 ```
 
 ```{R prep data through time}

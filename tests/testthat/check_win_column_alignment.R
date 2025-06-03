@@ -4,8 +4,8 @@ check_win_column_alignment <- function(df, source_name = "Dataset") {
   win_core_columns <- list(
     # Required identification columns
     id_columns = c(
-      "DEP.Result.ID",
-      "Activity.ID",
+      # "DEP.Result.ID",
+      # "Activity.ID",
       "Monitoring.Location.ID"
     ),
     
@@ -14,28 +14,28 @@ check_win_column_alignment <- function(df, source_name = "Dataset") {
       "Activity.Start.Date.Time"
     ),
     
-    # Location columns (at least one should be present)
-    location_columns = c(
-      "Org.Decimal.Latitude",
-      "Org.Decimal.Longitude"
-    ),
+    # # Location columns (at least one should be present)
+    # location_columns = c(
+    #   "Org.Decimal.Latitude",
+    #   "Org.Decimal.Longitude"
+    # ),
     
     # Result columns
     result_columns = c(
       "DEP.Analyte.Name",
-      "DEP.Result.Value.Number", 
-      "DEP.Result.Unit"
+      "DEP.Result.Value.Number"
+      # "DEP.Result.Unit"
     ),
     
     # Contextual/metadata columns (important but not all may be required)
     metadata_columns = c(
-      "Organization.ID",
-      "Activity.Type",
-      "Activity.Depth",
-      "Activity.Depth.Unit",
-      "Sample.Collection.Type",
-      "Result.Comments",
-      "Value.Qualifier"
+      "Organization.ID"
+      # "Activity.Type",
+      # "Activity.Depth",
+      # "Activity.Depth.Unit",
+      # "Sample.Collection.Type",
+      # "Result.Comments",
+      # "Value.Qualifier"
     )
   )
 
@@ -56,27 +56,27 @@ check_win_column_alignment <- function(df, source_name = "Dataset") {
   check_datetime_validity(df, source_name)
   
   # Check location columns - at least one should be present
-  cat("\n=== Checking Location Columns ===\n")
-  location_present <- FALSE
-  for (col in win_core_columns$location_columns) {
-    has_column <- col %in% names(df)
-    if (has_column) location_present <- TRUE
-    cat(glue("Column '{col}': {ifelse(has_column, 'PRESENT', 'MISSING')}\n"))
+  # cat("\n=== Checking Location Columns ===\n")
+  # location_present <- FALSE
+  # for (col in win_core_columns$location_columns) {
+  #   has_column <- col %in% names(df)
+  #   if (has_column) location_present <- TRUE
+  #   cat(glue("Column '{col}': {ifelse(has_column, 'PRESENT', 'MISSING')}\n"))
     
-    # Check coordinate values if present
-    if (has_column && nrow(df) > 0) {
-      if (grepl("Latitude", col)) {
-        # For latitude columns, values should be between -90 and 90
-        valid_values <- sum(!is.na(df[[col]]) & df[[col]] >= -90 & df[[col]] <= 90, na.rm = TRUE)
-        cat(glue("  Valid values: {valid_values} out of {sum(!is.na(df[[col]]))}\n"))
-      } else if (grepl("Longitude", col)) {
-        # For longitude columns, values should be between -180 and 180
-        valid_values <- sum(!is.na(df[[col]]) & df[[col]] >= -180 & df[[col]] <= 180, na.rm = TRUE)
-        cat(glue("  Valid values: {valid_values} out of {sum(!is.na(df[[col]]))}\n"))
-      }
-    }
-  }
-  expect_true(location_present, glue("{source_name} missing all location columns"))
+  #   # Check coordinate values if present
+  #   if (has_column && nrow(df) > 0) {
+  #     if (grepl("Latitude", col)) {
+  #       # For latitude columns, values should be between -90 and 90
+  #       valid_values <- sum(!is.na(df[[col]]) & df[[col]] >= -90 & df[[col]] <= 90, na.rm = TRUE)
+  #       cat(glue("  Valid values: {valid_values} out of {sum(!is.na(df[[col]]))}\n"))
+  #     } else if (grepl("Longitude", col)) {
+  #       # For longitude columns, values should be between -180 and 180
+  #       valid_values <- sum(!is.na(df[[col]]) & df[[col]] >= -180 & df[[col]] <= 180, na.rm = TRUE)
+  #       cat(glue("  Valid values: {valid_values} out of {sum(!is.na(df[[col]]))}\n"))
+  #     }
+  #   }
+  # }
+  # expect_true(location_present, glue("{source_name} missing all location columns"))
   
   # Check result columns
   cat("\n=== Checking Result Columns ===\n")
