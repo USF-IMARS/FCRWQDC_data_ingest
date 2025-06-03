@@ -10,6 +10,7 @@ params:
 #| message: false
 #| warning: false
 library('here')
+library('dplyr')
 source(here("R/getAllData.R"))
 df <- getAllData() %>%
   filter(DEP.Result.Analyte.Name == params$analyte)
