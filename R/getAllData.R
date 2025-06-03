@@ -10,7 +10,7 @@ getAllData <- function(){
     all_data_list <- list()
 
     for (program in programs) {
-        cat(paste0("Processing program: ", program, "\n"))
+        # cat(paste0("Processing program: ", program, "\n"))
         data <- getData(program)
         # add program name to dataframe
         data$program <- program
@@ -20,6 +20,6 @@ getAllData <- function(){
 
     # Combine all dataframes, preserving all columns and filling missing values with NA
     df <- dplyr::bind_rows(all_data_list)
-    cat(paste0("Combined dataframe has ", nrow(df), " rows and ", ncol(df), " columns\n"))
+    # cat(paste0("Combined dataframe has ", nrow(df), " rows and ", ncol(df), " columns\n"))
     return(df)
 }
