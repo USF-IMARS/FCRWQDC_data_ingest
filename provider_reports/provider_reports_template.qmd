@@ -44,7 +44,7 @@ plotHeatmap(heat_long)
 
 # check for missing lat/lon
 if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude))) {
-  cat("ERROR: All rows have missing latitude or longitude.")
+  cat("Cannot make map: All rows have missing latitude or longitude.")
 } else {
   library(leaflet)
   library(dplyr)
