@@ -22,7 +22,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
 
   source(here("R/getFpath.R"))
   
-  cat("\n=== Processing Miami Beach Water Quality Data ===\n")
+  # cat("\n=== Processing Miami Beach Water Quality Data ===\n")
   
   # Define column mappings for different data sources
   # historical columns:
@@ -56,7 +56,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
   # Function to load historical data
   load_historical_data <- function(file_path) {
     if (!file.exists(file_path)) {
-      cat("Historical data file not found. Starting with empty dataframe.\n")
+      # cat("Historical data file not found. Starting with empty dataframe.\n")
       return(data.frame())
     }
     
@@ -69,7 +69,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       na.strings = c("", "NA")
     )
     
-    cat(glue("Loaded {nrow(df)} rows and {ncol(df)} columns from historical file\n"))
+    # cat(glue("Loaded {nrow(df)} rows and {ncol(df)} columns from historical file\n"))
     return(df)
   }
   
@@ -81,7 +81,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       recursive = TRUE,
       full.names = TRUE
     )
-    cat(glue("Found {length(files)} Excel files\n"))
+    # cat(glue("Found {length(files)} Excel files\n"))
     return(files)
   }
   
@@ -105,7 +105,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
   
   # Function to read an Excel file and process it
   read_excel_file <- function(file_path) {
-    cat(glue("Processing {basename(file_path)}\n"))
+    # cat(glue("Processing {basename(file_path)}\n"))
     
     # Extract date from filename
     file_date <- extract_date_from_filename(basename(file_path))
@@ -124,36 +124,36 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       
       return(df)
     }, error = function(e) {
-      cat(glue("Error reading {basename(file_path)}: {e$message}\n"))
+      # cat(glue("Error reading {basename(file_path)}: {e$message}\n"))
       return(data.frame())
     })
   }
   
   # Load historical data
   historical_file <- here("data/MiamiBeach/Discrete WQ - 4058.txt")
-  cat(glue("Loading historical data from {basename(historical_file)}\n"))
+  # cat(glue("Loading historical data from {basename(historical_file)}\n"))
   historical_df <- load_historical_data(historical_file)
   
   # Find and load Excel files
   xls_directory <- here("data/MiamiBeach/2024")
-  cat(glue("Searching for Excel files in {xls_directory}\n"))
+  # cat(glue("Searching for Excel files in {xls_directory}\n"))
   excel_files <- find_excel_files(xls_directory)
   
   # Process all Excel files and combine them
   if (length(excel_files) > 0) {
     excel_data_list <- lapply(excel_files, read_excel_file)
     excel_df <- dplyr::bind_rows(excel_data_list)
-    cat(glue("Combined {nrow(excel_df)} rows from Excel files\n"))
+    # cat(glue("Combined {nrow(excel_df)} rows from Excel files\n"))
   } else {
     excel_df <- data.frame()
-    cat("No Excel files found\n")
+    # cat("No Excel files found\n")
   }
   
   # Function to map columns while preserving original columns
   map_columns <- function(df, source_type) {
     # First check if dataframe is empty
     if (nrow(df) == 0) {
-      cat(glue("No data found for {source_type}\n"))
+      # cat(glue("No data found for {source_type}\n"))
       return(data.frame())
     }
     
@@ -161,7 +161,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
     current_cols <- names(df)
     mapping <- column_mappings[[source_type]]
     
-    cat(glue("Column names in {source_type} data: {paste(current_cols, collapse=', ')}\n"))
+    # cat(glue("Column names in {source_type} data: {paste(current_cols, collapse=', ')}\n"))
     
     # Create a result dataframe with all original columns
     result_df <- df
@@ -183,10 +183,10 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
     missing_cols <- required_cols[!required_cols %in% names(result_df)]
     
     if (length(missing_cols) > 0) {
-      cat(glue("Missing required columns in {source_type} data: {paste(missing_cols, collapse=', ')}\n"))
-      cat(glue("Available columns: {paste(names(result_df), collapse=', ')}\n"))
+      # cat(glue("Missing required columns in {source_type} data: {paste(missing_cols, collapse=', ')}\n"))
+      # cat(glue("Available columns: {paste(names(result_df), collapse=', ')}\n"))
     } else {
-      cat(glue("Successfully converted {source_type} data to standard format\n"))
+      # cat(glue("Successfully converted {source_type} data to standard format\n"))
     }
     
     return(result_df)
@@ -262,7 +262,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
           # Log stats about date parsing
           na_count <- sum(is.na(parsed_dates))
           if (na_count > 0) {
-            cat(glue("Warning: {na_count} Excel dates could not be parsed and were set to NA\n"))
+            # cat(glue("Warning: {na_count} Excel dates could not be parsed and were set to NA\n"))
           }
         }
       }
@@ -289,7 +289,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       # Handle conversion failures by replacing NAs with 0
       na_count <- sum(is.na(df$DEP.Result.Value.Number))
       if (na_count > 0) {
-        cat(glue("Warning: {na_count} values could not be converted to numeric and were set to NA\n"))
+        # cat(glue("Warning: {na_count} values could not be converted to numeric and were set to NA\n"))
       }
     }
     
@@ -303,13 +303,13 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
   # Combine standardized datasets
   if (nrow(historical_standardized) > 0 && nrow(excel_standardized) > 0) {
     merged_df <- dplyr::bind_rows(historical_standardized, excel_standardized)
-    cat(glue("Merged dataframe has {nrow(merged_df)} rows and {ncol(merged_df)} columns\n"))
+    # cat(glue("Merged dataframe has {nrow(merged_df)} rows and {ncol(merged_df)} columns\n"))
   } else if (nrow(historical_standardized) > 0) {
     merged_df <- historical_standardized
-    cat("Using only historical data\n")
+    # cat("Using only historical data\n")
   } else if (nrow(excel_standardized) > 0) {
     merged_df <- excel_standardized
-    cat("Using only Excel data\n")
+    # cat("Using only Excel data\n")
   } else {
     cat("No data found. Returning empty dataframe.\n")
     return(data.frame())
@@ -326,8 +326,8 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       program = "MiamiBeach"
     )
   
-  cat(glue("Final Miami Beach dataset has {nrow(merged_df)} rows for {length(unique(merged_df$Monitoring.Location.ID))} monitoring locations\n"))
-  cat("================================================\n")
+  # cat(glue("Final Miami Beach dataset has {nrow(merged_df)} rows for {length(unique(merged_df$Monitoring.Location.ID))} monitoring locations\n"))
+  # cat("================================================\n")
   
   return(merged_df)
 }

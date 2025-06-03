@@ -36,7 +36,7 @@ getListOfAnalytes <- function(){
       "Nitrogen- Total Kjeldahl",
       "Phosphorus- Total",
       "Ammonia (N)",
-      "Chlorophyll a, free of ph",
+      "Chlorophyll a, free of pheophytin",
       "Temperature, Water",
       "Orthophosphate (P)",
       "Chlorophyll a- corrected",
