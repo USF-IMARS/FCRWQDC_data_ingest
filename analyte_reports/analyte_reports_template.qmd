@@ -1,12 +1,9 @@
 ---
 title: "Salinity Report"
-author: "Tylar Murray"
 format: html
 params:
   analyte: "Salinity"  # must be Salinity before rendering
 ---
-
-Analyte report.
 
 ```{R, get data across all programs, filter for analyte}
 #| code-summary: get data across all programs, filter for analyte
@@ -18,6 +15,9 @@ df <- getAllData() %>%
   filter(DEP.Result.Analyte.Name == params$analyte)
 ```
 
+
+### Histogram of `DEP.Result.Value.Number`:
+
 ```{R, display histogram of values}
 #| code-summary: display histogram of values
 
@@ -27,6 +27,8 @@ ggplot(df, aes(x = DEP.Result.Value.Number)) +
   labs(title = "Histogram of Values", x = "Value", y = "Count")
 ```
 
+
+### Station Statistics:
 ```{R, create station statistics dataframe}
 #| code-summary: create station statistics dataframe
 

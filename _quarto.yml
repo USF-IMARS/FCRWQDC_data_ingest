@@ -3,7 +3,7 @@ project:
   pre-render: 
     - pre_render/provider_reports.R
     - pre_render/analyte_reports.R
-  render:
+  # render:
     - "*.qmd"
 
 website:
