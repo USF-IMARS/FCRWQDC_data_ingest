@@ -13,7 +13,7 @@ library('here')
 library('dplyr')
 source(here("R/getAllData.R"))
 df <- getAllData() %>%
-  filter(DEP.Result.Analyte.Name == params$analyte)
+  filter(DEP.Analyte.Name == params$analyte)
 ```
 
 
@@ -77,9 +77,7 @@ sample_stats_df <- samples_df %>%
 # pander(sample_stats_df)
 ```
 
-
-
-```{r, display with gt}
+```{R, display with gt}
 #| code-summary: display with gt
 
 library(gt)
@@ -190,3 +188,12 @@ gt_tbl <- color_column(
 gt_tbl
 ```
 
+### Reporting Programs:
+```{R, display reporting programs}
+#| code-summary: display reporting programs
+
+library(ggplot2)
+ggplot(df, aes(x = program)) +
+  geom_bar() +
+  labs(title = "Reporting Programs", x = "Program", y = "Count")
+```
