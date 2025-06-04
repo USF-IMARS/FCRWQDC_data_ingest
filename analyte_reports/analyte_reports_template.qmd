@@ -2,7 +2,7 @@
 title: "Salinity Report"
 format: html
 params:
-  analyte: "Dissolved Oxygen (Discrete)"  # must be "Salinity" before rendering
+  analyte: "Salinity"  # must be "Salinity" before rendering
 ---
 
 ```{R, get data across all programs, filter for analyte}
@@ -18,6 +18,13 @@ df <- filter(full_df, DEP.Analyte.Name == params$analyte)
 # unique(full_df$DEP.Analyte.Name)
 ```
 
+```{R, create .csv of analyte data}
+#| code-summary: create .csv of analyte data
+# save df to csv
+write.csv(df, here("data", "exports", paste0(params$analyte, ".csv")))
+```
+
+Download data for this analyte [here](data/exports/`r params$analyte`.csv)
 
 ### Histogram of `DEP.Result.Value.Number`:
 
@@ -134,58 +141,90 @@ gt_tbl <- sample_stats_df %>%
   gt()
 
 # trend blue (-) to red (+) (0 centered)
-min_trend <- min(sample_stats_df$trend,  na.rm = TRUE)
-max_trend <- max(sample_stats_df$trend,  na.rm = TRUE)
-max_abs_trend <- max(abs(min_trend), abs(max_trend))
-gt_tbl <- color_column(
-  gt_tbl, 
-  df     = sample_stats_df, 
-  column = "trend",
-  palette = rev(brewer.pal(11, "RdBu")),
-  domain  = c(-max_abs_trend, max_abs_trend)
-)
+tryCatch({
+  min_trend <- min(sample_stats_df$trend,  na.rm = TRUE)
+  max_trend <- max(sample_stats_df$trend,  na.rm = TRUE)
+  max_abs_trend <- max(abs(min_trend), abs(max_trend))
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df     = sample_stats_df, 
+    column = "trend",
+    palette = rev(brewer.pal(11, "RdBu")),
+    domain  = c(-max_abs_trend, max_abs_trend)
+  )
+}, error = function(e) {
+  print("Error in trend color column")
+  print(e)
+})
+tryCatch({
+  # mean values blue to red (0 centered)
+  min_mean <- min(sample_stats_df$mean,  na.rm = TRUE)
+  max_mean <- max(sample_stats_df$mean,  na.rm = TRUE)
+  max_abs_mean <- max(abs(min_mean), abs(max_mean))
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df     = sample_stats_df, 
+    column = "mean",
+    palette = rev(brewer.pal(11, "RdBu")),
+    domain  = c(-max_abs_mean, max_abs_mean)
+  )
+}, error = function(e) {
+  print("Error in mean color column")
+  print(e)
+})
 
-# mean values blue to red (0 centered)
-min_mean <- min(sample_stats_df$mean,  na.rm = TRUE)
-max_mean <- max(sample_stats_df$mean,  na.rm = TRUE)
-max_abs_mean <- max(abs(min_mean), abs(max_mean))
-gt_tbl <- color_column(
-  gt_tbl, 
-  df     = sample_stats_df, 
-  column = "mean",
-  palette = rev(brewer.pal(11, "RdBu")),
-  domain  = c(-max_abs_mean, max_abs_mean)
-)
-# n values white to green
-gt_tbl <- color_column(
-  gt_tbl, 
-  df      = sample_stats_df, 
-  column  = "n_values", 
-  palette = scales::brewer_pal(palette = "Greens")(9)
-)
+tryCatch({
+  # n values white to green
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df      = sample_stats_df, 
+    column  = "n_values", 
+    palette = scales::brewer_pal(palette = "Greens")(9)
+  )
+}, error = function(e) {
+  print("Error in n_values color column")
+  print(e)
+})
 
-# min
-gt_tbl <- color_column(
-  gt_tbl, 
-  df      = sample_stats_df, 
-  column  = "min", 
-  palette = scales::brewer_pal(palette = "Blues")(9)
-)
-# max
-gt_tbl <- color_column(
-  gt_tbl, 
-  df      = sample_stats_df, 
-  column  = "max", 
-  palette = scales::brewer_pal(palette = "Blues")(9)
-)
+tryCatch({
+  # min
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df      = sample_stats_df, 
+    column  = "min", 
+    palette = scales::brewer_pal(palette = "Blues")(9)
+  )
+}, error = function(e) {
+  print("Error in min color column")
+  print(e)
+})
 
-# coefficient.of.variation
-gt_tbl <- color_column(
-  gt_tbl, 
-  df      = sample_stats_df, 
-  column  = "coefficient.of.variation", 
-  palette = scales::brewer_pal(palette = "Blues")(9)
-)
+tryCatch({
+  # max
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df      = sample_stats_df, 
+    column  = "max", 
+    palette = scales::brewer_pal(palette = "Blues")(9)
+  )
+}, error = function(e) {
+  print("Error in max color column")
+  print(e)
+})
+
+tryCatch({
+  # coefficient.of.variation
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df      = sample_stats_df, 
+    column  = "coefficient.of.variation", 
+    palette = scales::brewer_pal(palette = "Blues")(9)
+  )
+}, error = function(e) {
+  print("Error in coefficient.of.variation color column")
+  print(e)
+})
+
 # 4) Render/display:
 gt_tbl
 ```
