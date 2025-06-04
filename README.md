@@ -11,7 +11,17 @@ Additional data is provided in custom formats by some providers:
   * newer FIU data from a custom file format
   * MiamiBeach data is a custom format
 
-# tests
+* Some datasets are missing crucial values
+  * STORET data has no lat, lon. (can we add these based on station names?)
+  * newer FIU data has no lat, lon. (can we add these based on station names?)
+
+### Notes about the final data
+* getData applies depth filtering >=1m dropped
+* getData files attempt to align all columns to WIN column names
+  * for column mappings between projects see relevant `R/get*Data.R` and `R/align_*_df.R` files
+* exported .csv files do not contain all columns. Many more are returned by getData.
+
+## tests
 ```bash
 Rscript -e "testthat::test_dir(here::here('tests/testthat'))"
 ```
@@ -22,41 +32,23 @@ or
 testthat::test_dir(here::here('tests/testthat'))
 ```
 
-# plans & TODO items
+## plans & TODO items
 * slopes files due tuesday. upload to [this folder](https://drive.google.com/drive/u/0/folders/1aJoe4-hS959vFNoU8aN-dyK7KyyjqVSE). add 
   * full file there
   * two subfolders:
     * one for slope files (seasonal-mann-kendall)
     * one for samples files (unified-wq-db)
 
-* reduce analytes down to emailed list from Dan
-
-* depth filtering >=1m dropped
-
-* add to slope p-value (expect [1,near-0) & significance (expect ~1e5)
-
-* csv files expected (reduce cols down to only what is needed):
-  * one for each analyte (slope file)
-    * cols: program (source), Monitoring.Location.ID (site), trend (slope), p-value, significance, mean, min, max, coefficient.of.variation
-  * one for each analyte (samples file)
-    * cols: program (source), Monitoring.Location.ID (site), lat, lon, month, day, year, value, units, sample depth (NOTE: samples >1m not included) 
-* csv file with everything (same cols as above, + analyte column)
+* check slope p-value (expect [1,near-0) & significance (expect ~1e5)
 
 * re-pull WIN data. it has updated
   * 6 + AOML. Miami Beach coming
   * new one called DEP
 
-* Some datasets are missing crucial values
-  * STORET data has no lat, lon. (can we add these based on station names?)
-  * newer FIU data has no lat, lon. (can we add these based on station names?)
 
 * older data also available:
   * https://usf.box.com/s/m40d8rsugrp9t4joieh6ce0vo4i1vvkc
   * check alignment & merge with newer data
   * 3 there now, 1 more coming
 
-* new FIU dataset with custom import method (excel files)
-  * 2 excel files merged, report should be separate from WIN data (for now)
-  * many columns, some will be dropped, Dan will give list of columns to keep
-  * FIU data also comes from WIN so there will be some overlap
-
+* new FIU dataset should be separate from WIN data?

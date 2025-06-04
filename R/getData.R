@@ -222,5 +222,10 @@ processDMSCoordinates <- function(df) {
   # cat("Converted", sum(missing_lat & !is.na(df$`Org.Decimal.Latitude`)), "latitude values from DMS to decimal format.\n")
   # cat("Converted", sum(missing_lon & !is.na(df$`Org.Decimal.Longitude`)), "longitude values from DMS to decimal format.\n")
   
+  if ("DEP.Monitoring.Location.SampleDepth" %in% names(df)) {
+    # drop rows with depth > 1m
+    df <- filter(df, DEP.Monitoring.Location.SampleDepth <= 1)
+  }
+
   return(df)
 }
