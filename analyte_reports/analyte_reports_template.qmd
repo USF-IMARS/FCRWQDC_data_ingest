@@ -14,8 +14,6 @@ library('dplyr')
 source(here("R/getAllData.R"))
 full_df <- getAllData()
 df <- filter(full_df, DEP.Analyte.Name == params$analyte)
-# df <- filter(full_df, DEP.Analyte.Name == "Salinity")
-# unique(full_df$DEP.Analyte.Name)
 ```
 
 ```{R, create .csv of analyte data}
@@ -23,7 +21,7 @@ df <- filter(full_df, DEP.Analyte.Name == params$analyte)
 # save df to csv
 # reduce to only cols we need & save to csv
 df %>%
-  rename(
+  mutate(
     source = DEP.Program.Name,
     site = DEP.Monitoring.Location.ID,
     datetime = DEP.Activity.Start.Date.Time,
@@ -31,9 +29,10 @@ df %>%
     units = DEP.Result.Unit,
     latitude = DEP.Monitoring.Location.Latitude,
     longitude = DEP.Monitoring.Location.Longitude,
-    sample_depth = DEP.Monitoring.Location.SampleDepth
+    sample_depth = DEP.Monitoring.Location.SampleDepth,
+    .keep = "none"
 ) %>%
-  write.csv(here("data", "exports", "unified-wq-db-samples" paste0(params$analyte, ".csv")))
+  write.csv(here("data", "exports", "unified-wq-db-samples", paste0(params$analyte, ".csv")))
 ```
 
 Download data for this analyte [here](data/exports/`r params$analyte`.csv)
@@ -62,7 +61,10 @@ library(pander)  # for display
 samples_df <- df %>%
   select(
     program, Monitoring.Location.ID, Activity.Start.Date.Time,
-    DEP.Result.Value.Number, DEP.Result.Unit
+    DEP.Result.Value.Number, DEP.Result.Unit,
+    DEP.Monitoring.Location.Latitude,
+    DEP.Monitoring.Location.Longitude,
+    DEP.Monitoring.Location.SampleDepth
     ) %>%
   # drop any with empty Monitoring.Location.ID
   filter(!is.na(Monitoring.Location.ID)) %>%
