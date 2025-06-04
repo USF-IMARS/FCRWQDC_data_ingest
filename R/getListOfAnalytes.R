@@ -1,54 +1,75 @@
+Chlorophyll-a (there are several flavors, “corrected”, “not corrected”, ”free of phaeophytin”)
+
+
+
 getListOfAnalytes <- function(){
   # NOTE: instead of reading all data here, we hardcode the list of analytes
   analytes <- c(
-    # subset of desired analytes:
+    # === subset of desired analytes:
+    # higher priority:
+    "Chlorophyll a",
+    "Chlorophyll a, free of pheophytin",
+    "Chlorophyll a- corrected",
+    "Chlorophyll a- uncorrected",
+
+    "Total Kjeldahl Nitrogen",
+    "Nitrogen, Kjeldahl, Total",
+    "Nitrogen- Total Kjeldahl",
+
+    "Total Nitrogen",
+    "NO2+3, Filtered",
+    "Nitrogen- Total",
+
+    "Nitrate (N)",
+    "Nitrite (N)",
+    "Nitrite",
+    "Nitrate",
+
+    "Nitrate+Nitrite",
+    "Nitrate-Nitrite (N)",
+    "Nitrogen, NO2 plus NO3",
+
+    "Ammonia (N)",
+    
+    "Total Phosphorus",
+    "Phosphorus, Total (as P) LL",
+    "Phosphorus- Total",
+   
+    "Orthophosphate (P)",
+    
+    "Silica (SiO2)",
+    
+    "Silicate",
+    
+    "Turbidity",
+
+    # lower priority:
+    "Salinity",
+
+    "pH",
+    "Field pH",
+
+    "Dissolved Oxygen",
+    "Dissolved Oxygen (Discrete)",
+    "Dissolved Oxygen (CTD)",
+    "Oxygen, Dissolved",
+
+    "Water Temperature",
+    "Temperature, Water"
     "Temperature",
-    "Salinity"
-    # # === all analytes (as reported by index.md 2025-05)
-    # "Temperature",
-    # "Salinity",
+    "Field Temperature",
+    "Temperature, Water",
+
+
+    # other analytes (as reported by index.md 2025-05)
     # "Ammonium",
-    # "Nitrite",
-    # "Nitrate",
-    # "Nitrate+Nitrite",
     # "Phosphate",
-    # "Silicate",
-    # "Chlorophyll a",
     # "Pheophytin",
-    # "Dissolved Oxygen (Discrete)",
-    # "Dissolved Oxygen (CTD)",
-    # "Dissolved Oxygen",
-    # "Water Temperature",
-    # "pH",
     # "Specific Conductivity",
-    # "Turbidity",
-    # "Total Kjeldahl Nitrogen",
-    # "NO2+3, Filtered",
-    # "Total Phosphorus",
-    # "Total Nitrogen",
     # "Fecal Coliforms",
     # "Enterococci",
-    # "Field pH",
-    # "Field Temperature",
     # "Field Specific Conductance",
-    # "Oxygen, Dissolved",
     # "Nitrogen, Ammonia",
-    # "Nitrogen, Kjeldahl, Total",
-    # "Nitrogen, NO2 plus NO3",
-    # "Phosphorus, Total (as P) LL",
-    # "Nitrate-Nitrite (N)",
-    # "Nitrogen- Total Kjeldahl",
-    # "Phosphorus- Total",
-    # "Ammonia (N)",
-    # "Chlorophyll a, free of pheophytin",
-    # "Temperature, Water",
-    # "Orthophosphate (P)",
-    # "Chlorophyll a- corrected",
-    # "Nitrite (N)",
-    # "Nitrogen- Total",
-    # "Silica (SiO2)",
-    # "Chlorophyll a- uncorrected",
-    # "Nitrate (N)"
   )
   analytes <- gsub("[ \\(\\)|,]", "_", analytes)
 
