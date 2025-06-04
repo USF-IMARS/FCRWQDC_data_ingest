@@ -24,8 +24,19 @@ df <- getAllData()
 
 ```{R, create .csv of all data}
 #| code-summary: create .csv of all data
-# save df to csv
-write.csv(df, here("data", "exports", "allData.csv"))
+# reduce to only cols we need & save to csv
+df %>%
+  rename(
+    source = DEP.Program.Name,
+    site = DEP.Monitoring.Location.ID,
+    datetime = DEP.Activity.Start.Date.Time,
+    value = DEP.Result.Value.Number,
+    units = DEP.Result.Unit,
+    latitude = DEP.Monitoring.Location.Latitude,
+    longitude = DEP.Monitoring.Location.Longitude,
+    sample_depth = DEP.Monitoring.Location.SampleDepth
+) %>%
+  write.csv(here("data", "exports", "allData.csv"))
 ```
 
 ### List of Analytes:

@@ -21,7 +21,19 @@ df <- filter(full_df, DEP.Analyte.Name == params$analyte)
 ```{R, create .csv of analyte data}
 #| code-summary: create .csv of analyte data
 # save df to csv
-write.csv(df, here("data", "exports", paste0(params$analyte, ".csv")))
+# reduce to only cols we need & save to csv
+df %>%
+  rename(
+    source = DEP.Program.Name,
+    site = DEP.Monitoring.Location.ID,
+    datetime = DEP.Activity.Start.Date.Time,
+    value = DEP.Result.Value.Number,
+    units = DEP.Result.Unit,
+    latitude = DEP.Monitoring.Location.Latitude,
+    longitude = DEP.Monitoring.Location.Longitude,
+    sample_depth = DEP.Monitoring.Location.SampleDepth
+) %>%
+  write.csv(here("data", "exports", "unified-wq-db-samples" paste0(params$analyte, ".csv")))
 ```
 
 Download data for this analyte [here](data/exports/`r params$analyte`.csv)
@@ -85,6 +97,16 @@ sample_stats_df <- samples_df %>%
 # # display sample_stats_df with pander
 # pander(sample_stats_df)
 ```
+
+```{R, save stats to csv}
+#| code-summary: save stats to csv
+sample_stats_df %>%
+  write.csv(here(
+    "data", "exports", "seasonal-mann-kendall-stats", paste0(params$analyte, ".csv")))
+```
+
+Download data for this analyte's statistics [here](data/exports/seasonal-mann-kendall-stats/`r params$analyte`.csv)
+
 
 ```{R, display with gt}
 #| code-summary: display with gt
