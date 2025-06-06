@@ -41,14 +41,4 @@ testthat::test_dir(here::here('tests/testthat'))
 
 * check slope p-value (expect [1,near-0) & significance (expect ~1e5)
 
-* re-pull WIN data. it has updated
-  * 6 + AOML. Miami Beach coming
-  * new one called DEP
-
-
-* older data also available:
-  * https://usf.box.com/s/m40d8rsugrp9t4joieh6ce0vo4i1vvkc
-  * check alignment & merge with newer data
-  * 3 there now, 1 more coming
-
 * new FIU dataset should be separate from WIN data?
