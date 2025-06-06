@@ -14,6 +14,7 @@ Additional data is provided in custom formats by some providers:
 * Some datasets are missing crucial values
   * STORET data has no lat, lon. (can we add these based on station names?)
   * newer FIU data has no lat, lon. (can we add these based on station names?)
+  * STORET DERM_BBWQ has no depth
 
 ### Notes about the final data
 * getData applies depth filtering >=1m dropped
