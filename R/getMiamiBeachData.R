@@ -11,7 +11,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
   fpath <- getFpath(
     programName, 
     fpath, 
-    "data/MiamiBeach/Discrete WQ - 4058.txt"
+    here::here("data/MiamiBeach/Discrete WQ - 4058.txt")
   )
   # Load required packages
   library(readxl)

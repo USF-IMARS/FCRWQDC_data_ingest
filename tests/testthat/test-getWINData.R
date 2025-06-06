@@ -11,7 +11,7 @@ source(here::here("tests/testthat/check_datetime_validity.R"))
 # Test getWINData function
 test_that("getWINData can open and read WIN data", {  
   # Test that the file can be opened and read without error
-  expect_no_error(win_data <- getWINData(fpath="data/test/WIN_example.csv"))
+  expect_no_error(win_data <- getWINData(fpath=here::here("data/test/WIN_example.csv")))
   
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(win_data))

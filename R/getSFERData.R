@@ -9,7 +9,7 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
   fpath <- getFpath(
     programName, 
     fpath, 
-    "data/SFER_data.csv"
+    here::here("data/SFER_data.csv")
   )
 
   df <- read.csv(fpath)
