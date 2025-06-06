@@ -28,7 +28,10 @@ getData <- function(programName) {
   } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
     # For programs with both WIN and historical data
     # cat("\n--- Loading WIN Data ---\n")
-    df <- getWINData(programName)
+    df <- getWINData(programName) %>%
+      mutate(
+        Monitoring.Location.ID = as.character(Monitoring.Location.ID)
+      )
     
     # load & append historical STORET data
     # cat("\n--- Loading Historical STORET Data ---\n")
@@ -42,13 +45,15 @@ getData <- function(programName) {
     hist_data <- hist_data %>% mutate(
       Organization.ID = programName,
       Sampling.Agency.Name = programName,
-      Monitoring.Location.ID = Station,
+      Monitoring.Location.ID = as.character(Station),
       Activity.Start.Date.Time = Date,
-      Activity.Depth = Depth,
+      # special exception for DERM_BBWQ (missing depth)
+      Activity.Depth = if ("Depth" %in% colnames(.)) .data$Depth else NA_real_,
       DEP.Analyte.Name = Parameter,
       DEP.Result.Value.Number = Value,
       DEP.Result.Unit = Unit,
-      Value.Qualifier = VQ
+      Value.Qualifier = VQ,
+      .keep = "none"  # "unused"
     )
 
     # Ensure consistent data types before binding rows
@@ -125,6 +130,7 @@ getData <- function(programName) {
   # cat("===========================================\n")
   return(df)
 }
+
 
 # NOTE: this function is for use with "old" STORET data format
 # Merge WIN data with historical STORET data, ensuring consistent types

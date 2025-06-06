@@ -33,7 +33,7 @@ getFIUData <- function(programName=NULL, fpath=NULL) {
 
   df <- df %>%
     mutate(
-      Monitoring.Location.ID = Station,
+      Monitoring.Location.ID = as.character(Station),
       Activity.Start.Date.Time = Date,
       program = "FIU"
     )
