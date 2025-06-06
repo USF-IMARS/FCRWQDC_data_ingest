@@ -22,14 +22,14 @@ df <- filter(full_df, DEP.Analyte.Name == params$analyte)
 # reduce to only cols we need & save to csv
 df %>%
   mutate(
-    source = DEP.Program.Name,
-    site = DEP.Monitoring.Location.ID,
-    datetime = DEP.Activity.Start.Date.Time,
+    source = program,
+    site = Monitoring.Location.ID,
+    datetime = Activity.Start.Date.Time,
     value = DEP.Result.Value.Number,
     units = DEP.Result.Unit,
-    latitude = DEP.Monitoring.Location.Latitude,
-    longitude = DEP.Monitoring.Location.Longitude,
-    sample_depth = DEP.Monitoring.Location.SampleDepth,
+    latitude = Org.Decimal.Latitude,
+    longitude = Org.Decimal.Longitude,
+    sample_depth = Activity.Depth,
     .keep = "none"
 ) %>%
   write.csv(here("data", "exports", "unified-wq-db-samples", paste0(params$analyte, ".csv")))
@@ -60,36 +60,37 @@ library(pander)  # for display
 # create table of samples for each station
 samples_df <- df %>%
   select(
-    program, Monitoring.Location.ID, Activity.Start.Date.Time,
-    DEP.Result.Value.Number, DEP.Result.Unit,
-    DEP.Monitoring.Location.Latitude,
-    DEP.Monitoring.Location.Longitude,
-    DEP.Monitoring.Location.SampleDepth
+    program, 
+    Monitoring.Location.ID, 
+    Activity.Start.Date.Time,
+    DEP.Result.Value.Number, 
+    DEP.Result.Unit,
+    latitude = Org.Decimal.Latitude,
+    longitude = Org.Decimal.Longitude,
+    sample_depth = Activity.Depth
     ) %>%
   # drop any with empty Monitoring.Location.ID
   filter(!is.na(Monitoring.Location.ID)) %>%
   # drop any with empty Activity.Start.Date.Time
   filter(!is.na(Activity.Start.Date.Time)) %>%
-  distinct() %>%
   # parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct
-  mutate(
-    Activity.Start.Date.Time = mdy_hms(
-      Activity.Start.Date.Time,
-      tz = "UTC"
-    )
-  )
+  mutate(Activity.Start.Date.Time = mdy_hms(
+          Activity.Start.Date.Time,
+          tz = "UTC")) %>%
+  distinct()
 
 
 # add statistics for each station
 sample_stats_df <- samples_df %>%
   group_by(program, Monitoring.Location.ID) %>%
   reframe(
+    {
+      tmp <- seasonalMannKendallVectorized(
+        Activity.Start.Date.Time,
+        DEP.Result.Value.Number
+      )
+    },
     n_values = n(),
-    # add slope, p.value, tau
-    !!! seasonalMannKendallVectorized(
-      Activity.Start.Date.Time,
-      DEP.Result.Value.Number
-    ),
     mean = mean(DEP.Result.Value.Number),
     min = min(DEP.Result.Value.Number),
     max = max(DEP.Result.Value.Number),
@@ -189,17 +190,30 @@ tryCatch({
   print(e)
 })
 
-# p.value 
 tryCatch({
-  # min
+  # chi_square
   gt_tbl <- color_column(
     gt_tbl, 
     df      = sample_stats_df, 
-    column  = "p.value", 
+    column  = "chi_square", 
     palette = scales::brewer_pal(palette = "Blues")(9)
   )
 }, error = function(e) {
-  print("Error in p.value color column")
+  print("Error in chi_square color column")
+  print(e)
+})
+
+
+tryCatch({
+  # Z
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df      = sample_stats_df, 
+    column  = "z", 
+    palette = scales::brewer_pal(palette = "Blues")(9)
+  )
+}, error = function(e) {
+  print("Error in z color column")
   print(e)
 })
 

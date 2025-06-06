@@ -6,7 +6,7 @@ source(here("R/getFpath.R"))
 
 # Get data from WIN format files
 getWINData <- function(programName=NULL, fpath=NULL){
-  fpath <- getFpath(programName, fpath, "data/WIN/_WIN_WAVES_OTIS_{programName}.txt")
+  fpath <- getFpath(programName, fpath, here::here("data/WIN/_WIN_WAVES_OTIS_{programName}.txt"))
 
   all_lines <- readLines(here(fpath))
   

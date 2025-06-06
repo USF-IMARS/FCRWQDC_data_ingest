@@ -26,16 +26,16 @@ df <- getAllData()
 #| code-summary: create .csv of all data
 # reduce to only cols we need & save to csv
 df %>%
-  rename(
-    source = DEP.Program.Name,
-    site = DEP.Monitoring.Location.ID,
-    datetime = DEP.Activity.Start.Date.Time,
+  mutate(
+    source = program,
+    site = Monitoring.Location.ID,
+    datetime = Activity.Start.Date.Time,
     value = DEP.Result.Value.Number,
     units = DEP.Result.Unit,
-    latitude = DEP.Monitoring.Location.Latitude,
-    longitude = DEP.Monitoring.Location.Longitude,
-    sample_depth = DEP.Monitoring.Location.SampleDepth
-) %>%
+    latitude = Org.Decimal.Latitude,
+    longitude = Org.Decimal.Longitude,
+    sample_depth = Activity.Depth,
+    .keep = "none") %>%
   write.csv(here("data", "exports", "allData.csv"))
 ```
 

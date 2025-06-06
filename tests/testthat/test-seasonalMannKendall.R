@@ -77,13 +77,17 @@ test_that("seasonalMannKendall correctly calculates trends in dplyr pipeline", {
   # Run the function in a dplyr pipeline
   result_df <- test_df %>%
     group_by(program, Monitoring.Location.ID) %>%
-    reframe(
-      n_values = n(),
-      trend = seasonalMannKendallVectorized(
+    reframe({
+      tmp <- seasonalMannKendallVectorized(
         Activity.Start.Date.Time,
-        DEP.Result.Value.Number
-      )
-    )
+        DEP.Result.Value.Number)
+      # now unpack the elements from tmp into new columns
+      tibble(
+        slope      = tmp$slope,
+        tau        = tmp$tau,
+        chi_square = tmp$chi_square,
+        z          = tmp$z
+      )})
     
 
   cat('\n\n === result ===\n')
@@ -91,8 +95,11 @@ test_that("seasonalMannKendall correctly calculates trends in dplyr pipeline", {
   cat('\n\n')
   # Tests
   # Check if we got the expected number of rows
-  expect_equal(nrow(result_df), 4)
+  expect_equal(nrow(result_df), 3)
 
   # Check if the trends are calculated correctly
-  expect_equal(result_df$trend, c(12, -12, 0, NA))
+  expect_equal(result_df$slope, 
+               c(slope =  12,
+                 slope = -12,
+                 slope =   0))
 })

@@ -1,7 +1,3 @@
-Chlorophyll-a (there are several flavors, “corrected”, “not corrected”, ”free of phaeophytin”)
-
-
-
 getListOfAnalytes <- function(){
   # NOTE: instead of reading all data here, we hardcode the list of analytes
   analytes <- c(
@@ -55,10 +51,10 @@ getListOfAnalytes <- function(){
     "Oxygen, Dissolved",
 
     "Water Temperature",
-    "Temperature, Water"
+    "Temperature, Water",
     "Temperature",
     "Field Temperature",
-    "Temperature, Water",
+    "Temperature, Water"
 
 
     # other analytes (as reported by index.md 2025-05)
