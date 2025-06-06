@@ -25,32 +25,41 @@ getData <- function(programName) {
     # cat(glue("Total columns: {ncol(df)}\n"))
     # cat("------------------\n")
   
-  # TODO: Include STORET data once lat,lon are added
-  #       Currently excluded b/c there is no lat,lon in STORET files.
-  # } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
-  #   # For programs with both WIN and historical data
-  #   cat("\n--- Loading WIN Data ---\n")
-  #   df <- getWINData(programName)
-  #   win_rows <- nrow(df)
-  #   win_cols <- ncol(df)
+  } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
+    # For programs with both WIN and historical data
+    # cat("\n--- Loading WIN Data ---\n")
+    df <- getWINData(programName)
     
-  #   # load & append historical STORET data
-  #   cat("\n--- Loading Historical STORET Data ---\n")
-  #   hist_data <- getSTORETData(programName)
-  #   hist_rows <- nrow(hist_data)
-  #   hist_cols <- ncol(hist_data)
+    # load & append historical STORET data
+    # cat("\n--- Loading Historical STORET Data ---\n")
+    # NOTE: this method is for loading "old" STORET data format
+    # hist_data <- getSTORETData(programName)
+
+    # To load "new" STORET data format:
+    hist_data <- read.csv(here::here(
+      glue("data/STORET_historical/{programName}_STORET_ALL.csv")))
+    # align hist_data to WIN format
+    hist_data <- hist_data %>% mutate(
+      Organization.ID = programName,
+      Sampling.Agency.Name = programName,
+      Monitoring.Location.ID = Station,
+      Activity.Start.Date.Time = Date,
+      Activity.Depth = Depth,
+      DEP.Analyte.Name = Parameter,
+      DEP.Result.Value.Number = Value,
+      DEP.Result.Unit = Unit,
+      Value.Qualifier = VQ
+    )
+
+    # Ensure consistent data types before binding rows
+    # cat("\n--- Merging Data Sources ---\n")
+    df <- mergeWithHistoricalData(df, hist_data)
     
-  #   # Ensure consistent data types before binding rows
-  #   cat("\n--- Merging Data Sources ---\n")
-  #   df <- mergeWithHistoricalData(df, hist_data)
-  #   merged_rows <- nrow(df)
-  #   merged_cols <- ncol(df)
-    
-  #   cat("\n--- Merged Data Summary ---\n")
-  #   cat(glue("WIN records: {win_rows} rows, {win_cols} columns\n"))
-  #   cat(glue("STORET records: {hist_rows} rows, {hist_cols} columns\n"))
-  #   cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
-  #   cat("-------------------------\n")
+    # cat("\n--- Merged Data Summary ---\n")
+    # cat(glue("WIN records: {win_rows} rows, {win_cols} columns\n"))
+    # cat(glue("STORET records: {hist_rows} rows, {hist_cols} columns\n"))
+    # cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
+    # cat("-------------------------\n")
     
   } else if (programName == "MiamiBeach") {
     df <- getMiamiBeachData("MiamiBeach")
@@ -117,6 +126,7 @@ getData <- function(programName) {
   return(df)
 }
 
+# NOTE: this function is for use with "old" STORET data format
 # Merge WIN data with historical STORET data, ensuring consistent types
 mergeWithHistoricalData <- function(df, hist_data) {
   # === coerce column types where necessary           
