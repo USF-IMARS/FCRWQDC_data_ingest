@@ -1,1 +1,1 @@
-Sitemap: https://USF-IMARS.github.io/WIN_data_ingest/sitemap.xml
+Sitemap: https://USF-IMARS.github.io/FCRWQDC_data_ingest/sitemap.xml
