@@ -279,11 +279,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create column significant_trend</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_trend =</span> <span class="fu">ifelse</span>(z <span class="sc">&gt;</span> <span class="fl">1.96</span>, slope, <span class="cn">NA_real_</span>)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -496,23 +502,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="yzselatbdy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yzselatbdy table {
+<div id="nasidnivae" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nasidnivae table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yzselatbdy thead, #yzselatbdy tbody, #yzselatbdy tfoot, #yzselatbdy tr, #yzselatbdy td, #yzselatbdy th {
+#nasidnivae thead, #nasidnivae tbody, #nasidnivae tfoot, #nasidnivae tr, #nasidnivae td, #nasidnivae th {
   border-style: none;
 }
 
-#yzselatbdy p {
+#nasidnivae p {
   margin: 0;
   padding: 0;
 }
 
-#yzselatbdy .gt_table {
+#nasidnivae .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -538,12 +544,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_caption {
+#nasidnivae .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yzselatbdy .gt_title {
+#nasidnivae .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -555,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#yzselatbdy .gt_subtitle {
+#nasidnivae .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -567,7 +573,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#yzselatbdy .gt_heading {
+#nasidnivae .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -579,13 +585,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_bottom_border {
+#nasidnivae .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_col_headings {
+#nasidnivae .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -600,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_col_heading {
+#nasidnivae .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -620,7 +626,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#yzselatbdy .gt_column_spanner_outer {
+#nasidnivae .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -632,15 +638,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#yzselatbdy .gt_column_spanner_outer:first-child {
+#nasidnivae .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yzselatbdy .gt_column_spanner_outer:last-child {
+#nasidnivae .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yzselatbdy .gt_column_spanner {
+#nasidnivae .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -652,11 +658,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#yzselatbdy .gt_spanner_row {
+#nasidnivae .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yzselatbdy .gt_group_heading {
+#nasidnivae .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,7 +688,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#yzselatbdy .gt_empty_group_heading {
+#nasidnivae .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -697,15 +703,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#yzselatbdy .gt_from_md > :first-child {
+#nasidnivae .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yzselatbdy .gt_from_md > :last-child {
+#nasidnivae .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yzselatbdy .gt_row {
+#nasidnivae .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -724,7 +730,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#yzselatbdy .gt_stub {
+#nasidnivae .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -737,7 +743,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yzselatbdy .gt_stub_row_group {
+#nasidnivae .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -751,15 +757,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#yzselatbdy .gt_row_group_first td {
+#nasidnivae .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yzselatbdy .gt_row_group_first th {
+#nasidnivae .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yzselatbdy .gt_summary_row {
+#nasidnivae .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -769,16 +775,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yzselatbdy .gt_first_summary_row {
+#nasidnivae .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_first_summary_row.thick {
+#nasidnivae .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yzselatbdy .gt_last_summary_row {
+#nasidnivae .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -788,7 +794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_grand_summary_row {
+#nasidnivae .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -798,7 +804,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yzselatbdy .gt_first_grand_summary_row {
+#nasidnivae .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -808,7 +814,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_last_grand_summary_row_top {
+#nasidnivae .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -818,11 +824,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_striped {
+#nasidnivae .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yzselatbdy .gt_table_body {
+#nasidnivae .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -831,7 +837,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_footnotes {
+#nasidnivae .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -845,7 +851,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_footnote {
+#nasidnivae .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -854,7 +860,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yzselatbdy .gt_sourcenotes {
+#nasidnivae .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -868,7 +874,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yzselatbdy .gt_sourcenote {
+#nasidnivae .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -876,72 +882,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yzselatbdy .gt_left {
+#nasidnivae .gt_left {
   text-align: left;
 }
 
-#yzselatbdy .gt_center {
+#nasidnivae .gt_center {
   text-align: center;
 }
 
-#yzselatbdy .gt_right {
+#nasidnivae .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yzselatbdy .gt_font_normal {
+#nasidnivae .gt_font_normal {
   font-weight: normal;
 }
 
-#yzselatbdy .gt_font_bold {
+#nasidnivae .gt_font_bold {
   font-weight: bold;
 }
 
-#yzselatbdy .gt_font_italic {
+#nasidnivae .gt_font_italic {
   font-style: italic;
 }
 
-#yzselatbdy .gt_super {
+#nasidnivae .gt_super {
   font-size: 65%;
 }
 
-#yzselatbdy .gt_footnote_marks {
+#nasidnivae .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yzselatbdy .gt_asterisk {
+#nasidnivae .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yzselatbdy .gt_indent_1 {
+#nasidnivae .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yzselatbdy .gt_indent_2 {
+#nasidnivae .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yzselatbdy .gt_indent_3 {
+#nasidnivae .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yzselatbdy .gt_indent_4 {
+#nasidnivae .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yzselatbdy .gt_indent_5 {
+#nasidnivae .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yzselatbdy .katex-display {
+#nasidnivae .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yzselatbdy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nasidnivae div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -960,6 +966,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th id="min" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">min</th>
 <th id="max" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">max</th>
 <th id="coefficient.of.variation" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">coefficient.of.variation</th>
+<th id="significant_trend" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">significant_trend</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -975,6 +982,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #094185; color: #FFFFFF">7.91</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #B0D2E7; color: #000000">7.91</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -988,6 +996,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #083674; color: #FFFFFF">8.14</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #7DB7DA; color: #000000">8.14</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1001,6 +1010,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #08306B; color: #FFFFFF">8.27</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #60A6D1; color: #FFFFFF">8.27</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1014,6 +1024,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093A79; color: #FFFFFF">8.07</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8EC1DD; color: #000000">8.07</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1027,6 +1038,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #083775; color: #FFFFFF">8.13</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #80B9DA; color: #000000">8.13</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1040,6 +1052,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #083674; color: #FFFFFF">8.14</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #7DB7DA; color: #000000">8.14</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1053,6 +1066,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093A79; color: #FFFFFF">8.07</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8EC1DD; color: #000000">8.07</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1066,6 +1080,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093D7F; color: #FFFFFF">7.99</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A0CBE2; color: #000000">7.99</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1079,6 +1094,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #094083; color: #FFFFFF">7.94</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #AACFE5; color: #000000">7.94</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1092,6 +1108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093E80; color: #FFFFFF">7.98</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A2CCE3; color: #000000">7.98</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1105,6 +1122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093F81; color: #FFFFFF">7.96</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A6CDE4; color: #000000">7.96</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1118,6 +1136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093E80; color: #FFFFFF">7.98</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A2CCE3; color: #000000">7.98</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1131,6 +1150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093B7C; color: #FFFFFF">8.03</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #98C6E0; color: #000000">8.03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1144,6 +1164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093B7B; color: #FFFFFF">8.04</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #95C5DF; color: #000000">8.04</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1157,6 +1178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093978; color: #FFFFFF">8.08</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8CBFDD; color: #000000">8.08</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1170,6 +1192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093B7B; color: #FFFFFF">8.04</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #95C5DF; color: #000000">8.04</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1183,6 +1206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #083776; color: #FFFFFF">8.12</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #82BADB; color: #000000">8.12</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1196,6 +1220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093A7A; color: #FFFFFF">8.06</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #91C2DE; color: #000000">8.06</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1209,6 +1234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #125BA4; color: #FFFFFF">7.38</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">7.38</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1222,6 +1248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093A7B; color: #FFFFFF">8.05</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #93C4DF; color: #000000">8.05</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1235,6 +1262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093B7B; color: #FFFFFF">8.04</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #95C5DF; color: #000000">8.04</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1248,6 +1276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093978; color: #FFFFFF">8.09</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8ABEDC; color: #000000">8.09</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1261,6 +1290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #083876; color: #FFFFFF">8.11</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #85BBDB; color: #000000">8.11</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1274,6 +1304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093978; color: #FFFFFF">8.08</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8CBFDD; color: #000000">8.08</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1287,6 +1318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093978; color: #FFFFFF">8.09</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8ABEDC; color: #000000">8.09</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1300,6 +1332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #093877; color: #FFFFFF">8.10</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #87BDDC; color: #000000">8.10</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1313,6 +1346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #2A78B9; color: #FFFFFF">6.78</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #9ECAE1; color: #000000">8.00</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D7E6F5; color: #000000">0.04858017</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1326,6 +1360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0B549E; color: #FFFFFF">7.54</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A8CEE5; color: #000000">7.95</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F5FAFE; color: #000000">0.02017189</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1339,6 +1374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0D559F; color: #FFFFFF">7.51</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A6CDE4; color: #000000">7.96</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F3F9FE; color: #000000">0.02166063</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1352,6 +1388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1159A2; color: #FFFFFF">7.42</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #BAD6EB; color: #000000">7.86</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F5FAFE; color: #000000">0.01980173</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1365,6 +1402,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0F57A1; color: #FFFFFF">7.47</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #98C6E0; color: #000000">8.03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F0F7FD; color: #000000">0.02433673</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1378,6 +1416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0E56A0; color: #FFFFFF">7.48</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #91C2DE; color: #000000">8.06</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EEF5FC; color: #000000">0.02648710</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1391,6 +1430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #115AA3; color: #FFFFFF">7.41</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8ABEDC; color: #000000">8.09</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #ECF4FC; color: #000000">0.02823037</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1404,6 +1444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #135CA4; color: #FFFFFF">7.37</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #AACFE5; color: #000000">7.94</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F0F6FD; color: #000000">0.02481764</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1417,6 +1458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #145DA6; color: #FFFFFF">7.33</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A6CDE4; color: #000000">7.96</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #ECF4FC; color: #000000">0.02803560</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1430,6 +1472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1760A8; color: #FFFFFF">7.27</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A4CDE3; color: #000000">7.97</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EAF3FB; color: #000000">0.03048181</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1443,6 +1486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1A66AC; color: #FFFFFF">7.16</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #B0D2E7; color: #000000">7.91</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EAF3FB; color: #000000">0.03046817</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1456,6 +1500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1862AA; color: #FFFFFF">7.23</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A0CBE2; color: #000000">7.99</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EDF5FC; color: #000000">0.02740895</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1469,6 +1514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #145DA6; color: #FFFFFF">7.33</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A4CDE3; color: #000000">7.97</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EEF5FC; color: #000000">0.02679057</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1482,6 +1528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1C69AF; color: #FFFFFF">7.09</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #7DB7DA; color: #000000">8.14</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E1EDF8; color: #000000">0.03859620</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1495,6 +1542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1E6CB1; color: #FFFFFF">7.02</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A0CBE2; color: #000000">7.99</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E5F0F9; color: #000000">0.03473664</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1508,6 +1556,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1A66AC; color: #FFFFFF">7.16</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #95C5DF; color: #000000">8.04</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E9F2FA; color: #000000">0.03137095</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1521,6 +1570,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1B67AD; color: #FFFFFF">7.13</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #80B9DA; color: #000000">8.13</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E7F1FA; color: #000000">0.03345059</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1534,6 +1584,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1A65AB; color: #FFFFFF">7.18</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #66AAD4; color: #FFFFFF">8.24</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DAE8F6; color: #000000">0.04561823</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1547,6 +1598,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #2E7CBB; color: #FFFFFF">6.70</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #094990; color: #FFFFFF">8.88</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C2D9EE; color: #000000">0.06702191</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1560,6 +1612,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1A66AC; color: #FFFFFF">7.16</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #08306B; color: #FFFFFF">9.04</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CFE1F2; color: #000000">0.05618667</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1573,6 +1626,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #155EA7; color: #FFFFFF">7.31</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #093E80; color: #FFFFFF">8.95</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D6E5F4; color: #000000">0.04956602</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1586,6 +1640,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1B67AD; color: #FFFFFF">7.14</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #6EAFD7; color: #000000">8.20</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E6F0F9; color: #000000">0.03426322</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1599,6 +1654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #2170B4; color: #FFFFFF">6.94</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #AACFE5; color: #000000">7.94</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E2EEF8; color: #000000">0.03741160</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1612,6 +1668,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0B549E; color: #FFFFFF">7.54</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #08306B; color: #FFFFFF">9.04</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D8E7F5; color: #000000">0.04754561</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1625,6 +1682,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0D55A0; color: #FFFFFF">7.50</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #87BDDC; color: #000000">8.10</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F2F8FE; color: #000000">0.02253550</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1638,6 +1696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0D55A0; color: #FFFFFF">7.50</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #084C95; color: #FFFFFF">8.86</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DCE9F6; color: #000000">0.04372071</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1651,6 +1710,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0D559F; color: #FFFFFF">7.51</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #0C549F; color: #FFFFFF">8.81</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DFECF7; color: #000000">0.04045262</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1664,6 +1724,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #09529D; color: #FFFFFF">7.57</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #7BB6D9; color: #000000">8.15</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F5F9FE; color: #000000">0.02043436</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1677,6 +1738,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1A65AC; color: #FFFFFF">7.17</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #98C6E0; color: #000000">8.03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E2EDF8; color: #000000">0.03826690</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1690,6 +1752,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">2.88</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #5AA2CF; color: #FFFFFF">8.30</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #08306B; color: #FFFFFF">0.20470659</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1703,6 +1766,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0D55A0; color: #FFFFFF">7.50</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #2675B7; color: #FFFFFF">8.60</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E1EDF8; color: #000000">0.03829904</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1716,6 +1780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0F57A1; color: #FFFFFF">7.47</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8CBFDD; color: #000000">8.08</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EFF6FD; color: #000000">0.02531748</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1729,6 +1794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0B549E; color: #FFFFFF">7.54</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8EC1DD; color: #000000">8.07</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F2F8FD; color: #000000">0.02261708</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1742,6 +1808,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #206FB3; color: #FFFFFF">6.97</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #D0E2F2; color: #000000">7.71</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E5EFF9; color: #000000">0.03494700</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1755,6 +1822,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1159A2; color: #FFFFFF">7.42</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ACD0E6; color: #000000">7.93</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F5FAFE; color: #000000">0.01995090</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1768,6 +1836,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #084D96; color: #FFFFFF">7.68</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #D3E4F3; color: #000000">7.68</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1781,6 +1850,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1862AA; color: #FFFFFF">7.23</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #B8D5EA; color: #000000">7.87</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EFF6FD; color: #000000">0.02546712</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1794,6 +1864,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #08519C; color: #FFFFFF">7.59</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8CBFDD; color: #000000">8.08</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F7FBFF; color: #000000">0.01822049</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1807,6 +1878,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0A539D; color: #FFFFFF">7.56</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #8CBFDD; color: #000000">8.08</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F5FAFE; color: #000000">0.01992505</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1820,6 +1892,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0E56A0; color: #FFFFFF">7.49</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #A2CCE3; color: #000000">7.98</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F0F7FD; color: #000000">0.02456914</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1833,6 +1906,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0F57A1; color: #FFFFFF">7.47</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #95C5DF; color: #000000">8.04</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F0F7FD; color: #000000">0.02467779</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1846,6 +1920,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0C549E; color: #FFFFFF">7.53</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #98C6E0; color: #000000">8.03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F1F7FD; color: #000000">0.02405289</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1859,6 +1934,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #1760A8; color: #FFFFFF">7.27</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #93C4DF; color: #000000">8.05</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E7F1FA; color: #000000">0.03319501</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
@@ -1872,6 +1948,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="min" style="background-color: #0C549E; color: #FFFFFF">7.53</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #9CC9E1; color: #000000">8.01</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F3F8FE; color: #000000">0.02232202</td>
+<td class="gt_row gt_center" headers="significant_trend">NA</td>
 </tr>
 </tbody>
 </table>
