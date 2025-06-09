@@ -95,7 +95,13 @@ sample_stats_df <- samples_df %>%
     min = min(DEP.Result.Value.Number),
     max = max(DEP.Result.Value.Number),
     coefficient.of.variation = sd(DEP.Result.Value.Number) / mean(DEP.Result.Value.Number)
+  ) %>%
+  # create column significant_trend
+  mutate(
+    significant_trend = ifelse(z > 1.96, slope, NA_real_)
   )
+
+
 
 # print(head(sample_stats_df))
 # # display sample_stats_df with pander
