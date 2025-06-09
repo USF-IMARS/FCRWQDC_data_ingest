@@ -30,6 +30,7 @@ df %>%
     source = program,
     site = Monitoring.Location.ID,
     datetime = Activity.Start.Date.Time,
+    analyte = DEP.Analyte.Name,
     value = DEP.Result.Value.Number,
     units = DEP.Result.Unit,
     latitude = Org.Decimal.Latitude,
