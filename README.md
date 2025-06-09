@@ -43,3 +43,5 @@ testthat::test_dir(here::here('tests/testthat'))
 * check slope p-value (expect [1,near-0) & significance (expect ~1e5)
 
 * new FIU dataset should be separate from WIN data?
+
+* code for loading old STORET file formats no longer needed (discuss w/ Dan)
