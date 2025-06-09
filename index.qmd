@@ -7,7 +7,7 @@ Below are some statistics on data across all analytes and programs.
 For more information on specific analytes and providers, see the [analyte reports](analyte_reports/analyte_reports.qmd) and [provider reports](provider_reports/provider_reports.qmd).
 
 Data for each analyte can be downloaded from the relevant analyte report.
-The full compiled data can be downloaded from the University of South Florida [here]()
+The full compiled data can be downloaded from the University of South Florida [here](data/exports/allData.csv)
 
 Florida Coral Reef Water Quality Database Compilation (FCRWQDC).
 This work is a product of the University of South Florida Institute for Marine Remote Sensing (IMaRS), funded by the Florida Department of Environmental Protection (FDEP).
