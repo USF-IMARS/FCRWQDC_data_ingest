@@ -65,7 +65,7 @@ getListOfAnalytes <- function(){
     "Fecal Coliforms",
     "Enterococci",
     "Field Specific Conductance",
-    "Nitrogen, Ammonia",
+    "Nitrogen, Ammonia"
   )
   analytes <- gsub("[ \\(\\)|,]", "_", analytes)
 
