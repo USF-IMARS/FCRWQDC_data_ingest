@@ -202,14 +202,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> program,</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> Monitoring.Location.ID,</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">datetime =</span> Activity.Start.Date.Time,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Download data for this analyte <a href="data/exports/Temperature.csv">here</a></p>
@@ -247,49 +248,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    program, </span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Monitoring.Location.ID, </span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Activity.Start.Date.Time,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Value.Number, </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Unit,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Activity.Start.Date.Time =</span> <span class="fu">mdy_hms</span>(</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>          Activity.Start.Date.Time,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Value.Number, </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Unit,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Activity.Start.Date.Time =</span> <span class="fu">mdy_hms</span>(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>          Activity.Start.Date.Time,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create column significant_trend</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_trend =</span> <span class="fu">ifelse</span>(z <span class="sc">&gt;</span> <span class="fl">1.96</span>, slope, <span class="cn">NA_real_</span>)</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create column significant_trend</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_trend =</span> <span class="fu">ifelse</span>(z <span class="sc">&gt;</span> <span class="fl">1.96</span>, slope, <span class="cn">NA_real_</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -479,23 +481,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="dzcyjmlqtx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dzcyjmlqtx table {
+<div id="ngpfpjhvwj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ngpfpjhvwj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dzcyjmlqtx thead, #dzcyjmlqtx tbody, #dzcyjmlqtx tfoot, #dzcyjmlqtx tr, #dzcyjmlqtx td, #dzcyjmlqtx th {
+#ngpfpjhvwj thead, #ngpfpjhvwj tbody, #ngpfpjhvwj tfoot, #ngpfpjhvwj tr, #ngpfpjhvwj td, #ngpfpjhvwj th {
   border-style: none;
 }
 
-#dzcyjmlqtx p {
+#ngpfpjhvwj p {
   margin: 0;
   padding: 0;
 }
 
-#dzcyjmlqtx .gt_table {
+#ngpfpjhvwj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -521,12 +523,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_caption {
+#ngpfpjhvwj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dzcyjmlqtx .gt_title {
+#ngpfpjhvwj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -538,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#dzcyjmlqtx .gt_subtitle {
+#ngpfpjhvwj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -550,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#dzcyjmlqtx .gt_heading {
+#ngpfpjhvwj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -562,13 +564,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_bottom_border {
+#ngpfpjhvwj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_col_headings {
+#ngpfpjhvwj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -583,7 +585,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_col_heading {
+#ngpfpjhvwj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -603,7 +605,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#dzcyjmlqtx .gt_column_spanner_outer {
+#ngpfpjhvwj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,15 +617,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#dzcyjmlqtx .gt_column_spanner_outer:first-child {
+#ngpfpjhvwj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dzcyjmlqtx .gt_column_spanner_outer:last-child {
+#ngpfpjhvwj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dzcyjmlqtx .gt_column_spanner {
+#ngpfpjhvwj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -635,11 +637,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#dzcyjmlqtx .gt_spanner_row {
+#ngpfpjhvwj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dzcyjmlqtx .gt_group_heading {
+#ngpfpjhvwj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -665,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#dzcyjmlqtx .gt_empty_group_heading {
+#ngpfpjhvwj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -680,15 +682,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#dzcyjmlqtx .gt_from_md > :first-child {
+#ngpfpjhvwj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dzcyjmlqtx .gt_from_md > :last-child {
+#ngpfpjhvwj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dzcyjmlqtx .gt_row {
+#ngpfpjhvwj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -707,7 +709,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#dzcyjmlqtx .gt_stub {
+#ngpfpjhvwj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,7 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#dzcyjmlqtx .gt_stub_row_group {
+#ngpfpjhvwj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -734,15 +736,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#dzcyjmlqtx .gt_row_group_first td {
+#ngpfpjhvwj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dzcyjmlqtx .gt_row_group_first th {
+#ngpfpjhvwj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dzcyjmlqtx .gt_summary_row {
+#ngpfpjhvwj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -752,16 +754,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#dzcyjmlqtx .gt_first_summary_row {
+#ngpfpjhvwj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_first_summary_row.thick {
+#ngpfpjhvwj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dzcyjmlqtx .gt_last_summary_row {
+#ngpfpjhvwj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -771,7 +773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_grand_summary_row {
+#ngpfpjhvwj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -781,7 +783,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#dzcyjmlqtx .gt_first_grand_summary_row {
+#ngpfpjhvwj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -791,7 +793,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_last_grand_summary_row_top {
+#ngpfpjhvwj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -801,11 +803,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_striped {
+#ngpfpjhvwj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#dzcyjmlqtx .gt_table_body {
+#ngpfpjhvwj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -814,7 +816,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_footnotes {
+#ngpfpjhvwj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -828,7 +830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_footnote {
+#ngpfpjhvwj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -837,7 +839,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#dzcyjmlqtx .gt_sourcenotes {
+#ngpfpjhvwj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -851,7 +853,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#dzcyjmlqtx .gt_sourcenote {
+#ngpfpjhvwj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -859,72 +861,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#dzcyjmlqtx .gt_left {
+#ngpfpjhvwj .gt_left {
   text-align: left;
 }
 
-#dzcyjmlqtx .gt_center {
+#ngpfpjhvwj .gt_center {
   text-align: center;
 }
 
-#dzcyjmlqtx .gt_right {
+#ngpfpjhvwj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dzcyjmlqtx .gt_font_normal {
+#ngpfpjhvwj .gt_font_normal {
   font-weight: normal;
 }
 
-#dzcyjmlqtx .gt_font_bold {
+#ngpfpjhvwj .gt_font_bold {
   font-weight: bold;
 }
 
-#dzcyjmlqtx .gt_font_italic {
+#ngpfpjhvwj .gt_font_italic {
   font-style: italic;
 }
 
-#dzcyjmlqtx .gt_super {
+#ngpfpjhvwj .gt_super {
   font-size: 65%;
 }
 
-#dzcyjmlqtx .gt_footnote_marks {
+#ngpfpjhvwj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dzcyjmlqtx .gt_asterisk {
+#ngpfpjhvwj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dzcyjmlqtx .gt_indent_1 {
+#ngpfpjhvwj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dzcyjmlqtx .gt_indent_2 {
+#ngpfpjhvwj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dzcyjmlqtx .gt_indent_3 {
+#ngpfpjhvwj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dzcyjmlqtx .gt_indent_4 {
+#ngpfpjhvwj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dzcyjmlqtx .gt_indent_5 {
+#ngpfpjhvwj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#dzcyjmlqtx .katex-display {
+#ngpfpjhvwj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#dzcyjmlqtx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ngpfpjhvwj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -4093,7 +4095,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/USF-IMARS\.github\.io\/FCRWQDC_data_ingest\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

@@ -202,14 +202,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> program,</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> Monitoring.Location.ID,</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">datetime =</span> Activity.Start.Date.Time,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Download data for this analyte <a href="data/exports/Total_Phosphorus.csv">here</a></p>
@@ -247,49 +248,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    program, </span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Monitoring.Location.ID, </span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Activity.Start.Date.Time,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Value.Number, </span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Unit,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Activity.Start.Date.Time =</span> <span class="fu">mdy_hms</span>(</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>          Activity.Start.Date.Time,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create column significant_trend</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_trend =</span> <span class="fu">ifelse</span>(z <span class="sc">&gt;</span> <span class="fl">1.96</span>, slope, <span class="cn">NA_real_</span>)</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">original.analyte.name =</span> DEP.Analyte.Name,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Value.Number, </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Unit,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Activity.Start.Date.Time =</span> <span class="fu">mdy_hms</span>(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>          Activity.Start.Date.Time,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># === combine synonymous analytes</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Chlorophyll_a-_a_corrected"</span> <span class="sc">~</span> <span class="st">"Chlorophyll_a"</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Chlorophyll_a-_a_uncorrected"</span> <span class="sc">~</span> <span class="st">"Chlorophyll_a"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Chlorophyll_a__free_of_pheophytin"</span> <span class="sc">~</span> <span class="st">"Chlorophyll_a"</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Dissoved_Oxygen_CTD"</span> <span class="sc">~</span> <span class="st">"Dissolved_Oxygen"</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Dissoved_Oxygen_Discrete"</span> <span class="sc">~</span> <span class="st">"Dissolved_Oxygen"</span>,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Oxygen__Dissolved "</span> <span class="sc">~</span> <span class="st">"Dissolved_Oxygen"</span>,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"NO2+3__Filtered"</span> <span class="sc">~</span> <span class="st">"Nitrate+Nitrite"</span>,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrate-Nitrite_N"</span> <span class="sc">~</span> <span class="st">"Nitrate+Nitrite"</span>,</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen__NO2_plus_NO3"</span> <span class="sc">~</span> <span class="st">"Nitrate+Nitrite"</span>,</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen-_Total"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen-_Total_Kjeldahl"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen__Kjeldahl__Total"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Total_Kjeldahl_Nitrogen"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Phosphorus-_Total"</span> <span class="sc">~</span> <span class="st">"Total_Phosphorus"</span>,</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Phosphorus__Total__as_P__LL"</span> <span class="sc">~</span> <span class="st">"Total_Phosphorus"</span>,</span>
 <span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Temperature__Water"</span> <span class="sc">~</span> <span class="st">"Temperature"</span>,</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Water_Temperature"</span> <span class="sc">~</span> <span class="st">"Temperature"</span>,</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Field_Temperature"</span> <span class="sc">~</span> <span class="st">"Temperature"</span>,</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Field_pH"</span> <span class="sc">~</span> <span class="st">"pH"</span>,</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrate (N)"</span> <span class="sc">~</span> <span class="st">"Nitrate"</span>,</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrite (N)"</span> <span class="sc">~</span> <span class="st">"Nitrite"</span>,</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> original.analyte.name</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -365,137 +404,126 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
 <span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co"># tau </span></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"tau"</span>, </span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in tau color column"</span>)</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pvalue Z</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"z"</span>, </span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in z color column"</span>)</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="co"># slope blue (-) to red (+) (0 centered)</span></span>
 <span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>  <span class="co"># chi_square</span></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"chi_square"</span>, </span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in chi_square color column"</span>)</span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Z</span></span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"z"</span>, </span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in z color column"</span>)</span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mean values blue to red (0 centered)</span></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>  min_mean <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>  max_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>  max_abs_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_mean), <span class="fu">abs</span>(max_mean))</span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"mean"</span>,</span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_mean, max_abs_mean)</span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in mean color column"</span>)</span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
-<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
-<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
-<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
-<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
-<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
-<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
-<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
-<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
-<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>  min_slope <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>significant_slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>  max_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>significant_slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>  max_abs_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_slope), <span class="fu">abs</span>(max_slope))</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"significant_slope"</span>,</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_slope, max_abs_slope)</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in significant_slope color column"</span>)</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mean values blue to red (0 centered)</span></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>  min_mean <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>  max_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>  max_abs_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_mean), <span class="fu">abs</span>(max_mean))</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"mean"</span>,</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_mean, max_abs_mean)</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in mean color column"</span>)</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="ogctzaqevc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ogctzaqevc table {
+<div id="nyslcnpvgz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nyslcnpvgz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ogctzaqevc thead, #ogctzaqevc tbody, #ogctzaqevc tfoot, #ogctzaqevc tr, #ogctzaqevc td, #ogctzaqevc th {
+#nyslcnpvgz thead, #nyslcnpvgz tbody, #nyslcnpvgz tfoot, #nyslcnpvgz tr, #nyslcnpvgz td, #nyslcnpvgz th {
   border-style: none;
 }
 
-#ogctzaqevc p {
+#nyslcnpvgz p {
   margin: 0;
   padding: 0;
 }
 
-#ogctzaqevc .gt_table {
+#nyslcnpvgz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -521,12 +549,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_caption {
+#nyslcnpvgz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ogctzaqevc .gt_title {
+#nyslcnpvgz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -538,7 +566,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#ogctzaqevc .gt_subtitle {
+#nyslcnpvgz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -550,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#ogctzaqevc .gt_heading {
+#nyslcnpvgz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -562,13 +590,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_bottom_border {
+#nyslcnpvgz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_col_headings {
+#nyslcnpvgz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -583,7 +611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_col_heading {
+#nyslcnpvgz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -603,7 +631,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ogctzaqevc .gt_column_spanner_outer {
+#nyslcnpvgz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,15 +643,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#ogctzaqevc .gt_column_spanner_outer:first-child {
+#nyslcnpvgz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ogctzaqevc .gt_column_spanner_outer:last-child {
+#nyslcnpvgz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ogctzaqevc .gt_column_spanner {
+#nyslcnpvgz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -635,11 +663,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#ogctzaqevc .gt_spanner_row {
+#nyslcnpvgz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ogctzaqevc .gt_group_heading {
+#nyslcnpvgz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -665,7 +693,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#ogctzaqevc .gt_empty_group_heading {
+#nyslcnpvgz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -680,15 +708,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#ogctzaqevc .gt_from_md > :first-child {
+#nyslcnpvgz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ogctzaqevc .gt_from_md > :last-child {
+#nyslcnpvgz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ogctzaqevc .gt_row {
+#nyslcnpvgz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -707,7 +735,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#ogctzaqevc .gt_stub {
+#nyslcnpvgz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ogctzaqevc .gt_stub_row_group {
+#nyslcnpvgz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -734,15 +762,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#ogctzaqevc .gt_row_group_first td {
+#nyslcnpvgz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ogctzaqevc .gt_row_group_first th {
+#nyslcnpvgz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ogctzaqevc .gt_summary_row {
+#nyslcnpvgz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -752,16 +780,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ogctzaqevc .gt_first_summary_row {
+#nyslcnpvgz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_first_summary_row.thick {
+#nyslcnpvgz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ogctzaqevc .gt_last_summary_row {
+#nyslcnpvgz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -771,7 +799,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_grand_summary_row {
+#nyslcnpvgz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -781,7 +809,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ogctzaqevc .gt_first_grand_summary_row {
+#nyslcnpvgz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -791,7 +819,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_last_grand_summary_row_top {
+#nyslcnpvgz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -801,11 +829,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_striped {
+#nyslcnpvgz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ogctzaqevc .gt_table_body {
+#nyslcnpvgz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -814,7 +842,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_footnotes {
+#nyslcnpvgz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -828,7 +856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_footnote {
+#nyslcnpvgz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -837,7 +865,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ogctzaqevc .gt_sourcenotes {
+#nyslcnpvgz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -851,7 +879,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#ogctzaqevc .gt_sourcenote {
+#nyslcnpvgz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -859,72 +887,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#ogctzaqevc .gt_left {
+#nyslcnpvgz .gt_left {
   text-align: left;
 }
 
-#ogctzaqevc .gt_center {
+#nyslcnpvgz .gt_center {
   text-align: center;
 }
 
-#ogctzaqevc .gt_right {
+#nyslcnpvgz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ogctzaqevc .gt_font_normal {
+#nyslcnpvgz .gt_font_normal {
   font-weight: normal;
 }
 
-#ogctzaqevc .gt_font_bold {
+#nyslcnpvgz .gt_font_bold {
   font-weight: bold;
 }
 
-#ogctzaqevc .gt_font_italic {
+#nyslcnpvgz .gt_font_italic {
   font-style: italic;
 }
 
-#ogctzaqevc .gt_super {
+#nyslcnpvgz .gt_super {
   font-size: 65%;
 }
 
-#ogctzaqevc .gt_footnote_marks {
+#nyslcnpvgz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ogctzaqevc .gt_asterisk {
+#nyslcnpvgz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ogctzaqevc .gt_indent_1 {
+#nyslcnpvgz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ogctzaqevc .gt_indent_2 {
+#nyslcnpvgz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ogctzaqevc .gt_indent_3 {
+#nyslcnpvgz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ogctzaqevc .gt_indent_4 {
+#nyslcnpvgz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ogctzaqevc .gt_indent_5 {
+#nyslcnpvgz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ogctzaqevc .katex-display {
+#nyslcnpvgz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ogctzaqevc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#nyslcnpvgz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -943,7 +971,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th id="min" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">min</th>
 <th id="max" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">max</th>
 <th id="coefficient.of.variation" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">coefficient.of.variation</th>
-<th id="significant_trend" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">significant_trend</th>
+<th id="significant_slope" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">significant_slope</th>
+<th id="pvalue" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">pvalue</th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -951,771 +980,826 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">16</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #CCE2EF; color: #000000">-0.005286905</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #A8CEE5; color: #000000">-0.50378788</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #3E8DC4; color: #FFFFFF">0.66241759</td>
+<td class="gt_row gt_right" headers="tau">-0.50378788</td>
+<td class="gt_row gt_right" headers="chi_square">0.66241759</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">7.145771e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #69BE70; color: #000000">44</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7B495; color: #000000">0.03791136</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #E4EFF9; color: #000000">0.0059</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #DBE9F6; color: #000000">0.095</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B6D4E9; color: #000000">0.5106995</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #A8D0E4; color: #000000">-0.005286905</td>
+<td class="gt_row gt_right" headers="pvalue">7.145771e-04</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">17</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #CBE2EE; color: #000000">-0.005366667</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #9DC9E1; color: #000000">-0.45386518</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #09488F; color: #FFFFFF">0.91183718</td>
+<td class="gt_row gt_right" headers="tau">-0.45386518</td>
+<td class="gt_row gt_right" headers="chi_square">0.91183718</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">1.159339e-05</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00481D; color: #FFFFFF">77</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8B698; color: #000000">0.03690779</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #E1EDF8; color: #000000">0.0064</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E5EFF9; color: #000000">0.070</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.4246312</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #A6CFE4; color: #000000">-0.005366667</td>
+<td class="gt_row gt_right" headers="pvalue">1.159339e-05</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">18</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D5E7F1; color: #000000">-0.004333333</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #8DC0DD; color: #000000">-0.39629630</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #09468B; color: #FFFFFF">0.92137398</td>
+<td class="gt_row gt_right" headers="tau">-0.39629630</td>
+<td class="gt_row gt_right" headers="chi_square">0.92137398</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F6FAFF; color: #000000">3.901083e-03</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #64BC6E; color: #000000">45</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #EC9273; color: #000000">0.05004222</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #D2E3F3; color: #000000">0.0089</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #2A78B9; color: #FFFFFF">0.390</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #08306B; color: #FFFFFF">1.4428986</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #BBD9E9; color: #000000">-0.004333333</td>
+<td class="gt_row gt_right" headers="pvalue">3.901083e-03</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">19</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DCEAF2; color: #000000">-0.003500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #8DC0DD; color: #000000">-0.39401709</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #62A7D2; color: #FFFFFF">0.55597420</td>
+<td class="gt_row gt_right" headers="tau">-0.39401709</td>
+<td class="gt_row gt_right" headers="chi_square">0.55597420</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">1.823856e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">78</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAC3A8; color: #000000">0.03173333</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #D6E6F4; color: #000000">0.0082</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EDF4FC; color: #000000">0.050</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D1E2F3; color: #000000">0.3684764</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #CBE2EE; color: #000000">-0.003500000</td>
+<td class="gt_row gt_right" headers="pvalue">1.823856e-04</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DCEAF2; color: #000000">-0.003557143</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #94C4DF; color: #000000">-0.42105263</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #125BA4; color: #FFFFFF">0.84596610</td>
+<td class="gt_row gt_right" headers="tau">-0.42105263</td>
+<td class="gt_row gt_right" headers="chi_square">0.84596610</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F4F9FE; color: #000000">1.417139e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #88CD86; color: #000000">38</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD0B9; color: #000000">0.02652105</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">0.052</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BCD6EB; color: #000000">0.4872653</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #CAE1EE; color: #000000">-0.003557143</td>
+<td class="gt_row gt_right" headers="pvalue">1.417139e-02</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">21</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E0ECF3; color: #000000">-0.003000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #71B1D7; color: #000000">-0.29824561</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #A1CBE2; color: #000000">0.39930468</td>
+<td class="gt_row gt_right" headers="tau">-0.29824561</td>
+<td class="gt_row gt_right" headers="chi_square">0.39930468</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F0F6FD; color: #000000">3.733642e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #83CB82; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC9AF; color: #000000">0.02939744</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.0030</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #CADEF0; color: #000000">0.140</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #6AADD6; color: #000000">0.7793764</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #D3E6F0; color: #000000">-0.003000000</td>
+<td class="gt_row gt_right" headers="pvalue">3.733642e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">22</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DAE9F2; color: #000000">-0.003716667</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #8FC1DE; color: #000000">-0.40092593</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #64A9D3; color: #FFFFFF">0.54872651</td>
+<td class="gt_row gt_right" headers="tau">-0.40092593</td>
+<td class="gt_row gt_right" headers="chi_square">0.54872651</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">6.882263e-05</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #005F26; color: #FFFFFF">72</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD4BE; color: #000000">0.02476667</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">0.053</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B8D5EA; color: #000000">0.5021059</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #C7E0ED; color: #000000">-0.003716667</td>
+<td class="gt_row gt_right" headers="pvalue">6.882263e-05</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">23</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DFECF3; color: #000000">-0.003057143</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #8ABEDD; color: #000000">-0.38461538</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #08316C; color: #FFFFFF">0.99763854</td>
+<td class="gt_row gt_right" headers="tau">-0.38461538</td>
+<td class="gt_row gt_right" headers="chi_square">0.99763854</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F1F7FD; color: #000000">3.184847e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #7EC97E; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD3BD; color: #000000">0.02507500</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">0.047</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BAD6EB; color: #000000">0.4922192</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #D2E6F0; color: #000000">-0.003057143</td>
+<td class="gt_row gt_right" headers="pvalue">3.184847e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">24</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DCEAF2; color: #000000">-0.003525000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #76B4D8; color: #000000">-0.31531532</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #87BDDC; color: #000000">0.46424663</td>
+<td class="gt_row gt_right" headers="tau">-0.31531532</td>
+<td class="gt_row gt_right" headers="chi_square">0.46424663</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #EBF4FB; color: #000000">5.811336e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #88CD86; color: #000000">38</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD0B8; color: #000000">0.02655000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EFF6FC; color: #000000">0.045</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CADEF0; color: #000000">0.4138550</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">5.811336e-02</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">25</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D5E7F1; color: #000000">-0.004400000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #74B2D8; color: #000000">-0.30701754</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #62A7D2; color: #FFFFFF">0.55616543</td>
+<td class="gt_row gt_right" headers="tau">-0.30701754</td>
+<td class="gt_row gt_right" headers="chi_square">0.55616543</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F2F8FD; color: #000000">2.633314e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #83CB82; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCCB4; color: #000000">0.02801538</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F5F9FE; color: #000000">0.0032</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">0.076</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B4D3E9; color: #000000">0.5184941</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #B9D9E9; color: #000000">-0.004400000</td>
+<td class="gt_row gt_right" headers="pvalue">2.633314e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">26</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DCEAF2; color: #000000">-0.003500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #4996C8; color: #FFFFFF">-0.12380952</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #D7E6F5; color: #000000">0.20876161</td>
+<td class="gt_row gt_right" headers="tau">-0.12380952</td>
+<td class="gt_row gt_right" headers="chi_square">0.20876161</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #D4E4F4; color: #000000">1.775299e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #92D28F; color: #000000">36</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCBB2; color: #000000">0.02870556</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #D5E5F4; color: #000000">0.110</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #9AC8E0; color: #000000">0.6228034</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.775299e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">27</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D8E8F1; color: #000000">-0.004016667</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #7CB7D9; color: #000000">-0.33333333</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #5AA1CF; color: #FFFFFF">0.58058286</td>
+<td class="gt_row gt_right" headers="tau">-0.33333333</td>
+<td class="gt_row gt_right" headers="chi_square">0.58058286</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F0F7FD; color: #000000">3.358661e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #88CD86; color: #000000">38</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC8AF; color: #000000">0.02955263</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #D9E8F5; color: #000000">0.100</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #9FCAE1; color: #000000">0.6062696</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #C1DDEB; color: #000000">-0.004016667</td>
+<td class="gt_row gt_right" headers="pvalue">3.358661e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">28</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DCEAF2; color: #000000">-0.003500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #92C3DE; color: #000000">-0.41228070</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #3E8DC4; color: #FFFFFF">0.66210079</td>
+<td class="gt_row gt_right" headers="tau">-0.41228070</td>
+<td class="gt_row gt_right" headers="chi_square">0.66210079</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F3F8FE; color: #000000">1.996445e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #83CB82; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.02562051</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">0.043</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C0D9ED; color: #000000">0.4668840</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #CBE2EE; color: #000000">-0.003500000</td>
+<td class="gt_row gt_right" headers="pvalue">1.996445e-02</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">29</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DAE9F2; color: #000000">-0.003785714</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #5CA3D0; color: #FFFFFF">-0.20720721</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #6BAED6; color: #000000">0.52634097</td>
+<td class="gt_row gt_right" headers="tau">-0.20720721</td>
+<td class="gt_row gt_right" headers="chi_square">0.52634097</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #E7F1FA; color: #000000">7.775990e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #88CD86; color: #000000">38</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCCB4; color: #000000">0.02796053</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EAF2FB; color: #000000">0.058</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BFD8EC; color: #000000">0.4734765</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">7.775990e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">30</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EFF3F6; color: #000000">-0.001000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #5BA2CF; color: #FFFFFF">-0.20370370</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #3785BF; color: #FFFFFF">0.69106187</td>
+<td class="gt_row gt_right" headers="tau">-0.20370370</td>
+<td class="gt_row gt_right" headers="chi_square">0.69106187</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #D3E4F3; color: #000000">1.827463e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8DD08A; color: #000000">37</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAC4AA; color: #000000">0.03117027</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #BAD6EB; color: #000000">0.170</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #5DA4D0; color: #FFFFFF">0.8360929</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.827463e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">31</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DCEAF2; color: #000000">-0.003466667</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #76B4D8; color: #000000">-0.31531532</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #1159A2; color: #FFFFFF">0.85188795</td>
+<td class="gt_row gt_right" headers="tau">-0.31531532</td>
+<td class="gt_row gt_right" headers="chi_square">0.85188795</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #EBF3FB; color: #000000">6.079272e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #88CD86; color: #000000">38</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD1BA; color: #000000">0.02615526</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">0.042</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C5DBEF; color: #000000">0.4452095</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">6.079272e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">32</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F3F5F6; color: #000000">-0.000500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #2D7BBA; color: #FFFFFF">0.02857143</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #A5CDE3; color: #000000">0.38908495</td>
+<td class="gt_row gt_right" headers="tau">0.02857143</td>
+<td class="gt_row gt_right" headers="chi_square">0.38908495</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #3582BE; color: #FFFFFF">6.830914e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #92D28F; color: #000000">36</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCEB6; color: #000000">0.02743056</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">0.046</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D0E2F2; color: #000000">0.3729115</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">6.830914e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">33</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #CFE4EF; color: #000000">-0.005100000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #89BEDC; color: #000000">-0.37962963</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #8CC0DD; color: #000000">0.45211399</td>
+<td class="gt_row gt_right" headers="tau">-0.37962963</td>
+<td class="gt_row gt_right" headers="chi_square">0.45211399</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F5FAFE; color: #000000">8.071487e-03</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8DD08A; color: #000000">37</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC6AC; color: #000000">0.03039730</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">0.077</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B7D5EA; color: #000000">0.5052338</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #ACD2E5; color: #000000">-0.005100000</td>
+<td class="gt_row gt_right" headers="pvalue">8.071487e-03</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">34</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D8E8F1; color: #000000">-0.004000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #87BDDC; color: #000000">-0.37270288</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #4E9ACA; color: #FFFFFF">0.61300215</td>
+<td class="gt_row gt_right" headers="tau">-0.37270288</td>
+<td class="gt_row gt_right" headers="chi_square">0.61300215</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">8.849119e-05</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #006428; color: #FFFFFF">71</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD1BA; color: #000000">0.02620423</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #DEEBF7; color: #000000">0.086</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B0D2E7; color: #000000">0.5355304</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #C1DDEB; color: #000000">-0.004000000</td>
+<td class="gt_row gt_right" headers="pvalue">8.849119e-05</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">35</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D8E8F1; color: #000000">-0.004000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #6AADD5; color: #000000">-0.27192982</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #6DAFD6; color: #000000">0.52298338</td>
+<td class="gt_row gt_right" headers="tau">-0.27192982</td>
+<td class="gt_row gt_right" headers="chi_square">0.52298338</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #EAF3FB; color: #000000">6.619258e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #83CB82; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC9B0; color: #000000">0.02924615</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">0.055</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C2D9EE; color: #000000">0.4604445</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">6.619258e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">36</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E8F0F4; color: #000000">-0.002000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #4895C8; color: #FFFFFF">-0.11965812</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #2675B7; color: #FFFFFF">0.75060455</td>
+<td class="gt_row gt_right" headers="tau">-0.11965812</td>
+<td class="gt_row gt_right" headers="chi_square">0.75060455</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #8DC0DD; color: #000000">4.178870e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #7EC97E; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.02561500</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F0F7FD; color: #000000">0.0039</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">0.042</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DCEF; color: #000000">0.4345143</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">4.178870e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">37</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D6E7F1; color: #000000">-0.004293333</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #ACD0E6; color: #000000">-0.52136752</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #81B9DA; color: #000000">0.47928887</td>
+<td class="gt_row gt_right" headers="tau">-0.52136752</td>
+<td class="gt_row gt_right" headers="chi_square">0.47928887</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">5.610552e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #7EC97E; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC6AC; color: #000000">0.03039250</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F3F9FE; color: #000000">0.0034</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #CADEF0; color: #000000">0.140</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #70B0D7; color: #000000">0.7619079</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #BCDAEA; color: #000000">-0.004293333</td>
+<td class="gt_row gt_right" headers="pvalue">5.610552e-04</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">38</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DBEAF2; color: #000000">-0.003666667</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #7DB7DA; color: #000000">-0.33732304</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #CBDEF1; color: #000000">0.26751417</td>
+<td class="gt_row gt_right" headers="tau">-0.33732304</td>
+<td class="gt_row gt_right" headers="chi_square">0.26751417</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">3.241116e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #005622; color: #FFFFFF">74</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.02572297</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #DEEBF7; color: #000000">0.086</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #ABCFE5; color: #000000">0.5567632</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #C8E0ED; color: #000000">-0.003666667</td>
+<td class="gt_row gt_right" headers="pvalue">3.241116e-04</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">39</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D9E9F2; color: #000000">-0.003850000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #95C5DF; color: #000000">-0.42592593</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #1D69AF; color: #FFFFFF">0.79085455</td>
+<td class="gt_row gt_right" headers="tau">-0.42592593</td>
+<td class="gt_row gt_right" headers="chi_square">0.79085455</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F0F6FD; color: #000000">3.512051e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8DD08A; color: #000000">37</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCEB6; color: #000000">0.02731081</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">0.052</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C3DAEE; color: #000000">0.4541178</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #C4DEEC; color: #000000">-0.003850000</td>
+<td class="gt_row gt_right" headers="pvalue">3.512051e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">3A</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="tau">NA</td>
+<td class="gt_row gt_right" headers="chi_square">NA</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F1FAEE; color: #000000">9</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #EC9273; color: #000000">0.05022222</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #B1D2E8; color: #000000">0.0130</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #D5E5F4; color: #000000">0.110</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #86BCDC; color: #000000">0.6918910</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D9E9F2; color: #000000">-0.003840000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #92C3DE; color: #000000">-0.41351351</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #09458B; color: #FFFFFF">0.92308583</td>
+<td class="gt_row gt_right" headers="tau">-0.41351351</td>
+<td class="gt_row gt_right" headers="chi_square">0.92308583</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">4.354664e-05</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #005622; color: #FFFFFF">74</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.02565541</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.0030</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">0.053</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B9D5EA; color: #000000">0.4976677</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #C4DEEC; color: #000000">-0.003840000</td>
+<td class="gt_row gt_right" headers="pvalue">4.354664e-05</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">40</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E1ECF3; color: #000000">-0.002920000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #5FA5D1; color: #FFFFFF">-0.21904762</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #808080; color: #FFFFFF">NaN</td>
+<td class="gt_row gt_right" headers="tau">-0.21904762</td>
+<td class="gt_row gt_right" headers="chi_square">NaN</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #BFD8ED; color: #000000">2.718184e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #92D28F; color: #000000">36</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD1BA; color: #000000">0.02614722</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">0.042</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DBEF; color: #000000">0.4386327</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">2.718184e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">42</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E8F0F4; color: #000000">-0.002000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #559ECD; color: #FFFFFF">-0.17619048</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #A5CDE3; color: #000000">0.38907443</td>
+<td class="gt_row gt_right" headers="tau">-0.17619048</td>
+<td class="gt_row gt_right" headers="chi_square">0.38907443</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #E4EFF9; color: #000000">9.351735e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #19813D; color: #FFFFFF">63</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC9B0; color: #000000">0.02923651</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #DEEBF7; color: #000000">0.088</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C6DBEF; color: #000000">0.4436849</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">9.351735e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">45</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDAC6; color: #000000">0.005000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #08306B; color: #FFFFFF">0.44444444</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #1761A8; color: #FFFFFF">0.82340660</td>
+<td class="gt_row gt_right" headers="tau">0.44444444</td>
+<td class="gt_row gt_right" headers="chi_square">0.82340660</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #DAE8F6; color: #000000">1.472991e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B6E2AF; color: #000000">28</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7B191; color: #000000">0.03925000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #61A6D2; color: #FFFFFF">0.0200</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #DCEAF6; color: #000000">0.092</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CFE1F2; color: #000000">0.3819847</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.472991e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">46</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E8F0F4; color: #000000">-0.002000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #539CCC; color: #FFFFFF">-0.16557377</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #F5FAFE; color: #000000">0.06315427</td>
+<td class="gt_row gt_right" headers="tau">-0.16557377</td>
+<td class="gt_row gt_right" headers="chi_square">0.06315427</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #E5F0F9; color: #000000">8.893650e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #208842; color: #FFFFFF">61</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCBB2; color: #000000">0.02855574</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E9F2FB; color: #000000">0.059</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CADEF0; color: #000000">0.4157967</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">8.893650e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">47</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E6EFF4; color: #000000">-0.002250000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #4F9ACB; color: #FFFFFF">-0.14946237</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #CFE1F2; color: #000000">0.24450329</td>
+<td class="gt_row gt_right" headers="tau">-0.14946237</td>
+<td class="gt_row gt_right" headers="chi_square">0.24450329</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #E3EEF8; color: #000000">1.017069e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1D843F; color: #FFFFFF">62</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC9B0; color: #000000">0.02935000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E9F2FB; color: #000000">0.059</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDE0F1; color: #000000">0.3946135</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.017069e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">48</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F7; color: #000000">0.000000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #3E8EC4; color: #FFFFFF">-0.07407407</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #808080; color: #FFFFFF">NaN</td>
+<td class="gt_row gt_right" headers="tau">-0.07407407</td>
+<td class="gt_row gt_right" headers="chi_square">NaN</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #08306B; color: #FFFFFF">1.000000e+00</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B6E2AF; color: #000000">28</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAC4A9; color: #000000">0.03153571</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #61A6D2; color: #FFFFFF">0.0200</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E8F1FA; color: #000000">0.062</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E2EEF8; color: #000000">0.2487113</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">52</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E8F0F4; color: #000000">-0.002000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #559ECD; color: #FFFFFF">-0.17634409</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #84BBDB; color: #000000">0.47151481</td>
+<td class="gt_row gt_right" headers="tau">-0.17634409</td>
+<td class="gt_row gt_right" headers="chi_square">0.47151481</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #EAF3FB; color: #000000">6.392238e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1D843F; color: #FFFFFF">62</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC5AA; color: #000000">0.03095645</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #D2E3F3; color: #000000">0.120</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B4D3E9; color: #000000">0.5178645</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">6.392238e-02</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">54</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E6EFF4; color: #000000">-0.002250000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #63A8D3; color: #FFFFFF">-0.24166667</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #D4E5F4; color: #000000">0.21990574</td>
+<td class="gt_row gt_right" headers="tau">-0.24166667</td>
+<td class="gt_row gt_right" headers="chi_square">0.21990574</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F4F9FE; color: #000000">1.572530e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #238B45; color: #FFFFFF">60</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCAB1; color: #000000">0.02876667</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ECF4FC; color: #000000">0.051</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D0E2F2; color: #000000">0.3725235</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #DCEAF2; color: #000000">-0.002250000</td>
+<td class="gt_row gt_right" headers="pvalue">1.572530e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">56</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EBF1F5; color: #000000">-0.001500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #4B98C9; color: #FFFFFF">-0.13448276</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #E5F0F9; color: #000000">0.13895183</td>
+<td class="gt_row gt_right" headers="tau">-0.13448276</td>
+<td class="gt_row gt_right" headers="chi_square">0.13895183</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #D8E7F5; color: #000000">1.582563e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #2A924A; color: #FFFFFF">58</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCDB4; color: #000000">0.02783448</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">0.052</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CBDFF1; color: #000000">0.4055589</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.582563e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">59</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F7; color: #000000">0.000000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #4795C8; color: #FFFFFF">-0.11538462</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #808080; color: #FFFFFF">NaN</td>
+<td class="gt_row gt_right" headers="tau">-0.11538462</td>
+<td class="gt_row gt_right" headers="chi_square">NaN</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #08306B; color: #FFFFFF">1.000000e+00</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #BFE5B8; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9BDA0; color: #000000">0.03434615</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #61A6D2; color: #FFFFFF">0.0200</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">0.077</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D3E3F3; color: #000000">0.3549629</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">60</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EBF1F5; color: #000000">-0.001500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #3E8EC4; color: #FFFFFF">-0.07356322</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #B8D5EA; color: #000000">0.33245697</td>
+<td class="gt_row gt_right" headers="tau">-0.07356322</td>
+<td class="gt_row gt_right" headers="chi_square">0.33245697</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #99C7E0; color: #000000">3.868881e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #2A924A; color: #FFFFFF">58</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCAB1; color: #000000">0.02878621</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">0.052</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDE0F1; color: #000000">0.3945358</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">3.868881e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">61</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EFF3F6; color: #000000">-0.001000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #3C8BC2; color: #FFFFFF">-0.05882353</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #D4E4F4; color: #000000">0.22425647</td>
+<td class="gt_row gt_right" headers="tau">-0.05882353</td>
+<td class="gt_row gt_right" headers="chi_square">0.22425647</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #206FB3; color: #FFFFFF">7.594629e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D1EDCB; color: #000000">21</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC7AD; color: #000000">0.03004762</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #4C98CA; color: #FFFFFF">0.0220</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">0.039</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EBF3FB; color: #000000">0.1921863</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">7.594629e-01</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">62</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F3F5F6; color: #000000">-0.000500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #3280BD; color: #FFFFFF">0.00000000</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #B2D2E8; color: #000000">0.35048521</td>
+<td class="gt_row gt_right" headers="tau">0.00000000</td>
+<td class="gt_row gt_right" headers="chi_square">0.35048521</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #08306B; color: #FFFFFF">1.000000e+00</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #CEECC7; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FABFA2; color: #000000">0.03354545</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #579FCE; color: #FFFFFF">0.0210</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">0.047</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EBF3FB; color: #000000">0.1911509</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">63</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E6EFF4; color: #000000">-0.002250000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #569FCD; color: #FFFFFF">-0.18121212</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #F7FBFF; color: #000000">0.05432791</td>
+<td class="gt_row gt_right" headers="tau">-0.18121212</td>
+<td class="gt_row gt_right" headers="chi_square">0.05432791</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #E3EEF9; color: #000000">9.965441e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #349D52; color: #FFFFFF">55</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCAB1; color: #000000">0.02876909</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #DAE9F6; color: #000000">0.097</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B8D5EA; color: #000000">0.5027378</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">9.965441e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">64</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="tau">NA</td>
+<td class="gt_row gt_right" headers="chi_square">NA</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F4A684; color: #000000">0.04350000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #08306B; color: #FFFFFF">0.0350</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">0.048</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F7FBFF; color: #000000">0.1095276</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">66</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #5CA0CA; color: #FFFFFF">-0.013350000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #D9E8F5; color: #000000">-0.78431373</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #1159A2; color: #FFFFFF">0.85115134</td>
+<td class="gt_row gt_right" headers="tau">-0.78431373</td>
+<td class="gt_row gt_right" headers="chi_square">0.85115134</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">4.896400e-05</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #9CD797; color: #000000">34</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCBB2; color: #000000">0.02847647</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #E6F0F9; color: #000000">0.0056</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">0.048</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C3DAEE; color: #000000">0.4540977</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #1B5B9D; color: #FFFFFF">-0.013350000</td>
+<td class="gt_row gt_right" headers="pvalue">4.896400e-05</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">67</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #6CABD0; color: #000000">-0.012350000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #D2E3F3; color: #000000">-0.72549020</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #135CA5; color: #FFFFFF">0.84110359</td>
+<td class="gt_row gt_right" headers="tau">-0.72549020</td>
+<td class="gt_row gt_right" headers="chi_square">0.84110359</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">1.781293e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #9CD797; color: #000000">34</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCDB4; color: #000000">0.02784412</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.0040</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EDF4FC; color: #000000">0.050</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BBD6EB; color: #000000">0.4887217</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #266BAF; color: #FFFFFF">-0.012350000</td>
+<td class="gt_row gt_right" headers="pvalue">1.781293e-04</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">68</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #3C88BD; color: #FFFFFF">-0.015900000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #CEE0F2; color: #000000">-0.69607843</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #0F57A1; color: #FFFFFF">0.85802783</td>
+<td class="gt_row gt_right" headers="tau">-0.69607843</td>
+<td class="gt_row gt_right" headers="chi_square">0.85802783</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">2.762397e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #9CD797; color: #000000">34</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC5AB; color: #000000">0.03088529</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E2EDF8; color: #000000">0.078</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #9DC9E1; color: #000000">0.6134949</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #053061; color: #FFFFFF">-0.015900000</td>
+<td class="gt_row gt_right" headers="pvalue">2.762397e-04</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">69</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #81B8D7; color: #000000">-0.011000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #CEE0F2; color: #000000">-0.69607843</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #0F57A1; color: #FFFFFF">0.85802783</td>
+<td class="gt_row gt_right" headers="tau">-0.69607843</td>
+<td class="gt_row gt_right" headers="chi_square">0.85802783</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">2.762397e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #9CD797; color: #000000">34</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAC0A5; color: #000000">0.03280294</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #DBE9F6; color: #000000">0.0073</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E9F2FB; color: #000000">0.059</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C2D9ED; color: #000000">0.4612358</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #357EB8; color: #FFFFFF">-0.011000000</td>
+<td class="gt_row gt_right" headers="pvalue">2.762397e-04</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">70</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #3F8CBF; color: #FFFFFF">-0.015450000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #D4E4F4; color: #000000">-0.74509804</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #1159A3; color: #FFFFFF">0.85058988</td>
+<td class="gt_row gt_right" headers="tau">-0.74509804</td>
+<td class="gt_row gt_right" headers="chi_square">0.85058988</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">1.949110e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #9CD797; color: #000000">34</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC9B0; color: #000000">0.02919412</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F0F7FD; color: #000000">0.0039</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E3EEF9; color: #000000">0.074</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A6CDE4; color: #000000">0.5759740</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #09376B; color: #FFFFFF">-0.015450000</td>
+<td class="gt_row gt_right" headers="pvalue">1.949110e-04</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">71</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #61A3CC; color: #FFFFFF">-0.013050000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #D9E8F5; color: #000000">-0.78431373</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #1159A2; color: #FFFFFF">0.85115134</td>
+<td class="gt_row gt_right" headers="tau">-0.78431373</td>
+<td class="gt_row gt_right" headers="chi_square">0.85115134</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">4.896400e-05</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #9CD797; color: #000000">34</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCAB1; color: #000000">0.02893235</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F3F9FE; color: #000000">0.0034</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E0EDF8; color: #000000">0.081</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A7CEE4; color: #000000">0.5749099</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #1E60A4; color: #FFFFFF">-0.013050000</td>
+<td class="gt_row gt_right" headers="pvalue">4.896400e-05</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">74</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #B3D6E7; color: #000000">-0.007250000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #AACFE5; color: #000000">-0.50980392</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #D0E2F2; color: #000000">0.24179603</td>
+<td class="gt_row gt_right" headers="tau">-0.50980392</td>
+<td class="gt_row gt_right" headers="chi_square">0.24179603</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F3F9FE; color: #000000">1.770607e-02</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #9CD797; color: #000000">34</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC8AE; color: #000000">0.02979118</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #D5E5F4; color: #000000">0.0084</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #E8F1FA; color: #000000">0.062</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDE0F1; color: #000000">0.3936437</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #7EB7D6; color: #000000">-0.007250000</td>
+<td class="gt_row gt_right" headers="pvalue">1.770607e-02</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">78</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAECE4; color: #000000">0.001916667</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #307EBC; color: #FFFFFF">0.01010101</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #3684BF; color: #FFFFFF">0.69382189</td>
+<td class="gt_row gt_right" headers="tau">0.01010101</td>
+<td class="gt_row gt_right" headers="chi_square">0.69382189</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #0A529D; color: #FFFFFF">8.699961e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A1D99B; color: #000000">33</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #A61429; color: #FFFFFF">0.09145455</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #2A79B9; color: #FFFFFF">0.0260</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #08306B; color: #FFFFFF">0.530</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #3886C0; color: #FFFFFF">1.0027839</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">8.699961e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">79</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #66A7CE; color: #FFFFFF">-0.012750000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #3F8EC4; color: #FFFFFF">-0.07692308</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #A5CDE3; color: #000000">0.38791567</td>
+<td class="gt_row gt_right" headers="tau">-0.07692308</td>
+<td class="gt_row gt_right" headers="chi_square">0.38791567</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #08306B; color: #FFFFFF">1.000000e+00</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D4EECE; color: #000000">20</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #67001F; color: #FFFFFF">0.11005000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #093877; color: #FFFFFF">0.0340</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #69ADD5; color: #000000">0.280</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A2CCE2; color: #000000">0.5937665</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">81</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #053061; color: #FFFFFF">-0.024500000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #F7FBFF; color: #000000">-1.00000000</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #08306B; color: #FFFFFF">1.00000000</td>
+<td class="gt_row gt_right" headers="tau">-1.00000000</td>
+<td class="gt_row gt_right" headers="chi_square">1.00000000</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #74B3D8; color: #000000">4.795001e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">12</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.02566667</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #9DC9E1; color: #000000">0.0150</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #EDF5FC; color: #000000">0.049</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CBDEF1; color: #000000">0.4094141</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">82</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #367EB9; color: #FFFFFF">-0.016900000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #F7FBFF; color: #000000">-1.00000000</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #08306B; color: #FFFFFF">1.00000000</td>
+<td class="gt_row gt_right" headers="tau">-1.00000000</td>
+<td class="gt_row gt_right" headers="chi_square">1.00000000</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #74B3D8; color: #000000">4.795001e-01</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">12</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DE; color: #000000">0.01151667</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">0.024</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #88BDDC; color: #000000">0.6859657</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">83</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="tau">NA</td>
+<td class="gt_row gt_right" headers="chi_square">NA</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE7DB; color: #000000">0.01256667</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.0036</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">0.032</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #4F9ACB; color: #FFFFFF">0.8934701</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">84</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="tau">NA</td>
+<td class="gt_row gt_right" headers="chi_square">NA</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #EFF9EC; color: #000000">10</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #BE3435; color: #FFFFFF">0.08104000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #ECF4FC; color: #000000">0.0045</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #BAD6EB; color: #000000">0.170</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #6DAFD6; color: #000000">0.7690624</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">9</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D0E4F0; color: #000000">-0.005000000</td>
-<td class="gt_row gt_right" headers="tau" style="background-color: #82BADB; color: #000000">-0.35684932</td>
-<td class="gt_row gt_right" headers="chi_square" style="background-color: #C6DBEF; color: #000000">0.28836299</td>
+<td class="gt_row gt_right" headers="tau">-0.35684932</td>
+<td class="gt_row gt_right" headers="chi_square">0.28836299</td>
 <td class="gt_row gt_right" headers="z" style="background-color: #F7FBFF; color: #000000">5.892777e-04</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #005A24; color: #FFFFFF">73</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7B394; color: #000000">0.03824795</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0028</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #DFECF7; color: #000000">0.084</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C0D9ED; color: #000000">0.4666496</td>
-<td class="gt_row gt_right" headers="significant_trend">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #AED3E6; color: #000000">-0.005000000</td>
+<td class="gt_row gt_right" headers="pvalue">5.892777e-04</td>
 </tr>
 </tbody>
 </table>

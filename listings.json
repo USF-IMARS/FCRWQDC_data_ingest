@@ -1,46 +1,5 @@
 [
   {
-    "listing": "/analyte_reports/analyte_reports.html",
-    "items": [
-      "/analyte_reports/analyte_reports/Ammonia__N_.html",
-      "/analyte_reports/analyte_reports/Chlorophyll_a.html",
-      "/analyte_reports/analyte_reports/Chlorophyll_a-_corrected.html",
-      "/analyte_reports/analyte_reports/Chlorophyll_a-_uncorrected.html",
-      "/analyte_reports/analyte_reports/Chlorophyll_a__free_of_pheophytin.html",
-      "/analyte_reports/analyte_reports/Dissolved_Oxygen.html",
-      "/analyte_reports/analyte_reports/Dissolved_Oxygen__CTD_.html",
-      "/analyte_reports/analyte_reports/Dissolved_Oxygen__Discrete_.html",
-      "/analyte_reports/analyte_reports/Field_Temperature.html",
-      "/analyte_reports/analyte_reports/Field_pH.html",
-      "/analyte_reports/analyte_reports/NO2+3__Filtered.html",
-      "/analyte_reports/analyte_reports/Nitrate.html",
-      "/analyte_reports/analyte_reports/Nitrate+Nitrite.html",
-      "/analyte_reports/analyte_reports/Nitrate-Nitrite__N_.html",
-      "/analyte_reports/analyte_reports/Nitrate__N_.html",
-      "/analyte_reports/analyte_reports/Nitrite.html",
-      "/analyte_reports/analyte_reports/Nitrite__N_.html",
-      "/analyte_reports/analyte_reports/Nitrogen-_Total.html",
-      "/analyte_reports/analyte_reports/Nitrogen-_Total_Kjeldahl.html",
-      "/analyte_reports/analyte_reports/Nitrogen__Kjeldahl__Total.html",
-      "/analyte_reports/analyte_reports/Nitrogen__NO2_plus_NO3.html",
-      "/analyte_reports/analyte_reports/Orthophosphate__P_.html",
-      "/analyte_reports/analyte_reports/Oxygen__Dissolved.html",
-      "/analyte_reports/analyte_reports/Phosphorus-_Total.html",
-      "/analyte_reports/analyte_reports/Phosphorus__Total__as_P__LL.html",
-      "/analyte_reports/analyte_reports/Salinity.html",
-      "/analyte_reports/analyte_reports/Silica__SiO2_.html",
-      "/analyte_reports/analyte_reports/Silicate.html",
-      "/analyte_reports/analyte_reports/Temperature.html",
-      "/analyte_reports/analyte_reports/Temperature__Water.html",
-      "/analyte_reports/analyte_reports/Total_Kjeldahl_Nitrogen.html",
-      "/analyte_reports/analyte_reports/Total_Nitrogen.html",
-      "/analyte_reports/analyte_reports/Total_Phosphorus.html",
-      "/analyte_reports/analyte_reports/Turbidity.html",
-      "/analyte_reports/analyte_reports/Water_Temperature.html",
-      "/analyte_reports/analyte_reports/pH.html"
-    ]
-  },
-  {
     "listing": "/provider_reports/provider_reports.html",
     "items": [
       "/provider_reports/provider_reports/BBAP.html",
@@ -51,6 +10,34 @@
       "/provider_reports/provider_reports/MiamiBeach.html",
       "/provider_reports/provider_reports/PALMBEACH.html",
       "/provider_reports/provider_reports/SFER.html"
+    ]
+  },
+  {
+    "listing": "/analyte_reports/analyte_reports.html",
+    "items": [
+      "/analyte_reports/analyte_reports/Ammonia__N_.html",
+      "/analyte_reports/analyte_reports/Ammonium.html",
+      "/analyte_reports/analyte_reports/Chlorophyll_a.html",
+      "/analyte_reports/analyte_reports/Dissolved_Oxygen.html",
+      "/analyte_reports/analyte_reports/Enterococci.html",
+      "/analyte_reports/analyte_reports/Fecal_Coliforms.html",
+      "/analyte_reports/analyte_reports/Field_Specific_Conductance.html",
+      "/analyte_reports/analyte_reports/Nitrate.html",
+      "/analyte_reports/analyte_reports/Nitrate+Nitrite.html",
+      "/analyte_reports/analyte_reports/Nitrite.html",
+      "/analyte_reports/analyte_reports/Nitrogen__Ammonia.html",
+      "/analyte_reports/analyte_reports/Orthophosphate__P_.html",
+      "/analyte_reports/analyte_reports/Pheophytin.html",
+      "/analyte_reports/analyte_reports/Phosphate.html",
+      "/analyte_reports/analyte_reports/Salinity.html",
+      "/analyte_reports/analyte_reports/Silica__SiO2_.html",
+      "/analyte_reports/analyte_reports/Silicate.html",
+      "/analyte_reports/analyte_reports/Specific_Conductivity.html",
+      "/analyte_reports/analyte_reports/Total_Nitrogen.html",
+      "/analyte_reports/analyte_reports/Total_Phosphorus.html",
+      "/analyte_reports/analyte_reports/Turbidity.html",
+      "/analyte_reports/analyte_reports/Water_Temperature.html",
+      "/analyte_reports/analyte_reports/pH.html"
     ]
   }
 ]
