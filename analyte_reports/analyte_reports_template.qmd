@@ -100,7 +100,7 @@ sample_stats_df <- samples_df %>%
   ) %>%
   # create column significant_trend
   mutate(
-    significant_trend = ifelse(z > 1.96, slope, NA_real_)
+    significant_trend = ifelse(z <= 0.05, slope, NA_real_)
   )
 
 
