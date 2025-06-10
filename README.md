@@ -34,6 +34,7 @@ testthat::test_dir(here::here('tests/testthat'))
 ```
 
 ## plans & TODO items
+* SFER data in micromoles/L. Needs to convert to mg/L like others. Dan will email conversions.
 * slopes files due tuesday. upload to [this folder](https://drive.google.com/drive/u/0/folders/1aJoe4-hS959vFNoU8aN-dyK7KyyjqVSE). add 
   * full file there
   * two subfolders:
