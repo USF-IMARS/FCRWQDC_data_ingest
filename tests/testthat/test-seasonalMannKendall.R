@@ -84,9 +84,7 @@ test_that("seasonalMannKendall correctly calculates trends in dplyr pipeline", {
       # now unpack the elements from tmp into new columns
       tibble(
         slope      = tmp$slope,
-        tau        = tmp$tau,
-        chi_square = tmp$chi_square,
-        z          = tmp$z
+        pvalue       = tmp$z
       )})
     
 

@@ -4,32 +4,32 @@ getListOfAnalytes <- function(){
     # === subset of desired analytes:
     # higher priority:
     "Chlorophyll a",
-    "Chlorophyll a, free of pheophytin",
-    "Chlorophyll a- corrected",
-    "Chlorophyll a- uncorrected",
-
-    "Total Kjeldahl Nitrogen",
-    "Nitrogen, Kjeldahl, Total",
-    "Nitrogen- Total Kjeldahl",
+    # "Chlorophyll a, free of pheophytin",
+    # "Chlorophyll a- corrected",
+    # "Chlorophyll a- uncorrected",
 
     "Total Nitrogen",
-    "NO2+3, Filtered",
-    "Nitrogen- Total",
+    # "Total Kjeldahl Nitrogen",
+    # "Nitrogen, Kjeldahl, Total",
+    # "Nitrogen- Total Kjeldahl",
+    # "Nitrogen- Total",
 
-    "Nitrate (N)",
-    "Nitrite (N)",
     "Nitrite",
+    # "Nitrite (N)",
+    
     "Nitrate",
+    # "Nitrate (N)",
 
     "Nitrate+Nitrite",
-    "Nitrate-Nitrite (N)",
-    "Nitrogen, NO2 plus NO3",
+    # "NO2+3, Filtered",
+    # "Nitrate-Nitrite (N)",
+    # "Nitrogen, NO2 plus NO3",
 
     "Ammonia (N)",
     
     "Total Phosphorus",
-    "Phosphorus, Total (as P) LL",
-    "Phosphorus- Total",
+    # "Phosphorus, Total (as P) LL",
+    # "Phosphorus- Total",
    
     "Orthophosphate (P)",
     
@@ -43,29 +43,29 @@ getListOfAnalytes <- function(){
     "Salinity",
 
     "pH",
-    "Field pH",
+    # "Field pH",
 
     "Dissolved Oxygen",
-    "Dissolved Oxygen (Discrete)",
-    "Dissolved Oxygen (CTD)",
-    "Oxygen, Dissolved",
+    # "Dissolved Oxygen (Discrete)",
+    # "Dissolved Oxygen (CTD)",
+    # "Oxygen, Dissolved",
 
     "Water Temperature",
-    "Temperature, Water",
-    "Temperature",
-    "Field Temperature",
-    "Temperature, Water"
+    # "Temperature, Water",
+    # "Temperature",
+    # "Field Temperature",
+    # "Temperature, Water"
 
 
     # other analytes (as reported by index.md 2025-05)
-    # "Ammonium",
-    # "Phosphate",
-    # "Pheophytin",
-    # "Specific Conductivity",
-    # "Fecal Coliforms",
-    # "Enterococci",
-    # "Field Specific Conductance",
-    # "Nitrogen, Ammonia",
+    "Ammonium",
+    "Phosphate",
+    "Pheophytin",
+    "Specific Conductivity",
+    "Fecal Coliforms",
+    "Enterococci",
+    "Field Specific Conductance",
+    "Nitrogen, Ammonia",
   )
   analytes <- gsub("[ \\(\\)|,]", "_", analytes)
 
