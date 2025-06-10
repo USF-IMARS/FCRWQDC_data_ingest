@@ -64,7 +64,7 @@ samples_df <- df %>%
     program, 
     Monitoring.Location.ID, 
     Activity.Start.Date.Time,
-    analyte = DEP.Analyte.Name,
+    original.analyte.name = DEP.Analyte.Name,
     DEP.Result.Value.Number, 
     DEP.Result.Unit,
     latitude = Org.Decimal.Latitude,
@@ -79,6 +79,42 @@ samples_df <- df %>%
   mutate(Activity.Start.Date.Time = mdy_hms(
           Activity.Start.Date.Time,
           tz = "UTC")) %>%
+  # === combine synonymous analytes
+  mutate(
+    analyte = case_when(
+      original.analyte.name == "Chlorophyll_a-_a_corrected" ~ "Chlorophyll_a",
+      original.analyte.name == "Chlorophyll_a-_a_uncorrected" ~ "Chlorophyll_a",
+      original.analyte.name == "Chlorophyll_a__free_of_pheophytin" ~ "Chlorophyll_a",
+
+      original.analyte.name == "Dissoved_Oxygen_CTD" ~ "Dissolved_Oxygen",
+      original.analyte.name == "Dissoved_Oxygen_Discrete" ~ "Dissolved_Oxygen",
+      original.analyte.name == "Oxygen__Dissolved " ~ "Dissolved_Oxygen",
+
+      original.analyte.name == "NO2+3__Filtered" ~ "Nitrate+Nitrite",
+      original.analyte.name == "Nitrate-Nitrite_N" ~ "Nitrate+Nitrite",
+      original.analyte.name == "Nitrogen__NO2_plus_NO3" ~ "Nitrate+Nitrite",
+
+      original.analyte.name == "Nitrogen-_Total" ~ "Total_Nitrogen",
+      original.analyte.name == "Nitrogen-_Total_Kjeldahl" ~ "Total_Nitrogen",
+      original.analyte.name == "Nitrogen__Kjeldahl__Total" ~ "Total_Nitrogen",
+      original.analyte.name == "Total_Kjeldahl_Nitrogen" ~ "Total_Nitrogen",
+
+      original.analyte.name == "Phosphorus-_Total" ~ "Total_Phosphorus",
+      original.analyte.name == "Phosphorus__Total__as_P__LL" ~ "Total_Phosphorus",
+
+      original.analyte.name == "Temperature__Water" ~ "Temperature",
+      original.analyte.name == "Water_Temperature" ~ "Temperature",
+      original.analyte.name == "Field_Temperature" ~ "Temperature",
+
+      original.analyte.name == "Field_pH" ~ "pH",
+
+      original.analyte.name == "Nitrate (N)" ~ "Nitrate",
+
+      original.analyte.name == "Nitrite (N)" ~ "Nitrite",
+
+      TRUE ~ original.analyte.name
+    )
+  ) %>%
   distinct()
 
 
@@ -98,9 +134,10 @@ sample_stats_df <- samples_df %>%
     max = max(DEP.Result.Value.Number),
     coefficient.of.variation = sd(DEP.Result.Value.Number) / mean(DEP.Result.Value.Number)
   ) %>%
-  # create column significant_trend
   mutate(
-    significant_trend = ifelse(z <= 0.05, slope, NA_real_)
+    # create column significant_slope
+    significant_slope = ifelse(z <= 0.05, slope, NA_real_),
+    pvalue = z
   )
 
 
@@ -184,36 +221,8 @@ tryCatch({
   print(e)
 })
 
-# tau 
 tryCatch({
-  # min
-  gt_tbl <- color_column(
-    gt_tbl, 
-    df      = sample_stats_df, 
-    column  = "tau", 
-    palette = scales::brewer_pal(palette = "Blues")(9)
-  )
-}, error = function(e) {
-  print("Error in tau color column")
-  print(e)
-})
-
-tryCatch({
-  # chi_square
-  gt_tbl <- color_column(
-    gt_tbl, 
-    df      = sample_stats_df, 
-    column  = "chi_square", 
-    palette = scales::brewer_pal(palette = "Blues")(9)
-  )
-}, error = function(e) {
-  print("Error in chi_square color column")
-  print(e)
-})
-
-
-tryCatch({
-  # Z
+  # pvalue Z
   gt_tbl <- color_column(
     gt_tbl, 
     df      = sample_stats_df, 
@@ -222,6 +231,23 @@ tryCatch({
   )
 }, error = function(e) {
   print("Error in z color column")
+  print(e)
+})
+
+# slope blue (-) to red (+) (0 centered)
+tryCatch({
+  min_slope <- min(sample_stats_df$significant_slope,  na.rm = TRUE)
+  max_slope <- max(sample_stats_df$significant_slope,  na.rm = TRUE)
+  max_abs_slope <- max(abs(min_slope), abs(max_slope))
+  gt_tbl <- color_column(
+    gt_tbl, 
+    df     = sample_stats_df, 
+    column = "significant_slope",
+    palette = rev(brewer.pal(11, "RdBu")),
+    domain  = c(-max_abs_slope, max_abs_slope)
+  )
+}, error = function(e) {
+  print("Error in significant_slope color column")
   print(e)
 })
 
