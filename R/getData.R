@@ -123,9 +123,120 @@ getData <- function(programName) {
     }
   }
 
+  # preserve original analyte names
+  df$original.analyte.name <- df$DEP.Analyte.Name
 
   # replace spaces, parentheses, commas in DEP.Analyte.Name
   df$DEP.Analyte.Name <- gsub("[ \\(\\)|,]", "_", df$DEP.Analyte.Name)
+
+
+  # === combine synonymous analytes
+  df <- df %>% 
+  mutate(
+    DEP.Analyte.Name = case_when(
+    original.analyte.name == "Temperature"                                 ~ "Temperature",
+    original.analyte.name == "Salinity"                                    ~ "Salinity",
+    original.analyte.name == "Ammonium"                                    ~ "Ammonium",
+    original.analyte.name == "Chlorophyll_a"                               ~ "Chlorophyll_a",
+    original.analyte.name == "Pheophytin"                                  ~ "Pheophytin",
+    original.analyte.name == "Dissolved_Oxygen__Discrete_"                 ~ "Dissolved_Oxygen",
+    original.analyte.name == "Dissolved_Oxygen__CTD_"                      ~ "Dissolved_Oxygen",
+    original.analyte.name == "Dissolved_Oxygen"                            ~ "Dissolved_Oxygen",
+    original.analyte.name == "Water_Temperature"                           ~ "Temperature",
+    original.analyte.name == "pH"                                          ~ "pH",
+    original.analyte.name == "Specific_Conductivity"                       ~ "Specific_Conductivity",
+    original.analyte.name == "Turbidity"                                   ~ "Turbidity",
+    original.analyte.name == "Total_Kjeldahl_Nitrogen"                     ~ "Total_Kjeldahl_Nitrogen",
+    original.analyte.name == "NO2+3__Filtered"                             ~ "Nitrate+Nitrite",
+    original.analyte.name == "Total_Nitrogen"                              ~ "Total_Nitrogen",
+    original.analyte.name == "Fecal_Coliforms"                             ~ "Fecal_Coliforms",
+    original.analyte.name == "Enterococci"                                 ~ "Enterococci",
+    original.analyte.name == "Field_pH"                                    ~ "pH",
+    original.analyte.name == "Field_Temperature"                           ~ "Temperature",
+    original.analyte.name == "Field_Specific_Conductance"                  ~ "Specific_Conductivity",
+    original.analyte.name == "Oxygen__Dissolved"                           ~ "Dissolved_Oxygen",
+    original.analyte.name == "Nitrogen__Ammonia"                           ~ "Nitrogen__Ammonia",
+    original.analyte.name == "Nitrogen__Kjeldahl__Total"                   ~ "Total_Kjeldahl_Nitrogen",
+    original.analyte.name == "Nitrogen__NO2_plus_NO3"                      ~ "Nitrate+Nitrite",
+    original.analyte.name == "Ammonia__N_"                                 ~ "Ammonia__N",
+    original.analyte.name == "Temperature__Water"                          ~ "Temperature",
+    original.analyte.name == "Nitrogen-_Total_Kjeldahl"                    ~ "Total_Kjeldahl_Nitrogen",
+    original.analyte.name == "Nitrate-Nitrite__N_"                         ~ "Nitrate+Nitrite",
+    original.analyte.name == "Chlorophyll_a__free_of_pheophytin"           ~ "Chlorophyll_a",
+    original.analyte.name == "Orthophosphate__P_"                          ~ "Orthophosphate",
+    original.analyte.name == "Chlorophyll_a-_corrected"                    ~ "Chlorophyll_a",
+    original.analyte.name == "Chlorophyll_a__corrected_for_pheophytin"     ~ "Chlorophyll_a",
+    original.analyte.name == "Dissolved_oxygen__DO_"                       ~ "Dissolved_Oxygen",
+    original.analyte.name == "Phosphorus__orthophosphate_as_P"             ~ "Orthophosphate",
+    original.analyte.name == "Temperature__water"                          ~ "Temperature",
+    original.analyte.name == "Nitrogen__Kjeldahl"                          ~ "Total_Kjeldahl_Nitrogen",
+    original.analyte.name == "Chlorophyll_a__uncorrected_for_pheophytin"   ~ "Chlorophyll_a"
+
+
+    original.analyte.name == "Nitrite"                                     ~ "Nitrite",
+    original.analyte.name == "Nitrite__N_"                                 ~ "Nitrite",
+
+    original.analyte.name == "Nitrate"                                     ~ "Nitrate",
+    
+    original.analyte.name == "Nitrate+Nitrite"                             ~ "Nitrate+Nitrite",
+    original.analyte.name == "Nitrogen__Nitrite__NO2__+_Nitrate__NO3__as_N"~ "Nitrate+Nitrite",
+
+    original.analyte.name == "Nitrogen__ammonia__NH3__+_ammonium__NH4_"    ~ "Nitrogen__ammonia__NH3__+_ammonium__NH4_",
+    original.analyte.name == "Nitrogen-_Total"                             ~ "Total_Nitrogen",
+    original.analyte.name == "Chlorophyll_a-_uncorrected"                  ~ "Chlorophyll_a",
+    original.analyte.name == "Nitrate__N_"                                 ~ "Nitrate",
+    original.analyte.name == "Nitrogen__ammonia_as_N"                      ~ "Nitrogen__ammonia_as_N",
+    original.analyte.name == "Nitrogen__Nitrate__NO3__as_N"                ~ "Nitrate",
+    original.analyte.name == "Nitrogen__Nitrite__NO2__as_N"                ~ "Nitrite",
+    original.analyte.name == "Nitrogen__ammonia__NH3__as_NH3"              ~ "Nitrogen__ammonia__NH3__as_NH3",
+    original.analyte.name == "Nitrogen__Nitrate__NO3__as_NO3"              ~ "Nitrate",
+    original.analyte.name == "Nitrogen__Nitrite__NO2__as_NO2"              ~ "Nitrite",
+
+
+    original.analyte.name == "Phosphorus__Total__as_P__LL"                 ~ "Phosphorus",
+    original.analyte.name == "Phosphate"                                   ~ "Phosphate",
+    original.analyte.name == "Total_Phosphorus"                            ~ "Phosphorus",
+    original.analyte.name == "Phosphorus-_Total"                           ~ "Phosphorus",
+    original.analyte.name == "Phosphorus_as_P"                             ~ "Phosphorus",
+
+    original.analyte.name == "Silica__SiO2_"                               ~ "Silicate",
+    original.analyte.name == "Silicate"                                    ~ "Silicate",
+
+    TRUE ~ original.analyte.name
+    )
+  )
+
+  # convert all analyte values to mg/L using DEP.Result.Unit
+  convertUMolToMgPerL <- function(x, analyte) {
+    if (analyte == "Nitrite") {
+      return(x * 0.0461)
+    } else if (analyte == "Nitrate") {
+      return(x * 0.0620)
+    } else if (analyte == "Nitrate+Nitrite") {
+      return(x * 0.108)
+    } else if (analyte == "Ammonium") {
+      return(x * 0.018)
+    } else if (analyte == "Phosphate") {
+      return(x * 0.095)
+    } else if (analyte == "Phosphorus") {
+      return(x * 0.031)
+    } else if (analyte == "Silicate") {
+      return(x * 0.0601)
+    }
+  }
+
+  df <- df %>% 
+    mutate(
+      DEP.Result.Value.Number = case_when(
+        DEP.Result.Unit == "mg/L" ~ DEP.Result.Value.Number,
+        DEP.Result.Unit == "ppm" ~ DEP.Result.Value.Number * 1000,
+        DEP.Result.Unit == "mg/m3" ~ DEP.Result.Value.Number / 1000,
+        DEP.Result.Unit == "umol/L" ~ convertUMolToMgPerL(
+          DEP.Result.Value.Number, DEP.Analyte.Name),
+        TRUE ~ DEP.Result.Value.Number
+      )
+    )
+
 
   # cat("===========================================\n")
   return(df)

@@ -64,7 +64,7 @@ samples_df <- df %>%
     program, 
     Monitoring.Location.ID, 
     Activity.Start.Date.Time,
-    original.analyte.name = DEP.Analyte.Name,
+    analyte = DEP.Analyte.Name,
     DEP.Result.Value.Number, 
     DEP.Result.Unit,
     latitude = Org.Decimal.Latitude,
@@ -79,45 +79,6 @@ samples_df <- df %>%
   mutate(Activity.Start.Date.Time = mdy_hms(
           Activity.Start.Date.Time,
           tz = "UTC")) %>%
-  # === combine synonymous analytes  TODO: move this to getData()?
-  mutate(
-    analyte = case_when(
-      original.analyte.name == "Chlorophyll_a-_a_corrected" ~ "Chlorophyll_a",
-      original.analyte.name == "Chlorophyll_a-_a_uncorrected" ~ "Chlorophyll_a",
-      original.analyte.name == "Chlorophyll_a__free_of_pheophytin" ~ "Chlorophyll_a",
-
-      # original.analyte.name == "Dissoved_Oxygen_CTD" ~ "Dissolved_Oxygen",
-      
-      original.analyte.name == "Dissoved_Oxygen_Discrete" ~ "Dissolved_Oxygen",
-      original.analyte.name == "Oxygen__Dissolved " ~ "Dissolved_Oxygen",
-
-      original.analyte.name == "NO2+3__Filtered" ~ "Nitrate+Nitrite",
-      original.analyte.name == "Nitrate-Nitrite_N" ~ "Nitrate+Nitrite",
-      original.analyte.name == "Nitrogen__NO2_plus_NO3" ~ "Nitrate+Nitrite",
-
-      original.analyte.name == "Nitrogen-_Total" ~ "Total_Nitrogen",
-      
-      original.analyte.name == "Nitrogen-_Total_Kjeldahl" ~ "Total_Kjeldahl_Nitrogen",
-      original.analyte.name == "Nitrogen__Kjeldahl__Total" ~ "Total_Kjeldahl_Nitrogen",
-      original.analyte.name == "Total_Kjeldahl_Nitrogen" ~ "Total_Kjeldahl_Nitrogen",
-
-      original.analyte.name == "Phosphorus-_Total" ~ "Total_Phosphorus",
-      original.analyte.name == "Phosphorus__Total__as_P__LL" ~ "Total_Phosphorus",
-
-      original.analyte.name == "Temperature__Water" ~ "Temperature",
-      original.analyte.name == "Water_Temperature" ~ "Temperature",
-      original.analyte.name == "Field_Temperature" ~ "Temperature",
-
-      original.analyte.name == "Field_pH" ~ "pH",
-
-      original.analyte.name == "Nitrate (N)" ~ "Nitrate",
-
-      original.analyte.name == "Nitrite (N)" ~ "Nitrite",
-
-      original.analyte.name == "Silica (SiO2)" ~ "Silicate"
-      TRUE ~ original.analyte.name
-    )
-  ) %>%
   distinct()
 
 
