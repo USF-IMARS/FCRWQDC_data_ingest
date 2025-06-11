@@ -1,71 +1,33 @@
 getListOfAnalytes <- function(){
   # NOTE: instead of reading all data here, we hardcode the list of analytes
   analytes <- c(
-    # === subset of desired analytes:
-    # higher priority:
-    "Chlorophyll a",
-    # "Chlorophyll a, free of pheophytin",
-    # "Chlorophyll a- corrected",
-    # "Chlorophyll a- uncorrected",
-
-    "Total Nitrogen",
-    # "Total Kjeldahl Nitrogen",
-    # "Nitrogen, Kjeldahl, Total",
-    # "Nitrogen- Total Kjeldahl",
-    # "Nitrogen- Total",
-
-    "Nitrite",
-    # "Nitrite (N)",
-    
-    "Nitrate",
-    # "Nitrate (N)",
-
-    "Nitrate+Nitrite",
-    # "NO2+3, Filtered",
-    # "Nitrate-Nitrite (N)",
-    # "Nitrogen, NO2 plus NO3",
-
-    "Ammonia (N)",
-    
-    "Total Phosphorus",
-    # "Phosphorus, Total (as P) LL",
-    # "Phosphorus- Total",
-   
-    "Orthophosphate (P)",
-    
-    "Silicate",
-    #"Silica (SiO2)",
-    
-    
-    "Turbidity",
-
-    # lower priority:
-    "Salinity",
-
-    "pH",
-    # "Field pH",
-
-    "Dissolved Oxygen",
-    # "Dissolved Oxygen (Discrete)",
-    # "Dissolved Oxygen (CTD)",
-    # "Oxygen, Dissolved",
-
-    "Water Temperature",
-    # "Temperature, Water",
-    # "Temperature",
-    # "Field Temperature",
-    # "Temperature, Water"
-
-
-    # other analytes (as reported by index.md 2025-05)
+    # === subset of desired analytes
+    # NOTE: this should align with getData
     "Ammonium",
-    "Phosphate",
-    "Pheophytin",
-    "Specific Conductivity",
-    "Fecal Coliforms",
+    "Ammonia__N",
+    "Chlorophyll_a",
+    "Dissolved_Oxygen",
+    "Specific_Conductivity",
+    "Fecal_Coliforms",
     "Enterococci",
-    "Field Specific Conductance",
-    "Nitrogen, Ammonia"
+    "Nitrogen__Ammonia",
+    "Nitrate",
+    "Nitrite",
+    "Nitrate+Nitrite",
+    "Nitrogen__ammonia__NH3__+_ammonium__NH4_",
+    "Nitrogen__ammonia_as_N",
+    "Nitrogen__ammonia__NH3__as_NH3",
+    "Total_Nitrogen",
+    "Orthophosphate",
+    "Phosphorus",
+    "Pheophytin",
+    "Temperature",
+    "Total_Nitrogen",
+    "Total_Kjeldahl_Nitrogen",
+    "Silicate",
+    "Turbidity",
+    "pH",
+    "Salinity
   )
   analytes <- gsub("[ \\(\\)|,]", "_", analytes)
 
