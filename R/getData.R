@@ -222,32 +222,22 @@ getData <- function(programName) {
   )
 
   # convert all analyte values to mg/L using DEP.Result.Unit
-  convertUMolToMgPerL <- function(x, analyte) {
-    if (analyte == "Nitrite") {
-      return(x * 0.0461)
-    } else if (analyte == "Nitrate") {
-      return(x * 0.0620)
-    } else if (analyte == "Nitrate+Nitrite") {
-      return(x * 0.108)
-    } else if (analyte == "Ammonium") {
-      return(x * 0.018)
-    } else if (analyte == "Phosphate") {
-      return(x * 0.095)
-    } else if (analyte == "Phosphorus") {
-      return(x * 0.031)
-    } else if (analyte == "Silicate") {
-      return(x * 0.0601)
-    }
-  }
-
   df <- df %>% 
     mutate(
       DEP.Result.Value.Number = case_when(
         DEP.Result.Unit == "mg/L" ~ DEP.Result.Value.Number,
         DEP.Result.Unit == "ppm" ~ DEP.Result.Value.Number * 1000,
         DEP.Result.Unit == "mg/m3" ~ DEP.Result.Value.Number / 1000,
-        DEP.Result.Unit == "umol/L" ~ convertUMolToMgPerL(
-          DEP.Result.Value.Number, DEP.Analyte.Name),
+        DEP.Result.Unit == "umol/L" ~ case_when(
+          DEP.Analyte.Name == "Nitrite" ~ DEP.Result.Value.Number * 0.0461,
+          DEP.Analyte.Name == "Nitrate" ~ DEP.Result.Value.Number * 0.0620, 
+          DEP.Analyte.Name == "Nitrate+Nitrite" ~ DEP.Result.Value.Number * 0.108,
+          DEP.Analyte.Name == "Ammonium" ~ DEP.Result.Value.Number * 0.018,
+          DEP.Analyte.Name == "Orthophosphate" ~ DEP.Result.Value.Number * 0.095,
+          DEP.Analyte.Name == "Phosphorus" ~ DEP.Result.Value.Number * 0.031,
+          DEP.Analyte.Name == "Silicate" ~ DEP.Result.Value.Number * 0.0601,
+          TRUE ~ DEP.Result.Value.Number
+        ),
         TRUE ~ DEP.Result.Value.Number
       )
     )
