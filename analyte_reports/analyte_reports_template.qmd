@@ -140,6 +140,12 @@ sample_stats_df <- samples_df %>%
     # create column significant_slope
     significant_slope = ifelse(z <= 0.05, slope, NA_real_),
     pvalue = z
+  ) %>%
+  # drop unwanted columns added by seasonalMannKendall
+  select(
+    -z,
+    -tau,
+    -chi_square
   )
 
 
