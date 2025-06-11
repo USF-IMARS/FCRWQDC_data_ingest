@@ -33,9 +33,9 @@ getListOfAnalytes <- function(){
    
     "Orthophosphate (P)",
     
-    "Silica (SiO2)",
-    
     "Silicate",
+    #"Silica (SiO2)",
+    
     
     "Turbidity",
 

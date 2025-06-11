@@ -79,7 +79,7 @@ samples_df <- df %>%
   mutate(Activity.Start.Date.Time = mdy_hms(
           Activity.Start.Date.Time,
           tz = "UTC")) %>%
-  # === combine synonymous analytes
+  # === combine synonymous analytes  TODO: move this to getData()?
   mutate(
     analyte = case_when(
       original.analyte.name == "Chlorophyll_a-_a_corrected" ~ "Chlorophyll_a",
@@ -114,6 +114,7 @@ samples_df <- df %>%
 
       original.analyte.name == "Nitrite (N)" ~ "Nitrite",
 
+      original.analyte.name == "Silica (SiO2)" ~ "Silicate"
       TRUE ~ original.analyte.name
     )
   ) %>%
