@@ -1,4 +1,4 @@
-"","program","Monitoring.Location.ID","slope","tau","chi_square","z","n_values","mean","min","max","coefficient.of.variation","significant_trend","pvalue"
+"","program","Monitoring.Location.ID","slope","tau","chi_square","z","n_values","mean","min","max","coefficient.of.variation","significant_slope","pvalue"
 "1","BBAP","BB14",NA,NA,NA,NA,3,30.18,27.22,31.94,0.0854434007225246,NA,NA
 "2","BBAP","DM08",NA,NA,NA,NA,2,28.325,25.24,31.41,0.154028202645049,NA,NA
 "3","BBAP","JFK03",NA,NA,NA,NA,2,28.795,25.4,32.19,0.166739192368698,NA,NA
