@@ -27,9 +27,8 @@ getListOfAnalytes <- function(){
     "Silicate",
     "Turbidity",
     "pH",
-    "Salinity
+    "Salinity"
   )
-  analytes <- gsub("[ \\(\\)|,]", "_", analytes)
 
   return(analytes)
 }
