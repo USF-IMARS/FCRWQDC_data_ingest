@@ -140,7 +140,7 @@ getData <- function(programName) {
 
     original.analyte.name == "Chlorophyll_a"                               ~ "Chlorophyll_a",
     original.analyte.name == "Chlorophyll_a-_uncorrected"                  ~ "Chlorophyll_a",
-    original.analyte.name == "Chlorophyll_a__uncorrected_for_pheophytin"   ~ "Chlorophyll_a"
+    original.analyte.name == "Chlorophyll_a__uncorrected_for_pheophytin"   ~ "Chlorophyll_a",
     original.analyte.name == "Chlorophyll_a__free_of_pheophytin"           ~ "Chlorophyll_a",
     original.analyte.name == "Chlorophyll_a-_corrected"                    ~ "Chlorophyll_a",
     original.analyte.name == "Chlorophyll_a__corrected_for_pheophytin"     ~ "Chlorophyll_a",
