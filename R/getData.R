@@ -133,10 +133,16 @@ getData <- function(programName) {
   # === combine synonymous analytes
   df <- df %>% 
   mutate(
+
     DEP.Analyte.Name = case_when(
     original.analyte.name == "Ammonium"                                    ~ "Ammonium",
 
+    original.analyte.name == "Nitrogen__ammonia__NH3__+_ammonium__NH4_"    ~ "Ammonia_plus_Ammonium",
+
+    original.analyte.name == "Nitrogen__ammonia_as_N"                      ~ "Ammonia",
+    original.analyte.name == "Nitrogen__ammonia__NH3__as_NH3"              ~ "Ammonia",
     original.analyte.name == "Ammonia__N_"                                 ~ "Ammonia",
+    original.analyte.name == "Nitrogen__Ammonia"                           ~ "Ammonia",
 
     original.analyte.name == "Chlorophyll_a"                               ~ "Chlorophyll_a",
     original.analyte.name == "Chlorophyll_a-_uncorrected"                  ~ "Chlorophyll_a",
@@ -157,8 +163,6 @@ getData <- function(programName) {
     original.analyte.name == "Fecal_Coliforms"                             ~ "Fecal_Coliforms",
 
     original.analyte.name == "Enterococci"                                 ~ "Enterococci",
-
-    original.analyte.name == "Nitrogen__Ammonia"                           ~ "Nitrogen__Ammonia",
     
     original.analyte.name == "Nitrite"                                     ~ "Nitrite",
     original.analyte.name == "Nitrite__N_"                                 ~ "Nitrite",
@@ -176,13 +180,7 @@ getData <- function(programName) {
     original.analyte.name == "Nitrate-Nitrite__N_"                         ~ "Nitrate+Nitrite",
     original.analyte.name == "Nitrogen__NO2_plus_NO3"                      ~ "Nitrate+Nitrite",
     
-    original.analyte.name == "Nitrogen__ammonia__NH3__+_ammonium__NH4_"    ~ "Nitrogen__ammonia__NH3__+_ammonium__NH4_",
 
-    original.analyte.name == "Nitrogen__ammonia_as_N"                      ~ "Nitrogen__ammonia_as_N",
-
-    original.analyte.name == "Nitrogen__ammonia__NH3__as_NH3"              ~ "Nitrogen__ammonia__NH3__as_NH3",
-
-    original.analyte.name == "Nitrogen-_Total"                             ~ "Total_Nitrogen",
 
     original.analyte.name == "Orthophosphate__P_"                          ~ "Orthophosphate",
     original.analyte.name == "Phosphorus__orthophosphate_as_P"             ~ "Orthophosphate",
@@ -210,6 +208,7 @@ getData <- function(programName) {
     original.analyte.name == "Water_Temperature"                           ~ "Temperature",
 
     original.analyte.name == "Total_Nitrogen"                              ~ "Total_Nitrogen",
+    original.analyte.name == "Nitrogen-_Total"                             ~ "Total_Nitrogen",
 
     original.analyte.name == "Total_Kjeldahl_Nitrogen"                     ~ "Total_Kjeldahl_Nitrogen",
     original.analyte.name == "Nitrogen__Kjeldahl"                          ~ "Total_Kjeldahl_Nitrogen",
@@ -220,6 +219,7 @@ getData <- function(programName) {
     TRUE ~ original.analyte.name
     )
   )
+
 
   # convert all analyte values to mg/L using DEP.Result.Unit
   df <- df %>% 
