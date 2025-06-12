@@ -9,6 +9,7 @@ source(here::here("R/getSFERData.R"))
 source(here::here("R/getSTORETData.R"))
 source(here::here("R/getWINData.R"))
 source(here::here("R/getMiamiBeachData.R"))
+source(here::here("R/getFIUData.R"))
 
 # Main function to get data for a specific program
 getData <- function(programName) {
@@ -67,12 +68,15 @@ getData <- function(programName) {
     # cat("-------------------------\n")
     
   } else if (programName == "MiamiBeach") {
-    df <- getMiamiBeachData("MiamiBeach")
-  } else if (programName == "FIU") {
-    df <- getWINData("FIU")
-    df2 <- getFIUData("FIU")
+    df <- getMiamiBeachData(programName)
+  } else if (programName == "FIU_WQMP") {
+    df1 <- getWINData(programName)
+    # cat("nrows WIN: ", nrow(df), "\n")
+    df2 <- getFIUData()
+    # cat("nrows FIU: ", nrow(df2), "\n")
     # combine dataframes
-    df <- bind_rows(df, df2)
+    df <- bind_rows(df1, df2)
+    # cat("nrows combined: ", nrow(df), "\n")
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
@@ -240,8 +244,6 @@ getData <- function(programName) {
         TRUE ~ DEP.Result.Value.Number
       )
     )
-
-
   # cat("===========================================\n")
   return(df)
 }
