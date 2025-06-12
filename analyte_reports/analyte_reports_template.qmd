@@ -12,8 +12,26 @@ params:
 library('here')
 library('dplyr')
 source(here("R/getAllData.R"))
-full_df <- getAllData()
-df <- filter(full_df, DEP.Analyte.Name == params$analyte)
+
+# read from all source files
+# full_df <- getAllData() %>%
+#   mutate(
+#     source = program,
+#     site = Monitoring.Location.ID,
+#     datetime = Activity.Start.Date.Time,
+#     analyte = DEP.Analyte.Name,
+#     value = DEP.Result.Value.Number,
+#     units = DEP.Result.Unit,
+#     latitude = Org.Decimal.Latitude,
+#     longitude = Org.Decimal.Longitude,
+#     sample_depth = Activity.Depth,
+#     .keep = "none"
+# )
+
+# read from cached file produced by index.qmd
+full_df <- read.csv(here("data", "exports", "allData.csv"))
+
+df <- filter(full_df, analyte == params$analyte)
 ```
 
 ```{R, create .csv of analyte data}
@@ -21,30 +39,18 @@ df <- filter(full_df, DEP.Analyte.Name == params$analyte)
 # save df to csv
 # reduce to only cols we need & save to csv
 df %>%
-  mutate(
-    source = program,
-    site = Monitoring.Location.ID,
-    datetime = Activity.Start.Date.Time,
-    analyte = DEP.Analyte.Name,
-    value = DEP.Result.Value.Number,
-    units = DEP.Result.Unit,
-    latitude = Org.Decimal.Latitude,
-    longitude = Org.Decimal.Longitude,
-    sample_depth = Activity.Depth,
-    .keep = "none"
-) %>%
   write.csv(here("data", "exports", "unified-wq-db-samples", paste0(params$analyte, ".csv")))
 ```
 
 Download data for this analyte [here](data/exports/`r params$analyte`.csv)
 
-### Histogram of `DEP.Result.Value.Number`:
+### Histogram of `value`:
 
 ```{R, display histogram of values}
 #| code-summary: display histogram of values
 
 library(ggplot2)
-ggplot(df, aes(x = DEP.Result.Value.Number)) +
+ggplot(df, aes(x = value)) +
   geom_histogram(bins = 30, fill = "blue", color = "black") +
   labs(title = "Histogram of Values", x = "Value", y = "Count")
 ```
@@ -60,43 +66,32 @@ library(pander)  # for display
 
 # create table of samples for each station
 samples_df <- df %>%
-  select(
-    program, 
-    Monitoring.Location.ID, 
-    Activity.Start.Date.Time,
-    analyte = DEP.Analyte.Name,
-    DEP.Result.Value.Number, 
-    DEP.Result.Unit,
-    latitude = Org.Decimal.Latitude,
-    longitude = Org.Decimal.Longitude,
-    sample_depth = Activity.Depth
-    ) %>%
   # drop any with empty Monitoring.Location.ID
-  filter(!is.na(Monitoring.Location.ID)) %>%
+  filter(!is.na(site)) %>%
   # drop any with empty Activity.Start.Date.Time
-  filter(!is.na(Activity.Start.Date.Time)) %>%
+  filter(!is.na(datetime)) %>%
   # parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct
-  mutate(Activity.Start.Date.Time = mdy_hms(
-          Activity.Start.Date.Time,
+  mutate(datetime = mdy_hms(
+          datetime,
           tz = "UTC")) %>%
   distinct()
 
 
 # add statistics for each station
 sample_stats_df <- samples_df %>%
-  group_by(program, Monitoring.Location.ID) %>%
+  group_by(source, site) %>%
   reframe(
     {
       tmp <- seasonalMannKendallVectorized(
-        Activity.Start.Date.Time,
-        DEP.Result.Value.Number
+        datetime,
+        value
       )
     },
     n_values = n(),
-    mean = mean(DEP.Result.Value.Number),
-    min = min(DEP.Result.Value.Number),
-    max = max(DEP.Result.Value.Number),
-    coefficient.of.variation = sd(DEP.Result.Value.Number) / mean(DEP.Result.Value.Number)
+    mean = mean(value),
+    min = min(value),
+    max = max(value),
+    coefficient.of.variation = sd(value) / mean(value)
   ) %>%
   mutate(
     # create column significant_slope
@@ -299,7 +294,7 @@ gt_tbl
 #| code-summary: display reporting programs
 
 library(ggplot2)
-ggplot(df, aes(x = program)) +
+ggplot(df, aes(x = source)) +
   geom_bar() +
   labs(title = "Reporting Programs", x = "Program", y = "Count")
 ```
