@@ -2,16 +2,9 @@ library(here)
 library(dplyr)
 library(tidyr)
 
-source(here("R/getFpath.R"))
-
-
 
 getFIUData <- function(programName=NULL, fpath=NULL) {
-  fpath <- getFpath(
-    programName, 
-    fpath, 
-    here("data/FIU_recent_all.csv")
-  )
+  fpath <- here("data", "FIU_recent_all.csv")
 
   df <- read.csv(fpath)
 
@@ -34,9 +27,11 @@ getFIUData <- function(programName=NULL, fpath=NULL) {
   df <- df %>%
     mutate(
       Monitoring.Location.ID = as.character(Station),
-      Activity.Start.Date.Time = Date,
-      program = "FIU"
+      # format date from `%m/%d/%Y %H:%M` to `%Y-%m-%d %H:%M:%S`
+      Activity.Start.Date.Time = format(
+        as.POSIXct(Date, format = "%m/%d/%Y %H:%M"),
+        "%Y/%m/%d %H:%M:%S"),
+      program = "FIU_WQMP"
     )
-
   return(df)
 }
