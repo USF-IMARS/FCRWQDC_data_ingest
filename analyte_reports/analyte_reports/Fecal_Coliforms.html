@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#histogram-of-dep.result.value.number" id="toc-histogram-of-dep.result.value.number" class="nav-link active" data-scroll-target="#histogram-of-dep.result.value.number">Histogram of <code>DEP.Result.Value.Number</code>:</a></li>
+  <li><a href="#histogram-of-value" id="toc-histogram-of-value" class="nav-link active" data-scroll-target="#histogram-of-value">Histogram of <code>value</code>:</a></li>
   <li><a href="#station-statistics" id="toc-station-statistics" class="nav-link" data-scroll-target="#station-statistics">Station Statistics:</a></li>
   <li><a href="#reporting-programs" id="toc-reporting-programs" class="nav-link" data-scroll-target="#reporting-programs">Reporting Programs:</a></li>
   </ul>
@@ -188,8 +188,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'here'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'dplyr'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getAllData.R"</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>full_df <span class="ot">&lt;-</span> <span class="fu">getAllData</span>()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">filter</span>(full_df, DEP.Analyte.Name <span class="sc">==</span> params<span class="sc">$</span>analyte)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># read from all source files</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># full_df &lt;- getAllData() %&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     source = program,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     site = Monitoring.Location.ID,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     datetime = Activity.Start.Date.Time,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     analyte = DEP.Analyte.Name,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     value = DEP.Result.Value.Number,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     units = DEP.Result.Unit,</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     latitude = Org.Decimal.Latitude,</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     longitude = Org.Decimal.Longitude,</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     sample_depth = Activity.Depth,</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     .keep = "none"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># read from cached file produced by index.qmd</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>full_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">filter</span>(full_df, analyte <span class="sc">==</span> params<span class="sc">$</span>analyte)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -198,29 +216,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save df to csv</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce to only cols we need &amp; save to csv</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> program,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> Monitoring.Location.ID,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">datetime =</span> Activity.Start.Date.Time,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Download data for this analyte <a href="data/exports/Fecal_Coliforms.csv">here</a></p>
-<section id="histogram-of-dep.result.value.number" class="level3">
-<h3 class="anchored" data-anchor-id="histogram-of-dep.result.value.number">Histogram of <code>DEP.Result.Value.Number</code>:</h3>
+<section id="histogram-of-value" class="level3">
+<h3 class="anchored" data-anchor-id="histogram-of-value">Histogram of <code>value</code>:</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>display histogram of values</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> DEP.Result.Value.Number)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Values"</span>, <span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -244,61 +250,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create table of samples for each station</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>samples_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    program, </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Monitoring.Location.ID, </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Activity.Start.Date.Time,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Value.Number, </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Unit,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Activity.Start.Date.Time =</span> <span class="fu">mdy_hms</span>(</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>          Activity.Start.Date.Time,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop unwanted columns added by seasonalMannKendall</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>z,</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>tau,</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>chi_square</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(site)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(datetime)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">datetime =</span> <span class="fu">mdy_hms</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>          datetime,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source, site) <span class="sc">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        datetime,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        value</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(value),</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(value) <span class="sc">/</span> <span class="fu">mean</span>(value)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop unwanted columns added by seasonalMannKendall</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>z,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>tau,</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>chi_square</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -437,111 +432,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in mean color column"</span>)</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in mean color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in n_values color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in min color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in max color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in coefficient.of.variation color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="obthhnybmo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#obthhnybmo table {
+<div id="lbxrrugbco" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lbxrrugbco table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#obthhnybmo thead, #obthhnybmo tbody, #obthhnybmo tfoot, #obthhnybmo tr, #obthhnybmo td, #obthhnybmo th {
+#lbxrrugbco thead, #lbxrrugbco tbody, #lbxrrugbco tfoot, #lbxrrugbco tr, #lbxrrugbco td, #lbxrrugbco th {
   border-style: none;
 }
 
-#obthhnybmo p {
+#lbxrrugbco p {
   margin: 0;
   padding: 0;
 }
 
-#obthhnybmo .gt_table {
+#lbxrrugbco .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -567,12 +532,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_caption {
+#lbxrrugbco .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#obthhnybmo .gt_title {
+#lbxrrugbco .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -584,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#obthhnybmo .gt_subtitle {
+#lbxrrugbco .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -596,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#obthhnybmo .gt_heading {
+#lbxrrugbco .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -608,13 +573,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_bottom_border {
+#lbxrrugbco .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_col_headings {
+#lbxrrugbco .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -629,7 +594,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_col_heading {
+#lbxrrugbco .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -649,7 +614,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#obthhnybmo .gt_column_spanner_outer {
+#lbxrrugbco .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -661,15 +626,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#obthhnybmo .gt_column_spanner_outer:first-child {
+#lbxrrugbco .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#obthhnybmo .gt_column_spanner_outer:last-child {
+#lbxrrugbco .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#obthhnybmo .gt_column_spanner {
+#lbxrrugbco .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -681,11 +646,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#obthhnybmo .gt_spanner_row {
+#lbxrrugbco .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#obthhnybmo .gt_group_heading {
+#lbxrrugbco .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -711,7 +676,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#obthhnybmo .gt_empty_group_heading {
+#lbxrrugbco .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -726,15 +691,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#obthhnybmo .gt_from_md > :first-child {
+#lbxrrugbco .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#obthhnybmo .gt_from_md > :last-child {
+#lbxrrugbco .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#obthhnybmo .gt_row {
+#lbxrrugbco .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -753,7 +718,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#obthhnybmo .gt_stub {
+#lbxrrugbco .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -766,7 +731,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#obthhnybmo .gt_stub_row_group {
+#lbxrrugbco .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -780,15 +745,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#obthhnybmo .gt_row_group_first td {
+#lbxrrugbco .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#obthhnybmo .gt_row_group_first th {
+#lbxrrugbco .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#obthhnybmo .gt_summary_row {
+#lbxrrugbco .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -798,16 +763,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#obthhnybmo .gt_first_summary_row {
+#lbxrrugbco .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_first_summary_row.thick {
+#lbxrrugbco .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#obthhnybmo .gt_last_summary_row {
+#lbxrrugbco .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -817,7 +782,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_grand_summary_row {
+#lbxrrugbco .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -827,7 +792,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#obthhnybmo .gt_first_grand_summary_row {
+#lbxrrugbco .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -837,7 +802,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_last_grand_summary_row_top {
+#lbxrrugbco .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -847,11 +812,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_striped {
+#lbxrrugbco .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#obthhnybmo .gt_table_body {
+#lbxrrugbco .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -860,7 +825,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_footnotes {
+#lbxrrugbco .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -874,7 +839,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_footnote {
+#lbxrrugbco .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -883,7 +848,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#obthhnybmo .gt_sourcenotes {
+#lbxrrugbco .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -897,7 +862,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#obthhnybmo .gt_sourcenote {
+#lbxrrugbco .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -905,81 +870,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#obthhnybmo .gt_left {
+#lbxrrugbco .gt_left {
   text-align: left;
 }
 
-#obthhnybmo .gt_center {
+#lbxrrugbco .gt_center {
   text-align: center;
 }
 
-#obthhnybmo .gt_right {
+#lbxrrugbco .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#obthhnybmo .gt_font_normal {
+#lbxrrugbco .gt_font_normal {
   font-weight: normal;
 }
 
-#obthhnybmo .gt_font_bold {
+#lbxrrugbco .gt_font_bold {
   font-weight: bold;
 }
 
-#obthhnybmo .gt_font_italic {
+#lbxrrugbco .gt_font_italic {
   font-style: italic;
 }
 
-#obthhnybmo .gt_super {
+#lbxrrugbco .gt_super {
   font-size: 65%;
 }
 
-#obthhnybmo .gt_footnote_marks {
+#lbxrrugbco .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#obthhnybmo .gt_asterisk {
+#lbxrrugbco .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#obthhnybmo .gt_indent_1 {
+#lbxrrugbco .gt_indent_1 {
   text-indent: 5px;
 }
 
-#obthhnybmo .gt_indent_2 {
+#lbxrrugbco .gt_indent_2 {
   text-indent: 10px;
 }
 
-#obthhnybmo .gt_indent_3 {
+#lbxrrugbco .gt_indent_3 {
   text-indent: 15px;
 }
 
-#obthhnybmo .gt_indent_4 {
+#lbxrrugbco .gt_indent_4 {
   text-indent: 20px;
 }
 
-#obthhnybmo .gt_indent_5 {
+#lbxrrugbco .gt_indent_5 {
   text-indent: 25px;
 }
 
-#obthhnybmo .katex-display {
+#lbxrrugbco .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#obthhnybmo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lbxrrugbco div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_col_headings">
-<th id="program" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">program</th>
-<th id="Monitoring.Location.ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Monitoring.Location.ID</th>
+<th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">source</th>
+<th id="site" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">site</th>
 <th id="slope" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">slope</th>
 <th id="n_values" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n_values</th>
 <th id="mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mean</th>
@@ -991,6 +956,846 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </thead>
 <tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#1</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F1; color: #000000">7.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">7</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F8FE; color: #000000">7</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#10</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">1.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#11</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE0D0; color: #000000">49.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D7E7F5; color: #000000">49</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D7E7F5; color: #000000">49</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#12</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F4A683; color: #000000">120.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #96C5DF; color: #000000">120</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #96C5DF; color: #000000">120</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#13</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">6.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">6</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">6</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#14</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE9DE; color: #000000">31.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #E3EEF9; color: #000000">31</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E3EEF9; color: #000000">31</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#15</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">3.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">3</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F6FAFF; color: #000000">3</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#16</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DD; color: #000000">32.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #E2EEF8; color: #000000">32</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">32</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#17</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DD; color: #000000">32.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #E2EEF8; color: #000000">32</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">32</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#18</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDBC7; color: #000000">60.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D0E2F2; color: #000000">60</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D0E2F2; color: #000000">60</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#19</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EA; color: #000000">16.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF5FC; color: #000000">16</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EDF5FC; color: #000000">16</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#2</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">12.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">12</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">12</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#20</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">9.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">9</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">9</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#21</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">5.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">5</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">5</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#22</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">3.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">3</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F6FAFF; color: #000000">3</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#23</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">18.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #ECF4FB; color: #000000">18</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">18</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#24</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">2.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FBFF; color: #000000">2</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F6FBFF; color: #000000">2</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#3</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">5.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">5</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">5</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#3A</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BC; color: #000000">70.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #CADEF0; color: #000000">70</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #CADEF0; color: #000000">70</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#3B</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #67001F; color: #FFFFFF">302.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #08306B; color: #FFFFFF">302</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #08306B; color: #FFFFFF">302</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#4</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">1.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#5</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">11.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F7FD; color: #000000">11</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F7FD; color: #000000">11</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#6</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F6AF8E; color: #000000">110.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #A2CCE2; color: #000000">110</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #A2CCE2; color: #000000">110</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#7</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">8.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FE; color: #000000">8</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FE; color: #000000">8</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#8</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">19.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EBF3FB; color: #000000">19</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">19</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">#9</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">10.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">10</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">10</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">1</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">10</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">11</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">12</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">13</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">14</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">15</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">16</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">17</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">18</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">19</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">2</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">9.363636</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E3EEF9; color: #000000">31</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #9CC9E1; color: #000000">1.225387</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">20</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">21</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">22</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">23</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">24</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">25</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #006529; color: #FFFFFF">10</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">26</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">27</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">28</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">29</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">3</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">30</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">31</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">11.545455</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D0E2F2; color: #000000">60</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #08306B; color: #FFFFFF">1.538402</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">32</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">33</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">34</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">35</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">36</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">37</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">38</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DE; color: #000000">31.818182</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #9AC8E0; color: #000000">117</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F7FBFF; color: #000000">1.034073</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">39</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">3A</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #30984E; color: #FFFFFF">8</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">3B</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #177F3B; color: #FFFFFF">9</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">3b</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">9.000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">9</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">9</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">4</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">40</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE6DA; color: #000000">36.363636</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">1</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #A2CCE2; color: #000000">110</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDE0F1; color: #000000">1.141517</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">41</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">5</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">6</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">7</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">8</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">MiamiBeach</td>
+<td class="gt_row gt_left" headers="site">9</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
 </tbody>
 </table>
 
@@ -1003,10 +1808,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>display reporting programs</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> program)) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>

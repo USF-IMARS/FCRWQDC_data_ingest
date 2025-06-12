@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#histogram-of-dep.result.value.number" id="toc-histogram-of-dep.result.value.number" class="nav-link active" data-scroll-target="#histogram-of-dep.result.value.number">Histogram of <code>DEP.Result.Value.Number</code>:</a></li>
+  <li><a href="#histogram-of-value" id="toc-histogram-of-value" class="nav-link active" data-scroll-target="#histogram-of-value">Histogram of <code>value</code>:</a></li>
   <li><a href="#station-statistics" id="toc-station-statistics" class="nav-link" data-scroll-target="#station-statistics">Station Statistics:</a></li>
   <li><a href="#reporting-programs" id="toc-reporting-programs" class="nav-link" data-scroll-target="#reporting-programs">Reporting Programs:</a></li>
   </ul>
@@ -188,8 +188,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'here'</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">'dplyr'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getAllData.R"</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>full_df <span class="ot">&lt;-</span> <span class="fu">getAllData</span>()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">filter</span>(full_df, DEP.Analyte.Name <span class="sc">==</span> params<span class="sc">$</span>analyte)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># read from all source files</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># full_df &lt;- getAllData() %&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     source = program,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     site = Monitoring.Location.ID,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     datetime = Activity.Start.Date.Time,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     analyte = DEP.Analyte.Name,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     value = DEP.Result.Value.Number,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     units = DEP.Result.Unit,</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     latitude = Org.Decimal.Latitude,</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     longitude = Org.Decimal.Longitude,</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     sample_depth = Activity.Depth,</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     .keep = "none"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># read from cached file produced by index.qmd</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>full_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>))</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">filter</span>(full_df, analyte <span class="sc">==</span> params<span class="sc">$</span>analyte)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -198,29 +216,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save df to csv</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce to only cols we need &amp; save to csv</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> program,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> Monitoring.Location.ID,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">datetime =</span> Activity.Start.Date.Time,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"unified-wq-db-samples"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Download data for this analyte <a href="data/exports/Pheophytin.csv">here</a></p>
-<section id="histogram-of-dep.result.value.number" class="level3">
-<h3 class="anchored" data-anchor-id="histogram-of-dep.result.value.number">Histogram of <code>DEP.Result.Value.Number</code>:</h3>
+<section id="histogram-of-value" class="level3">
+<h3 class="anchored" data-anchor-id="histogram-of-value">Histogram of <code>value</code>:</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>display histogram of values</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> DEP.Result.Value.Number)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Values"</span>, <span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -244,61 +250,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create table of samples for each station</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>samples_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    program, </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Monitoring.Location.ID, </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Activity.Start.Date.Time,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Value.Number, </span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Unit,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Activity.Start.Date.Time =</span> <span class="fu">mdy_hms</span>(</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>          Activity.Start.Date.Time,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop unwanted columns added by seasonalMannKendall</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>z,</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>tau,</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>chi_square</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(site)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(datetime)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">datetime =</span> <span class="fu">mdy_hms</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>          datetime,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source, site) <span class="sc">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        datetime,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        value</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(value),</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(value) <span class="sc">/</span> <span class="fu">mean</span>(value)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop unwanted columns added by seasonalMannKendall</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>z,</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>tau,</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>chi_square</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -483,23 +478,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="kvnrrzvcma" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kvnrrzvcma table {
+<div id="rxuettfthu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rxuettfthu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kvnrrzvcma thead, #kvnrrzvcma tbody, #kvnrrzvcma tfoot, #kvnrrzvcma tr, #kvnrrzvcma td, #kvnrrzvcma th {
+#rxuettfthu thead, #rxuettfthu tbody, #rxuettfthu tfoot, #rxuettfthu tr, #rxuettfthu td, #rxuettfthu th {
   border-style: none;
 }
 
-#kvnrrzvcma p {
+#rxuettfthu p {
   margin: 0;
   padding: 0;
 }
 
-#kvnrrzvcma .gt_table {
+#rxuettfthu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -525,12 +520,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_caption {
+#rxuettfthu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kvnrrzvcma .gt_title {
+#rxuettfthu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -542,7 +537,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#kvnrrzvcma .gt_subtitle {
+#rxuettfthu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -554,7 +549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#kvnrrzvcma .gt_heading {
+#rxuettfthu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -566,13 +561,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_bottom_border {
+#rxuettfthu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_col_headings {
+#rxuettfthu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -587,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_col_heading {
+#rxuettfthu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -607,7 +602,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#kvnrrzvcma .gt_column_spanner_outer {
+#rxuettfthu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -619,15 +614,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#kvnrrzvcma .gt_column_spanner_outer:first-child {
+#rxuettfthu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kvnrrzvcma .gt_column_spanner_outer:last-child {
+#rxuettfthu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kvnrrzvcma .gt_column_spanner {
+#rxuettfthu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -639,11 +634,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#kvnrrzvcma .gt_spanner_row {
+#rxuettfthu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kvnrrzvcma .gt_group_heading {
+#rxuettfthu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -669,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#kvnrrzvcma .gt_empty_group_heading {
+#rxuettfthu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -684,15 +679,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#kvnrrzvcma .gt_from_md > :first-child {
+#rxuettfthu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kvnrrzvcma .gt_from_md > :last-child {
+#rxuettfthu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kvnrrzvcma .gt_row {
+#rxuettfthu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -711,7 +706,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#kvnrrzvcma .gt_stub {
+#rxuettfthu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -724,7 +719,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kvnrrzvcma .gt_stub_row_group {
+#rxuettfthu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -738,15 +733,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#kvnrrzvcma .gt_row_group_first td {
+#rxuettfthu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kvnrrzvcma .gt_row_group_first th {
+#rxuettfthu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kvnrrzvcma .gt_summary_row {
+#rxuettfthu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -756,16 +751,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kvnrrzvcma .gt_first_summary_row {
+#rxuettfthu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_first_summary_row.thick {
+#rxuettfthu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kvnrrzvcma .gt_last_summary_row {
+#rxuettfthu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -775,7 +770,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_grand_summary_row {
+#rxuettfthu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -785,7 +780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kvnrrzvcma .gt_first_grand_summary_row {
+#rxuettfthu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -795,7 +790,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_last_grand_summary_row_top {
+#rxuettfthu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -805,11 +800,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_striped {
+#rxuettfthu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kvnrrzvcma .gt_table_body {
+#rxuettfthu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -818,7 +813,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_footnotes {
+#rxuettfthu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -832,7 +827,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_footnote {
+#rxuettfthu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -841,7 +836,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kvnrrzvcma .gt_sourcenotes {
+#rxuettfthu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -855,7 +850,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#kvnrrzvcma .gt_sourcenote {
+#rxuettfthu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -863,72 +858,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#kvnrrzvcma .gt_left {
+#rxuettfthu .gt_left {
   text-align: left;
 }
 
-#kvnrrzvcma .gt_center {
+#rxuettfthu .gt_center {
   text-align: center;
 }
 
-#kvnrrzvcma .gt_right {
+#rxuettfthu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kvnrrzvcma .gt_font_normal {
+#rxuettfthu .gt_font_normal {
   font-weight: normal;
 }
 
-#kvnrrzvcma .gt_font_bold {
+#rxuettfthu .gt_font_bold {
   font-weight: bold;
 }
 
-#kvnrrzvcma .gt_font_italic {
+#rxuettfthu .gt_font_italic {
   font-style: italic;
 }
 
-#kvnrrzvcma .gt_super {
+#rxuettfthu .gt_super {
   font-size: 65%;
 }
 
-#kvnrrzvcma .gt_footnote_marks {
+#rxuettfthu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kvnrrzvcma .gt_asterisk {
+#rxuettfthu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kvnrrzvcma .gt_indent_1 {
+#rxuettfthu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kvnrrzvcma .gt_indent_2 {
+#rxuettfthu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kvnrrzvcma .gt_indent_3 {
+#rxuettfthu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kvnrrzvcma .gt_indent_4 {
+#rxuettfthu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kvnrrzvcma .gt_indent_5 {
+#rxuettfthu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kvnrrzvcma .katex-display {
+#rxuettfthu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kvnrrzvcma div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rxuettfthu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -936,8 +931,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_col_headings">
-<th id="program" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">program</th>
-<th id="Monitoring.Location.ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Monitoring.Location.ID</th>
+<th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">source</th>
+<th id="site" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">site</th>
 <th id="slope" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">slope</th>
 <th id="n_values" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n_values</th>
 <th id="mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mean</th>
@@ -950,8 +945,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody class="gt_table_body">
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F2F5F6; color: #000000">-0.0071250000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBEAE1; color: #000000">0.27488235</td>
@@ -962,8 +957,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.287140e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">10</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">10</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0065000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #299149; color: #FFFFFF">49</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE9DF; color: #000000">0.29238776</td>
@@ -974,8 +969,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.198414e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">11</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">11</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">0.0018750000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFEA; color: #000000">0.16156863</td>
@@ -986,8 +981,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.030204e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">12</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">12</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">0.0049732143</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.09723529</td>
@@ -998,8 +993,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.566312e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">13</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">13</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F3F0; color: #000000">0.0080000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAECE4; color: #000000">0.23272549</td>
@@ -1010,8 +1005,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">8.740500e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">14</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">14</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F6; color: #000000">0.0013333333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.13467308</td>
@@ -1022,8 +1017,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.051892e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">15</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">15</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F6; color: #000000">0.0017500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.07975000</td>
@@ -1034,8 +1029,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.461132e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">15.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">15.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">0.0020000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #2D954C; color: #FFFFFF">48</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.06706250</td>
@@ -1046,8 +1041,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.244841e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">16</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">16</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F6F6F7; color: #000000">-0.0021428571</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DE; color: #000000">0.31507843</td>
@@ -1058,8 +1053,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">9.369873e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">17</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">17</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F6; color: #000000">0.0012708333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EA; color: #000000">0.15638462</td>
@@ -1070,8 +1065,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.979603e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">18</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">18</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">0.0020000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.10350980</td>
@@ -1082,8 +1077,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.525763e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">19</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">19</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0060000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEAE1; color: #000000">0.27159615</td>
@@ -1094,8 +1089,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.848424e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F4; color: #000000">0.0035571429</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">0.16713462</td>
@@ -1106,8 +1101,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.913260e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">20</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">20</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F3F0; color: #000000">0.0081250000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1A823D; color: #FFFFFF">53</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">0.18800000</td>
@@ -1118,8 +1113,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.113834e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">21.25</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">21.25</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F1; color: #000000">0.07300000</td>
@@ -1130,8 +1125,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">21.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">21.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F4; color: #000000">0.0041666667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F1; color: #000000">0.06878431</td>
@@ -1142,8 +1137,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.149749e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">21LK</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">21LK</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">0.0050000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #177E3A; color: #FFFFFF">54</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.12237037</td>
@@ -1154,8 +1149,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.603627e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">22</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">22</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F1; color: #000000">0.0072222222</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #177E3A; color: #FFFFFF">54</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.11107407</td>
@@ -1166,8 +1161,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.316282e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">22.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">22.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F4; color: #000000">0.0037083333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.07962000</td>
@@ -1178,8 +1173,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.129767e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">23</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">23</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">0.0048000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #177E3A; color: #FFFFFF">54</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">0.17353704</td>
@@ -1190,8 +1185,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.160728e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">24</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">24</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0061428571</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #177E3A; color: #FFFFFF">54</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEAE1; color: #000000">0.27237037</td>
@@ -1202,8 +1197,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.181742e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0062847222</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.13051923</td>
@@ -1214,8 +1209,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.080694e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">30</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">30</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9F1ED; color: #000000">0.0125000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEDE5; color: #000000">0.22011765</td>
@@ -1226,8 +1221,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.463184e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">30.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">30.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F2EF; color: #000000">0.0096250000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAECE3; color: #000000">0.24294118</td>
@@ -1238,8 +1233,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.073173e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">31</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">31</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE4D6; color: #000000">0.0400416667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.69888000</td>
@@ -1250,8 +1245,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.554059e-03</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">32</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">32</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAECE4; color: #000000">0.0230000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD9C4; color: #000000">0.62461538</td>
@@ -1262,8 +1257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.119863e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">33</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">33</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDCC8; color: #000000">0.0570000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD7C2; color: #000000">0.63970588</td>
@@ -1274,8 +1269,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.688638e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">34</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">34</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EB8F70; color: #000000">0.1360000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F6AE8D; color: #000000">1.10201923</td>
@@ -1286,8 +1281,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">9.604093e-05</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">39</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">39</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCCFB7; color: #000000">0.0720000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #43AC5E; color: #FFFFFF">42</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8B596; color: #000000">1.02533333</td>
@@ -1298,8 +1293,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.599892e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9F2EE; color: #000000">0.0105238095</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #4AAF61; color: #FFFFFF">41</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EB; color: #000000">0.14734146</td>
@@ -1310,8 +1305,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.849177e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">40</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">40</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE1D1; color: #000000">0.0461250000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #349C52; color: #FFFFFF">46</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAC0A4; color: #000000">0.89645652</td>
@@ -1322,8 +1317,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.554284e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">41</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">41</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCCDB5; color: #000000">0.0733750000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #299149; color: #FFFFFF">49</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8B799; color: #000000">0.99977551</td>
@@ -1334,8 +1329,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">8.161350e-03</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">42</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">42</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAECE4; color: #000000">0.0230000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDBC6; color: #000000">0.60426000</td>
@@ -1346,8 +1341,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.074187e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">45</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">45</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBE7DC; color: #000000">0.0328571429</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.70078000</td>
@@ -1358,8 +1353,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.340728e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">46</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">46</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE4D7; color: #000000">0.0390952381</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDCC9; color: #000000">0.57290196</td>
@@ -1370,8 +1365,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">9.617932e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">47</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">47</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE0D0; color: #000000">0.0472500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #299149; color: #FFFFFF">49</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCDB5; color: #000000">0.75383673</td>
@@ -1382,8 +1377,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.728237e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">48</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">48</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBC8AF; color: #000000">0.0787500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC8AF; color: #000000">0.80786000</td>
@@ -1394,8 +1389,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.817740e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">49</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">49</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDCC8; color: #000000">0.0567500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #2D954C; color: #FFFFFF">48</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FABEA2; color: #000000">0.91722917</td>
@@ -1406,8 +1401,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.196439e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F2EF; color: #000000">0.0095555556</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #50B264; color: #FFFFFF">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">0.18522500</td>
@@ -1418,8 +1413,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.407499e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">5.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">5.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0060000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #4AAF61; color: #FFFFFF">41</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.10768293</td>
@@ -1430,8 +1425,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.691258e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">50</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">50</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE2D2; color: #000000">0.0447500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #299149; color: #FFFFFF">49</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAC4AA; color: #000000">0.85087755</td>
@@ -1442,8 +1437,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.725689e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">51</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">51</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCCFB8; color: #000000">0.0712083333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD0B9; color: #000000">0.71678431</td>
@@ -1454,8 +1449,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">8.940230e-03</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">52</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">52</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDBC6; color: #000000">0.0590000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #2D954C; color: #FFFFFF">48</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCAB1; color: #000000">0.78943750</td>
@@ -1466,8 +1461,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.075096e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">53</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">53</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7B393; color: #000000">0.1020000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #37A055; color: #FFFFFF">45</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9B99C; color: #000000">0.97291111</td>
@@ -1478,8 +1473,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.792004e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">54</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">54</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E1775E; color: #FFFFFF">0.1563333333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #005C25; color: #FFFFFF">62</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #EC9272; color: #000000">1.37020968</td>
@@ -1490,8 +1485,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.522106e-04</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">55</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">55</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F6AF8E; color: #000000">0.1066666667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #004E1F; color: #FFFFFF">65</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9B99B; color: #000000">0.97776923</td>
@@ -1502,8 +1497,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.512987e-03</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">56</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">56</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9BDA0; color: #000000">0.0910000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00491D; color: #FFFFFF">66</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAC1A5; color: #000000">0.88769697</td>
@@ -1514,8 +1509,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.851128e-04</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">57</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">57</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCDFCE; color: #000000">0.0498750000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">67</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD4BE; color: #000000">0.67653731</td>
@@ -1526,8 +1521,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.895055e-03</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">57.1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">57.1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDAC6; color: #000000">0.0595625000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">67</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCDFCE; color: #000000">0.51277612</td>
@@ -1538,8 +1533,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.967081e-03</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">57.2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">57.2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBE9DF; color: #000000">0.0290000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #004E1F; color: #FFFFFF">65</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCDFCE; color: #000000">0.51200000</td>
@@ -1550,8 +1545,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.392583e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">57.3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">57.3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE1D1; color: #000000">0.0456250000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #005C25; color: #FFFFFF">62</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE1D1; color: #000000">0.46848387</td>
@@ -1562,8 +1557,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.568832e-03</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">58</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">58</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAEBE2; color: #000000">0.0255000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #2D954C; color: #FFFFFF">48</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D4; color: #000000">0.43610417</td>
@@ -1574,8 +1569,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.427990e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">59</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">59</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9EFE9; color: #000000">0.0165000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #2D954C; color: #FFFFFF">48</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDAC6; color: #000000">0.60729167</td>
@@ -1586,8 +1581,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.334205e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F4; color: #000000">0.0030625000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #3EA85B; color: #FFFFFF">43</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.11227907</td>
@@ -1598,8 +1593,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.197182e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">6.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">6.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F4; color: #000000">0.0040803571</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #3EA85B; color: #FFFFFF">43</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.07588372</td>
@@ -1610,8 +1605,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.840564e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">60</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">60</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9F0EC; color: #000000">0.0135625000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBCAB2; color: #000000">0.78305882</td>
@@ -1622,8 +1617,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.563652e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">61</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">61</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAEEE7; color: #000000">0.0198000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC9B0; color: #000000">0.79417647</td>
@@ -1634,8 +1629,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.790184e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">62</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">62</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9EFE9; color: #000000">0.0170000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #299149; color: #FFFFFF">49</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8B89A; color: #000000">0.98591837</td>
@@ -1646,8 +1641,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.858818e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">63</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">63</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE4D6; color: #000000">0.0397500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #299149; color: #FFFFFF">49</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F6AC8B; color: #000000">1.11940816</td>
@@ -1658,8 +1653,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">9.563173e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">64</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">64</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EC9172; color: #000000">0.1345714286</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #3EA85B; color: #FFFFFF">43</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #E68468; color: #FFFFFF">1.49202326</td>
@@ -1670,8 +1665,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.577433e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">65</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">65</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBCBB3; color: #000000">0.0755694444</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #349C52; color: #FFFFFF">46</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #EA8C6E; color: #000000">1.41743478</td>
@@ -1682,8 +1677,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.722090e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">66</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">66</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE4D7; color: #000000">0.0391111111</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #30984F; color: #FFFFFF">47</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8B698; color: #000000">1.00880851</td>
@@ -1694,8 +1689,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.353333e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">67</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">67</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAEBE3; color: #000000">0.0245000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #30984F; color: #FFFFFF">47</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCCB3; color: #000000">0.76689362</td>
@@ -1706,8 +1701,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.113138e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">68</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">68</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F3F0; color: #000000">0.0083875000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDAC6; color: #000000">0.60828000</td>
@@ -1718,8 +1713,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.815124e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">69</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">69</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9EFEA; color: #000000">0.0161666667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #63BB6D; color: #000000">37</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE1D1; color: #000000">0.47935135</td>
@@ -1730,8 +1725,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.714186e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9F1ED; color: #000000">0.0126666667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEDE6; color: #000000">0.20838462</td>
@@ -1742,8 +1737,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.313023e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">70</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">70</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EFF3F5; color: #000000">-0.0128750000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #5DB86A; color: #000000">38</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDAC5; color: #000000">0.61281579</td>
@@ -1754,8 +1749,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.233364e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">71</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">71</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DE; color: #000000">0.31000000</td>
@@ -1766,8 +1761,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">8</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">8</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0060000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1A823D; color: #FFFFFF">53</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.13832075</td>
@@ -1778,8 +1773,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.474634e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">9</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">9</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">0.0022500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1A823D; color: #FFFFFF">53</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.12139623</td>
@@ -1790,8 +1785,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.158448e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">9.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">9.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">0.0042678571</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.10166000</td>
@@ -1802,8 +1797,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.388917e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">9.6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">9.6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">0.01000000</td>
@@ -1814,8 +1809,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">9.7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">9.7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">0.01000000</td>
@@ -1826,8 +1821,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">9.8</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">9.8</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">0.00000000</td>
@@ -1838,8 +1833,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AC1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AC1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE4D7; color: #000000">0.39600000</td>
@@ -1850,8 +1845,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AC2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AC2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD7C1; color: #000000">0.64800000</td>
@@ -1862,8 +1857,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AC3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AC3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #EA8D6F; color: #000000">1.41200000</td>
@@ -1874,8 +1869,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AC4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AC4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE7DC; color: #000000">0.33600000</td>
@@ -1886,8 +1881,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AC5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AC5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAECE4; color: #000000">0.23700000</td>
@@ -1898,8 +1893,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AC6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AC6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBEAE0; color: #000000">0.28100000</td>
@@ -1910,8 +1905,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E78569; color: #FFFFFF">0.1445000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B7E2B0; color: #000000">21</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD0B8; color: #000000">0.72676190</td>
@@ -1922,8 +1917,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.547075e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EFF3F6; color: #000000">-0.0120000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B7E2B0; color: #000000">21</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCDFCE; color: #000000">0.50733333</td>
@@ -1934,8 +1929,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE2D3; color: #000000">0.0440000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B2E0AC; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDCC9; color: #000000">0.57059091</td>
@@ -1946,8 +1941,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">0.0020000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #BCE4B5; color: #000000">20</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE6D9; color: #000000">0.36905000</td>
@@ -1958,8 +1953,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EBF1F5; color: #000000">-0.0192500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B2E0AC; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DC; color: #000000">0.33013636</td>
@@ -1970,8 +1965,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.113138e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EFF3F6; color: #000000">-0.0120000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B2E0AC; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE2; color: #000000">0.26009091</td>
@@ -1982,8 +1977,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.113138e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E3EDF3; color: #000000">-0.0310000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B2E0AC; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">0.17668182</td>
@@ -1994,8 +1989,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.841912e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI8</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI8</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAEBE3; color: #000000">0.0242500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B2E0AC; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EB; color: #000000">0.14931818</td>
@@ -2006,8 +2001,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">AMI9</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">AMI9</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F3F5F6; color: #000000">-0.0055000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B2E0AC; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EB; color: #000000">0.15400000</td>
@@ -2018,8 +2013,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.841912e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #890A25; color: #FFFFFF">0.2652500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B7E2B0; color: #000000">21</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #E8876A; color: #FFFFFF">1.46200000</td>
@@ -2030,8 +2025,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG10</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG10</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02500000</td>
@@ -2042,8 +2037,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG11</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG11</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02700000</td>
@@ -2054,8 +2049,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG12</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG12</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">0.01800000</td>
@@ -2066,8 +2061,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG13</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG13</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02100000</td>
@@ -2078,8 +2073,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG14</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG14</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02100000</td>
@@ -2090,8 +2085,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG15</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG15</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.01900000</td>
@@ -2102,8 +2097,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG16</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG16</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02300000</td>
@@ -2114,8 +2109,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG17</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG17</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F4; color: #000000">0.04200000</td>
@@ -2126,8 +2121,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG18</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG18</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.03000000</td>
@@ -2138,8 +2133,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DD7058; color: #FFFFFF">0.1628000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A0D89A; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F6AE8E; color: #000000">1.09653846</td>
@@ -2150,8 +2145,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.140626e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG20</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG20</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02400000</td>
@@ -2162,8 +2157,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBCAB1; color: #000000">0.0772500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A5DA9E; color: #000000">25</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD6C1; color: #000000">0.65084000</td>
@@ -2174,8 +2169,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.864220e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F5AB89; color: #000000">0.1107500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A0D89A; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE1D2; color: #000000">0.46450000</td>
@@ -2186,8 +2181,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.587087e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #D0E4F0; color: #000000">-0.0600000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">9</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.12244444</td>
@@ -2198,8 +2193,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9F0EB; color: #000000">0.0140000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">9</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.09733333</td>
@@ -2210,8 +2205,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG8</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG8</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02300000</td>
@@ -2222,8 +2217,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BG9</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BG9</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">0.01600000</td>
@@ -2234,8 +2229,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">BK1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">BK1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EB; color: #000000">0.15000000</td>
@@ -2246,8 +2241,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #67001F; color: #FFFFFF">0.2928000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #90D18C; color: #000000">29</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #E78569; color: #FFFFFF">1.48034483</td>
@@ -2258,8 +2253,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.496102e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E48065; color: #FFFFFF">0.1489166667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8ACE88; color: #000000">30</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC5AA; color: #000000">0.84393333</td>
@@ -2270,8 +2265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.149370e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDD5C0; color: #000000">0.0647083333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8ACE88; color: #000000">30</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD0B9; color: #000000">0.72086667</td>
@@ -2282,8 +2277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.581525e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCCDB5; color: #000000">0.0736000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8ACE88; color: #000000">30</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD9C4; color: #000000">0.62190000</td>
@@ -2294,8 +2289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.581525e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDCC8; color: #000000">0.0574000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8ACE88; color: #000000">30</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD9C4; color: #000000">0.62576667</td>
@@ -2306,8 +2301,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.723409e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #EFF3F6; color: #000000">-0.0118000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A9DCA3; color: #000000">24</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE2; color: #000000">0.26004167</td>
@@ -2318,8 +2313,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.625206e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE2; color: #000000">0.25600000</td>
@@ -2330,8 +2325,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CAL8</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CAL8</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE2; color: #000000">0.25800000</td>
@@ -2342,8 +2337,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CALA</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CALA</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBEAE0; color: #000000">0.28100000</td>
@@ -2354,8 +2349,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CK1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CK1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDCC8; color: #000000">0.58700000</td>
@@ -2366,8 +2361,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CK2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CK2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFEA; color: #000000">0.16300000</td>
@@ -2378,8 +2373,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CW1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CW1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE2D4; color: #000000">0.0430000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #DBF1D5; color: #000000">12</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F5A987; color: #000000">1.15208333</td>
@@ -2390,8 +2385,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CW2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CW2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E8886B; color: #FFFFFF">0.1420000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #DBF1D5; color: #000000">12</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCEB6; color: #000000">0.74491667</td>
@@ -2402,8 +2397,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CW3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CW3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCCFB7; color: #000000">0.0716000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7F0D1; color: #000000">13</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD5C0; color: #000000">0.66276923</td>
@@ -2414,8 +2409,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">5.200505e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CW4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CW4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8B799; color: #000000">0.0972000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #DBF1D5; color: #000000">12</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDFCD; color: #000000">0.52075000</td>
@@ -2426,8 +2421,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CW5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CW5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E1EDF3; color: #000000">-0.0338500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">9</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCDFCE; color: #000000">0.51088889</td>
@@ -2438,8 +2433,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.434288e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CW6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CW6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E6EFF4; color: #000000">-0.0262000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">9</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D4; color: #000000">0.43633333</td>
@@ -2450,8 +2445,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.434288e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">CW7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">CW7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #1D5EA1; color: #FFFFFF">-0.2425000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E8F6E3; color: #000000">8</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE9DF; color: #000000">0.29400000</td>
@@ -2462,8 +2457,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Caseyhole</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Caseyhole</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.05200000</td>
@@ -2474,8 +2469,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">EB1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">EB1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9BDA0; color: #000000">0.93400000</td>
@@ -2486,8 +2481,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">EB2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">EB2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE1; color: #000000">0.26700000</td>
@@ -2498,8 +2493,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">EH07</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">EH07</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F19E7C; color: #000000">1.26600000</td>
@@ -2510,8 +2505,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">EH08</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">EH08</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8B596; color: #000000">1.02300000</td>
@@ -2522,8 +2517,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">EKIN</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">EKIN</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">0.0023333333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #258D46; color: #FFFFFF">50</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">0.17606000</td>
@@ -2534,8 +2529,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">8.101812e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">EKMID</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">EKMID</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">0.0048000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.12523529</td>
@@ -2546,8 +2541,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.678826e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">EKOFF</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">EKOFF</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F6; color: #000000">0.0010000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EB; color: #000000">0.14923529</td>
@@ -2558,8 +2553,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">9.367237e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">GP1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">GP1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F5A886; color: #000000">1.16575000</td>
@@ -2570,8 +2565,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">GP1.5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">GP1.5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">0.00000000</td>
@@ -2582,8 +2577,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">GP2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">GP2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE6DA; color: #000000">0.36350000</td>
@@ -2594,8 +2589,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">GP3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">GP3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F3FAF0; color: #000000">3</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBEAE1; color: #000000">0.27833333</td>
@@ -2606,8 +2601,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">GP4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">GP4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.13050000</td>
@@ -2618,8 +2613,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">GP5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">GP5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDECD; color: #000000">0.0513750000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #90D18C; color: #000000">29</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEAE1; color: #000000">0.27082759</td>
@@ -2630,8 +2625,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.495507e-02</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">GS</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">GS</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.04600000</td>
@@ -2642,8 +2637,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Glider</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Glider</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF2; color: #000000">2</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE5D9; color: #000000">0.37500000</td>
@@ -2654,8 +2649,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">HB1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">HB1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE5D8; color: #000000">0.38300000</td>
@@ -2666,8 +2661,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">HB2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">HB2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCDFCE; color: #000000">0.50900000</td>
@@ -2678,8 +2673,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">HB3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">HB3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7B191; color: #000000">1.06900000</td>
@@ -2690,8 +2685,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">HB4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">HB4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F19D7C; color: #000000">1.27000000</td>
@@ -2702,8 +2697,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">HB5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">HB5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D5; color: #000000">0.42100000</td>
@@ -2714,8 +2709,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">HB6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">HB6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE0CF; color: #000000">0.49900000</td>
@@ -2726,8 +2721,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Junkpile</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Junkpile</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F5A987; color: #000000">1.15700000</td>
@@ -2738,8 +2733,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">KW1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">KW1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F1F4F6; color: #000000">-0.0088000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #85CC83; color: #000000">31</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCDFCF; color: #000000">0.50409677</td>
@@ -2750,8 +2745,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.566836e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">KW2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">KW2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F6; color: #000000">0.0006666667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #85CC83; color: #000000">31</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDAC5; color: #000000">0.61464516</td>
@@ -2762,8 +2757,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">KW3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">KW3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F0F4F6; color: #000000">-0.0113333333</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #85CC83; color: #000000">31</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D5; color: #000000">0.42422581</td>
@@ -2774,8 +2769,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.566836e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">KW4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">KW4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0058000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8ACE88; color: #000000">30</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE7DC; color: #000000">0.33486667</td>
@@ -2786,8 +2781,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.487740e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">L1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">L1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">7</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #EA8D6F; color: #000000">1.41228571</td>
@@ -2798,8 +2793,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">L3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">L3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">7</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDECD; color: #000000">0.52571429</td>
@@ -2810,8 +2805,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">L5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">L5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">7</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE9E0; color: #000000">0.28928571</td>
@@ -2822,8 +2817,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">L7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">L7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">7</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DD; color: #000000">0.31700000</td>
@@ -2834,8 +2829,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">L9</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">L9</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E8F6E3; color: #000000">8</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">0.18725000</td>
@@ -2846,8 +2841,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">M01</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">M01</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.08000000</td>
@@ -2858,8 +2853,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">M02</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">M02</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.09600000</td>
@@ -2870,8 +2865,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">M03</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">M03</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.06700000</td>
@@ -2882,8 +2877,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">M04</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">M04</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE7; color: #000000">0.19600000</td>
@@ -2894,8 +2889,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">M05</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">M05</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE7; color: #000000">0.19900000</td>
@@ -2906,8 +2901,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">MR</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">MR</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F4; color: #000000">0.0032500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1A823D; color: #FFFFFF">53</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.07477358</td>
@@ -2918,8 +2913,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.710516e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Mudhole</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Mudhole</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F1; color: #000000">0.07200000</td>
@@ -2930,8 +2925,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">NaplesBlueHole</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">NaplesBlueHole</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.04400000</td>
@@ -2942,8 +2937,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">PLUME</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">PLUME</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.11500000</td>
@@ -2954,8 +2949,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">ROME4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">ROME4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #CCE3EF; color: #000000">-0.0630000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E8F6E3; color: #000000">8</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDBC7; color: #000000">0.60150000</td>
@@ -2966,8 +2961,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">ROME5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">ROME5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBEAE0; color: #000000">0.0280000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E8F6E3; color: #000000">8</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7B090; color: #000000">1.07850000</td>
@@ -2978,8 +2973,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">RP1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">RP1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #AC162A; color: #FFFFFF">0.2384750000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8ACE88; color: #000000">30</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #E68568; color: #FFFFFF">1.48653333</td>
@@ -2990,8 +2985,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.581525e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">RP2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">RP2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9EFE9; color: #000000">0.0169666667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #90D18C; color: #000000">29</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9BA9C; color: #000000">0.97117241</td>
@@ -3002,8 +2997,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.264963e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">RP3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">RP3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F9F2EE; color: #000000">0.0110000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #90D18C; color: #000000">29</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BC; color: #000000">0.69444828</td>
@@ -3014,8 +3009,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">8.711315e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">RP4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">RP4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDAC6; color: #000000">0.0594166667</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #8ACE88; color: #000000">30</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE0D0; color: #000000">0.48183333</td>
@@ -3026,8 +3021,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.149370e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">RedTide</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">RedTide</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCCEB7; color: #000000">0.74000000</td>
@@ -3038,8 +3033,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBE9DF; color: #000000">0.0290000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A9DCA3; color: #000000">24</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBC9AF; color: #000000">0.80412500</td>
@@ -3050,8 +3045,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB10</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB10</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F6F6F7; color: #000000">-0.0020000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B2E0AC; color: #000000">22</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE9DE; color: #000000">0.30922727</td>
@@ -3062,8 +3057,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.016996e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB11</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB11</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F4; color: #000000">0.03400000</td>
@@ -3074,8 +3069,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB12</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB12</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.09800000</td>
@@ -3086,8 +3081,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB13</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB13</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.04500000</td>
@@ -3098,8 +3093,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #E0775D; color: #FFFFFF">0.1570000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A9DCA3; color: #000000">24</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDD8C3; color: #000000">0.63504167</td>
@@ -3110,8 +3105,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">3.750436e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #DE7159; color: #FFFFFF">0.1620000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A9DCA3; color: #000000">24</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDAC6; color: #000000">0.60804167</td>
@@ -3122,8 +3117,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.833212e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDBC7; color: #000000">0.0585000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A9DCA3; color: #000000">24</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE6D9; color: #000000">0.37208333</td>
@@ -3134,8 +3129,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.573804e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F1F4F6; color: #000000">-0.0090000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A9DCA3; color: #000000">24</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBEAE1; color: #000000">0.27650000</td>
@@ -3146,8 +3141,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF2; color: #000000">2</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F5AA88; color: #000000">1.14450000</td>
@@ -3158,8 +3153,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF2; color: #000000">2</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #D45D4B; color: #FFFFFF">1.82850000</td>
@@ -3170,8 +3165,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB8</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB8</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF2; color: #000000">2</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D5; color: #000000">0.42250000</td>
@@ -3182,8 +3177,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TB9</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TB9</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF2; color: #000000">2</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE5D9; color: #000000">0.37900000</td>
@@ -3194,8 +3189,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TBA</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TBA</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F5AA88; color: #000000">1.14700000</td>
@@ -3206,8 +3201,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TBB</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TBB</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD3BC; color: #000000">0.69400000</td>
@@ -3218,8 +3213,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">TBC</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">TBC</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD4BF; color: #000000">0.67200000</td>
@@ -3230,8 +3225,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">UKIN</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">UKIN</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">0.0064722222</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">0.17139216</td>
@@ -3242,8 +3237,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">6.539865e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">UKMID</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">UKMID</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">0.0020000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #218943; color: #FFFFFF">51</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.11217647</td>
@@ -3254,8 +3249,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.824619e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">UKOFF</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">UKOFF</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F6; color: #000000">0.0016000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1E8540; color: #FFFFFF">52</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.07773077</td>
@@ -3266,8 +3261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.958810e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V1</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V1</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #CE5245; color: #FFFFFF">0.1891000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A5DA9E; color: #000000">25</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7B393; color: #000000">1.04700000</td>
@@ -3278,8 +3273,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.062116e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V10</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V10</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">0.01200000</td>
@@ -3290,8 +3285,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V11</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V11</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">0.02400000</td>
@@ -3302,8 +3297,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V2</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V2</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAC3A8; color: #000000">0.0848000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A0D89A; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BC; color: #000000">0.69653846</td>
@@ -3314,8 +3309,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.771966e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V3</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V3</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBC6AC; color: #000000">0.0812000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A9DCA3; color: #000000">24</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCD2BB; color: #000000">0.70412500</td>
@@ -3326,8 +3321,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.000827e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V4</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V4</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAEBE3; color: #000000">0.0246000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A0D89A; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D4; color: #000000">0.43315385</td>
@@ -3338,8 +3333,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.771966e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V5</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V5</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FAEDE5; color: #000000">0.0212500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A5DA9E; color: #000000">25</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DD; color: #000000">0.31952000</td>
@@ -3350,8 +3345,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.109480e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V6</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V6</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE5D8; color: #000000">0.0375000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A0D89A; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE2; color: #000000">0.26634615</td>
@@ -3362,8 +3357,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">7.556057e-02</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V7</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V7</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FCE2D3; color: #000000">0.0432000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A0D89A; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEAE1; color: #000000">0.27026923</td>
@@ -3374,8 +3369,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">4.469742e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V8</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V8</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FBE7DB; color: #000000">0.0337500000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A5DA9E; color: #000000">25</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE1; color: #000000">0.26684000</td>
@@ -3386,8 +3381,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.174491e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">V9</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">V9</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #FDDCC9; color: #000000">0.0565000000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A0D89A; color: #000000">26</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE7; color: #000000">0.19853846</td>
@@ -3398,8 +3393,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">2.539933e-01</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">WS</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">WS</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">0.0045555556</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1A823D; color: #FFFFFF">53</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.10949057</td>
@@ -3410,8 +3405,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">1.076602e-01</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z03027</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z03027</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE3; color: #000000">0.24800000</td>
@@ -3422,8 +3417,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z03076</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z03076</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">0.16900000</td>
@@ -3434,8 +3429,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z03116</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z03116</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.09400000</td>
@@ -3446,8 +3441,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z03146</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z03146</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">0.18600000</td>
@@ -3458,8 +3453,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z03198</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z03198</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE1D0; color: #000000">0.48000000</td>
@@ -3470,8 +3465,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z04067</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z04067</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9BB9E; color: #000000">0.95500000</td>
@@ -3482,8 +3477,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z04068</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z04068</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #67001F; color: #FFFFFF">3.00000000</td>
@@ -3494,8 +3489,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z04093</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z04093</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #CF5546; color: #FFFFFF">1.91200000</td>
@@ -3506,8 +3501,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z04099</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z04099</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.10600000</td>
@@ -3518,8 +3513,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z04110</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z04110</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FDDAC6; color: #000000">0.60700000</td>
@@ -3530,8 +3525,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="program">SFER</td>
-<td class="gt_row gt_left" headers="Monitoring.Location.ID">Z04610</td>
+<td class="gt_row gt_left" headers="source">SFER</td>
+<td class="gt_row gt_left" headers="site">Z04610</td>
 <td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.09000000</td>
@@ -3554,7 +3549,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>display reporting programs</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> program)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
