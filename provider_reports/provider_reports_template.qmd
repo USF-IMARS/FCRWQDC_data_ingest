@@ -2,7 +2,7 @@
 title: "BROWARD Data"
 format: html
 params: 
-  org_id: BROWARD #FIU_WQMP #SFER #DERM_BBWQ  # must be BROWARD before rendering
+  org_id: FIU_WQMP #FIU_WQMP #SFER #DERM_BBWQ  # must be BROWARD before rendering
 ---
 
 Provider Data Assesment
@@ -19,43 +19,56 @@ librarian::shelf(
 ```{R getData}
 #| code-summary: read in data
 
-# read data from source files (takes a long time)
-# source(here("R/getData.R"))
-# df <- getData(params$org_id) %>%
-#   mutate(
-#     source = program,
-#     site = Monitoring.Location.ID,
-#     datetime = Activity.Start.Date.Time,
-#     analyte = DEP.Analyte.Name,
-#     value = DEP.Result.Value.Number,
-#     units = DEP.Result.Unit,
-#     latitude = Org.Decimal.Latitude,
-#     longitude = Org.Decimal.Longitude,
-#     sample_depth = Activity.Depth,
-#     .keep = "none"
-# )
+# # read data from source files (takes a long time)
+source(here("R/getData.R"))
+df_getData <- getData(params$org_id) %>%
+  mutate(
+    source = program,
+    site = Monitoring.Location.ID,
+    datetime = as.POSIXct(Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S"),
+    analyte = DEP.Analyte.Name,
+    value = as.numeric(DEP.Result.Value.Number),
+    units = DEP.Result.Unit,
+    latitude = Org.Decimal.Latitude,
+    longitude = Org.Decimal.Longitude,
+    sample_depth = Activity.Depth,
+    .keep = "none"
+) %>%
+  filter(source == params$org_id)
+df <- df_getData
 
 # read from cached file produced by index.qmd
-full_df <- read.csv(here("data", "exports", "allData.csv"))
-df <- filter(full_df, source == params$org_id)
+df_allData <- read.csv(here("data", "exports", "allData.csv")) %>%
+  filter(source == params$org_id)
+df <- df_allData
 
-# read latest FIU data only
+# # read latest FIU data only
 # source(here("R/getData.R"))
-# fiu <- getFIUData("FIU_WQMP") %>%
-#   mutate(
-#     source = program,
-#     site = Monitoring.Location.ID,
-#     datetime = Activity.Start.Date.Time,
-#     analyte = DEP.Analyte.Name,
-#     value = DEP.Result.Value.Number,
-#     .keep = "none"
-# )
-# df <- fiu
-
+df_fiu <- getFIUData("FIU_WQMP") %>%
+  mutate(
+    source = program,
+    site = Monitoring.Location.ID,
+    datetime = as.POSIXct(Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S"),
+    analyte = DEP.Analyte.Name,
+    value = as.numeric(DEP.Result.Value.Number),
+    .keep = "none"
+)
+df_WIN <- getWINData(params$org_id) %>%
+  mutate(
+    source = program,
+    site = Monitoring.Location.ID,
+    datetime = as.POSIXct(Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S"),
+    analyte = DEP.Analyte.Name,
+    value = as.numeric(DEP.Result.Value.Number),
+    units = DEP.Result.Unit,
+    latitude = Org.Decimal.Latitude,
+    longitude = Org.Decimal.Longitude,
+    sample_depth = Activity.Depth,
+    .keep = "none"
+)
 
 df$value <- as.numeric(df$value)
 df$datetime <- as.POSIXct(df$datetime, format = "%m/%d/%Y %H:%M:%S")
-
 ```
 
 ```{R create presence table}
@@ -68,7 +81,7 @@ source(here::here("R/presenceTable.R"))
 heat_long <- getPresenceHeatmapTable(df)
 ```
 
-```{R analyte presence table, fig.width=10, fig.height= max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2)}
+```{R analyte presence table, fig.width=10, fig.height= max(6, length(unique(heat_long$site)) * 0.2)}
 plotHeatmap(heat_long)
 ```
 
@@ -147,7 +160,7 @@ if (nrow(sampling_events) > 0) {
       labs(
         title = "Sampling Locations Over Time",
         x = "Date",
-        y = "Monitoring Location ID"
+        y = "site"
       ) +
       theme_minimal() +
       theme(

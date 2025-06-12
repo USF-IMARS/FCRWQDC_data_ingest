@@ -89,13 +89,13 @@ getData <- function(programName) {
   
   # Process DMS coordinates and return the dataframe
   # cat("\n--- Processing DMS Coordinates ---\n")
-  original_rows <- nrow(df)
+  # original_rows <- nrow(df)
   df <- processDMSCoordinates(df)
-  if (nrow(df) != original_rows) {
-    # cat(glue("WARNING: Row count changed during DMS coordinate processing from {original_rows} to {nrow(df)}\n"))
-  } else {
-    # cat("No change in row count during DMS coordinate processing\n")
-  }
+  # if (nrow(df) != original_rows) {
+  #   cat(glue("WARNING: Row count changed during DMS coordinate processing from {original_rows} to {nrow(df)}\n"))
+  # } else {
+  #   cat("No change in row count during DMS coordinate processing\n")
+  # }
   
   # Ensure consistent column types to prevent binding issues
   # cat("\n--- Standardizing Column Types ---\n")
@@ -171,6 +171,7 @@ getData <- function(programName) {
     original.analyte.name == "Nitrite__N_"                                 ~ "Nitrite",
     original.analyte.name == "Nitrogen__Nitrite__NO2__as_N"                ~ "Nitrite",
     original.analyte.name == "Nitrogen__Nitrite__NO2__as_NO2"              ~ "Nitrite",
+    original.analyte.name == "NO2"                                         ~ "Nitrite",
 
     original.analyte.name == "Nitrate"                                     ~ "Nitrate",
     original.analyte.name == "Nitrate__N_"                                 ~ "Nitrate",
@@ -244,6 +245,13 @@ getData <- function(programName) {
         TRUE ~ DEP.Result.Value.Number
       )
     )
+    df$program <- programName 
+    if ("Activity.Depth" %in% names(df)) {
+      # drop rows with depth > 1m, keep any with depth==NA
+      df <- filter(
+        df,
+        is.na(Activity.Depth) | Activity.Depth <= 1)
+    }
   # cat("===========================================\n")
   return(df)
 }
@@ -355,10 +363,5 @@ processDMSCoordinates <- function(df) {
   # cat("Converted", sum(missing_lat & !is.na(df$`Org.Decimal.Latitude`)), "latitude values from DMS to decimal format.\n")
   # cat("Converted", sum(missing_lon & !is.na(df$`Org.Decimal.Longitude`)), "longitude values from DMS to decimal format.\n")
   
-  if ("Activity.Depth" %in% names(df)) {
-    # drop rows with depth > 1m
-    df <- filter(df, Activity.Depth <= 1)
-  }
-
   return(df)
 }
