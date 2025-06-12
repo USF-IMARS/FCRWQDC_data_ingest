@@ -1,7 +1,16 @@
 [
   {
     "listing": "/provider_reports/provider_reports.html",
-    "items": []
+    "items": [
+      "/provider_reports/provider_reports/BBAP.html",
+      "/provider_reports/provider_reports/BROWARD.html",
+      "/provider_reports/provider_reports/DEP.html",
+      "/provider_reports/provider_reports/DERM_BBWQ.html",
+      "/provider_reports/provider_reports/FIU_WQMP.html",
+      "/provider_reports/provider_reports/MiamiBeach.html",
+      "/provider_reports/provider_reports/PALMBEACH.html",
+      "/provider_reports/provider_reports/SFER.html"
+    ]
   },
   {
     "listing": "/analyte_reports/analyte_reports.html",
