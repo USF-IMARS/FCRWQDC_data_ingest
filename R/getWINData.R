@@ -91,6 +91,8 @@ getWINData <- function(programName=NULL, fpath=NULL){
   # cat(glue("Final column count: {final_cols}\n"))
   # cat("------------------------\n")
   
+  result_df$program = programName
+  result_df$source = programName
   # Return the dataframe
   return(result_df)
 }

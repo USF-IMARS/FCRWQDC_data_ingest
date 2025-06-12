@@ -11,8 +11,6 @@ getFIUData <- function(programName=NULL, fpath=NULL) {
   # align columns
   # FIU columns:
   # Station,Date,Nitrate-Nitrite,NO2,Ammonia,TN,TP,Phosphate,Si,Chlorophyll_a
-
-  # cast to numeric
   df <- df %>%
     mutate(across(c("Nitrate.Nitrite", "NO2", "Ammonia", "TN", "TP", "Phosphate", "Si", "Chlorophyll_a"), as.numeric))
 
@@ -31,6 +29,8 @@ getFIUData <- function(programName=NULL, fpath=NULL) {
       Activity.Start.Date.Time = format(
         as.POSIXct(Date, format = "%m/%d/%Y %H:%M"),
         "%Y/%m/%d %H:%M:%S"),
+      datetime = Activity.Start.Date.Time,
+      Organization.ID = "FIU_WQMP",
       program = "FIU_WQMP"
     )
   return(df)
