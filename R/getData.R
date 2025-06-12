@@ -127,8 +127,7 @@ getData <- function(programName) {
   df$original.analyte.name <- df$DEP.Analyte.Name
 
   # replace spaces, parentheses, commas in DEP.Analyte.Name
-  df$DEP.Analyte.Name <- gsub("[ \\(\\)|,]", "_", df$DEP.Analyte.Name)
-
+  df$original.analyte.name <- gsub("[ \\(\\)|,]", "_", df$original.analyte.name)
 
   # === combine synonymous analytes
   df <- df %>% 
