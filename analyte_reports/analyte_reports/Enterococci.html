@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    program, </span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    Monitoring.Location.ID, </span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    Activity.Start.Date.Time,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">original.analyte.name =</span> DEP.Analyte.Name,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Value.Number, </span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    DEP.Result.Unit,</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
@@ -263,72 +263,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Activity.Start.Date.Time =</span> <span class="fu">mdy_hms</span>(</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>          Activity.Start.Date.Time,</span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># === combine synonymous analytes</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> <span class="fu">case_when</span>(</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Chlorophyll_a-_a_corrected"</span> <span class="sc">~</span> <span class="st">"Chlorophyll_a"</span>,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Chlorophyll_a-_a_uncorrected"</span> <span class="sc">~</span> <span class="st">"Chlorophyll_a"</span>,</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Chlorophyll_a__free_of_pheophytin"</span> <span class="sc">~</span> <span class="st">"Chlorophyll_a"</span>,</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Dissoved_Oxygen_CTD"</span> <span class="sc">~</span> <span class="st">"Dissolved_Oxygen"</span>,</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Dissoved_Oxygen_Discrete"</span> <span class="sc">~</span> <span class="st">"Dissolved_Oxygen"</span>,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Oxygen__Dissolved "</span> <span class="sc">~</span> <span class="st">"Dissolved_Oxygen"</span>,</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"NO2+3__Filtered"</span> <span class="sc">~</span> <span class="st">"Nitrate+Nitrite"</span>,</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrate-Nitrite_N"</span> <span class="sc">~</span> <span class="st">"Nitrate+Nitrite"</span>,</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen__NO2_plus_NO3"</span> <span class="sc">~</span> <span class="st">"Nitrate+Nitrite"</span>,</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen-_Total"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen-_Total_Kjeldahl"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrogen__Kjeldahl__Total"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Total_Kjeldahl_Nitrogen"</span> <span class="sc">~</span> <span class="st">"Total_Nitrogen"</span>,</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Phosphorus-_Total"</span> <span class="sc">~</span> <span class="st">"Total_Phosphorus"</span>,</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Phosphorus__Total__as_P__LL"</span> <span class="sc">~</span> <span class="st">"Total_Phosphorus"</span>,</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Temperature__Water"</span> <span class="sc">~</span> <span class="st">"Temperature"</span>,</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Water_Temperature"</span> <span class="sc">~</span> <span class="st">"Temperature"</span>,</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Field_Temperature"</span> <span class="sc">~</span> <span class="st">"Temperature"</span>,</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Field_pH"</span> <span class="sc">~</span> <span class="st">"pH"</span>,</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrate (N)"</span> <span class="sc">~</span> <span class="st">"Nitrate"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop unwanted columns added by seasonalMannKendall</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>z,</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>tau,</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>chi_square</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>      original.analyte.name <span class="sc">==</span> <span class="st">"Nitrite (N)"</span> <span class="sc">~</span> <span class="st">"Nitrite"</span>,</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> original.analyte.name</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(program, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>        Activity.Start.Date.Time,</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>        DEP.Result.Value.Number</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(DEP.Result.Value.Number),</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(DEP.Result.Value.Number) <span class="sc">/</span> <span class="fu">mean</span>(DEP.Result.Value.Number)</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -425,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Error in z color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
+&lt;simpleError in color_column(gt_tbl, df = sample_stats_df, column = "z", palette = (scales::brewer_pal(palette = "Blues"))(9)): `z` is not numeric; data_color() requires a numeric column.&gt;</code></pre>
 </div>
 <details class="code-fold">
 <summary>display with gt</summary>
@@ -525,23 +495,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fvrqbucnuu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#fvrqbucnuu table {
+<div id="myddhsczri" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#myddhsczri table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fvrqbucnuu thead, #fvrqbucnuu tbody, #fvrqbucnuu tfoot, #fvrqbucnuu tr, #fvrqbucnuu td, #fvrqbucnuu th {
+#myddhsczri thead, #myddhsczri tbody, #myddhsczri tfoot, #myddhsczri tr, #myddhsczri td, #myddhsczri th {
   border-style: none;
 }
 
-#fvrqbucnuu p {
+#myddhsczri p {
   margin: 0;
   padding: 0;
 }
 
-#fvrqbucnuu .gt_table {
+#myddhsczri .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -567,12 +537,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_caption {
+#myddhsczri .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fvrqbucnuu .gt_title {
+#myddhsczri .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -584,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#fvrqbucnuu .gt_subtitle {
+#myddhsczri .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -596,7 +566,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#fvrqbucnuu .gt_heading {
+#myddhsczri .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -608,13 +578,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_bottom_border {
+#myddhsczri .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_col_headings {
+#myddhsczri .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -629,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_col_heading {
+#myddhsczri .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -649,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fvrqbucnuu .gt_column_spanner_outer {
+#myddhsczri .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -661,15 +631,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#fvrqbucnuu .gt_column_spanner_outer:first-child {
+#myddhsczri .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fvrqbucnuu .gt_column_spanner_outer:last-child {
+#myddhsczri .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fvrqbucnuu .gt_column_spanner {
+#myddhsczri .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -681,11 +651,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#fvrqbucnuu .gt_spanner_row {
+#myddhsczri .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fvrqbucnuu .gt_group_heading {
+#myddhsczri .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -711,7 +681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#fvrqbucnuu .gt_empty_group_heading {
+#myddhsczri .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -726,15 +696,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#fvrqbucnuu .gt_from_md > :first-child {
+#myddhsczri .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fvrqbucnuu .gt_from_md > :last-child {
+#myddhsczri .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fvrqbucnuu .gt_row {
+#myddhsczri .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -753,7 +723,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#fvrqbucnuu .gt_stub {
+#myddhsczri .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -766,7 +736,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fvrqbucnuu .gt_stub_row_group {
+#myddhsczri .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -780,15 +750,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#fvrqbucnuu .gt_row_group_first td {
+#myddhsczri .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fvrqbucnuu .gt_row_group_first th {
+#myddhsczri .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fvrqbucnuu .gt_summary_row {
+#myddhsczri .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -798,16 +768,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fvrqbucnuu .gt_first_summary_row {
+#myddhsczri .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_first_summary_row.thick {
+#myddhsczri .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fvrqbucnuu .gt_last_summary_row {
+#myddhsczri .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -817,7 +787,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_grand_summary_row {
+#myddhsczri .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -827,7 +797,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fvrqbucnuu .gt_first_grand_summary_row {
+#myddhsczri .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -837,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_last_grand_summary_row_top {
+#myddhsczri .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -847,11 +817,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_striped {
+#myddhsczri .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#fvrqbucnuu .gt_table_body {
+#myddhsczri .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -860,7 +830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_footnotes {
+#myddhsczri .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -874,7 +844,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_footnote {
+#myddhsczri .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -883,7 +853,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fvrqbucnuu .gt_sourcenotes {
+#myddhsczri .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -897,7 +867,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#fvrqbucnuu .gt_sourcenote {
+#myddhsczri .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -905,72 +875,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#fvrqbucnuu .gt_left {
+#myddhsczri .gt_left {
   text-align: left;
 }
 
-#fvrqbucnuu .gt_center {
+#myddhsczri .gt_center {
   text-align: center;
 }
 
-#fvrqbucnuu .gt_right {
+#myddhsczri .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fvrqbucnuu .gt_font_normal {
+#myddhsczri .gt_font_normal {
   font-weight: normal;
 }
 
-#fvrqbucnuu .gt_font_bold {
+#myddhsczri .gt_font_bold {
   font-weight: bold;
 }
 
-#fvrqbucnuu .gt_font_italic {
+#myddhsczri .gt_font_italic {
   font-style: italic;
 }
 
-#fvrqbucnuu .gt_super {
+#myddhsczri .gt_super {
   font-size: 65%;
 }
 
-#fvrqbucnuu .gt_footnote_marks {
+#myddhsczri .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fvrqbucnuu .gt_asterisk {
+#myddhsczri .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fvrqbucnuu .gt_indent_1 {
+#myddhsczri .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fvrqbucnuu .gt_indent_2 {
+#myddhsczri .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fvrqbucnuu .gt_indent_3 {
+#myddhsczri .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fvrqbucnuu .gt_indent_4 {
+#myddhsczri .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fvrqbucnuu .gt_indent_5 {
+#myddhsczri .gt_indent_5 {
   text-indent: 25px;
 }
 
-#fvrqbucnuu .katex-display {
+#myddhsczri .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#fvrqbucnuu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#myddhsczri div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -981,9 +951,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th id="program" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">program</th>
 <th id="Monitoring.Location.ID" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Monitoring.Location.ID</th>
 <th id="slope" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">slope</th>
-<th id="tau" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">tau</th>
-<th id="chi_square" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">chi_square</th>
-<th id="z" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">z</th>
 <th id="n_values" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">n_values</th>
 <th id="mean" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">mean</th>
 <th id="min" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">min</th>
@@ -998,9 +965,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#1</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1013,9 +977,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#10</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">20.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">20</td>
@@ -1028,9 +989,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#11</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F4; color: #000000">51.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">51</td>
@@ -1043,9 +1001,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#12</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #67001F; color: #FFFFFF">4350.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #08306B; color: #FFFFFF">4350</td>
@@ -1058,9 +1013,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#13</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1073,9 +1025,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#14</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1088,9 +1037,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#15</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">20.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">20</td>
@@ -1103,9 +1049,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#16</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1118,9 +1061,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#17</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1133,9 +1073,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#18</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1148,9 +1085,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#19</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1163,9 +1097,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#2</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">31.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">31</td>
@@ -1178,9 +1109,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#20</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">20.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">20</td>
@@ -1193,9 +1121,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#21</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1208,9 +1133,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#22</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1223,9 +1145,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#23</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">63.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F5F9FE; color: #000000">63</td>
@@ -1238,9 +1157,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#24</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1253,9 +1169,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#3</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1268,9 +1181,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#3A</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #A31329; color: #FFFFFF">3650.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #125AA3; color: #FFFFFF">3650</td>
@@ -1283,9 +1193,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#3B</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1298,9 +1205,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#4</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1313,9 +1217,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#5</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">20.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">20</td>
@@ -1328,9 +1229,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#6</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FAEBE3; color: #000000">359.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #E7F1FA; color: #000000">359</td>
@@ -1343,9 +1241,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#7</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F5; color: #000000">31.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">31</td>
@@ -1358,9 +1253,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#8</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">20.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">20</td>
@@ -1373,9 +1265,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">#9</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1388,9 +1277,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">1</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1403,9 +1289,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">10</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1418,9 +1301,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">11</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1433,9 +1313,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">12</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #FCE2D2; color: #000000">661.1818</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">85</td>
@@ -1448,9 +1325,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">13</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1463,9 +1337,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">14</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1478,9 +1349,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">15</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1493,9 +1361,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">16</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1508,9 +1373,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">17</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1523,9 +1385,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">18</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1538,9 +1397,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">19</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1553,9 +1409,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">2</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1568,9 +1421,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">20</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1583,9 +1433,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">21</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1598,9 +1445,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">22</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1613,9 +1457,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">23</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1628,9 +1469,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">24</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1643,9 +1481,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">25</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #006529; color: #FFFFFF">10</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1658,9 +1493,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">26</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1673,9 +1505,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">27</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1688,9 +1517,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">28</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1703,9 +1529,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">29</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1718,9 +1541,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">3</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1733,9 +1553,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">30</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1748,9 +1565,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">31</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1763,9 +1577,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">32</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1778,9 +1589,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">33</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1793,9 +1601,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">34</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1808,9 +1613,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">35</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1823,9 +1625,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">36</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1838,9 +1637,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">37</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1853,9 +1649,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">38</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1868,9 +1661,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">39</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1883,9 +1673,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">3A</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #30984E; color: #FFFFFF">8</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1898,9 +1685,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">3B</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #177F3B; color: #FFFFFF">9</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1913,9 +1697,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">3b</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">10.0000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">10</td>
@@ -1928,9 +1709,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">4</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1943,9 +1721,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">40</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1958,9 +1733,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">41</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1973,9 +1745,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">5</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -1988,9 +1757,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">6</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -2003,9 +1769,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">7</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -2018,9 +1781,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">8</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
@@ -2033,9 +1793,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td class="gt_row gt_left" headers="program">MiamiBeach</td>
 <td class="gt_row gt_left" headers="Monitoring.Location.ID">9</td>
 <td class="gt_row gt_right" headers="slope">NA</td>
-<td class="gt_row gt_right" headers="tau">NA</td>
-<td class="gt_row gt_right" headers="chi_square">NA</td>
-<td class="gt_row gt_right" headers="z">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">11</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
