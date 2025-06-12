@@ -4,30 +4,26 @@ getListOfAnalytes <- function(){
     # === subset of desired analytes
     # NOTE: this should align with getData
     "Ammonium",
-    "Ammonia__N",
+    "Ammonia_plus_Ammonium",
+    "Ammonia",
     "Chlorophyll_a",
     "Dissolved_Oxygen",
     "Specific_Conductivity",
     "Fecal_Coliforms",
     "Enterococci",
-    "Nitrogen__Ammonia",
-    "Nitrate",
     "Nitrite",
+    "Nitrate",
     "Nitrate+Nitrite",
-    "Nitrogen__ammonia__NH3__+_ammonium__NH4_",
-    "Nitrogen__ammonia_as_N",
-    "Nitrogen__ammonia__NH3__as_NH3",
-    "Total_Nitrogen",
     "Orthophosphate",
     "Phosphorus",
     "Pheophytin",
+    "pH",
+    "Salinity",
+    "Silicate",
     "Temperature",
     "Total_Nitrogen",
     "Total_Kjeldahl_Nitrogen",
-    "Silicate",
-    "Turbidity",
-    "pH",
-    "Salinity"
+    "Turbidity"
   )
 
   return(analytes)
