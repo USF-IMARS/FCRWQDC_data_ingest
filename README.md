@@ -46,3 +46,28 @@ testthat::test_dir(here::here('tests/testthat'))
 * new FIU dataset should be separate from WIN data?
 
 * code for loading old STORET file formats no longer needed (discuss w/ Dan)
+
+FIU data:
+- Sites do not have coordinates
+- 2017 data has missing site names
+- The dates are formatted differently
+- The units and sample depths are all NA
+- Orthophosphate values are NA.
+- There are lots of NA values in general for the different analytes
+- Looks like there might be some data missing in Florida Bay for FIU
+- Site names are different, don't have the "-W"
+- Analytes have different names then the others
+
+Miami Beach:
+- Some sites do not have coordinates (some of those sites are only present in the 2024 data and we could not find coordinates for previous years)
+- Some sites had an extra '#' in front
+
+Palm Beach:
+- Some Dates were formatted differently with quotation marks and no time stamp
+- Some analytes values are NA for SFER; BBAP; BROWARD, DERM_WQ, MiamiBeach, PALMBEACH, FIU_WQMP.
+
+For the slopes:
+- Some NA values; would it be possible to include site coordinates in the slope tables? 
+- Also we thought moving forward we could include two columns with the year when sampling started and when sampling ended for that site, which could be useful?
+
+ 
