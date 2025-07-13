@@ -5,7 +5,7 @@ params:
   org_id: BROWARD #FIU_WQMP #SFER #DERM_BBWQ  # must be BROWARD before rendering
 ---
 
-Provider Data Assesment
+Provider Data Assessment
 
 ```{R setup}
 librarian::shelf(
