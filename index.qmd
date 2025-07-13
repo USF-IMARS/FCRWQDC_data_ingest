@@ -12,7 +12,6 @@ The full compiled data can be downloaded from the University of South Florida [h
 Florida Coral Reef Water Quality Database Compilation (FCRWQDC).
 This work is a product of the University of South Florida Institute for Marine Remote Sensing (IMaRS), funded by the Florida Department of Environmental Protection (FDEP).
 
-
 ```{R, get data across all programs}
 #| code-summary: get data across all programs
 #| message: false

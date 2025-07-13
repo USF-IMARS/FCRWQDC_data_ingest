@@ -10,6 +10,7 @@ source(here::here("R/getSTORETData.R"))
 source(here::here("R/getWINData.R"))
 source(here::here("R/getMiamiBeachData.R"))
 source(here::here("R/getFIUData.R"))
+source(here::here("R/getBBWWData.R"))
 
 # Main function to get data for a specific program
 getData <- function(programName) {
@@ -77,6 +78,8 @@ getData <- function(programName) {
     # combine dataframes
     df <- bind_rows(df1, df2)
     # cat("nrows combined: ", nrow(df), "\n")
+  } else if (programName == "BBWW"){
+    df <- getBBWWData()
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
@@ -86,6 +89,11 @@ getData <- function(programName) {
     # cat(glue("Total columns: {ncol(df)}\n"))
     # cat("------------------\n")
   }
+  
+  # set any literal "NULL" text strings to na
+  df <- df %>%
+    mutate(across(where(~ is.character(.) || is.factor(.)), ~ na_if(as.character(.), "NULL")))
+  
   
   # Process DMS coordinates and return the dataframe
   # cat("\n--- Processing DMS Coordinates ---\n")
@@ -116,7 +124,8 @@ getData <- function(programName) {
     "Sample.Collection.Type" = as.character,
     
     # Numeric columns - need safe conversion
-    "DEP.Result.Value.Number" = function(x) as.numeric(as.character(x))
+    "DEP.Result.Value.Number" = function(x) as.numeric(as.character(x)),
+    "Activity.Depth" = function(x) as.numeric(as.character(x))
   )
   
   # Apply type standardization to all columns that exist in the dataframe
@@ -247,7 +256,7 @@ getData <- function(programName) {
     )
     df$program <- programName 
     if ("Activity.Depth" %in% names(df)) {
-      # drop rows with depth > 1m, keep any with depth==NA
+      # drop rows with depth > 1m, keep any with depth==NA or depth==NULL
       df <- filter(
         df,
         is.na(Activity.Depth) | Activity.Depth <= 1)
