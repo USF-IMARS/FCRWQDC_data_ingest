@@ -2,7 +2,7 @@
 title: "BROWARD Data"
 format: html
 params: 
-  org_id: FIU_WQMP #FIU_WQMP #SFER #DERM_BBWQ  # must be BROWARD before rendering
+  org_id: BROWARD #FIU_WQMP #SFER #DERM_BBWQ  # must be BROWARD before rendering
 ---
 
 Provider Data Assesment
