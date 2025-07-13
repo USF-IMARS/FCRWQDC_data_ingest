@@ -19,53 +19,29 @@ librarian::shelf(
 ```{R getData}
 #| code-summary: read in data
 
-# # read data from source files (takes a long time)
-source(here("R/getData.R"))
-df_getData <- getData(params$org_id) %>%
-  mutate(
-    source = program,
-    site = Monitoring.Location.ID,
-    datetime = as.POSIXct(Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S"),
-    analyte = DEP.Analyte.Name,
-    value = as.numeric(DEP.Result.Value.Number),
-    units = DEP.Result.Unit,
-    latitude = Org.Decimal.Latitude,
-    longitude = Org.Decimal.Longitude,
-    sample_depth = Activity.Depth,
-    .keep = "none"
-) %>%
-  filter(source == params$org_id)
-df <- df_getData
+# # # read data from source files (takes a long time)
+# source(here("R/getData.R"))
+# df <- getData(params$org_id) %>%
+#   mutate(
+#     source = program,
+#     site = Monitoring.Location.ID,
+#     datetime = as.POSIXct(Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S"),
+#     analyte = DEP.Analyte.Name,
+#     value = as.numeric(DEP.Result.Value.Number),
+#     units = DEP.Result.Unit,
+#     latitude = Org.Decimal.Latitude,
+#     longitude = Org.Decimal.Longitude,
+#     sample_depth = Activity.Depth,
+#     .keep = "none"
+# ) %>%
+#   filter(source == params$org_id)
 
 # read from cached file produced by index.qmd
 df_allData <- read.csv(here("data", "exports", "allData.csv")) %>%
   filter(source == params$org_id)
 df <- df_allData
 
-# # read latest FIU data only
-# source(here("R/getData.R"))
-df_fiu <- getFIUData("FIU_WQMP") %>%
-  mutate(
-    source = program,
-    site = Monitoring.Location.ID,
-    datetime = as.POSIXct(Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S"),
-    analyte = DEP.Analyte.Name,
-    value = as.numeric(DEP.Result.Value.Number),
-    .keep = "none"
-)
-df_WIN <- getWINData(params$org_id) %>%
-  mutate(
-    source = program,
-    site = Monitoring.Location.ID,
-    datetime = as.POSIXct(Activity.Start.Date.Time, format = "%m/%d/%Y %H:%M:%S"),
-    analyte = DEP.Analyte.Name,
-    value = as.numeric(DEP.Result.Value.Number),
-    units = DEP.Result.Unit,
-    latitude = Org.Decimal.Latitude,
-    longitude = Org.Decimal.Longitude,
-    sample_depth = Activity.Depth,
-    .keep = "none"
-)
+
 
 df$value <- as.numeric(df$value)
 df$datetime <- as.POSIXct(df$datetime, format = "%m/%d/%Y %H:%M:%S")

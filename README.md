@@ -33,13 +33,20 @@ or
 testthat::test_dir(here::here('tests/testthat'))
 ```
 
+## Common Workflows
+### Add a Provider
+1. Add provider data files to `./data/`.
+2. Check `R/getListOfPrograms.R`
+3. If custom file reader is needed
+  * create file `get{provider}Data.R`
+    * map columns to standard column names `DEP.Result.ID Activity.ID year month day  time   Activity.Start.Date.Time lat_deg lat_min Org.Decimal.Latitude lon_deg lon_min   Org.Decimal.Longitude Monitoring.Location.ID Activity.Type Activity.Depth   Activity.Depth.Unit Activity.Depth.Top.Bottom.Unit Sample.Collection.Type   Activity.Top.Depth Activity.Bottom.Depth Value.Qualifier Result.Comments   DEP.Analyte.Name DEP.Result.Value.Number DEP.Result.Unit`
+  * include relevant logic in `getData.R`
+    * new `get{provider}Data` call
+    * analyte name mappings
+
+
 ## plans & TODO items
 * SFER data in micromoles/L. Needs to convert to mg/L like others. Dan will email conversions.
-* slopes files due tuesday. upload to [this folder](https://drive.google.com/drive/u/0/folders/1aJoe4-hS959vFNoU8aN-dyK7KyyjqVSE). add 
-  * full file there
-  * two subfolders:
-    * one for slope files (seasonal-mann-kendall)
-    * one for samples files (unified-wq-db)
 
 * check slope p-value (expect [1,near-0) & significance (expect ~1e5)
 
