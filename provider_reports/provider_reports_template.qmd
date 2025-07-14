@@ -57,7 +57,7 @@ source(here::here("R/presenceTable.R"))
 heat_long <- getPresenceHeatmapTable(df)
 ```
 
-```{R analyte presence table, fig.width=10, fig.height= max(6, length(unique(heat_long$site)) * 0.2)}
+```{R analyte presence table, fig.width=10, fig.height=min(max(6, length(unique(heat_long$site)) * 0.2),20)}
 plotHeatmap(heat_long)
 ```
 
@@ -122,7 +122,7 @@ ggplot(sampling_events, aes(x = datetime)) +
 
 ```
 
-```{R sampling heatmap, fig.width=10, fig.height= max(6, length(unique(heat_long$site)) * 0.2)}
+```{R sampling heatmap, fig.width=10, fig.height=min(max(6, length(unique(heat_long$site)) * 0.2),20)}
 # Create a heatmap of sampling locations over time
 # drop rows with missing dates or IDs
 sampling_events <- sampling_events %>%
