@@ -10,6 +10,7 @@ source(here::here("R/getSTORETData.R"))
 source(here::here("R/getWINData.R"))
 source(here::here("R/getMiamiBeachData.R"))
 source(here::here("R/getFIURecentData.R"))
+source(here::here("R/getFIUHistoricalData.R"))
 source(here::here("R/getBBWWData.R"))
 
 # Main function to get data for a specific program
@@ -75,9 +76,11 @@ getData <- function(programName) {
     # cat("nrows WIN: ", nrow(df), "\n")
     df2 <- getFIURecentData()
     # cat("nrows FIU: ", nrow(df2), "\n")
-    
+    df3 <- getFIUHistoricalData()
     # combine dataframes
-    df <- bind_rows(df1, df2)
+    df <- df1 %>%
+      bind_rows(df2)
+      bind_rows(df3)
     # cat("nrows combined: ", nrow(df), "\n")
   } else if (programName == "BBWW"){
     df <- getBBWWData()
@@ -233,6 +236,20 @@ getData <- function(programName) {
     TRUE ~ original.analyte.name
     )
   )
+
+  # === drop any non-standard analyte names  
+  # valid_analytes <- c(
+  #   "Ammonium", "Ammonia", "Chlorophyll_a", "Dissolved_Oxygen",
+  #   "Specific_Conductivity", "Fecal_Coliforms", "Enterococci",
+  #   "Nitrite", "Nitrate", "Nitrate+Nitrite", "Orthophosphate",
+  #   "Phosphorus", "Pheophytin", "pH", "Salinity", "Silicate",
+  #   "Temperature", "Total_Nitrogen", "Total_Kjeldahl_Nitrogen",
+  #   "Turbidity"
+  # )
+  # 
+  # df_long <- df_long %>%
+  #   filter(DEP.Analyte.Name %in% valid_analytes)
+  # 
 
 
   # convert all analyte values to mg/L using DEP.Result.Unit
