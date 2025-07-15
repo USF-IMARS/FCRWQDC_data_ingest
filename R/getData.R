@@ -13,6 +13,8 @@ source(here::here("R/getFIURecentData.R"))
 source(here::here("R/getFIUHistoricalData.R"))
 source(here::here("R/getBBWWData.R"))
 
+source(here::here("R/getListOfAnalytes.R"))
+
 # Main function to get data for a specific program
 getData <- function(programName) {
   # cat("\n===========================================\n")
@@ -237,19 +239,12 @@ getData <- function(programName) {
     )
   )
 
+  
   # === drop any non-standard analyte names  
-  # valid_analytes <- c(
-  #   "Ammonium", "Ammonia", "Chlorophyll_a", "Dissolved_Oxygen",
-  #   "Specific_Conductivity", "Fecal_Coliforms", "Enterococci",
-  #   "Nitrite", "Nitrate", "Nitrate+Nitrite", "Orthophosphate",
-  #   "Phosphorus", "Pheophytin", "pH", "Salinity", "Silicate",
-  #   "Temperature", "Total_Nitrogen", "Total_Kjeldahl_Nitrogen",
-  #   "Turbidity"
-  # )
-  # 
-  # df_long <- df_long %>%
-  #   filter(DEP.Analyte.Name %in% valid_analytes)
-  # 
+  valid_analytes <- getListOfAnalytes()
+
+  df <- df %>%
+    filter(DEP.Analyte.Name %in% valid_analytes)
 
 
   # convert all analyte values to mg/L using DEP.Result.Unit
