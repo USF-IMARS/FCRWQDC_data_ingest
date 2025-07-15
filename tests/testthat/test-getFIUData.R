@@ -5,16 +5,16 @@ library(here)
 library(dplyr)
 
 # Load necessary source files
-source(here::here("R/getFIUData.R"))
+source(here::here("R/getFIURecentData.R"))
 source(here::here("tests/testthat/check_win_column_alignment.R"))
 source(here::here("tests/testthat/check_datetime_validity.R"))
 source(here::here("R/getFpath.R"))
 
 # Test basic loading functionality and column alignment
-test_that("getFIUData can open and read FIU data", {  
+test_that("getFIURecentData can open and read FIU data", {  
   # Test that the data can be loaded without error
-  expect_no_error(getFIUData(fpath=here("data/test/FIU.csv")))
-  fiu_data <- getFIUData(fpath=here("data/test/FIU.csv"))
+  expect_no_error(getFIURecentData(fpath=here("data/test/FIU.csv")))
+  fiu_data <- getFIURecentData(fpath=here("data/test/FIU.csv"))
 
   # Check basic structure - it's a data frame with rows
   expect_true(is.data.frame(fiu_data))
