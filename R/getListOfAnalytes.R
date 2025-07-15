@@ -4,7 +4,7 @@ getListOfAnalytes <- function(){
     # === subset of desired analytes
     # NOTE: this should align with getData
     "Ammonium",
-    "Ammonia_plus_Ammonium",
+    "Ammonia+Ammonium",
     "Ammonia",
     "Chlorophyll_a",
     "Dissolved_Oxygen",
