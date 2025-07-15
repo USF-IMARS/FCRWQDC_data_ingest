@@ -11,6 +11,7 @@ source(here::here("R/getWINData.R"))
 source(here::here("R/getMiamiBeachData.R"))
 source(here::here("R/getFIURecentData.R"))
 source(here::here("R/getFIUHistoricalData.R"))
+source(here::here("R/getFIUEstuariesData.R"))
 source(here::here("R/getBBWWData.R"))
 
 source(here::here("R/getListOfAnalytes.R"))
@@ -84,6 +85,8 @@ getData <- function(programName) {
       bind_rows(df2)
       bind_rows(df3)
     # cat("nrows combined: ", nrow(df), "\n")
+  } else if(programName == "FIU_Estuaries"){
+    df <- getFIUEstuariesData()
   } else if (programName == "BBWW"){
     df <- getBBWWData()
   } else {
