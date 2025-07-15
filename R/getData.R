@@ -155,7 +155,7 @@ getData <- function(programName) {
     DEP.Analyte.Name = case_when(
     original.analyte.name == "Ammonium"                                    ~ "Ammonium",
 
-    original.analyte.name == "Nitrogen__ammonia__NH3__+_ammonium__NH4_"    ~ "Ammonia_plus_Ammonium",
+    original.analyte.name == "Nitrogen__ammonia__NH3__+_ammonium__NH4_"    ~ "Ammonia+Ammonium",
 
     original.analyte.name == "Nitrogen__ammonia_as_N"                      ~ "Ammonia",
     original.analyte.name == "Nitrogen__ammonia__NH3__as_NH3"              ~ "Ammonia",
