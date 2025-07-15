@@ -3,7 +3,7 @@ library(dplyr)
 library(tidyr)
 
 
-getFIUData <- function(programName=NULL, fpath=NULL) {
+getFIURecentData <- function(programName=NULL, fpath=NULL) {
   fpath <- here("data", "FIU_recent_all.csv")
 
   df <- read.csv(fpath)
