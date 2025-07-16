@@ -2,6 +2,8 @@
 ## Data
 Data for this repo is staged in `/data`.
 
+Final data is also stored in gdrive [here](https://drive.google.com/drive/folders/1QMUpJOwfAMG9dB_fYT0Yva3IBVRg27fr?usp=drive_link).
+
 Data from WIN is pulled manually for each program and put into `data/`.
 This data is staged at [this box.com link](https://usf.app.box.com/s/6j6ipvgh1ncu8qcmgw9o0ygxogcg8371).
 

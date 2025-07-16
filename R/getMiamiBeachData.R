@@ -319,7 +319,10 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
   merged_df <- merged_df %>%
     dplyr::mutate(
       # Convert date/time if needed
-      Activity.Start.Date.Time = as.character(.data$Activity.Start.Date.Time),
+      Activity.Start.Date.Time = as.Date(
+        .data$Activity.Start.Date.Time,
+        format="%m/%d/%y"
+      ),
       # Convert result value to numeric
       DEP.Result.Value.Number = as.numeric(as.character(.data$DEP.Result.Value.Number)),
       # Add program identifier (using mixed case to match getListOfPrograms)

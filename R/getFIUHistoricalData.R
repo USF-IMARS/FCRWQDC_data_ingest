@@ -65,7 +65,9 @@ getFIUHistoricalData <- function(){
      "%SAT-S"  = "Oxygen_Saturation",
      "%Io"     = "Surface_Light_Penetration",
      "DSIGT"   = "Sigma_T_Density_Difference"
-    ))
+    ),
+    Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time)
+  )
   
   return(df)
 }

@@ -1,495 +1,495 @@
-"","X","source","datetime","site","analyte","value","units","latitude","longitude","sample_depth"
-"1","...81484","MiamiBeach","01/16/2024 12:00:00","22","Enterococci",10,"MPN/100mL",NA,NA,NA
-"2","...81496","MiamiBeach","01/16/2024 12:00:00","23","Enterococci",20,"MPN/100mL",NA,NA,NA
-"3","...81508","MiamiBeach","01/16/2024 12:00:00","24","Enterococci",3320,"MPN/100mL",NA,NA,NA
-"4","...81520","MiamiBeach","01/16/2024 12:00:00","25","Enterococci",31,"MPN/100mL",NA,NA,NA
-"5","...81532","MiamiBeach","01/16/2024 12:00:00","26","Enterococci",10,"MPN/100mL",NA,NA,NA
-"6","...81544","MiamiBeach","01/16/2024 12:00:00","27","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"7","...81556","MiamiBeach","01/16/2024 12:00:00","28","Enterococci",10,"MPN/100mL",NA,NA,NA
-"8","...81568","MiamiBeach","01/16/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"9","...81580","MiamiBeach","01/16/2024 12:00:00","30","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"10","...81592","MiamiBeach","01/16/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"11","...81604","MiamiBeach","01/16/2024 12:00:00","32","Enterococci",10,"MPN/100mL",NA,NA,NA
-"12","...81616","MiamiBeach","01/16/2024 12:00:00","33","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"13","...81628","MiamiBeach","01/16/2024 12:00:00","34","Enterococci",20,"MPN/100mL",NA,NA,NA
-"14","...81640","MiamiBeach","01/16/2024 12:00:00","35","Enterococci",20,"MPN/100mL",NA,NA,NA
-"15","...81652","MiamiBeach","01/16/2024 12:00:00","36","Enterococci",330,"MPN/100mL",NA,NA,NA
-"16","...81664","MiamiBeach","01/16/2024 12:00:00","37","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"17","...81676","MiamiBeach","01/16/2024 12:00:00","38","Enterococci",60,"MPN/100mL",NA,NA,NA
-"18","...81688","MiamiBeach","01/16/2024 12:00:00","39","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"19","...81700","MiamiBeach","01/16/2024 12:00:00","40","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"20","...81712","MiamiBeach","01/16/2024 12:00:00","41","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"21","...81766","MiamiBeach","01/17/2024 12:00:00","1","Enterococci",10,"MPN/100mL",NA,NA,NA
-"22","...81767","MiamiBeach","01/17/2024 12:00:00","2","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"23","...81768","MiamiBeach","01/17/2024 12:00:00","3b","Enterococci",10,"MPN/100mL",NA,NA,NA
-"24","...81769","MiamiBeach","01/17/2024 12:00:00","3","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"25","...81770","MiamiBeach","01/17/2024 12:00:00","4","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"26","...81771","MiamiBeach","01/17/2024 12:00:00","5","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"27","...81772","MiamiBeach","01/17/2024 12:00:00","6","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"28","...81773","MiamiBeach","01/17/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"29","...81774","MiamiBeach","01/17/2024 12:00:00","8","Enterococci",20,"MPN/100mL",NA,NA,NA
-"30","...81775","MiamiBeach","01/17/2024 12:00:00","9","Enterococci",10,"MPN/100mL",NA,NA,NA
-"31","...81776","MiamiBeach","01/17/2024 12:00:00","10","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"32","...81777","MiamiBeach","01/17/2024 12:00:00","11","Enterococci",52,"MPN/100mL",NA,NA,NA
-"33","...81778","MiamiBeach","01/17/2024 12:00:00","12","Enterococci",1440,"MPN/100mL",NA,NA,NA
-"34","...81779","MiamiBeach","01/17/2024 12:00:00","13","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"35","...81780","MiamiBeach","01/17/2024 12:00:00","14","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"36","...81781","MiamiBeach","01/17/2024 12:00:00","15","Enterococci",41,"MPN/100mL",NA,NA,NA
-"37","...81782","MiamiBeach","01/17/2024 12:00:00","16","Enterococci",10,"MPN/100mL",NA,NA,NA
-"38","...81783","MiamiBeach","01/17/2024 12:00:00","17","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"39","...81784","MiamiBeach","01/17/2024 12:00:00","18","Enterococci",10,"MPN/100mL",NA,NA,NA
-"40","...81785","MiamiBeach","01/17/2024 12:00:00","19","Enterococci",20,"MPN/100mL",NA,NA,NA
-"41","...81786","MiamiBeach","01/17/2024 12:00:00","20","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"42","...81787","MiamiBeach","01/17/2024 12:00:00","21","Enterococci",10,"MPN/100mL",NA,NA,NA
-"43","...82009","MiamiBeach","02/13/2024 12:00:00","26","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"44","...82010","MiamiBeach","02/13/2024 12:00:00","27","Enterococci",10,"MPN/100mL",NA,NA,NA
-"45","...82011","MiamiBeach","02/13/2024 12:00:00","28","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"46","...82012","MiamiBeach","02/13/2024 12:00:00","32","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"47","...82013","MiamiBeach","02/13/2024 12:00:00","33","Enterococci",51,"MPN/100mL",NA,NA,NA
-"48","...82014","MiamiBeach","02/13/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"49","...82015","MiamiBeach","02/13/2024 12:00:00","30","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"50","...82016","MiamiBeach","02/13/2024 12:00:00","31","Enterococci",20,"MPN/100mL",NA,NA,NA
-"51","...82017","MiamiBeach","02/13/2024 12:00:00","34","Enterococci",10,"MPN/100mL",NA,NA,NA
-"52","...82018","MiamiBeach","02/13/2024 12:00:00","37","Enterococci",24200,"MPN/100mL",NA,NA,NA
-"53","...82019","MiamiBeach","02/13/2024 12:00:00","36","Enterococci",1310,"MPN/100mL",NA,NA,NA
-"54","...82020","MiamiBeach","02/13/2024 12:00:00","25","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"55","...82189","MiamiBeach","02/16/2024 12:00:00","24","Enterococci",20,"MPN/100mL",NA,NA,NA
-"56","...82190","MiamiBeach","02/16/2024 12:00:00","23","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"57","...82191","MiamiBeach","02/16/2024 12:00:00","22","Enterococci",10,"MPN/100mL",NA,NA,NA
-"58","...82192","MiamiBeach","02/16/2024 12:00:00","21","Enterococci",10,"MPN/100mL",NA,NA,NA
-"59","...82193","MiamiBeach","02/16/2024 12:00:00","20","Enterococci",10,"MPN/100mL",NA,NA,NA
-"60","...82194","MiamiBeach","02/16/2024 12:00:00","15","Enterococci",10,"MPN/100mL",NA,NA,NA
-"61","...82195","MiamiBeach","02/16/2024 12:00:00","16","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"62","...82196","MiamiBeach","02/16/2024 12:00:00","17","Enterococci",20,"MPN/100mL",NA,NA,NA
-"63","...82197","MiamiBeach","02/16/2024 12:00:00","18","Enterococci",10,"MPN/100mL",NA,NA,NA
-"64","...82198","MiamiBeach","02/16/2024 12:00:00","19","Enterococci",84,"MPN/100mL",NA,NA,NA
-"65","...82199","MiamiBeach","02/16/2024 12:00:00","14","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"66","...82200","MiamiBeach","02/16/2024 12:00:00","13","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"67","...82201","MiamiBeach","02/16/2024 12:00:00","12","Enterococci",175,"MPN/100mL",NA,NA,NA
-"68","...82202","MiamiBeach","02/16/2024 12:00:00","11","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"69","...82203","MiamiBeach","02/16/2024 12:00:00","10","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"70","...82204","MiamiBeach","02/16/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"71","...82205","MiamiBeach","02/16/2024 12:00:00","8","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"72","...82206","MiamiBeach","02/16/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"73","...82207","MiamiBeach","02/16/2024 12:00:00","6","Enterococci",30,"MPN/100mL",NA,NA,NA
-"74","...82208","MiamiBeach","02/16/2024 12:00:00","5","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"75","...82209","MiamiBeach","02/16/2024 12:00:00","4","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"76","...82210","MiamiBeach","02/16/2024 12:00:00","3B","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"77","...82211","MiamiBeach","02/16/2024 12:00:00","3","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"78","...82212","MiamiBeach","02/16/2024 12:00:00","2","Enterococci",10,"MPN/100mL",NA,NA,NA
-"79","...82213","MiamiBeach","02/16/2024 12:00:00","1","Enterococci",10,"MPN/100mL",NA,NA,NA
-"80","...82214","MiamiBeach","02/16/2024 12:00:00","35","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"81","...82215","MiamiBeach","02/16/2024 12:00:00","41","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"82","...82216","MiamiBeach","02/16/2024 12:00:00","40","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"83","...82217","MiamiBeach","02/16/2024 12:00:00","39","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"84","...82218","MiamiBeach","02/16/2024 12:00:00","38","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"85","...82535","MiamiBeach","03/12/2024 12:00:00","1","Enterococci",10,"MPN/100mL",NA,NA,NA
-"86","...82536","MiamiBeach","03/12/2024 12:00:00","2","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"87","...82537","MiamiBeach","03/12/2024 12:00:00","3B","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"88","...82538","MiamiBeach","03/12/2024 12:00:00","3","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"89","...82539","MiamiBeach","03/12/2024 12:00:00","4","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"90","...82540","MiamiBeach","03/12/2024 12:00:00","5","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"91","...82541","MiamiBeach","03/12/2024 12:00:00","6","Enterococci",10,"MPN/100mL",NA,NA,NA
-"92","...82542","MiamiBeach","03/12/2024 12:00:00","7","Enterococci",20,"MPN/100mL",NA,NA,NA
-"93","...82543","MiamiBeach","03/12/2024 12:00:00","8","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"94","...82544","MiamiBeach","03/12/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"95","...82545","MiamiBeach","03/12/2024 12:00:00","10","Enterococci",107,"MPN/100mL",NA,NA,NA
-"96","...82546","MiamiBeach","03/12/2024 12:00:00","11","Enterococci",72,"MPN/100mL",NA,NA,NA
-"97","...82547","MiamiBeach","03/12/2024 12:00:00","12","Enterococci",301,"MPN/100mL",NA,NA,NA
-"98","...82548","MiamiBeach","03/12/2024 12:00:00","13","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"99","...82549","MiamiBeach","03/12/2024 12:00:00","14","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"100","...82550","MiamiBeach","03/12/2024 12:00:00","15","Enterococci",20,"MPN/100mL",NA,NA,NA
-"101","...82551","MiamiBeach","03/12/2024 12:00:00","16","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"102","...82552","MiamiBeach","03/12/2024 12:00:00","17","Enterococci",51,"MPN/100mL",NA,NA,NA
-"103","...82553","MiamiBeach","03/12/2024 12:00:00","18","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"104","...82554","MiamiBeach","03/12/2024 12:00:00","19","Enterococci",41,"MPN/100mL",NA,NA,NA
-"105","...82555","MiamiBeach","03/12/2024 12:00:00","20","Enterococci",10,"MPN/100mL",NA,NA,NA
-"106","...82556","MiamiBeach","03/12/2024 12:00:00","21","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"107","...82557","MiamiBeach","03/12/2024 12:00:00","22","Enterococci",30,"MPN/100mL",NA,NA,NA
-"108","...82558","MiamiBeach","03/12/2024 12:00:00","23","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"109","...82813","MiamiBeach","03/14/2024 12:00:00","25","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"110","...82814","MiamiBeach","03/14/2024 12:00:00","24","Enterococci",20,"MPN/100mL",NA,NA,NA
-"111","...82815","MiamiBeach","03/14/2024 12:00:00","26","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"112","...82816","MiamiBeach","03/14/2024 12:00:00","27","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"113","...82817","MiamiBeach","03/14/2024 12:00:00","28","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"114","...82818","MiamiBeach","03/14/2024 12:00:00","32","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"115","...82819","MiamiBeach","03/14/2024 12:00:00","33","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"116","...82820","MiamiBeach","03/14/2024 12:00:00","29","Enterococci",10,"MPN/100mL",NA,NA,NA
-"117","...82821","MiamiBeach","03/14/2024 12:00:00","30","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"118","...82822","MiamiBeach","03/14/2024 12:00:00","31","Enterococci",10,"MPN/100mL",NA,NA,NA
-"119","...82823","MiamiBeach","03/14/2024 12:00:00","34","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"120","...82824","MiamiBeach","03/14/2024 12:00:00","41","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"121","...82825","MiamiBeach","03/14/2024 12:00:00","40","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"122","...82826","MiamiBeach","03/14/2024 12:00:00","39","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"123","...82827","MiamiBeach","03/14/2024 12:00:00","38","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"124","...82828","MiamiBeach","03/14/2024 12:00:00","37","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"125","...82829","MiamiBeach","03/14/2024 12:00:00","36","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"126","...82830","MiamiBeach","03/14/2024 12:00:00","35","Enterococci",10,"MPN/100mL",NA,NA,NA
-"127","...82831","MiamiBeach","03/14/2024 12:00:00","3A","Enterococci",30,"MPN/100mL",NA,NA,NA
-"128","...83057","MiamiBeach","04/10/2024 12:00:00","25","Enterococci",20,"MPN/100mL",NA,NA,NA
-"129","...83058","MiamiBeach","04/10/2024 12:00:00","1","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"130","...83059","MiamiBeach","04/10/2024 12:00:00","2","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"131","...83060","MiamiBeach","04/10/2024 12:00:00","3B","Enterococci",30,"MPN/100mL",NA,NA,NA
-"132","...83061","MiamiBeach","04/10/2024 12:00:00","3","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"133","...83062","MiamiBeach","04/10/2024 12:00:00","3A","Enterococci",20,"MPN/100mL",NA,NA,NA
-"134","...83063","MiamiBeach","04/10/2024 12:00:00","4","Enterococci",31,"MPN/100mL",NA,NA,NA
-"135","...83064","MiamiBeach","04/10/2024 12:00:00","5","Enterococci",10,"MPN/100mL",NA,NA,NA
-"136","...83065","MiamiBeach","04/10/2024 12:00:00","6","Enterococci",10,"MPN/100mL",NA,NA,NA
-"137","...83066","MiamiBeach","04/10/2024 12:00:00","7","Enterococci",20,"MPN/100mL",NA,NA,NA
-"138","...83067","MiamiBeach","04/10/2024 12:00:00","8","Enterococci",10,"MPN/100mL",NA,NA,NA
-"139","...83068","MiamiBeach","04/10/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"140","...83069","MiamiBeach","04/10/2024 12:00:00","10","Enterococci",31,"MPN/100mL",NA,NA,NA
-"141","...83070","MiamiBeach","04/10/2024 12:00:00","11","Enterococci",31,"MPN/100mL",NA,NA,NA
-"142","...83071","MiamiBeach","04/10/2024 12:00:00","12","Enterococci",122,"MPN/100mL",NA,NA,NA
-"143","...83072","MiamiBeach","04/10/2024 12:00:00","13","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"144","...83073","MiamiBeach","04/10/2024 12:00:00","14","Enterococci",10,"MPN/100mL",NA,NA,NA
-"145","...83074","MiamiBeach","04/10/2024 12:00:00","15","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"146","...83075","MiamiBeach","04/10/2024 12:00:00","16","Enterococci",20,"MPN/100mL",NA,NA,NA
-"147","...83076","MiamiBeach","04/10/2024 12:00:00","17","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"148","...83077","MiamiBeach","04/10/2024 12:00:00","18","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"149","...83078","MiamiBeach","04/10/2024 12:00:00","19","Enterococci",10,"MPN/100mL",NA,NA,NA
-"150","...83079","MiamiBeach","04/10/2024 12:00:00","20","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"151","...83080","MiamiBeach","04/10/2024 12:00:00","21","Enterococci",10,"MPN/100mL",NA,NA,NA
-"152","...83081","MiamiBeach","04/10/2024 12:00:00","22","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"153","...83082","MiamiBeach","04/10/2024 12:00:00","23","Enterococci",10,"MPN/100mL",NA,NA,NA
-"154","...83083","MiamiBeach","04/10/2024 12:00:00","24","Enterococci",52,"MPN/100mL",NA,NA,NA
-"155","...83359","MiamiBeach","04/11/2024 12:00:00","26","Enterococci",10,"MPN/100mL",NA,NA,NA
-"156","...83360","MiamiBeach","04/11/2024 12:00:00","27","Enterococci",10,"MPN/100mL",NA,NA,NA
-"157","...83361","MiamiBeach","04/11/2024 12:00:00","28","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"158","...83362","MiamiBeach","04/11/2024 12:00:00","32","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"159","...83363","MiamiBeach","04/11/2024 12:00:00","33","Enterococci",72,"MPN/100mL",NA,NA,NA
-"160","...83364","MiamiBeach","04/11/2024 12:00:00","29","Enterococci",10,"MPN/100mL",NA,NA,NA
-"161","...83365","MiamiBeach","04/11/2024 12:00:00","30","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"162","...83366","MiamiBeach","04/11/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"163","...83367","MiamiBeach","04/11/2024 12:00:00","34","Enterococci",10,"MPN/100mL",NA,NA,NA
-"164","...83368","MiamiBeach","04/11/2024 12:00:00","41","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"165","...83369","MiamiBeach","04/11/2024 12:00:00","40","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"166","...83370","MiamiBeach","04/11/2024 12:00:00","39","Enterococci",10,"MPN/100mL",NA,NA,NA
-"167","...83371","MiamiBeach","04/11/2024 12:00:00","38","Enterococci",132,"MPN/100mL",NA,NA,NA
-"168","...83372","MiamiBeach","04/11/2024 12:00:00","37","Enterococci",565,"MPN/100mL",NA,NA,NA
-"169","...83373","MiamiBeach","04/11/2024 12:00:00","36","Enterococci",20,"MPN/100mL",NA,NA,NA
-"170","...83374","MiamiBeach","04/11/2024 12:00:00","35","Enterococci",10,"MPN/100mL",NA,NA,NA
-"171","...83573","MiamiBeach","05/14/2024 12:00:00","1","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"172","...83574","MiamiBeach","05/14/2024 12:00:00","2","Enterococci",73,"MPN/100mL",NA,NA,NA
-"173","...83575","MiamiBeach","05/14/2024 12:00:00","3B","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"174","...83576","MiamiBeach","05/14/2024 12:00:00","3","Enterococci",20,"MPN/100mL",NA,NA,NA
-"175","...83577","MiamiBeach","05/14/2024 12:00:00","3A","Enterococci",130,"MPN/100mL",NA,NA,NA
-"176","...83578","MiamiBeach","05/14/2024 12:00:00","4","Enterococci",52,"MPN/100mL",NA,NA,NA
-"177","...83579","MiamiBeach","05/14/2024 12:00:00","5","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"178","...83580","MiamiBeach","05/14/2024 12:00:00","6","Enterococci",20,"MPN/100mL",NA,NA,NA
-"179","...83581","MiamiBeach","05/14/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"180","...83582","MiamiBeach","05/14/2024 12:00:00","8","Enterococci",41,"MPN/100mL",NA,NA,NA
-"181","...83583","MiamiBeach","05/14/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"182","...83584","MiamiBeach","05/14/2024 12:00:00","10","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"183","...83585","MiamiBeach","05/14/2024 12:00:00","11","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"184","...83586","MiamiBeach","05/14/2024 12:00:00","12","Enterococci",241,"MPN/100mL",NA,NA,NA
-"185","...83587","MiamiBeach","05/14/2024 12:00:00","13","Enterococci",41,"MPN/100mL",NA,NA,NA
-"186","...83588","MiamiBeach","05/14/2024 12:00:00","14","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"187","...83589","MiamiBeach","05/14/2024 12:00:00","15","Enterococci",10,"MPN/100mL",NA,NA,NA
-"188","...83590","MiamiBeach","05/14/2024 12:00:00","16","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"189","...83591","MiamiBeach","05/14/2024 12:00:00","17","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"190","...83592","MiamiBeach","05/14/2024 12:00:00","18","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"191","...83593","MiamiBeach","05/14/2024 12:00:00","19","Enterococci",41,"MPN/100mL",NA,NA,NA
-"192","...83594","MiamiBeach","05/14/2024 12:00:00","20","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"193","...83595","MiamiBeach","05/14/2024 12:00:00","21","Enterococci",10,"MPN/100mL",NA,NA,NA
-"194","...83596","MiamiBeach","05/14/2024 12:00:00","22","Enterococci",10,"MPN/100mL",NA,NA,NA
-"195","...83597","MiamiBeach","05/14/2024 12:00:00","23","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"196","...83598","MiamiBeach","05/14/2024 12:00:00","24","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"197","...83599","MiamiBeach","05/14/2024 12:00:00","25","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"198","...83875","MiamiBeach","05/16/2024 12:00:00","26","Enterococci",10,"MPN/100mL",NA,NA,NA
-"199","...83876","MiamiBeach","05/16/2024 12:00:00","27","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"200","...83877","MiamiBeach","05/16/2024 12:00:00","28","Enterococci",10,"MPN/100mL",NA,NA,NA
-"201","...83878","MiamiBeach","05/16/2024 12:00:00","32","Enterococci",10,"MPN/100mL",NA,NA,NA
-"202","...83879","MiamiBeach","05/16/2024 12:00:00","33","Enterococci",20,"MPN/100mL",NA,NA,NA
-"203","...83880","MiamiBeach","05/16/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"204","...83881","MiamiBeach","05/16/2024 12:00:00","30","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"205","...83882","MiamiBeach","05/16/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"206","...83883","MiamiBeach","05/16/2024 12:00:00","34","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"207","...83884","MiamiBeach","05/16/2024 12:00:00","41","Enterococci",51,"MPN/100mL",NA,NA,NA
-"208","...83885","MiamiBeach","05/16/2024 12:00:00","40","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"209","...83886","MiamiBeach","05/16/2024 12:00:00","39","Enterococci",3130,"MPN/100mL",NA,NA,NA
-"210","...83887","MiamiBeach","05/16/2024 12:00:00","38","Enterococci",110,"MPN/100mL",NA,NA,NA
-"211","...83888","MiamiBeach","05/16/2024 12:00:00","37","Enterococci",85,"MPN/100mL",NA,NA,NA
-"212","...83889","MiamiBeach","05/16/2024 12:00:00","36","Enterococci",10,"MPN/100mL",NA,NA,NA
-"213","...83890","MiamiBeach","05/16/2024 12:00:00","35","Enterococci",110,"MPN/100mL",NA,NA,NA
-"214","...84087","MiamiBeach","06/18/2024 12:00:00","1","Enterococci",10,"MPN/100mL",NA,NA,NA
-"215","...84088","MiamiBeach","06/18/2024 12:00:00","2","Enterococci",41,"MPN/100mL",NA,NA,NA
-"216","...84089","MiamiBeach","06/18/2024 12:00:00","3B","Enterococci",10,"MPN/100mL",NA,NA,NA
-"217","...84090","MiamiBeach","06/18/2024 12:00:00","3","Enterococci",715,"MPN/100mL",NA,NA,NA
-"218","...84091","MiamiBeach","06/18/2024 12:00:00","3A","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"219","...84092","MiamiBeach","06/18/2024 12:00:00","4","Enterococci",171,"MPN/100mL",NA,NA,NA
-"220","...84093","MiamiBeach","06/18/2024 12:00:00","5","Enterococci",583,"MPN/100mL",NA,NA,NA
-"221","...84094","MiamiBeach","06/18/2024 12:00:00","6","Enterococci",292,"MPN/100mL",NA,NA,NA
-"222","...84095","MiamiBeach","06/18/2024 12:00:00","7","Enterococci",41,"MPN/100mL",NA,NA,NA
-"223","...84096","MiamiBeach","06/18/2024 12:00:00","8","Enterococci",1320,"MPN/100mL",NA,NA,NA
-"224","...84097","MiamiBeach","06/18/2024 12:00:00","9","Enterococci",20,"MPN/100mL",NA,NA,NA
-"225","...84098","MiamiBeach","06/18/2024 12:00:00","10","Enterococci",108,"MPN/100mL",NA,NA,NA
-"226","...84099","MiamiBeach","06/18/2024 12:00:00","11","Enterococci",465,"MPN/100mL",NA,NA,NA
-"227","...84100","MiamiBeach","06/18/2024 12:00:00","12","Enterococci",3430,"MPN/100mL",NA,NA,NA
-"228","...84101","MiamiBeach","06/18/2024 12:00:00","13","Enterococci",183,"MPN/100mL",NA,NA,NA
-"229","...84102","MiamiBeach","06/18/2024 12:00:00","14","Enterococci",20,"MPN/100mL",NA,NA,NA
-"230","...84103","MiamiBeach","06/18/2024 12:00:00","15","Enterococci",759,"MPN/100mL",NA,NA,NA
-"231","...84104","MiamiBeach","06/18/2024 12:00:00","16","Enterococci",132,"MPN/100mL",NA,NA,NA
-"232","...84105","MiamiBeach","06/18/2024 12:00:00","17","Enterococci",20,"MPN/100mL",NA,NA,NA
-"233","...84106","MiamiBeach","06/18/2024 12:00:00","18","Enterococci",50,"MPN/100mL",NA,NA,NA
-"234","...84107","MiamiBeach","06/18/2024 12:00:00","19","Enterococci",865,"MPN/100mL",NA,NA,NA
-"235","...84108","MiamiBeach","06/18/2024 12:00:00","20","Enterococci",41,"MPN/100mL",NA,NA,NA
-"236","...84109","MiamiBeach","06/18/2024 12:00:00","21","Enterococci",41,"MPN/100mL",NA,NA,NA
-"237","...84110","MiamiBeach","06/18/2024 12:00:00","22","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"238","...84111","MiamiBeach","06/18/2024 12:00:00","23","Enterococci",72,"MPN/100mL",NA,NA,NA
-"239","...84112","MiamiBeach","06/18/2024 12:00:00","24","Enterococci",10,"MPN/100mL",NA,NA,NA
-"240","...84379","MiamiBeach","06/20/2024 12:00:00","26","Enterococci",30,"MPN/100mL",NA,NA,NA
-"241","...84380","MiamiBeach","06/20/2024 12:00:00","27","Enterococci",20,"MPN/100mL",NA,NA,NA
-"242","...84381","MiamiBeach","06/20/2024 12:00:00","28","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"243","...84382","MiamiBeach","06/20/2024 12:00:00","32","Enterococci",10,"MPN/100mL",NA,NA,NA
-"244","...84383","MiamiBeach","06/20/2024 12:00:00","33","Enterococci",10,"MPN/100mL",NA,NA,NA
-"245","...84384","MiamiBeach","06/20/2024 12:00:00","29","Enterococci",51,"MPN/100mL",NA,NA,NA
-"246","...84385","MiamiBeach","06/20/2024 12:00:00","30","Enterococci",10,"MPN/100mL",NA,NA,NA
-"247","...84386","MiamiBeach","06/20/2024 12:00:00","34","Enterococci",10,"MPN/100mL",NA,NA,NA
-"248","...84387","MiamiBeach","06/20/2024 12:00:00","41","Enterococci",75,"MPN/100mL",NA,NA,NA
-"249","...84388","MiamiBeach","06/20/2024 12:00:00","40","Enterococci",74,"MPN/100mL",NA,NA,NA
-"250","...84389","MiamiBeach","06/20/2024 12:00:00","39","Enterococci",10,"MPN/100mL",NA,NA,NA
-"251","...84390","MiamiBeach","06/20/2024 12:00:00","38","Enterococci",30,"MPN/100mL",NA,NA,NA
-"252","...84391","MiamiBeach","06/20/2024 12:00:00","37","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"253","...84392","MiamiBeach","06/20/2024 12:00:00","36","Enterococci",2310,"MPN/100mL",NA,NA,NA
-"254","...84393","MiamiBeach","06/20/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"255","...84394","MiamiBeach","06/20/2024 12:00:00","35","Enterococci",3680,"MPN/100mL",NA,NA,NA
-"256","...84593","MiamiBeach","07/17/2024 12:00:00","1","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"257","...84594","MiamiBeach","07/17/2024 12:00:00","2","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"258","...84595","MiamiBeach","07/17/2024 12:00:00","3B","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"259","...84596","MiamiBeach","07/17/2024 12:00:00","3","Enterococci",20,"MPN/100mL",NA,NA,NA
-"260","...84597","MiamiBeach","07/17/2024 12:00:00","3A","Enterococci",269,"MPN/100mL",NA,NA,NA
-"261","...84598","MiamiBeach","07/17/2024 12:00:00","4","Enterococci",10,"MPN/100mL",NA,NA,NA
-"262","...84599","MiamiBeach","07/17/2024 12:00:00","5","Enterococci",20,"MPN/100mL",NA,NA,NA
-"263","...84600","MiamiBeach","07/17/2024 12:00:00","6","Enterococci",10,"MPN/100mL",NA,NA,NA
-"264","...84601","MiamiBeach","07/17/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"265","...84602","MiamiBeach","07/17/2024 12:00:00","8","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"266","...84603","MiamiBeach","07/17/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"267","...84604","MiamiBeach","07/17/2024 12:00:00","10","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"268","...84605","MiamiBeach","07/17/2024 12:00:00","11","Enterococci",20,"MPN/100mL",NA,NA,NA
-"269","...84606","MiamiBeach","07/17/2024 12:00:00","12","Enterococci",326,"MPN/100mL",NA,NA,NA
-"270","...84607","MiamiBeach","07/17/2024 12:00:00","13","Enterococci",52,"MPN/100mL",NA,NA,NA
-"271","...84608","MiamiBeach","07/17/2024 12:00:00","14","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"272","...84609","MiamiBeach","07/17/2024 12:00:00","15","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"273","...84610","MiamiBeach","07/17/2024 12:00:00","16","Enterococci",20,"MPN/100mL",NA,NA,NA
-"274","...84611","MiamiBeach","07/17/2024 12:00:00","17","Enterococci",20,"MPN/100mL",NA,NA,NA
-"275","...84612","MiamiBeach","07/17/2024 12:00:00","18","Enterococci",20,"MPN/100mL",NA,NA,NA
-"276","...84613","MiamiBeach","07/17/2024 12:00:00","19","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"277","...84614","MiamiBeach","07/17/2024 12:00:00","20","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"278","...84615","MiamiBeach","07/17/2024 12:00:00","21","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"279","...84616","MiamiBeach","07/17/2024 12:00:00","22","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"280","...84617","MiamiBeach","07/17/2024 12:00:00","23","Enterococci",10,"MPN/100mL",NA,NA,NA
-"281","...84618","MiamiBeach","07/17/2024 12:00:00","24","Enterococci",41,"MPN/100mL",NA,NA,NA
-"282","...84619","MiamiBeach","07/17/2024 12:00:00","25","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"283","...84895","MiamiBeach","07/18/2024 12:00:00","26","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"284","...84896","MiamiBeach","07/18/2024 12:00:00","27","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"285","...84897","MiamiBeach","07/18/2024 12:00:00","28","Enterococci",31,"MPN/100mL",NA,NA,NA
-"286","...84898","MiamiBeach","07/18/2024 12:00:00","32","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"287","...84899","MiamiBeach","07/18/2024 12:00:00","33","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"288","...84900","MiamiBeach","07/18/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"289","...84901","MiamiBeach","07/18/2024 12:00:00","30","Enterococci",51,"MPN/100mL",NA,NA,NA
-"290","...84902","MiamiBeach","07/18/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"291","...84903","MiamiBeach","07/18/2024 12:00:00","34","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"292","...84904","MiamiBeach","07/18/2024 12:00:00","41","Enterococci",10,"MPN/100mL",NA,NA,NA
-"293","...84905","MiamiBeach","07/18/2024 12:00:00","40","Enterococci",63,"MPN/100mL",NA,NA,NA
-"294","...84906","MiamiBeach","07/18/2024 12:00:00","39","Enterococci",146,"MPN/100mL",NA,NA,NA
-"295","...84907","MiamiBeach","07/18/2024 12:00:00","38","Enterococci",246,"MPN/100mL",NA,NA,NA
-"296","...84908","MiamiBeach","07/18/2024 12:00:00","37","Enterococci",134,"MPN/100mL",NA,NA,NA
-"297","...84909","MiamiBeach","07/18/2024 12:00:00","36","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"298","...84910","MiamiBeach","07/18/2024 12:00:00","35","Enterococci",118,"MPN/100mL",NA,NA,NA
-"299","...85109","MiamiBeach","08/15/2024 12:00:00","1","Enterococci",20,"MPN/100mL",NA,NA,NA
-"300","...85110","MiamiBeach","08/15/2024 12:00:00","2","Enterococci",62,"MPN/100mL",NA,NA,NA
-"301","...85111","MiamiBeach","08/15/2024 12:00:00","3B","Enterococci",61,"MPN/100mL",NA,NA,NA
-"302","...85112","MiamiBeach","08/15/2024 12:00:00","3","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"303","...85113","MiamiBeach","08/15/2024 12:00:00","3A","Enterococci",41,"MPN/100mL",NA,NA,NA
-"304","...85114","MiamiBeach","08/15/2024 12:00:00","4","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"305","...85115","MiamiBeach","08/15/2024 12:00:00","5","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"306","...85116","MiamiBeach","08/15/2024 12:00:00","6","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"307","...85117","MiamiBeach","08/15/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"308","...85118","MiamiBeach","08/15/2024 12:00:00","8","Enterococci",30,"MPN/100mL",NA,NA,NA
-"309","...85119","MiamiBeach","08/15/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"310","...85120","MiamiBeach","08/15/2024 12:00:00","10","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"311","...85121","MiamiBeach","08/15/2024 12:00:00","11","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"312","...85122","MiamiBeach","08/15/2024 12:00:00","12","Enterococci",259,"MPN/100mL",NA,NA,NA
-"313","...85123","MiamiBeach","08/15/2024 12:00:00","13","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"314","...85124","MiamiBeach","08/15/2024 12:00:00","14","Enterococci",10,"MPN/100mL",NA,NA,NA
-"315","...85125","MiamiBeach","08/15/2024 12:00:00","15","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"316","...85126","MiamiBeach","08/15/2024 12:00:00","16","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"317","...85127","MiamiBeach","08/15/2024 12:00:00","17","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"318","...85128","MiamiBeach","08/15/2024 12:00:00","18","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"319","...85129","MiamiBeach","08/15/2024 12:00:00","19","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"320","...85130","MiamiBeach","08/15/2024 12:00:00","20","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"321","...85131","MiamiBeach","08/15/2024 12:00:00","21","Enterococci",10,"MPN/100mL",NA,NA,NA
-"322","...85132","MiamiBeach","08/15/2024 12:00:00","22","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"323","...85133","MiamiBeach","08/15/2024 12:00:00","23","Enterococci",10,"MPN/100mL",NA,NA,NA
-"324","...85134","MiamiBeach","08/15/2024 12:00:00","24","Enterococci",30,"MPN/100mL",NA,NA,NA
-"325","...85135","MiamiBeach","08/15/2024 12:00:00","25","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"326","...85411","MiamiBeach","08/16/2024 12:00:00","26","Enterococci",20,"MPN/100mL",NA,NA,NA
-"327","...85412","MiamiBeach","08/16/2024 12:00:00","27","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"328","...85413","MiamiBeach","08/16/2024 12:00:00","28","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"329","...85414","MiamiBeach","08/16/2024 12:00:00","33","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"330","...85415","MiamiBeach","08/16/2024 12:00:00","32","Enterococci",24200,"MPN/100mL",NA,NA,NA
-"331","...85416","MiamiBeach","08/16/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"332","...85417","MiamiBeach","08/16/2024 12:00:00","30","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"333","...85418","MiamiBeach","08/16/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"334","...85419","MiamiBeach","08/16/2024 12:00:00","34","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"335","...85420","MiamiBeach","08/16/2024 12:00:00","41","Enterococci",238,"MPN/100mL",NA,NA,NA
-"336","...85421","MiamiBeach","08/16/2024 12:00:00","40","Enterococci",256,"MPN/100mL",NA,NA,NA
-"337","...85422","MiamiBeach","08/16/2024 12:00:00","39","Enterococci",134,"MPN/100mL",NA,NA,NA
-"338","...85423","MiamiBeach","08/16/2024 12:00:00","38","Enterococci",146,"MPN/100mL",NA,NA,NA
-"339","...85424","MiamiBeach","08/16/2024 12:00:00","37","Enterococci",171,"MPN/100mL",NA,NA,NA
-"340","...85425","MiamiBeach","08/16/2024 12:00:00","36","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"341","...85426","MiamiBeach","08/16/2024 12:00:00","35","Enterococci",422,"MPN/100mL",NA,NA,NA
-"342","...85623","MiamiBeach","09/18/2024 12:00:00","1","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"343","...85624","MiamiBeach","09/18/2024 12:00:00","2","Enterococci",10,"MPN/100mL",NA,NA,NA
-"344","...85625","MiamiBeach","09/18/2024 12:00:00","3","Enterococci",31,"MPN/100mL",NA,NA,NA
-"345","...85626","MiamiBeach","09/18/2024 12:00:00","3A","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"346","...85627","MiamiBeach","09/18/2024 12:00:00","3B","Enterococci",20,"MPN/100mL",NA,NA,NA
-"347","...85628","MiamiBeach","09/18/2024 12:00:00","4","Enterococci",189,"MPN/100mL",NA,NA,NA
-"348","...85629","MiamiBeach","09/18/2024 12:00:00","5","Enterococci",63,"MPN/100mL",NA,NA,NA
-"349","...85630","MiamiBeach","09/18/2024 12:00:00","6","Enterococci",20,"MPN/100mL",NA,NA,NA
-"350","...85631","MiamiBeach","09/18/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"351","...85632","MiamiBeach","09/18/2024 12:00:00","8","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"352","...85633","MiamiBeach","09/18/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"353","...85634","MiamiBeach","09/18/2024 12:00:00","10","Enterococci",10,"MPN/100mL",NA,NA,NA
-"354","...85635","MiamiBeach","09/18/2024 12:00:00","11","Enterococci",41,"MPN/100mL",NA,NA,NA
-"355","...85636","MiamiBeach","09/18/2024 12:00:00","13","Enterococci",20,"MPN/100mL",NA,NA,NA
-"356","...85637","MiamiBeach","09/18/2024 12:00:00","14","Enterococci",10,"MPN/100mL",NA,NA,NA
-"357","...85638","MiamiBeach","09/18/2024 12:00:00","15","Enterococci",10,"MPN/100mL",NA,NA,NA
-"358","...85639","MiamiBeach","09/18/2024 12:00:00","16","Enterococci",20,"MPN/100mL",NA,NA,NA
-"359","...85640","MiamiBeach","09/18/2024 12:00:00","17","Enterococci",10,"MPN/100mL",NA,NA,NA
-"360","...85641","MiamiBeach","09/18/2024 12:00:00","18","Enterococci",86,"MPN/100mL",NA,NA,NA
-"361","...85642","MiamiBeach","09/18/2024 12:00:00","19","Enterococci",52,"MPN/100mL",NA,NA,NA
-"362","...85643","MiamiBeach","09/18/2024 12:00:00","20","Enterococci",30,"MPN/100mL",NA,NA,NA
-"363","...85644","MiamiBeach","09/18/2024 12:00:00","21","Enterococci",31,"MPN/100mL",NA,NA,NA
-"364","...85645","MiamiBeach","09/18/2024 12:00:00","22","Enterococci",10,"MPN/100mL",NA,NA,NA
-"365","...85646","MiamiBeach","09/18/2024 12:00:00","23","Enterococci",10,"MPN/100mL",NA,NA,NA
-"366","...85647","MiamiBeach","09/18/2024 12:00:00","24","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"367","...85648","MiamiBeach","09/18/2024 12:00:00","25","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"368","...85917","MiamiBeach","09/19/2024 12:00:00","26","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"369","...85918","MiamiBeach","09/19/2024 12:00:00","27","Enterococci",10,"MPN/100mL",NA,NA,NA
-"370","...85919","MiamiBeach","09/19/2024 12:00:00","28","Enterococci",63,"MPN/100mL",NA,NA,NA
-"371","...85920","MiamiBeach","09/19/2024 12:00:00","32","Enterococci",131,"MPN/100mL",NA,NA,NA
-"372","...85921","MiamiBeach","09/19/2024 12:00:00","33","Enterococci",30,"MPN/100mL",NA,NA,NA
-"373","...85922","MiamiBeach","09/19/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"374","...85923","MiamiBeach","09/19/2024 12:00:00","30","Enterococci",239,"MPN/100mL",NA,NA,NA
-"375","...85924","MiamiBeach","09/19/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"376","...85925","MiamiBeach","09/19/2024 12:00:00","34","Enterococci",10,"MPN/100mL",NA,NA,NA
-"377","...85926","MiamiBeach","09/19/2024 12:00:00","41","Enterococci",798,"MPN/100mL",NA,NA,NA
-"378","...85927","MiamiBeach","09/19/2024 12:00:00","40","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"379","...85928","MiamiBeach","09/19/2024 12:00:00","39","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"380","...85929","MiamiBeach","09/19/2024 12:00:00","38","Enterococci",63,"MPN/100mL",NA,NA,NA
-"381","...85930","MiamiBeach","09/19/2024 12:00:00","37","Enterococci",2060,"MPN/100mL",NA,NA,NA
-"382","...85931","MiamiBeach","09/19/2024 12:00:00","36","Enterococci",24200,"MPN/100mL",NA,NA,NA
-"383","...85932","MiamiBeach","09/19/2024 12:00:00","35","Enterococci",10,"MPN/100mL",NA,NA,NA
-"384","...85933","MiamiBeach","09/19/2024 12:00:00","12","Enterococci",683,"MPN/100mL",NA,NA,NA
-"385","...86141","MiamiBeach","10/22/2024 12:00:00","1","Enterococci",52,"MPN/100mL",NA,NA,NA
-"386","...86142","MiamiBeach","10/22/2024 12:00:00","2","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"387","...86143","MiamiBeach","10/22/2024 12:00:00","3B","Enterococci",82,"MPN/100mL",NA,NA,NA
-"388","...86144","MiamiBeach","10/22/2024 12:00:00","3","Enterococci",144,"MPN/100mL",NA,NA,NA
-"389","...86145","MiamiBeach","10/22/2024 12:00:00","3A","Enterococci",9800,"MPN/100mL",NA,NA,NA
-"390","...86146","MiamiBeach","10/22/2024 12:00:00","4","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"391","...86147","MiamiBeach","10/22/2024 12:00:00","5","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"392","...86148","MiamiBeach","10/22/2024 12:00:00","6","Enterococci",30,"MPN/100mL",NA,NA,NA
-"393","...86149","MiamiBeach","10/22/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"394","...86150","MiamiBeach","10/22/2024 12:00:00","8","Enterococci",20,"MPN/100mL",NA,NA,NA
-"395","...86151","MiamiBeach","10/22/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"396","...86152","MiamiBeach","10/22/2024 12:00:00","10","Enterococci",20,"MPN/100mL",NA,NA,NA
-"397","...86153","MiamiBeach","10/22/2024 12:00:00","11","Enterococci",93,"MPN/100mL",NA,NA,NA
-"398","...86154","MiamiBeach","10/22/2024 12:00:00","12","Enterococci",211,"MPN/100mL",NA,NA,NA
-"399","...86155","MiamiBeach","10/22/2024 12:00:00","13","Enterococci",52,"MPN/100mL",NA,NA,NA
-"400","...86156","MiamiBeach","10/22/2024 12:00:00","14","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"401","...86157","MiamiBeach","10/22/2024 12:00:00","15","Enterococci",20,"MPN/100mL",NA,NA,NA
-"402","...86158","MiamiBeach","10/22/2024 12:00:00","16","Enterococci",31,"MPN/100mL",NA,NA,NA
-"403","...86159","MiamiBeach","10/22/2024 12:00:00","17","Enterococci",20,"MPN/100mL",NA,NA,NA
-"404","...86160","MiamiBeach","10/22/2024 12:00:00","18","Enterococci",51,"MPN/100mL",NA,NA,NA
-"405","...86161","MiamiBeach","10/22/2024 12:00:00","19","Enterococci",107,"MPN/100mL",NA,NA,NA
-"406","...86162","MiamiBeach","10/22/2024 12:00:00","20","Enterococci",10,"MPN/100mL",NA,NA,NA
-"407","...86163","MiamiBeach","10/22/2024 12:00:00","21","Enterococci",10,"MPN/100mL",NA,NA,NA
-"408","...86164","MiamiBeach","10/22/2024 12:00:00","22","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"409","...86165","MiamiBeach","10/22/2024 12:00:00","23","Enterococci",41,"MPN/100mL",NA,NA,NA
-"410","...86166","MiamiBeach","10/22/2024 12:00:00","24","Enterococci",257,"MPN/100mL",NA,NA,NA
-"411","...86167","MiamiBeach","10/22/2024 12:00:00","25","Enterococci",10,"MPN/100mL",NA,NA,NA
-"412","...86443","MiamiBeach","10/23/2024 12:00:00","26","Enterococci",20,"MPN/100mL",NA,NA,NA
-"413","...86444","MiamiBeach","10/23/2024 12:00:00","27","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"414","...86445","MiamiBeach","10/23/2024 12:00:00","28","Enterococci",20,"MPN/100mL",NA,NA,NA
-"415","...86446","MiamiBeach","10/23/2024 12:00:00","32","Enterococci",10,"MPN/100mL",NA,NA,NA
-"416","...86447","MiamiBeach","10/23/2024 12:00:00","33","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"417","...86448","MiamiBeach","10/23/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"418","...86449","MiamiBeach","10/23/2024 12:00:00","30","Enterococci",443,"MPN/100mL",NA,NA,NA
-"419","...86450","MiamiBeach","10/23/2024 12:00:00","31","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"420","...86451","MiamiBeach","10/23/2024 12:00:00","34","Enterococci",41,"MPN/100mL",NA,NA,NA
-"421","...86452","MiamiBeach","10/23/2024 12:00:00","41","Enterococci",30,"MPN/100mL",NA,NA,NA
-"422","...86453","MiamiBeach","10/23/2024 12:00:00","40","Enterococci",568,"MPN/100mL",NA,NA,NA
-"423","...86454","MiamiBeach","10/23/2024 12:00:00","39","Enterococci",10,"MPN/100mL",NA,NA,NA
-"424","...86455","MiamiBeach","10/23/2024 12:00:00","38","Enterococci",10,"MPN/100mL",NA,NA,NA
-"425","...86456","MiamiBeach","10/23/2024 12:00:00","37","Enterococci",1210,"MPN/100mL",NA,NA,NA
-"426","...86457","MiamiBeach","10/23/2024 12:00:00","36","Enterococci",10,"MPN/100mL",NA,NA,NA
-"427","...86458","MiamiBeach","10/23/2024 12:00:00","35","Enterococci",10,"MPN/100mL",NA,NA,NA
-"428","...86637","MiamiBeach","11/19/2024 12:00:00","26","Enterococci",10,"MPN/100mL",NA,NA,NA
-"429","...86638","MiamiBeach","11/19/2024 12:00:00","27","Enterococci",10,"MPN/100mL",NA,NA,NA
-"430","...86639","MiamiBeach","11/19/2024 12:00:00","28","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"431","...86640","MiamiBeach","11/19/2024 12:00:00","32","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"432","...86641","MiamiBeach","11/19/2024 12:00:00","33","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"433","...86642","MiamiBeach","11/19/2024 12:00:00","29","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"434","...86643","MiamiBeach","11/19/2024 12:00:00","30","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"435","...86644","MiamiBeach","11/19/2024 12:00:00","31","Enterococci",74,"MPN/100mL",NA,NA,NA
-"436","...86645","MiamiBeach","11/19/2024 12:00:00","34","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"437","...86646","MiamiBeach","11/19/2024 12:00:00","41","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"438","...86647","MiamiBeach","11/19/2024 12:00:00","40","Enterococci",10,"MPN/100mL",NA,NA,NA
-"439","...86648","MiamiBeach","11/19/2024 12:00:00","39","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"440","...86649","MiamiBeach","11/19/2024 12:00:00","38","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"441","...86650","MiamiBeach","11/19/2024 12:00:00","37","Enterococci",384,"MPN/100mL",NA,NA,NA
-"442","...86651","MiamiBeach","11/19/2024 12:00:00","36","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"443","...86652","MiamiBeach","11/19/2024 12:00:00","35","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"444","...86653","MiamiBeach","11/19/2024 12:00:00","25","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"445","...86855","MiamiBeach","11/20/2024 12:00:00","1","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"446","...86856","MiamiBeach","11/20/2024 12:00:00","2","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"447","...86857","MiamiBeach","11/20/2024 12:00:00","3","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"448","...86858","MiamiBeach","11/20/2024 12:00:00","4","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"449","...86859","MiamiBeach","11/20/2024 12:00:00","5","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"450","...86860","MiamiBeach","11/20/2024 12:00:00","6","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"451","...86861","MiamiBeach","11/20/2024 12:00:00","7","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"452","...86862","MiamiBeach","11/20/2024 12:00:00","8","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"453","...86863","MiamiBeach","11/20/2024 12:00:00","9","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"454","...86864","MiamiBeach","11/20/2024 12:00:00","10","Enterococci",10,"MPN/100mL",NA,NA,NA
-"455","...86865","MiamiBeach","11/20/2024 12:00:00","11","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"456","...86866","MiamiBeach","11/20/2024 12:00:00","12","Enterococci",85,"MPN/100mL",NA,NA,NA
-"457","...86867","MiamiBeach","11/20/2024 12:00:00","13","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"458","...86868","MiamiBeach","11/20/2024 12:00:00","14","Enterococci",10,"MPN/100mL",NA,NA,NA
-"459","...86869","MiamiBeach","11/20/2024 12:00:00","15","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"460","...86870","MiamiBeach","11/20/2024 12:00:00","16","Enterococci",10,"MPN/100mL",NA,NA,NA
-"461","...86871","MiamiBeach","11/20/2024 12:00:00","17","Enterococci",176,"MPN/100mL",NA,NA,NA
-"462","...86872","MiamiBeach","11/20/2024 12:00:00","18","Enterococci",52,"MPN/100mL",NA,NA,NA
-"463","...86873","MiamiBeach","11/20/2024 12:00:00","19","Enterococci",41,"MPN/100mL",NA,NA,NA
-"464","...86874","MiamiBeach","11/20/2024 12:00:00","20","Enterococci",10,"MPN/100mL",NA,NA,NA
-"465","...86875","MiamiBeach","11/20/2024 12:00:00","21","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"466","...86876","MiamiBeach","11/20/2024 12:00:00","22","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"467","...86877","MiamiBeach","11/20/2024 12:00:00","23","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"468","...86878","MiamiBeach","11/20/2024 12:00:00","24","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"469","...87147","MiamiBeach","12/30/2024 12:00:00","#1","Enterococci",10,"MPN/100mL",NA,NA,NA
-"470","...87148","MiamiBeach","12/30/2024 12:00:00","#2","Enterococci",31,"MPN/100mL",NA,NA,NA
-"471","...87149","MiamiBeach","12/30/2024 12:00:00","#3B","Enterococci",10,"MPN/100mL",NA,NA,NA
-"472","...87150","MiamiBeach","12/30/2024 12:00:00","#3","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"473","...87151","MiamiBeach","12/30/2024 12:00:00","#3A","Enterococci",3650,"MPN/100mL",NA,NA,NA
-"474","...87152","MiamiBeach","12/30/2024 12:00:00","#4","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"475","...87153","MiamiBeach","12/30/2024 12:00:00","#5","Enterococci",20,"MPN/100mL",NA,NA,NA
-"476","...87154","MiamiBeach","12/30/2024 12:00:00","#6","Enterococci",359,"MPN/100mL",NA,NA,NA
-"477","...87155","MiamiBeach","12/30/2024 12:00:00","#7","Enterococci",31,"MPN/100mL",NA,NA,NA
-"478","...87156","MiamiBeach","12/30/2024 12:00:00","#8","Enterococci",20,"MPN/100mL",NA,NA,NA
-"479","...87157","MiamiBeach","12/30/2024 12:00:00","#9","Enterococci",10,"MPN/100mL",NA,NA,NA
-"480","...87158","MiamiBeach","12/30/2024 12:00:00","#10","Enterococci",20,"MPN/100mL",NA,NA,NA
-"481","...87159","MiamiBeach","12/30/2024 12:00:00","#11","Enterococci",51,"MPN/100mL",NA,NA,NA
-"482","...87160","MiamiBeach","12/30/2024 12:00:00","#12","Enterococci",4350,"MPN/100mL",NA,NA,NA
-"483","...87161","MiamiBeach","12/30/2024 12:00:00","#13","Enterococci",10,"MPN/100mL",NA,NA,NA
-"484","...87162","MiamiBeach","12/30/2024 12:00:00","#14","Enterococci",10,"MPN/100mL",NA,NA,NA
-"485","...87163","MiamiBeach","12/30/2024 12:00:00","#15","Enterococci",20,"MPN/100mL",NA,NA,NA
-"486","...87164","MiamiBeach","12/30/2024 12:00:00","#16","Enterococci",10,"MPN/100mL",NA,NA,NA
-"487","...87165","MiamiBeach","12/30/2024 12:00:00","#17","Enterococci",10,"MPN/100mL",NA,NA,NA
-"488","...87166","MiamiBeach","12/30/2024 12:00:00","#18","Enterococci",10,"MPN/100mL",NA,NA,NA
-"489","...87167","MiamiBeach","12/30/2024 12:00:00","#19","Enterococci",NA,"MPN/100mL",NA,NA,NA
-"490","...87168","MiamiBeach","12/30/2024 12:00:00","#20","Enterococci",20,"MPN/100mL",NA,NA,NA
-"491","...87169","MiamiBeach","12/30/2024 12:00:00","#21","Enterococci",10,"MPN/100mL",NA,NA,NA
-"492","...87170","MiamiBeach","12/30/2024 12:00:00","#22","Enterococci",10,"MPN/100mL",NA,NA,NA
-"493","...87171","MiamiBeach","12/30/2024 12:00:00","#23","Enterococci",63,"MPN/100mL",NA,NA,NA
-"494","...87172","MiamiBeach","12/30/2024 12:00:00","#24","Enterococci",10,"MPN/100mL",NA,NA,NA
+"","X","source","site","datetime","analyte","value","units","latitude","longitude","sample_depth"
+"1","...81484","MiamiBeach","22","2020-01-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"2","...81496","MiamiBeach","23","2020-01-16","Enterococci",20,"MPN/100mL",NA,NA,NA
+"3","...81508","MiamiBeach","24","2020-01-16","Enterococci",3320,"MPN/100mL",NA,NA,NA
+"4","...81520","MiamiBeach","25","2020-01-16","Enterococci",31,"MPN/100mL",NA,NA,NA
+"5","...81532","MiamiBeach","26","2020-01-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"6","...81544","MiamiBeach","27","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"7","...81556","MiamiBeach","28","2020-01-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"8","...81568","MiamiBeach","29","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"9","...81580","MiamiBeach","30","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"10","...81592","MiamiBeach","31","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"11","...81604","MiamiBeach","32","2020-01-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"12","...81616","MiamiBeach","33","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"13","...81628","MiamiBeach","34","2020-01-16","Enterococci",20,"MPN/100mL",NA,NA,NA
+"14","...81640","MiamiBeach","35","2020-01-16","Enterococci",20,"MPN/100mL",NA,NA,NA
+"15","...81652","MiamiBeach","36","2020-01-16","Enterococci",330,"MPN/100mL",NA,NA,NA
+"16","...81664","MiamiBeach","37","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"17","...81676","MiamiBeach","38","2020-01-16","Enterococci",60,"MPN/100mL",NA,NA,NA
+"18","...81688","MiamiBeach","39","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"19","...81700","MiamiBeach","40","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"20","...81712","MiamiBeach","41","2020-01-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"21","...81766","MiamiBeach","1","2020-01-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"22","...81767","MiamiBeach","2","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"23","...81768","MiamiBeach","3b","2020-01-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"24","...81769","MiamiBeach","3","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"25","...81770","MiamiBeach","4","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"26","...81771","MiamiBeach","5","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"27","...81772","MiamiBeach","6","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"28","...81773","MiamiBeach","7","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"29","...81774","MiamiBeach","8","2020-01-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"30","...81775","MiamiBeach","9","2020-01-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"31","...81776","MiamiBeach","10","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"32","...81777","MiamiBeach","11","2020-01-17","Enterococci",52,"MPN/100mL",NA,NA,NA
+"33","...81778","MiamiBeach","12","2020-01-17","Enterococci",1440,"MPN/100mL",NA,NA,NA
+"34","...81779","MiamiBeach","13","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"35","...81780","MiamiBeach","14","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"36","...81781","MiamiBeach","15","2020-01-17","Enterococci",41,"MPN/100mL",NA,NA,NA
+"37","...81782","MiamiBeach","16","2020-01-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"38","...81783","MiamiBeach","17","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"39","...81784","MiamiBeach","18","2020-01-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"40","...81785","MiamiBeach","19","2020-01-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"41","...81786","MiamiBeach","20","2020-01-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"42","...81787","MiamiBeach","21","2020-01-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"43","...82009","MiamiBeach","26","2020-02-13","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"44","...82010","MiamiBeach","27","2020-02-13","Enterococci",10,"MPN/100mL",NA,NA,NA
+"45","...82011","MiamiBeach","28","2020-02-13","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"46","...82012","MiamiBeach","32","2020-02-13","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"47","...82013","MiamiBeach","33","2020-02-13","Enterococci",51,"MPN/100mL",NA,NA,NA
+"48","...82014","MiamiBeach","29","2020-02-13","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"49","...82015","MiamiBeach","30","2020-02-13","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"50","...82016","MiamiBeach","31","2020-02-13","Enterococci",20,"MPN/100mL",NA,NA,NA
+"51","...82017","MiamiBeach","34","2020-02-13","Enterococci",10,"MPN/100mL",NA,NA,NA
+"52","...82018","MiamiBeach","37","2020-02-13","Enterococci",24200,"MPN/100mL",NA,NA,NA
+"53","...82019","MiamiBeach","36","2020-02-13","Enterococci",1310,"MPN/100mL",NA,NA,NA
+"54","...82020","MiamiBeach","25","2020-02-13","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"55","...82189","MiamiBeach","24","2020-02-16","Enterococci",20,"MPN/100mL",NA,NA,NA
+"56","...82190","MiamiBeach","23","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"57","...82191","MiamiBeach","22","2020-02-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"58","...82192","MiamiBeach","21","2020-02-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"59","...82193","MiamiBeach","20","2020-02-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"60","...82194","MiamiBeach","15","2020-02-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"61","...82195","MiamiBeach","16","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"62","...82196","MiamiBeach","17","2020-02-16","Enterococci",20,"MPN/100mL",NA,NA,NA
+"63","...82197","MiamiBeach","18","2020-02-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"64","...82198","MiamiBeach","19","2020-02-16","Enterococci",84,"MPN/100mL",NA,NA,NA
+"65","...82199","MiamiBeach","14","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"66","...82200","MiamiBeach","13","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"67","...82201","MiamiBeach","12","2020-02-16","Enterococci",175,"MPN/100mL",NA,NA,NA
+"68","...82202","MiamiBeach","11","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"69","...82203","MiamiBeach","10","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"70","...82204","MiamiBeach","9","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"71","...82205","MiamiBeach","8","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"72","...82206","MiamiBeach","7","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"73","...82207","MiamiBeach","6","2020-02-16","Enterococci",30,"MPN/100mL",NA,NA,NA
+"74","...82208","MiamiBeach","5","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"75","...82209","MiamiBeach","4","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"76","...82210","MiamiBeach","3B","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"77","...82211","MiamiBeach","3","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"78","...82212","MiamiBeach","2","2020-02-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"79","...82213","MiamiBeach","1","2020-02-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"80","...82214","MiamiBeach","35","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"81","...82215","MiamiBeach","41","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"82","...82216","MiamiBeach","40","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"83","...82217","MiamiBeach","39","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"84","...82218","MiamiBeach","38","2020-02-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"85","...82535","MiamiBeach","1","2020-03-12","Enterococci",10,"MPN/100mL",NA,NA,NA
+"86","...82536","MiamiBeach","2","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"87","...82537","MiamiBeach","3B","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"88","...82538","MiamiBeach","3","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"89","...82539","MiamiBeach","4","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"90","...82540","MiamiBeach","5","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"91","...82541","MiamiBeach","6","2020-03-12","Enterococci",10,"MPN/100mL",NA,NA,NA
+"92","...82542","MiamiBeach","7","2020-03-12","Enterococci",20,"MPN/100mL",NA,NA,NA
+"93","...82543","MiamiBeach","8","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"94","...82544","MiamiBeach","9","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"95","...82545","MiamiBeach","10","2020-03-12","Enterococci",107,"MPN/100mL",NA,NA,NA
+"96","...82546","MiamiBeach","11","2020-03-12","Enterococci",72,"MPN/100mL",NA,NA,NA
+"97","...82547","MiamiBeach","12","2020-03-12","Enterococci",301,"MPN/100mL",NA,NA,NA
+"98","...82548","MiamiBeach","13","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"99","...82549","MiamiBeach","14","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"100","...82550","MiamiBeach","15","2020-03-12","Enterococci",20,"MPN/100mL",NA,NA,NA
+"101","...82551","MiamiBeach","16","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"102","...82552","MiamiBeach","17","2020-03-12","Enterococci",51,"MPN/100mL",NA,NA,NA
+"103","...82553","MiamiBeach","18","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"104","...82554","MiamiBeach","19","2020-03-12","Enterococci",41,"MPN/100mL",NA,NA,NA
+"105","...82555","MiamiBeach","20","2020-03-12","Enterococci",10,"MPN/100mL",NA,NA,NA
+"106","...82556","MiamiBeach","21","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"107","...82557","MiamiBeach","22","2020-03-12","Enterococci",30,"MPN/100mL",NA,NA,NA
+"108","...82558","MiamiBeach","23","2020-03-12","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"109","...82813","MiamiBeach","25","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"110","...82814","MiamiBeach","24","2020-03-14","Enterococci",20,"MPN/100mL",NA,NA,NA
+"111","...82815","MiamiBeach","26","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"112","...82816","MiamiBeach","27","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"113","...82817","MiamiBeach","28","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"114","...82818","MiamiBeach","32","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"115","...82819","MiamiBeach","33","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"116","...82820","MiamiBeach","29","2020-03-14","Enterococci",10,"MPN/100mL",NA,NA,NA
+"117","...82821","MiamiBeach","30","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"118","...82822","MiamiBeach","31","2020-03-14","Enterococci",10,"MPN/100mL",NA,NA,NA
+"119","...82823","MiamiBeach","34","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"120","...82824","MiamiBeach","41","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"121","...82825","MiamiBeach","40","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"122","...82826","MiamiBeach","39","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"123","...82827","MiamiBeach","38","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"124","...82828","MiamiBeach","37","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"125","...82829","MiamiBeach","36","2020-03-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"126","...82830","MiamiBeach","35","2020-03-14","Enterococci",10,"MPN/100mL",NA,NA,NA
+"127","...82831","MiamiBeach","3A","2020-03-14","Enterococci",30,"MPN/100mL",NA,NA,NA
+"128","...83057","MiamiBeach","25","2020-04-10","Enterococci",20,"MPN/100mL",NA,NA,NA
+"129","...83058","MiamiBeach","1","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"130","...83059","MiamiBeach","2","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"131","...83060","MiamiBeach","3B","2020-04-10","Enterococci",30,"MPN/100mL",NA,NA,NA
+"132","...83061","MiamiBeach","3","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"133","...83062","MiamiBeach","3A","2020-04-10","Enterococci",20,"MPN/100mL",NA,NA,NA
+"134","...83063","MiamiBeach","4","2020-04-10","Enterococci",31,"MPN/100mL",NA,NA,NA
+"135","...83064","MiamiBeach","5","2020-04-10","Enterococci",10,"MPN/100mL",NA,NA,NA
+"136","...83065","MiamiBeach","6","2020-04-10","Enterococci",10,"MPN/100mL",NA,NA,NA
+"137","...83066","MiamiBeach","7","2020-04-10","Enterococci",20,"MPN/100mL",NA,NA,NA
+"138","...83067","MiamiBeach","8","2020-04-10","Enterococci",10,"MPN/100mL",NA,NA,NA
+"139","...83068","MiamiBeach","9","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"140","...83069","MiamiBeach","10","2020-04-10","Enterococci",31,"MPN/100mL",NA,NA,NA
+"141","...83070","MiamiBeach","11","2020-04-10","Enterococci",31,"MPN/100mL",NA,NA,NA
+"142","...83071","MiamiBeach","12","2020-04-10","Enterococci",122,"MPN/100mL",NA,NA,NA
+"143","...83072","MiamiBeach","13","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"144","...83073","MiamiBeach","14","2020-04-10","Enterococci",10,"MPN/100mL",NA,NA,NA
+"145","...83074","MiamiBeach","15","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"146","...83075","MiamiBeach","16","2020-04-10","Enterococci",20,"MPN/100mL",NA,NA,NA
+"147","...83076","MiamiBeach","17","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"148","...83077","MiamiBeach","18","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"149","...83078","MiamiBeach","19","2020-04-10","Enterococci",10,"MPN/100mL",NA,NA,NA
+"150","...83079","MiamiBeach","20","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"151","...83080","MiamiBeach","21","2020-04-10","Enterococci",10,"MPN/100mL",NA,NA,NA
+"152","...83081","MiamiBeach","22","2020-04-10","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"153","...83082","MiamiBeach","23","2020-04-10","Enterococci",10,"MPN/100mL",NA,NA,NA
+"154","...83083","MiamiBeach","24","2020-04-10","Enterococci",52,"MPN/100mL",NA,NA,NA
+"155","...83359","MiamiBeach","26","2020-04-11","Enterococci",10,"MPN/100mL",NA,NA,NA
+"156","...83360","MiamiBeach","27","2020-04-11","Enterococci",10,"MPN/100mL",NA,NA,NA
+"157","...83361","MiamiBeach","28","2020-04-11","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"158","...83362","MiamiBeach","32","2020-04-11","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"159","...83363","MiamiBeach","33","2020-04-11","Enterococci",72,"MPN/100mL",NA,NA,NA
+"160","...83364","MiamiBeach","29","2020-04-11","Enterococci",10,"MPN/100mL",NA,NA,NA
+"161","...83365","MiamiBeach","30","2020-04-11","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"162","...83366","MiamiBeach","31","2020-04-11","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"163","...83367","MiamiBeach","34","2020-04-11","Enterococci",10,"MPN/100mL",NA,NA,NA
+"164","...83368","MiamiBeach","41","2020-04-11","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"165","...83369","MiamiBeach","40","2020-04-11","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"166","...83370","MiamiBeach","39","2020-04-11","Enterococci",10,"MPN/100mL",NA,NA,NA
+"167","...83371","MiamiBeach","38","2020-04-11","Enterococci",132,"MPN/100mL",NA,NA,NA
+"168","...83372","MiamiBeach","37","2020-04-11","Enterococci",565,"MPN/100mL",NA,NA,NA
+"169","...83373","MiamiBeach","36","2020-04-11","Enterococci",20,"MPN/100mL",NA,NA,NA
+"170","...83374","MiamiBeach","35","2020-04-11","Enterococci",10,"MPN/100mL",NA,NA,NA
+"171","...83573","MiamiBeach","1","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"172","...83574","MiamiBeach","2","2020-05-14","Enterococci",73,"MPN/100mL",NA,NA,NA
+"173","...83575","MiamiBeach","3B","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"174","...83576","MiamiBeach","3","2020-05-14","Enterococci",20,"MPN/100mL",NA,NA,NA
+"175","...83577","MiamiBeach","3A","2020-05-14","Enterococci",130,"MPN/100mL",NA,NA,NA
+"176","...83578","MiamiBeach","4","2020-05-14","Enterococci",52,"MPN/100mL",NA,NA,NA
+"177","...83579","MiamiBeach","5","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"178","...83580","MiamiBeach","6","2020-05-14","Enterococci",20,"MPN/100mL",NA,NA,NA
+"179","...83581","MiamiBeach","7","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"180","...83582","MiamiBeach","8","2020-05-14","Enterococci",41,"MPN/100mL",NA,NA,NA
+"181","...83583","MiamiBeach","9","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"182","...83584","MiamiBeach","10","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"183","...83585","MiamiBeach","11","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"184","...83586","MiamiBeach","12","2020-05-14","Enterococci",241,"MPN/100mL",NA,NA,NA
+"185","...83587","MiamiBeach","13","2020-05-14","Enterococci",41,"MPN/100mL",NA,NA,NA
+"186","...83588","MiamiBeach","14","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"187","...83589","MiamiBeach","15","2020-05-14","Enterococci",10,"MPN/100mL",NA,NA,NA
+"188","...83590","MiamiBeach","16","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"189","...83591","MiamiBeach","17","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"190","...83592","MiamiBeach","18","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"191","...83593","MiamiBeach","19","2020-05-14","Enterococci",41,"MPN/100mL",NA,NA,NA
+"192","...83594","MiamiBeach","20","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"193","...83595","MiamiBeach","21","2020-05-14","Enterococci",10,"MPN/100mL",NA,NA,NA
+"194","...83596","MiamiBeach","22","2020-05-14","Enterococci",10,"MPN/100mL",NA,NA,NA
+"195","...83597","MiamiBeach","23","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"196","...83598","MiamiBeach","24","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"197","...83599","MiamiBeach","25","2020-05-14","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"198","...83875","MiamiBeach","26","2020-05-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"199","...83876","MiamiBeach","27","2020-05-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"200","...83877","MiamiBeach","28","2020-05-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"201","...83878","MiamiBeach","32","2020-05-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"202","...83879","MiamiBeach","33","2020-05-16","Enterococci",20,"MPN/100mL",NA,NA,NA
+"203","...83880","MiamiBeach","29","2020-05-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"204","...83881","MiamiBeach","30","2020-05-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"205","...83882","MiamiBeach","31","2020-05-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"206","...83883","MiamiBeach","34","2020-05-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"207","...83884","MiamiBeach","41","2020-05-16","Enterococci",51,"MPN/100mL",NA,NA,NA
+"208","...83885","MiamiBeach","40","2020-05-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"209","...83886","MiamiBeach","39","2020-05-16","Enterococci",3130,"MPN/100mL",NA,NA,NA
+"210","...83887","MiamiBeach","38","2020-05-16","Enterococci",110,"MPN/100mL",NA,NA,NA
+"211","...83888","MiamiBeach","37","2020-05-16","Enterococci",85,"MPN/100mL",NA,NA,NA
+"212","...83889","MiamiBeach","36","2020-05-16","Enterococci",10,"MPN/100mL",NA,NA,NA
+"213","...83890","MiamiBeach","35","2020-05-16","Enterococci",110,"MPN/100mL",NA,NA,NA
+"214","...84087","MiamiBeach","1","2020-06-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"215","...84088","MiamiBeach","2","2020-06-18","Enterococci",41,"MPN/100mL",NA,NA,NA
+"216","...84089","MiamiBeach","3B","2020-06-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"217","...84090","MiamiBeach","3","2020-06-18","Enterococci",715,"MPN/100mL",NA,NA,NA
+"218","...84091","MiamiBeach","3A","2020-06-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"219","...84092","MiamiBeach","4","2020-06-18","Enterococci",171,"MPN/100mL",NA,NA,NA
+"220","...84093","MiamiBeach","5","2020-06-18","Enterococci",583,"MPN/100mL",NA,NA,NA
+"221","...84094","MiamiBeach","6","2020-06-18","Enterococci",292,"MPN/100mL",NA,NA,NA
+"222","...84095","MiamiBeach","7","2020-06-18","Enterococci",41,"MPN/100mL",NA,NA,NA
+"223","...84096","MiamiBeach","8","2020-06-18","Enterococci",1320,"MPN/100mL",NA,NA,NA
+"224","...84097","MiamiBeach","9","2020-06-18","Enterococci",20,"MPN/100mL",NA,NA,NA
+"225","...84098","MiamiBeach","10","2020-06-18","Enterococci",108,"MPN/100mL",NA,NA,NA
+"226","...84099","MiamiBeach","11","2020-06-18","Enterococci",465,"MPN/100mL",NA,NA,NA
+"227","...84100","MiamiBeach","12","2020-06-18","Enterococci",3430,"MPN/100mL",NA,NA,NA
+"228","...84101","MiamiBeach","13","2020-06-18","Enterococci",183,"MPN/100mL",NA,NA,NA
+"229","...84102","MiamiBeach","14","2020-06-18","Enterococci",20,"MPN/100mL",NA,NA,NA
+"230","...84103","MiamiBeach","15","2020-06-18","Enterococci",759,"MPN/100mL",NA,NA,NA
+"231","...84104","MiamiBeach","16","2020-06-18","Enterococci",132,"MPN/100mL",NA,NA,NA
+"232","...84105","MiamiBeach","17","2020-06-18","Enterococci",20,"MPN/100mL",NA,NA,NA
+"233","...84106","MiamiBeach","18","2020-06-18","Enterococci",50,"MPN/100mL",NA,NA,NA
+"234","...84107","MiamiBeach","19","2020-06-18","Enterococci",865,"MPN/100mL",NA,NA,NA
+"235","...84108","MiamiBeach","20","2020-06-18","Enterococci",41,"MPN/100mL",NA,NA,NA
+"236","...84109","MiamiBeach","21","2020-06-18","Enterococci",41,"MPN/100mL",NA,NA,NA
+"237","...84110","MiamiBeach","22","2020-06-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"238","...84111","MiamiBeach","23","2020-06-18","Enterococci",72,"MPN/100mL",NA,NA,NA
+"239","...84112","MiamiBeach","24","2020-06-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"240","...84379","MiamiBeach","26","2020-06-20","Enterococci",30,"MPN/100mL",NA,NA,NA
+"241","...84380","MiamiBeach","27","2020-06-20","Enterococci",20,"MPN/100mL",NA,NA,NA
+"242","...84381","MiamiBeach","28","2020-06-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"243","...84382","MiamiBeach","32","2020-06-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"244","...84383","MiamiBeach","33","2020-06-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"245","...84384","MiamiBeach","29","2020-06-20","Enterococci",51,"MPN/100mL",NA,NA,NA
+"246","...84385","MiamiBeach","30","2020-06-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"247","...84386","MiamiBeach","34","2020-06-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"248","...84387","MiamiBeach","41","2020-06-20","Enterococci",75,"MPN/100mL",NA,NA,NA
+"249","...84388","MiamiBeach","40","2020-06-20","Enterococci",74,"MPN/100mL",NA,NA,NA
+"250","...84389","MiamiBeach","39","2020-06-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"251","...84390","MiamiBeach","38","2020-06-20","Enterococci",30,"MPN/100mL",NA,NA,NA
+"252","...84391","MiamiBeach","37","2020-06-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"253","...84392","MiamiBeach","36","2020-06-20","Enterococci",2310,"MPN/100mL",NA,NA,NA
+"254","...84393","MiamiBeach","31","2020-06-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"255","...84394","MiamiBeach","35","2020-06-20","Enterococci",3680,"MPN/100mL",NA,NA,NA
+"256","...84593","MiamiBeach","1","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"257","...84594","MiamiBeach","2","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"258","...84595","MiamiBeach","3B","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"259","...84596","MiamiBeach","3","2020-07-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"260","...84597","MiamiBeach","3A","2020-07-17","Enterococci",269,"MPN/100mL",NA,NA,NA
+"261","...84598","MiamiBeach","4","2020-07-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"262","...84599","MiamiBeach","5","2020-07-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"263","...84600","MiamiBeach","6","2020-07-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"264","...84601","MiamiBeach","7","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"265","...84602","MiamiBeach","8","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"266","...84603","MiamiBeach","9","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"267","...84604","MiamiBeach","10","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"268","...84605","MiamiBeach","11","2020-07-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"269","...84606","MiamiBeach","12","2020-07-17","Enterococci",326,"MPN/100mL",NA,NA,NA
+"270","...84607","MiamiBeach","13","2020-07-17","Enterococci",52,"MPN/100mL",NA,NA,NA
+"271","...84608","MiamiBeach","14","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"272","...84609","MiamiBeach","15","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"273","...84610","MiamiBeach","16","2020-07-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"274","...84611","MiamiBeach","17","2020-07-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"275","...84612","MiamiBeach","18","2020-07-17","Enterococci",20,"MPN/100mL",NA,NA,NA
+"276","...84613","MiamiBeach","19","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"277","...84614","MiamiBeach","20","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"278","...84615","MiamiBeach","21","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"279","...84616","MiamiBeach","22","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"280","...84617","MiamiBeach","23","2020-07-17","Enterococci",10,"MPN/100mL",NA,NA,NA
+"281","...84618","MiamiBeach","24","2020-07-17","Enterococci",41,"MPN/100mL",NA,NA,NA
+"282","...84619","MiamiBeach","25","2020-07-17","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"283","...84895","MiamiBeach","26","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"284","...84896","MiamiBeach","27","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"285","...84897","MiamiBeach","28","2020-07-18","Enterococci",31,"MPN/100mL",NA,NA,NA
+"286","...84898","MiamiBeach","32","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"287","...84899","MiamiBeach","33","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"288","...84900","MiamiBeach","29","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"289","...84901","MiamiBeach","30","2020-07-18","Enterococci",51,"MPN/100mL",NA,NA,NA
+"290","...84902","MiamiBeach","31","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"291","...84903","MiamiBeach","34","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"292","...84904","MiamiBeach","41","2020-07-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"293","...84905","MiamiBeach","40","2020-07-18","Enterococci",63,"MPN/100mL",NA,NA,NA
+"294","...84906","MiamiBeach","39","2020-07-18","Enterococci",146,"MPN/100mL",NA,NA,NA
+"295","...84907","MiamiBeach","38","2020-07-18","Enterococci",246,"MPN/100mL",NA,NA,NA
+"296","...84908","MiamiBeach","37","2020-07-18","Enterococci",134,"MPN/100mL",NA,NA,NA
+"297","...84909","MiamiBeach","36","2020-07-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"298","...84910","MiamiBeach","35","2020-07-18","Enterococci",118,"MPN/100mL",NA,NA,NA
+"299","...85109","MiamiBeach","1","2020-08-15","Enterococci",20,"MPN/100mL",NA,NA,NA
+"300","...85110","MiamiBeach","2","2020-08-15","Enterococci",62,"MPN/100mL",NA,NA,NA
+"301","...85111","MiamiBeach","3B","2020-08-15","Enterococci",61,"MPN/100mL",NA,NA,NA
+"302","...85112","MiamiBeach","3","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"303","...85113","MiamiBeach","3A","2020-08-15","Enterococci",41,"MPN/100mL",NA,NA,NA
+"304","...85114","MiamiBeach","4","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"305","...85115","MiamiBeach","5","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"306","...85116","MiamiBeach","6","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"307","...85117","MiamiBeach","7","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"308","...85118","MiamiBeach","8","2020-08-15","Enterococci",30,"MPN/100mL",NA,NA,NA
+"309","...85119","MiamiBeach","9","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"310","...85120","MiamiBeach","10","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"311","...85121","MiamiBeach","11","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"312","...85122","MiamiBeach","12","2020-08-15","Enterococci",259,"MPN/100mL",NA,NA,NA
+"313","...85123","MiamiBeach","13","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"314","...85124","MiamiBeach","14","2020-08-15","Enterococci",10,"MPN/100mL",NA,NA,NA
+"315","...85125","MiamiBeach","15","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"316","...85126","MiamiBeach","16","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"317","...85127","MiamiBeach","17","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"318","...85128","MiamiBeach","18","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"319","...85129","MiamiBeach","19","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"320","...85130","MiamiBeach","20","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"321","...85131","MiamiBeach","21","2020-08-15","Enterococci",10,"MPN/100mL",NA,NA,NA
+"322","...85132","MiamiBeach","22","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"323","...85133","MiamiBeach","23","2020-08-15","Enterococci",10,"MPN/100mL",NA,NA,NA
+"324","...85134","MiamiBeach","24","2020-08-15","Enterococci",30,"MPN/100mL",NA,NA,NA
+"325","...85135","MiamiBeach","25","2020-08-15","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"326","...85411","MiamiBeach","26","2020-08-16","Enterococci",20,"MPN/100mL",NA,NA,NA
+"327","...85412","MiamiBeach","27","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"328","...85413","MiamiBeach","28","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"329","...85414","MiamiBeach","33","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"330","...85415","MiamiBeach","32","2020-08-16","Enterococci",24200,"MPN/100mL",NA,NA,NA
+"331","...85416","MiamiBeach","29","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"332","...85417","MiamiBeach","30","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"333","...85418","MiamiBeach","31","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"334","...85419","MiamiBeach","34","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"335","...85420","MiamiBeach","41","2020-08-16","Enterococci",238,"MPN/100mL",NA,NA,NA
+"336","...85421","MiamiBeach","40","2020-08-16","Enterococci",256,"MPN/100mL",NA,NA,NA
+"337","...85422","MiamiBeach","39","2020-08-16","Enterococci",134,"MPN/100mL",NA,NA,NA
+"338","...85423","MiamiBeach","38","2020-08-16","Enterococci",146,"MPN/100mL",NA,NA,NA
+"339","...85424","MiamiBeach","37","2020-08-16","Enterococci",171,"MPN/100mL",NA,NA,NA
+"340","...85425","MiamiBeach","36","2020-08-16","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"341","...85426","MiamiBeach","35","2020-08-16","Enterococci",422,"MPN/100mL",NA,NA,NA
+"342","...85623","MiamiBeach","1","2020-09-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"343","...85624","MiamiBeach","2","2020-09-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"344","...85625","MiamiBeach","3","2020-09-18","Enterococci",31,"MPN/100mL",NA,NA,NA
+"345","...85626","MiamiBeach","3A","2020-09-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"346","...85627","MiamiBeach","3B","2020-09-18","Enterococci",20,"MPN/100mL",NA,NA,NA
+"347","...85628","MiamiBeach","4","2020-09-18","Enterococci",189,"MPN/100mL",NA,NA,NA
+"348","...85629","MiamiBeach","5","2020-09-18","Enterococci",63,"MPN/100mL",NA,NA,NA
+"349","...85630","MiamiBeach","6","2020-09-18","Enterococci",20,"MPN/100mL",NA,NA,NA
+"350","...85631","MiamiBeach","7","2020-09-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"351","...85632","MiamiBeach","8","2020-09-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"352","...85633","MiamiBeach","9","2020-09-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"353","...85634","MiamiBeach","10","2020-09-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"354","...85635","MiamiBeach","11","2020-09-18","Enterococci",41,"MPN/100mL",NA,NA,NA
+"355","...85636","MiamiBeach","13","2020-09-18","Enterococci",20,"MPN/100mL",NA,NA,NA
+"356","...85637","MiamiBeach","14","2020-09-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"357","...85638","MiamiBeach","15","2020-09-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"358","...85639","MiamiBeach","16","2020-09-18","Enterococci",20,"MPN/100mL",NA,NA,NA
+"359","...85640","MiamiBeach","17","2020-09-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"360","...85641","MiamiBeach","18","2020-09-18","Enterococci",86,"MPN/100mL",NA,NA,NA
+"361","...85642","MiamiBeach","19","2020-09-18","Enterococci",52,"MPN/100mL",NA,NA,NA
+"362","...85643","MiamiBeach","20","2020-09-18","Enterococci",30,"MPN/100mL",NA,NA,NA
+"363","...85644","MiamiBeach","21","2020-09-18","Enterococci",31,"MPN/100mL",NA,NA,NA
+"364","...85645","MiamiBeach","22","2020-09-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"365","...85646","MiamiBeach","23","2020-09-18","Enterococci",10,"MPN/100mL",NA,NA,NA
+"366","...85647","MiamiBeach","24","2020-09-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"367","...85648","MiamiBeach","25","2020-09-18","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"368","...85917","MiamiBeach","26","2020-09-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"369","...85918","MiamiBeach","27","2020-09-19","Enterococci",10,"MPN/100mL",NA,NA,NA
+"370","...85919","MiamiBeach","28","2020-09-19","Enterococci",63,"MPN/100mL",NA,NA,NA
+"371","...85920","MiamiBeach","32","2020-09-19","Enterococci",131,"MPN/100mL",NA,NA,NA
+"372","...85921","MiamiBeach","33","2020-09-19","Enterococci",30,"MPN/100mL",NA,NA,NA
+"373","...85922","MiamiBeach","29","2020-09-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"374","...85923","MiamiBeach","30","2020-09-19","Enterococci",239,"MPN/100mL",NA,NA,NA
+"375","...85924","MiamiBeach","31","2020-09-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"376","...85925","MiamiBeach","34","2020-09-19","Enterococci",10,"MPN/100mL",NA,NA,NA
+"377","...85926","MiamiBeach","41","2020-09-19","Enterococci",798,"MPN/100mL",NA,NA,NA
+"378","...85927","MiamiBeach","40","2020-09-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"379","...85928","MiamiBeach","39","2020-09-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"380","...85929","MiamiBeach","38","2020-09-19","Enterococci",63,"MPN/100mL",NA,NA,NA
+"381","...85930","MiamiBeach","37","2020-09-19","Enterococci",2060,"MPN/100mL",NA,NA,NA
+"382","...85931","MiamiBeach","36","2020-09-19","Enterococci",24200,"MPN/100mL",NA,NA,NA
+"383","...85932","MiamiBeach","35","2020-09-19","Enterococci",10,"MPN/100mL",NA,NA,NA
+"384","...85933","MiamiBeach","12","2020-09-19","Enterococci",683,"MPN/100mL",NA,NA,NA
+"385","...86141","MiamiBeach","1","2020-10-22","Enterococci",52,"MPN/100mL",NA,NA,NA
+"386","...86142","MiamiBeach","2","2020-10-22","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"387","...86143","MiamiBeach","3B","2020-10-22","Enterococci",82,"MPN/100mL",NA,NA,NA
+"388","...86144","MiamiBeach","3","2020-10-22","Enterococci",144,"MPN/100mL",NA,NA,NA
+"389","...86145","MiamiBeach","3A","2020-10-22","Enterococci",9800,"MPN/100mL",NA,NA,NA
+"390","...86146","MiamiBeach","4","2020-10-22","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"391","...86147","MiamiBeach","5","2020-10-22","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"392","...86148","MiamiBeach","6","2020-10-22","Enterococci",30,"MPN/100mL",NA,NA,NA
+"393","...86149","MiamiBeach","7","2020-10-22","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"394","...86150","MiamiBeach","8","2020-10-22","Enterococci",20,"MPN/100mL",NA,NA,NA
+"395","...86151","MiamiBeach","9","2020-10-22","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"396","...86152","MiamiBeach","10","2020-10-22","Enterococci",20,"MPN/100mL",NA,NA,NA
+"397","...86153","MiamiBeach","11","2020-10-22","Enterococci",93,"MPN/100mL",NA,NA,NA
+"398","...86154","MiamiBeach","12","2020-10-22","Enterococci",211,"MPN/100mL",NA,NA,NA
+"399","...86155","MiamiBeach","13","2020-10-22","Enterococci",52,"MPN/100mL",NA,NA,NA
+"400","...86156","MiamiBeach","14","2020-10-22","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"401","...86157","MiamiBeach","15","2020-10-22","Enterococci",20,"MPN/100mL",NA,NA,NA
+"402","...86158","MiamiBeach","16","2020-10-22","Enterococci",31,"MPN/100mL",NA,NA,NA
+"403","...86159","MiamiBeach","17","2020-10-22","Enterococci",20,"MPN/100mL",NA,NA,NA
+"404","...86160","MiamiBeach","18","2020-10-22","Enterococci",51,"MPN/100mL",NA,NA,NA
+"405","...86161","MiamiBeach","19","2020-10-22","Enterococci",107,"MPN/100mL",NA,NA,NA
+"406","...86162","MiamiBeach","20","2020-10-22","Enterococci",10,"MPN/100mL",NA,NA,NA
+"407","...86163","MiamiBeach","21","2020-10-22","Enterococci",10,"MPN/100mL",NA,NA,NA
+"408","...86164","MiamiBeach","22","2020-10-22","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"409","...86165","MiamiBeach","23","2020-10-22","Enterococci",41,"MPN/100mL",NA,NA,NA
+"410","...86166","MiamiBeach","24","2020-10-22","Enterococci",257,"MPN/100mL",NA,NA,NA
+"411","...86167","MiamiBeach","25","2020-10-22","Enterococci",10,"MPN/100mL",NA,NA,NA
+"412","...86443","MiamiBeach","26","2020-10-23","Enterococci",20,"MPN/100mL",NA,NA,NA
+"413","...86444","MiamiBeach","27","2020-10-23","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"414","...86445","MiamiBeach","28","2020-10-23","Enterococci",20,"MPN/100mL",NA,NA,NA
+"415","...86446","MiamiBeach","32","2020-10-23","Enterococci",10,"MPN/100mL",NA,NA,NA
+"416","...86447","MiamiBeach","33","2020-10-23","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"417","...86448","MiamiBeach","29","2020-10-23","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"418","...86449","MiamiBeach","30","2020-10-23","Enterococci",443,"MPN/100mL",NA,NA,NA
+"419","...86450","MiamiBeach","31","2020-10-23","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"420","...86451","MiamiBeach","34","2020-10-23","Enterococci",41,"MPN/100mL",NA,NA,NA
+"421","...86452","MiamiBeach","41","2020-10-23","Enterococci",30,"MPN/100mL",NA,NA,NA
+"422","...86453","MiamiBeach","40","2020-10-23","Enterococci",568,"MPN/100mL",NA,NA,NA
+"423","...86454","MiamiBeach","39","2020-10-23","Enterococci",10,"MPN/100mL",NA,NA,NA
+"424","...86455","MiamiBeach","38","2020-10-23","Enterococci",10,"MPN/100mL",NA,NA,NA
+"425","...86456","MiamiBeach","37","2020-10-23","Enterococci",1210,"MPN/100mL",NA,NA,NA
+"426","...86457","MiamiBeach","36","2020-10-23","Enterococci",10,"MPN/100mL",NA,NA,NA
+"427","...86458","MiamiBeach","35","2020-10-23","Enterococci",10,"MPN/100mL",NA,NA,NA
+"428","...86637","MiamiBeach","26","2020-11-19","Enterococci",10,"MPN/100mL",NA,NA,NA
+"429","...86638","MiamiBeach","27","2020-11-19","Enterococci",10,"MPN/100mL",NA,NA,NA
+"430","...86639","MiamiBeach","28","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"431","...86640","MiamiBeach","32","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"432","...86641","MiamiBeach","33","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"433","...86642","MiamiBeach","29","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"434","...86643","MiamiBeach","30","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"435","...86644","MiamiBeach","31","2020-11-19","Enterococci",74,"MPN/100mL",NA,NA,NA
+"436","...86645","MiamiBeach","34","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"437","...86646","MiamiBeach","41","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"438","...86647","MiamiBeach","40","2020-11-19","Enterococci",10,"MPN/100mL",NA,NA,NA
+"439","...86648","MiamiBeach","39","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"440","...86649","MiamiBeach","38","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"441","...86650","MiamiBeach","37","2020-11-19","Enterococci",384,"MPN/100mL",NA,NA,NA
+"442","...86651","MiamiBeach","36","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"443","...86652","MiamiBeach","35","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"444","...86653","MiamiBeach","25","2020-11-19","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"445","...86855","MiamiBeach","1","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"446","...86856","MiamiBeach","2","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"447","...86857","MiamiBeach","3","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"448","...86858","MiamiBeach","4","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"449","...86859","MiamiBeach","5","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"450","...86860","MiamiBeach","6","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"451","...86861","MiamiBeach","7","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"452","...86862","MiamiBeach","8","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"453","...86863","MiamiBeach","9","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"454","...86864","MiamiBeach","10","2020-11-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"455","...86865","MiamiBeach","11","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"456","...86866","MiamiBeach","12","2020-11-20","Enterococci",85,"MPN/100mL",NA,NA,NA
+"457","...86867","MiamiBeach","13","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"458","...86868","MiamiBeach","14","2020-11-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"459","...86869","MiamiBeach","15","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"460","...86870","MiamiBeach","16","2020-11-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"461","...86871","MiamiBeach","17","2020-11-20","Enterococci",176,"MPN/100mL",NA,NA,NA
+"462","...86872","MiamiBeach","18","2020-11-20","Enterococci",52,"MPN/100mL",NA,NA,NA
+"463","...86873","MiamiBeach","19","2020-11-20","Enterococci",41,"MPN/100mL",NA,NA,NA
+"464","...86874","MiamiBeach","20","2020-11-20","Enterococci",10,"MPN/100mL",NA,NA,NA
+"465","...86875","MiamiBeach","21","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"466","...86876","MiamiBeach","22","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"467","...86877","MiamiBeach","23","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"468","...86878","MiamiBeach","24","2020-11-20","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"469","...87147","MiamiBeach","#1","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"470","...87148","MiamiBeach","#2","2020-12-30","Enterococci",31,"MPN/100mL",NA,NA,NA
+"471","...87149","MiamiBeach","#3B","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"472","...87150","MiamiBeach","#3","2020-12-30","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"473","...87151","MiamiBeach","#3A","2020-12-30","Enterococci",3650,"MPN/100mL",NA,NA,NA
+"474","...87152","MiamiBeach","#4","2020-12-30","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"475","...87153","MiamiBeach","#5","2020-12-30","Enterococci",20,"MPN/100mL",NA,NA,NA
+"476","...87154","MiamiBeach","#6","2020-12-30","Enterococci",359,"MPN/100mL",NA,NA,NA
+"477","...87155","MiamiBeach","#7","2020-12-30","Enterococci",31,"MPN/100mL",NA,NA,NA
+"478","...87156","MiamiBeach","#8","2020-12-30","Enterococci",20,"MPN/100mL",NA,NA,NA
+"479","...87157","MiamiBeach","#9","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"480","...87158","MiamiBeach","#10","2020-12-30","Enterococci",20,"MPN/100mL",NA,NA,NA
+"481","...87159","MiamiBeach","#11","2020-12-30","Enterococci",51,"MPN/100mL",NA,NA,NA
+"482","...87160","MiamiBeach","#12","2020-12-30","Enterococci",4350,"MPN/100mL",NA,NA,NA
+"483","...87161","MiamiBeach","#13","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"484","...87162","MiamiBeach","#14","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"485","...87163","MiamiBeach","#15","2020-12-30","Enterococci",20,"MPN/100mL",NA,NA,NA
+"486","...87164","MiamiBeach","#16","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"487","...87165","MiamiBeach","#17","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"488","...87166","MiamiBeach","#18","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"489","...87167","MiamiBeach","#19","2020-12-30","Enterococci",NA,"MPN/100mL",NA,NA,NA
+"490","...87168","MiamiBeach","#20","2020-12-30","Enterococci",20,"MPN/100mL",NA,NA,NA
+"491","...87169","MiamiBeach","#21","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"492","...87170","MiamiBeach","#22","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA
+"493","...87171","MiamiBeach","#23","2020-12-30","Enterococci",63,"MPN/100mL",NA,NA,NA
+"494","...87172","MiamiBeach","#24","2020-12-30","Enterococci",10,"MPN/100mL",NA,NA,NA

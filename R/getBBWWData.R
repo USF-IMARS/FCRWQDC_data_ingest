@@ -35,6 +35,10 @@ getBBWWData <- function() {
       `DEP.Result.Unit`                = ParameterUnits,
       `Value.Qualifier`                = ValueQualifier,
       `Result.Comments`                = ResultComments
+    ) %>%    
+    dplyr::mutate(
+      # Convert date/time if needed
+      Activity.Start.Date.Time = as.Date(.data$Activity.Start.Date.Time)
     )
   
   return(df)
