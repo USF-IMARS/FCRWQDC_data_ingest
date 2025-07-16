@@ -191,24 +191,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getAllData.R"</span>))</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getAllData</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : SFER...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : MiamiBeach...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : BBWW...
+=== LOADING PROVIDER : FIU_Estuaries...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : AOML_FBBB...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : BBAP...
+=== LOADING PROVIDER : BROWARD...
+=== LOADING PROVIDER : DEP...
+=== LOADING PROVIDER : DERM_BBWQ...
+=== LOADING PROVIDER : FIU_WQMP...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : PALMBEACH...</code></pre>
+</div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>create .csv of all data</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce to only cols we need &amp; save to csv</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> program,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> Monitoring.Location.ID,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">datetime =</span> Activity.Start.Date.Time,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce to only cols we need &amp; save to csv</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> program,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">site =</span> Monitoring.Location.ID,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">datetime =</span> Activity.Start.Date.Time,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">analyte =</span> DEP.Analyte.Name,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> DEP.Result.Value.Number,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> DEP.Result.Unit,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">latitude =</span> Org.Decimal.Latitude,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">longitude =</span> Org.Decimal.Longitude,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sample_depth =</span> Activity.Depth,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.keep =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="list-of-analytes" class="level3">
@@ -216,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>list all analytes</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(df<span class="sc">$</span>DEP.Analyte.Name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(df<span class="sc">$</span>DEP.Analyte.Name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Temperature"             "Salinity"               
@@ -238,8 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>skimr on all data</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -251,11 +274,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">966463</td>
+<td style="text-align: left;">1062448</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">117</td>
+<td style="text-align: left;">126</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">_______________________</td>
@@ -267,19 +290,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">character</td>
-<td style="text-align: left;">70</td>
+<td style="text-align: left;">72</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Date</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">logical</td>
 <td style="text-align: left;">9</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;">37</td>
-</tr>
 <tr class="odd">
-<td style="text-align: left;">POSIXct</td>
-<td style="text-align: left;">1</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">44</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">________________________</td>
@@ -318,27 +341,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">DEP.Result.ID</td>
-<td style="text-align: right;">587336</td>
-<td style="text-align: right;">0.39</td>
-<td style="text-align: right;">7</td>
+<td style="text-align: right;">587351</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: right;">43</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">326508</td>
+<td style="text-align: right;">332906</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Activity.ID</td>
 <td style="text-align: right;">587336</td>
-<td style="text-align: right;">0.39</td>
-<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: right;">36</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">86603</td>
+<td style="text-align: right;">86742</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">time</td>
-<td style="text-align: right;">908023</td>
+<td style="text-align: right;">1004008</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">5</td>
@@ -347,48 +370,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Activity.Start.Date.Time</td>
-<td style="text-align: right;">63</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">9950</td>
-<td style="text-align: right;">49043</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">Monitoring.Location.ID</td>
-<td style="text-align: right;">1508</td>
-<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">24068</td>
+<td style="text-align: right;">0.98</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">22213</td>
 <td style="text-align: right;">1772</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Activity.Type</td>
-<td style="text-align: right;">587336</td>
-<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">683321</td>
+<td style="text-align: right;">0.36</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">35</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Activity.Depth.Unit</td>
-<td style="text-align: right;">588246</td>
-<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">684231</td>
+<td style="text-align: right;">0.36</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">24857</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Activity.Depth.Top.Bottom.Unit</td>
-<td style="text-align: right;">908023</td>
+<td style="text-align: right;">1004008</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">4</td>
@@ -396,37 +409,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Sample.Collection.Type</td>
-<td style="text-align: right;">588246</td>
-<td style="text-align: right;">0.39</td>
+<td style="text-align: right;">684231</td>
+<td style="text-align: right;">0.36</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">10452</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Value.Qualifier</td>
-<td style="text-align: right;">438022</td>
-<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">534007</td>
+<td style="text-align: right;">0.50</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">184005</td>
 <td style="text-align: right;">127</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Result.Comments</td>
-<td style="text-align: right;">646643</td>
-<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">742628</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">874</td>
 <td style="text-align: right;">280333</td>
 <td style="text-align: right;">936</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">DEP.Analyte.Name</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1.00</td>
@@ -436,17 +449,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">DEP.Result.Unit</td>
-<td style="text-align: right;">2680</td>
-<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">79468</td>
+<td style="text-align: right;">0.93</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">18892</td>
-<td style="text-align: right;">21</td>
+<td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">original.analyte.name</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1.00</td>
@@ -456,19 +469,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">63</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">program</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">13</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">10</td>
+<td style="text-align: right;">11</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ProgramName</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">25</td>
 <td style="text-align: right;">36</td>
@@ -476,9 +489,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Habitat</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">12</td>
@@ -486,9 +499,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">IndicatorName</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">13</td>
@@ -496,9 +509,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ParameterName</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">23</td>
@@ -506,9 +519,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ParameterUnits</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">9</td>
@@ -516,9 +529,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ProgramLocationID</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
@@ -526,9 +539,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">55</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ManagedAreaName</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">29</td>
 <td style="text-align: right;">38</td>
@@ -536,19 +549,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Region</td>
-<td style="text-align: right;">942512</td>
-<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">942662</td>
+<td style="text-align: right;">0.11</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: right;">19</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ActivityType</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">6</td>
@@ -556,9 +569,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">SampleDate</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">23</td>
@@ -566,9 +579,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2134</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ActivityDepth_m</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -576,9 +589,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">RelativeDepth</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">7</td>
@@ -586,9 +599,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">TotalDepth_m</td>
-<td style="text-align: right;">966400</td>
+<td style="text-align: right;">1062385</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">8</td>
@@ -596,9 +609,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">MDL</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -606,9 +619,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">PQL</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -616,9 +629,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">DetectionUnit</td>
-<td style="text-align: right;">964297</td>
+<td style="text-align: right;">1060282</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">4</td>
@@ -626,19 +639,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ValueQualifier</td>
-<td style="text-align: right;">966463</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ValueQualifierSource</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -647,8 +650,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SampleFraction</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: left;">ValueQualifierSource</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -657,8 +660,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">SampleFraction</td>
+<td style="text-align: right;">1062448</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">ResultComments</td>
-<td style="text-align: right;">964297</td>
+<td style="text-align: right;">1060282</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">21</td>
@@ -666,9 +679,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SEACAR_QAQCFlagCode</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">13</td>
@@ -676,9 +689,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">26</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">SEACAR_QAQC_Description</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">31</td>
 <td style="text-align: right;">195</td>
@@ -686,9 +699,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">26</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SEACAR_EventID</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">36</td>
 <td style="text-align: right;">36</td>
@@ -696,9 +709,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2394</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ExportVersion</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">23</td>
@@ -706,9 +719,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">data_source</td>
-<td style="text-align: right;">937497</td>
+<td style="text-align: right;">1033482</td>
 <td style="text-align: right;">0.03</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">10</td>
@@ -716,9 +729,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">CLIENT SAMPLE ID</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">3</td>
@@ -726,9 +739,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">70</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">LAB SAMPLE ID</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">11</td>
@@ -736,9 +749,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">494</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">MATRIX</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">5</td>
@@ -746,9 +759,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">COLLECTED</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
@@ -756,9 +769,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ANALYTE</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">27</td>
@@ -766,19 +779,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SAMPLE RESULT</td>
-<td style="text-align: right;">961508</td>
-<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1057493</td>
+<td style="text-align: right;">0.00</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1545</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">REPORTING LIMIT</td>
-<td style="text-align: right;">963006</td>
+<td style="text-align: right;">1058991</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">6</td>
@@ -786,9 +799,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">UNITS</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">10</td>
@@ -796,9 +809,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">METHOD</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">29</td>
@@ -806,9 +819,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">DILUTION</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
@@ -816,9 +829,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ANALYZED</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
@@ -826,9 +839,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">123</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">PREPARED</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
@@ -836,9 +849,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">127</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">source_file</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">22</td>
@@ -846,9 +859,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SAMPLE COLLECTION DATE</td>
-<td style="text-align: right;">960538</td>
+<td style="text-align: right;">1056523</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">10</td>
@@ -856,9 +869,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">BASIN</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
@@ -866,9 +879,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">CLUSTER</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
@@ -876,9 +889,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ZSI</td>
-<td style="text-align: right;">928438</td>
+<td style="text-align: right;">1024423</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
@@ -886,9 +899,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ZONE</td>
-<td style="text-align: right;">960133</td>
+<td style="text-align: right;">1056118</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">3</td>
@@ -896,19 +909,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Organization.ID</td>
-<td style="text-align: right;">126746</td>
-<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">222731</td>
+<td style="text-align: right;">0.79</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Org.Latitude..DD.MM.SS.SSSS.</td>
-<td style="text-align: right;">865443</td>
+<td style="text-align: right;">961428</td>
 <td style="text-align: right;">0.10</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">11</td>
@@ -916,9 +929,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Org.Longitude..DD.MM.SS.SSSS.</td>
-<td style="text-align: right;">865443</td>
+<td style="text-align: right;">961428</td>
 <td style="text-align: right;">0.10</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">12</td>
@@ -926,95 +939,159 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">WBID</td>
-<td style="text-align: right;">646686</td>
-<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">742671</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">37805</td>
 <td style="text-align: right;">115</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Matrix</td>
-<td style="text-align: right;">646686</td>
-<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">742671</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">13</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Sampling.Agency.Name</td>
-<td style="text-align: right;">129426</td>
-<td style="text-align: right;">0.87</td>
+<td style="text-align: right;">225411</td>
+<td style="text-align: right;">0.79</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">58</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">DEP.Result.Value.Text</td>
-<td style="text-align: right;">757189</td>
-<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">853174</td>
+<td style="text-align: right;">0.20</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">201123</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Sample.Fraction</td>
-<td style="text-align: right;">646686</td>
-<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">742671</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">131120</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Lab.ID</td>
-<td style="text-align: right;">646686</td>
-<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">742671</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">102313</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">source</td>
-<td style="text-align: right;">646686</td>
-<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">742671</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">Station</td>
+<td style="text-align: right;">542508</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1237</td>
+<td style="text-align: right;">0</td>
+</tr>
 <tr class="odd">
 <td style="text-align: left;">Date</td>
-<td style="text-align: right;">963783</td>
-<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">542508</td>
+<td style="text-align: right;">0.49</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">663</td>
+<td style="text-align: right;">2837</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">datetime</td>
-<td style="text-align: right;">963783</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">17</td>
+<td style="text-align: left;">Parameter</td>
+<td style="text-align: right;">545188</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">44</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">663</td>
+<td style="text-align: right;">19</td>
 <td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Unit</td>
+<td style="text-align: right;">545188</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">11023</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">VQ</td>
+<td style="text-align: right;">853784</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">min</th>
+<th style="text-align: left;">max</th>
+<th style="text-align: left;">median</th>
+<th style="text-align: right;">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Activity.Start.Date.Time</td>
+<td style="text-align: right;">45110</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: left;">1-04-20</td>
+<td style="text-align: left;">2020-12-30</td>
+<td style="text-align: left;">2020-04-06</td>
+<td style="text-align: right;">1958</td>
 </tr>
 </tbody>
 </table>
@@ -1032,63 +1109,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Activity.Top.Depth</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Activity.Bottom.Depth</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TIME</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">DETECTION LIMITS</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NO3 DL</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">DIN DL</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TON DL</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">APA DL</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Audit.Censored.Decisions</td>
-<td style="text-align: right;">966463</td>
+<td style="text-align: right;">1062448</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
@@ -1128,7 +1205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">year</td>
-<td style="text-align: right;">907113</td>
+<td style="text-align: right;">1003098</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">2020.09</td>
 <td style="text-align: right;">2.99</td>
@@ -1141,7 +1218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">month</td>
-<td style="text-align: right;">907113</td>
+<td style="text-align: right;">1003098</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">6.61</td>
 <td style="text-align: right;">3.56</td>
@@ -1154,7 +1231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">day</td>
-<td style="text-align: right;">908023</td>
+<td style="text-align: right;">1004008</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">14.53</td>
 <td style="text-align: right;">8.56</td>
@@ -1167,7 +1244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">lat_deg</td>
-<td style="text-align: right;">908023</td>
+<td style="text-align: right;">1004008</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">25.10</td>
 <td style="text-align: right;">0.99</td>
@@ -1180,7 +1257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lat_min</td>
-<td style="text-align: right;">908023</td>
+<td style="text-align: right;">1004008</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">30.31</td>
 <td style="text-align: right;">15.93</td>
@@ -1194,19 +1271,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td style="text-align: left;">Org.Decimal.Latitude</td>
 <td style="text-align: right;">549586</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">25.77</td>
-<td style="text-align: right;">0.63</td>
+<td style="text-align: right;">0.48</td>
+<td style="text-align: right;">25.66</td>
+<td style="text-align: right;">0.62</td>
 <td style="text-align: right;">24.40</td>
-<td style="text-align: right;">25.47</td>
-<td style="text-align: right;">25.79</td>
-<td style="text-align: right;">26.03</td>
+<td style="text-align: right;">25.13</td>
+<td style="text-align: right;">25.73</td>
+<td style="text-align: right;">25.93</td>
 <td style="text-align: right;">28.78</td>
-<td style="text-align: left;">▂▇▂▁▁</td>
+<td style="text-align: left;">▅▇▂▁▁</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lon_deg</td>
-<td style="text-align: right;">908023</td>
+<td style="text-align: right;">1004008</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">-81.14</td>
 <td style="text-align: right;">0.82</td>
@@ -1219,7 +1296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">lon_min</td>
-<td style="text-align: right;">908023</td>
+<td style="text-align: right;">1004008</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">26.48</td>
 <td style="text-align: right;">17.05</td>
@@ -1233,20 +1310,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: left;">Org.Decimal.Longitude</td>
 <td style="text-align: right;">549586</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">-80.58</td>
-<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">0.48</td>
+<td style="text-align: right;">-80.60</td>
+<td style="text-align: right;">0.64</td>
 <td style="text-align: right;">-85.02</td>
-<td style="text-align: right;">-81.02</td>
-<td style="text-align: right;">-80.26</td>
-<td style="text-align: right;">-80.13</td>
+<td style="text-align: right;">-80.88</td>
+<td style="text-align: right;">-80.32</td>
+<td style="text-align: right;">-80.15</td>
 <td style="text-align: right;">-79.29</td>
-<td style="text-align: left;">▁▁▁▂▇</td>
+<td style="text-align: left;">▁▁▁▅▇</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Activity.Depth</td>
-<td style="text-align: right;">527212</td>
-<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">623197</td>
+<td style="text-align: right;">0.41</td>
 <td style="text-align: right;">0.46</td>
 <td style="text-align: right;">0.26</td>
 <td style="text-align: right;">0.00</td>
@@ -1258,20 +1335,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">DEP.Result.Value.Number</td>
-<td style="text-align: right;">24973</td>
-<td style="text-align: right;">0.97</td>
-<td style="text-align: right;">189.28</td>
-<td style="text-align: right;">2066.92</td>
+<td style="text-align: right;">62121</td>
+<td style="text-align: right;">0.94</td>
+<td style="text-align: right;">178.73</td>
+<td style="text-align: right;">2005.66</td>
 <td style="text-align: right;">-0.03</td>
 <td style="text-align: right;">0.10</td>
-<td style="text-align: right;">0.79</td>
-<td style="text-align: right;">2.80</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">2.92</td>
 <td style="text-align: right;">125600.00</td>
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">RowID</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1009723.34</td>
 <td style="text-align: right;">798651.12</td>
@@ -1284,7 +1361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ProgramID</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">4057.96</td>
 <td style="text-align: right;">0.19</td>
@@ -1297,7 +1374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">IndicatorID</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">6.73</td>
 <td style="text-align: right;">0.63</td>
@@ -1310,7 +1387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ParameterID</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">8.60</td>
 <td style="text-align: right;">6.56</td>
@@ -1323,7 +1400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">AreaID</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">6.09</td>
 <td style="text-align: right;">0.89</td>
@@ -1336,7 +1413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ResultValue</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">12.86</td>
 <td style="text-align: right;">41.22</td>
@@ -1349,7 +1426,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">Year</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">2019.17</td>
 <td style="text-align: right;">2.12</td>
@@ -1362,7 +1439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Month</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">6.55</td>
 <td style="text-align: right;">3.44</td>
@@ -1375,7 +1452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">OriginalLatitude</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">25.80</td>
 <td style="text-align: right;">0.02</td>
@@ -1388,7 +1465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">OriginalLongitude</td>
-<td style="text-align: right;">943422</td>
+<td style="text-align: right;">1039407</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">-80.15</td>
 <td style="text-align: right;">0.01</td>
@@ -1401,7 +1478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">Include</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.03</td>
@@ -1414,7 +1491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MADup</td>
-<td style="text-align: right;">942512</td>
+<td style="text-align: right;">1038497</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1427,7 +1504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">SURV</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">126.86</td>
 <td style="text-align: right;">50.82</td>
@@ -1440,7 +1517,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">STA</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">101.40</td>
 <td style="text-align: right;">138.18</td>
@@ -1452,8 +1529,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">YEAR</td>
+<td style="text-align: right;">1024018</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">2001.70</td>
+<td style="text-align: right;">4.23</td>
+<td style="text-align: right;">1991.20</td>
+<td style="text-align: right;">1998.21</td>
+<td style="text-align: right;">2001.97</td>
+<td style="text-align: right;">2005.28</td>
+<td style="text-align: right;">2008.73</td>
+<td style="text-align: left;">▁▆▇▇▇</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">NOX DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1464,9 +1554,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">▇▅▆▁▁</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">NO2 DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1477,9 +1567,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">▅▇▁▁▁</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">NH4 DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1490,9 +1580,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.01</td>
 <td style="text-align: left;">▇▁▁▁▂</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">TN DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.03</td>
 <td style="text-align: right;">0.03</td>
@@ -1503,9 +1593,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.08</td>
 <td style="text-align: left;">▇▃▁▆▂</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">TP DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1516,9 +1606,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">SRP DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1529,9 +1619,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.00</td>
 <td style="text-align: left;">▇▂▁▅▅</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">CHLA DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.10</td>
 <td style="text-align: right;">0.00</td>
@@ -1542,9 +1632,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.10</td>
 <td style="text-align: left;">▁▁▇▁▁</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">TOC DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.12</td>
 <td style="text-align: right;">0.04</td>
@@ -1555,9 +1645,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.16</td>
 <td style="text-align: left;">▅▁▁▇▇</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SiO2 DL</td>
-<td style="text-align: right;">928033</td>
+<td style="text-align: right;">1024018</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1568,10 +1658,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.01</td>
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
+<tr class="even">
+<td style="text-align: left;">Long Deg</td>
+<td style="text-align: right;">966463</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">-76.03</td>
+<td style="text-align: right;">25.15</td>
+<td style="text-align: right;">-81.00</td>
+<td style="text-align: right;">-80.00</td>
+<td style="text-align: right;">-80.00</td>
+<td style="text-align: right;">-80.00</td>
+<td style="text-align: right;">80.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
 <tr class="odd">
+<td style="text-align: left;">Long Min</td>
+<td style="text-align: right;">966463</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">34.89</td>
+<td style="text-align: right;">16.20</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">19.56</td>
+<td style="text-align: right;">37.48</td>
+<td style="text-align: right;">47.60</td>
+<td style="text-align: right;">65.75</td>
+<td style="text-align: left;">▃▅▅▇▃</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lat Deg</td>
+<td style="text-align: right;">966463</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">24.79</td>
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">24.00</td>
+<td style="text-align: right;">25.00</td>
+<td style="text-align: right;">25.00</td>
+<td style="text-align: right;">25.00</td>
+<td style="text-align: right;">25.00</td>
+<td style="text-align: left;">▂▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lat Min</td>
+<td style="text-align: right;">966463</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">21.51</td>
+<td style="text-align: right;">21.52</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4.02</td>
+<td style="text-align: right;">9.02</td>
+<td style="text-align: right;">39.68</td>
+<td style="text-align: right;">60.00</td>
+<td style="text-align: left;">▇▁▂▁▃</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">DEP.MDL</td>
-<td style="text-align: right;">756832</td>
-<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">852817</td>
+<td style="text-align: right;">0.20</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.47</td>
 <td style="text-align: right;">0.00</td>
@@ -1581,10 +1723,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">50.50</td>
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">DEP.PQL</td>
-<td style="text-align: right;">756832</td>
-<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">852817</td>
+<td style="text-align: right;">0.20</td>
 <td style="text-align: right;">0.15</td>
 <td style="text-align: right;">2.28</td>
 <td style="text-align: right;">0.00</td>
@@ -1594,52 +1736,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">250.00</td>
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Station</td>
-<td style="text-align: right;">963783</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">289.42</td>
-<td style="text-align: right;">80.47</td>
-<td style="text-align: right;">200.00</td>
-<td style="text-align: right;">231.00</td>
-<td style="text-align: right;">270.00</td>
-<td style="text-align: right;">314.00</td>
-<td style="text-align: right;">509.00</td>
-<td style="text-align: left;">▇▇▁▁▂</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: POSIXct</strong></p>
-<table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 17%">
-<col style="width: 12%">
-<col style="width: 17%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 11%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: left;">min</th>
-<th style="text-align: left;">max</th>
-<th style="text-align: left;">median</th>
-<th style="text-align: right;">n_unique</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">DATE</td>
-<td style="text-align: right;">928033</td>
+<tr class="even">
+<td style="text-align: left;">Depth</td>
+<td style="text-align: right;">1014987</td>
 <td style="text-align: right;">0.04</td>
-<td style="text-align: left;">1991-03-14</td>
-<td style="text-align: left;">2008-09-23</td>
-<td style="text-align: left;">2001-12-22</td>
-<td style="text-align: right;">898</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: left;">▁▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Value</td>
+<td style="text-align: right;">556485</td>
+<td style="text-align: right;">0.48</td>
+<td style="text-align: right;">1.79</td>
+<td style="text-align: right;">4.25</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.60</td>
+<td style="text-align: right;">820.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Value.1</td>
+<td style="text-align: right;">612787</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">12.09</td>
+<td style="text-align: right;">62.91</td>
+<td style="text-align: right;">-77.30</td>
+<td style="text-align: right;">2.10</td>
+<td style="text-align: right;">7.68</td>
+<td style="text-align: right;">23.78</td>
+<td style="text-align: right;">41361.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 </tbody>
 </table>
@@ -1648,47 +1782,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Create artistic data image</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)  <span class="co"># for melt()</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)<span class="co"># for scale_fill_distiller()</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extract &amp; drop NA</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>vals_raw <span class="ot">&lt;-</span> df<span class="sc">$</span>DEP.Result.Value.Number</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>vals_raw <span class="ot">&lt;-</span> vals_raw[<span class="sc">!</span><span class="fu">is.na</span>(vals_raw)]</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Log-transform</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">log10</span>(vals_raw <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Percentile of the log-values</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>pct1 <span class="ot">&lt;-</span> <span class="fu">ecdf</span>(v1)(v1)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Grid dims</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>N    <span class="ot">&lt;-</span> <span class="fu">length</span>(pct1)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ncol <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">sqrt</span>(N))</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>nrow <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(N <span class="sc">/</span> ncol)</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Pad</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>pad_len <span class="ot">&lt;-</span> (nrow <span class="sc">*</span> ncol) <span class="sc">-</span> N</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>p1_pad  <span class="ot">&lt;-</span> <span class="fu">c</span>(pct1, <span class="fu">rep</span>(<span class="cn">NA</span>, pad_len))</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Matrix &amp; melt</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>mat_p1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(p1_pad, <span class="at">nrow =</span> nrow, <span class="at">ncol =</span> ncol, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>mat_long_p1 <span class="ot">&lt;-</span> <span class="fu">melt</span>(mat_p1, <span class="at">varnames =</span> <span class="fu">c</span>(<span class="st">"row"</span>,<span class="st">"col"</span>), <span class="at">value.name =</span> <span class="st">"pct_log"</span>)</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Plot</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mat_long_p1, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> pct_log)) <span class="sc">+</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette   =</span> <span class="st">"Spectral"</span>,  <span class="co"># try "RdYlBu", "PuOr", "BrBG", etc.</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,           <span class="co"># reverse=FALSE so low values start at red-ish end</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.value  =</span> <span class="st">"grey90"</span>,    <span class="co"># color for the padded NA cells</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide     =</span> <span class="st">"none"</span>       <span class="co"># hide the legend; remove if you want a colorbar</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)  <span class="co"># for melt()</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)<span class="co"># for scale_fill_distiller()</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extract &amp; drop NA</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>vals_raw <span class="ot">&lt;-</span> df<span class="sc">$</span>DEP.Result.Value.Number</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>vals_raw <span class="ot">&lt;-</span> vals_raw[<span class="sc">!</span><span class="fu">is.na</span>(vals_raw)]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Log-transform</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">log10</span>(vals_raw <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Percentile of the log-values</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>pct1 <span class="ot">&lt;-</span> <span class="fu">ecdf</span>(v1)(v1)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Grid dims</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>N    <span class="ot">&lt;-</span> <span class="fu">length</span>(pct1)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>ncol <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">sqrt</span>(N))</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>nrow <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(N <span class="sc">/</span> ncol)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Pad</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>pad_len <span class="ot">&lt;-</span> (nrow <span class="sc">*</span> ncol) <span class="sc">-</span> N</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>p1_pad  <span class="ot">&lt;-</span> <span class="fu">c</span>(pct1, <span class="fu">rep</span>(<span class="cn">NA</span>, pad_len))</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Matrix &amp; melt</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>mat_p1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(p1_pad, <span class="at">nrow =</span> nrow, <span class="at">ncol =</span> ncol, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>mat_long_p1 <span class="ot">&lt;-</span> <span class="fu">melt</span>(mat_p1, <span class="at">varnames =</span> <span class="fu">c</span>(<span class="st">"row"</span>,<span class="st">"col"</span>), <span class="at">value.name =</span> <span class="st">"pct_log"</span>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Plot</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mat_long_p1, <span class="fu">aes</span>(<span class="at">x =</span> col, <span class="at">y =</span> row, <span class="at">fill =</span> pct_log)) <span class="sc">+</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette   =</span> <span class="st">"Spectral"</span>,  <span class="co"># try "RdYlBu", "PuOr", "BrBG", etc.</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,           <span class="co"># reverse=FALSE so low values start at red-ish end</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.value  =</span> <span class="st">"grey90"</span>,    <span class="co"># color for the padded NA cells</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide     =</span> <span class="st">"none"</span>       <span class="co"># hide the legend; remove if you want a colorbar</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
