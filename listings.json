@@ -1,26 +1,9 @@
 [
   {
-    "listing": "/provider_reports/provider_reports.html",
-    "items": [
-      "/provider_reports/provider_reports/AOML_FBBB.html",
-      "/provider_reports/provider_reports/BBAP.html",
-      "/provider_reports/provider_reports/BBWW.html",
-      "/provider_reports/provider_reports/BROWARD.html",
-      "/provider_reports/provider_reports/DEP.html",
-      "/provider_reports/provider_reports/DERM_BBWQ.html",
-      "/provider_reports/provider_reports/FIU_Estuaries.html",
-      "/provider_reports/provider_reports/FIU_WQMP.html",
-      "/provider_reports/provider_reports/MiamiBeach.html",
-      "/provider_reports/provider_reports/PALMBEACH.html",
-      "/provider_reports/provider_reports/SFER.html"
-    ]
-  },
-  {
     "listing": "/analyte_reports/analyte_reports.html",
     "items": [
       "/analyte_reports/analyte_reports/Ammonia.html",
       "/analyte_reports/analyte_reports/Ammonia+Ammonium.html",
-      "/analyte_reports/analyte_reports/Ammonia_plus_Ammonium.html",
       "/analyte_reports/analyte_reports/Ammonium.html",
       "/analyte_reports/analyte_reports/Chlorophyll_a.html",
       "/analyte_reports/analyte_reports/Dissolved_Oxygen.html",
@@ -40,6 +23,22 @@
       "/analyte_reports/analyte_reports/Total_Nitrogen.html",
       "/analyte_reports/analyte_reports/Turbidity.html",
       "/analyte_reports/analyte_reports/pH.html"
+    ]
+  },
+  {
+    "listing": "/provider_reports/provider_reports.html",
+    "items": [
+      "/provider_reports/provider_reports/AOML_FBBB.html",
+      "/provider_reports/provider_reports/BBAP.html",
+      "/provider_reports/provider_reports/BBWW.html",
+      "/provider_reports/provider_reports/BROWARD.html",
+      "/provider_reports/provider_reports/DEP.html",
+      "/provider_reports/provider_reports/DERM_BBWQ.html",
+      "/provider_reports/provider_reports/FIU_Estuaries.html",
+      "/provider_reports/provider_reports/FIU_WQMP.html",
+      "/provider_reports/provider_reports/MiamiBeach.html",
+      "/provider_reports/provider_reports/PALMBEACH.html",
+      "/provider_reports/provider_reports/SFER.html"
     ]
   }
 ]
