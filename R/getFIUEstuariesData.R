@@ -32,10 +32,10 @@ getFIUEstuariesData <- function(){
       Org.Decimal.Latitude = LATDEC,
       Org.Decimal.Longitude = LONDEC,
       Activity.Depth = DEPTH,
-      Activity.Start.Date.Time = YEAR,
+      Activity.Start.Date.Time = DATE,
       Monitoring.Location.ID = SITE,
     ) %>%
-    mutate(Activity.Start.Date.Time = paste0(Activity.Start.Date.Time, "-01-01"))
+    mutate(Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time))
   
   
   # === map analyte names to standard from unique(df$DEP.Analyte.Name))
@@ -63,5 +63,15 @@ getFIUEstuariesData <- function(){
     ))
   
   df$`DEP.Result.Unit` = "ppm"
+  
+  df <- df %>%
+    dplyr::mutate(
+      # Convert date/time if needed
+      Activity.Start.Date.Time = as.Date(
+        .data$Activity.Start.Date.Time,
+        format="%m/%d/%y"
+      )
+    )
+  
   return(df)
 }

@@ -13,15 +13,14 @@ source(here::here("R/getFIURecentData.R"))
 source(here::here("R/getFIUHistoricalData.R"))
 source(here::here("R/getFIUEstuariesData.R"))
 source(here::here("R/getBBWWData.R"))
+source(here::here("R/getFBBBData.R"))
 
 source(here::here("R/getListOfAnalytes.R"))
 
 # Main function to get data for a specific program
 getData <- function(programName) {
-  # cat("\n===========================================\n")
-  # cat(glue("DATA LOADING FOR PROGRAM: {toupper(programName)} \n"))
-  # cat("===========================================\n")
-  
+  print(glue("=== LOADING PROVIDER : {programName}...\n"))
+
   # Determine which data source to use based on program name
   if(programName == "SFER") {
     df <- getSFERData(programName)
@@ -34,10 +33,7 @@ getData <- function(programName) {
   } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
     # For programs with both WIN and historical data
     # cat("\n--- Loading WIN Data ---\n")
-    df <- getWINData(programName) %>%
-      mutate(
-        Monitoring.Location.ID = as.character(Monitoring.Location.ID)
-      )
+    df <- getWINData(programName)
     
     # load & append historical STORET data
     # cat("\n--- Loading Historical STORET Data ---\n")
@@ -52,14 +48,14 @@ getData <- function(programName) {
       Organization.ID = programName,
       Sampling.Agency.Name = programName,
       Monitoring.Location.ID = as.character(Station),
-      Activity.Start.Date.Time = Date,
+      Activity.Start.Date.Time = as.Date(gsub("'", "", Date), format = "%m/%d/%y"),
       # special exception for DERM_BBWQ (missing depth)
       Activity.Depth = if ("Depth" %in% colnames(.)) .data$Depth else NA_real_,
       DEP.Analyte.Name = Parameter,
       DEP.Result.Value.Number = Value,
       DEP.Result.Unit = Unit,
       Value.Qualifier = VQ,
-      .keep = "none"  # "unused"
+      # .keep = "none"  # "unused"
     )
 
     # Ensure consistent data types before binding rows
@@ -76,9 +72,7 @@ getData <- function(programName) {
     df <- getMiamiBeachData(programName)
   } else if (programName == "FIU_WQMP") {
     df1 <- getWINData(programName)
-    # cat("nrows WIN: ", nrow(df), "\n")
     df2 <- getFIURecentData()
-    # cat("nrows FIU: ", nrow(df2), "\n")
     df3 <- getFIUHistoricalData()
     # combine dataframes
     df <- df1 %>%
@@ -89,6 +83,8 @@ getData <- function(programName) {
     df <- getFIUEstuariesData()
   } else if (programName == "BBWW"){
     df <- getBBWWData()
+  } else if (programName == "AOML_FBBB"){
+    df <- getFBBBData()
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
@@ -131,10 +127,14 @@ getData <- function(programName) {
     "Organization.ID" = as.character,
     "Lab.ID" = as.character,
     "Sample.Collection.Type" = as.character,
+    "Monitoring.Location.ID" = as.character,
+    "Station" = as.character,
     
     # Numeric columns - need safe conversion
     "DEP.Result.Value.Number" = function(x) as.numeric(as.character(x)),
-    "Activity.Depth" = function(x) as.numeric(as.character(x))
+    "Activity.Depth" = function(x) as.numeric(as.character(x)),
+    
+    "Activity.Start.Date.Time" = as.Date
   )
   
   # Apply type standardization to all columns that exist in the dataframe

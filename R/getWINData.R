@@ -93,6 +93,14 @@ getWINData <- function(programName=NULL, fpath=NULL){
   
   result_df$program = programName
   result_df$source = programName
+  
+  
+  result_df <-result_df %>%
+    mutate(
+      Monitoring.Location.ID = as.character(Monitoring.Location.ID),
+      Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time, format="%m/%d/%y")
+    )
+      
   # Return the dataframe
   return(result_df)
 }

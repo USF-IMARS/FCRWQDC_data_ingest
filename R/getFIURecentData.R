@@ -25,11 +25,10 @@ getFIURecentData <- function(programName=NULL, fpath=NULL) {
   df <- df %>%
     mutate(
       Monitoring.Location.ID = as.character(Station),
-      # format date from `%m/%d/%Y %H:%M` to `%Y-%m-%d %H:%M:%S`
-      Activity.Start.Date.Time = format(
-        as.POSIXct(Date, format = "%m/%d/%Y %H:%M"),
-        "%Y/%m/%d %H:%M:%S"),
-      datetime = Activity.Start.Date.Time,
+      Activity.Start.Date.Time = as.Date(
+        date(), 
+        format = "%m/%d/%Y %H:%M"
+      ),
       Organization.ID = "FIU_WQMP",
       program = "FIU_WQMP"
     )
