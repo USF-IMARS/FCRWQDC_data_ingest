@@ -59,7 +59,7 @@ getWINData <- function(programName=NULL, fpath=NULL){
                    header = TRUE,
                    quote = "\"",
                    fill = TRUE,
-                   stringsAsFactors = FALSE)
+                   colClasses = 'character')
                    
   # Store the original column count
   original_cols <- ncol(result_df)
