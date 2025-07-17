@@ -278,6 +278,10 @@ getData <- function(programName) {
         is.na(Activity.Depth) | Activity.Depth <= 1)
     }
   # cat("===========================================\n")
+  df %>%
+    filter(is.na(Monitoring.Location.ID)) %>%
+    print()
+  
   return(df)
 }
 
