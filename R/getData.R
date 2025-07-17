@@ -42,7 +42,9 @@ getData <- function(programName) {
 
     # To load "new" STORET data format:
     hist_data <- read.csv(here::here(
-      glue("data/STORET_historical/{programName}_STORET_ALL.csv")))
+      glue("data/STORET_historical/{programName}_STORET_ALL.csv")),
+      colClasses='character'
+    )
     # align hist_data to WIN format
     hist_data <- hist_data %>% mutate(
       Organization.ID = programName,
@@ -129,10 +131,13 @@ getData <- function(programName) {
     "Sample.Collection.Type" = as.character,
     "Monitoring.Location.ID" = as.character,
     "Station" = as.character,
+    "DEP.Result.Unit" = as.character,
     
     # Numeric columns - need safe conversion
     "DEP.Result.Value.Number" = function(x) as.numeric(as.character(x)),
     "Activity.Depth" = function(x) as.numeric(as.character(x)),
+    "Org.Decimal.Latitude" = function(x) as.numeric(as.character(x)),
+    "Org.Decimal.Longitude" = function(x) as.numeric(as.character(x)),
     
     "Activity.Start.Date.Time" = as.Date
   )
@@ -278,10 +283,12 @@ getData <- function(programName) {
         is.na(Activity.Depth) | Activity.Depth <= 1)
     }
   # cat("===========================================\n")
-  df %>%
-    filter(is.na(Monitoring.Location.ID)) %>%
-    print()
-  
+  if(length(is.na(df$Monitoring.Location.ID)) > 0){
+    print("WARN - rows found with no location ID")
+    # df %>%
+    #   filter(is.na(Monitoring.Location.ID)) %>%
+    #   print()
+  }
   return(df)
 }
 
