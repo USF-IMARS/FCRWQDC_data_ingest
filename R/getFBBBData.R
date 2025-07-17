@@ -6,11 +6,18 @@ library(stringr)
 
 
 getFBBBData <- function(){
-  fname <- here::here('data', 'AOML_Florida_Bay_and_Biscayne_Bay_Data_1998-2017.xlsx')
+  fname <- here::here(
+    'data', 
+    'AOML_Florida_Bay_and_Biscayne_Bay_Data_1998-2017.xlsx'
+  )
   
   
   # Read full sheet
-  df <- read_excel(fname, sheet = "1996-2016")
+  df <- read_excel(
+    fname, 
+    sheet = "1996-2016", 
+    col_types = "text"
+  )
   
   # analytes from columns into rows (wide to long)
   df <- df %>%
@@ -52,11 +59,15 @@ getFBBBData <- function(){
       `Monitoring.Location.ID` = Station,
       `Org.Decimal.Longitude` = Longitude,
       `Org.Decimal.Latitude` = Latitude,
-    ) 
+    )
   
   # === map analyte names to standard from unique(df$DEP.Analyte.Name))
   df <- df %>%
     mutate(
+      Activity.Start.Date.Time = as.Date(
+        Activity.Start.Date.Time, 
+        format="%m/%d/%y"
+      ),
       DEP.Analyte.Name = recode(
         DEP.Analyte.Name,
         "NH4"       = "Ammonium",
