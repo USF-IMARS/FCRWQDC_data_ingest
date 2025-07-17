@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>read in data</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # # read data from source files (takes a long time)</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # read data from source files (takes a long time)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># source(here("R/getData.R"))</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- getData(params$org_id) %&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
@@ -213,20 +213,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     units = DEP.Result.Unit,</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     latitude = Org.Decimal.Latitude,</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     longitude = Org.Decimal.Longitude,</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     sample_depth = Activity.Depth,</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     .keep = "none"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ) %&gt;%</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(source == params$org_id)</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># read from cached file produced by index.qmd</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>df_allData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">==</span> params<span class="sc">$</span>org_id)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_allData</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>value)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>datetime <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df<span class="sc">$</span>datetime, <span class="at">format =</span> <span class="st">"%m/%d/%Y %H:%M:%S"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     .keep = "none"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;%</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#     sample_depth = if ("Activity.Depth" %in% names(.)) Activity.Depth </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#     else NA</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;%</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(source == params$org_id)</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># read from cached file produced by index.qmd</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>df_allData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(source <span class="sc">==</span> params<span class="sc">$</span>org_id)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_allData</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>value)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>datetime <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df<span class="sc">$</span>datetime, <span class="at">format =</span> <span class="st">"%m/%d/%Y %H:%M:%S"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -286,8 +289,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-672f31def748850d6706" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-672f31def748850d6706">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.2536,25.15048,25.8075,25.77,25.78417,25.796,25.753,25.7175,25.7125,25.67017,25.9,25.9298,25.73133,26.04217,26.29167,26.0257,25.8895],[-80.44414999999999,-80.80922,-81.34950000000001,-81.38333,-81.33217,-81.28,-81.2555,-81.23050000000001,-81.20699999999999,-81.16867000000001,-81.51600000000001,-81.60032,-81.28467000000001,-81.76158,-81.81999999999999,-81.7332,-81.4765],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: Highway Creek","Monitoring Location: Garfield Bight","Monitoring Location: Chokoloskee","Monitoring Location: Rabbit Key Pass","Monitoring Location: Lopez Bay","Monitoring Location: Sunday Bay","Monitoring Location: Huston Bay","Monitoring Location: Upper Chatham River","Monitoring Location: Chevalier Bay","Monitoring Location: Alligator Bay","Monitoring Location: Faka Union River","Monitoring Location: Blackwater River","Monitoring Location: Huston River","Monitoring Location: First National","Monitoring Location: Wiggins Pass","Monitoring Location: Henderson Creek","Monitoring Location: Fakahatchee Bay"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.15048,26.29167],"lng":[-81.81999999999999,-80.44414999999999]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-98d6041b7ff8fa0ad590" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-98d6041b7ff8fa0ad590">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.2536,25.15048,25.8075,25.77,25.78417,25.796,25.753,25.7175,25.7125,25.67017,25.9,25.9298,25.73133,26.04217,26.29167,26.0257,25.8895],[-80.44414999999999,-80.80922,-81.34950000000001,-81.38333,-81.33217,-81.28,-81.2555,-81.23050000000001,-81.20699999999999,-81.16867000000001,-81.51600000000001,-81.60032,-81.28467000000001,-81.76158,-81.81999999999999,-81.7332,-81.4765],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: Highway Creek","Monitoring Location: Garfield Bight","Monitoring Location: Chokoloskee","Monitoring Location: Rabbit Key Pass","Monitoring Location: Lopez Bay","Monitoring Location: Sunday Bay","Monitoring Location: Huston Bay","Monitoring Location: Upper Chatham River","Monitoring Location: Chevalier Bay","Monitoring Location: Alligator Bay","Monitoring Location: Faka Union River","Monitoring Location: Blackwater River","Monitoring Location: Huston River","Monitoring Location: First National","Monitoring Location: Wiggins Pass","Monitoring Location: Henderson Creek","Monitoring Location: Fakahatchee Bay"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.15048,26.29167],"lng":[-81.81999999999999,-80.44414999999999]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
