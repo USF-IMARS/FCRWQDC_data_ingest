@@ -283,7 +283,7 @@ getData <- function(programName) {
         is.na(Activity.Depth) | Activity.Depth <= 1)
     }
   # cat("===========================================\n")
-  if(length(is.na(df$Monitoring.Location.ID)) > 0){
+  if(any(is.na(df$Monitoring.Location.ID)) > 0){
     print("WARN - rows found with no location ID")
     # df %>%
     #   filter(is.na(Monitoring.Location.ID)) %>%
