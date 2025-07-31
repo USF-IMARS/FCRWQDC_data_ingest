@@ -50,6 +50,19 @@ df$value <- as.numeric(df$value)
 df$datetime <- as.POSIXct(df$datetime, format = "%m/%d/%Y %H:%M:%S")
 ```
 
+```{R create violin plot}
+# Load ggplot2
+library(ggplot2)
+
+ggplot(df, aes(x = analyte, y = value)) +
+  geom_violin(width = 1.2, adjust = 10, fill = "skyblue", color = "black") +
+  geom_boxplot(width = 0.1, outlier.shape = NA) +
+  scale_y_log10() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "Analyte", y = "Log10(Value)", title = "Violin + Boxplot")
+
+```
+
 ```{R create presence table}
 library(dplyr)
 library(tidyr)
