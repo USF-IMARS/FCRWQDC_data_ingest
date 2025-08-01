@@ -195,7 +195,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>=== LOADING PROVIDER : SFER...</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>=== LOADING PROVIDER : MiamiBeach...</code></pre>
+<pre><code>[1] "WARN - rows found with no location ID"
+=== LOADING PROVIDER : MiamiBeach...</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>=== LOADING PROVIDER : BBWW...
@@ -242,16 +243,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">unique</span>(df<span class="sc">$</span>DEP.Analyte.Name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Dissolved_Oxygen"        "Salinity"               
- [3] "Temperature"             "pH"                     
- [5] "Specific_Conductivity"   "Turbidity"              
- [7] "Total_Kjeldahl_Nitrogen" "Nitrate+Nitrite"        
- [9] "Phosphorus"              "Total_Nitrogen"         
-[11] "Fecal_Coliforms"         "Enterococci"            
-[13] "Ammonia"                 "Nitrate"                
-[15] "Nitrite"                 "Ammonium"               
-[17] "Orthophosphate"          "Chlorophyll_a"          
-[19] "Silicate"                "Pheophytin"             
+<pre><code> [1] "Temperature"             "Salinity"               
+ [3] "Dissolved_Oxygen"        "Ammonium"               
+ [5] "Nitrite"                 "Nitrate"                
+ [7] "Nitrate+Nitrite"         "Orthophosphate"         
+ [9] "Silicate"                "Chlorophyll_a"          
+[11] "Pheophytin"              "pH"                     
+[13] "Specific_Conductivity"   "Turbidity"              
+[15] "Total_Kjeldahl_Nitrogen" "Phosphorus"             
+[17] "Total_Nitrogen"          "Fecal_Coliforms"        
+[19] "Enterococci"             "Ammonia"                
 [21] "Ammonia+Ammonium"       </code></pre>
 </div>
 </div>
@@ -274,11 +275,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">1004008</td>
+<td style="text-align: left;">1068072</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">135</td>
+<td style="text-align: left;">134</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">_______________________</td>
@@ -290,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">character</td>
-<td style="text-align: left;">90</td>
+<td style="text-align: left;">89</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Date</td>
@@ -342,81 +343,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: left;">keyfield</td>
 <td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">43</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">5823</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Activity.ID</td>
-<td style="text-align: right;">587336</td>
-<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">587358</td>
+<td style="text-align: right;">0.45</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">36</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">86685</td>
+<td style="text-align: right;">86742</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">time</td>
 <td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">1422</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Monitoring.Location.ID</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">23721</td>
-<td style="text-align: right;">1682</td>
+<td style="text-align: right;">1840</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">station_type</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">depth_class</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">depth_order</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">notes</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068017</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">75</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
@@ -430,26 +431,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">… &lt;- NULL</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">DEP.Result.Unit</td>
-<td style="text-align: right;">79468</td>
-<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">143532</td>
+<td style="text-align: right;">0.87</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">18892</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">original.analyte.name</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1.00</td>
@@ -459,19 +450,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">61</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">program</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">13</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">10</td>
+<td style="text-align: right;">11</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ProgramName</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">25</td>
 <td style="text-align: right;">36</td>
@@ -479,9 +470,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Habitat</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">12</td>
@@ -489,9 +480,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">IndicatorName</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">13</td>
@@ -499,9 +490,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ParameterName</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">23</td>
@@ -509,9 +500,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ParameterUnits</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">9</td>
@@ -519,9 +510,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ProgramLocationID</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
@@ -529,9 +520,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">55</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ManagedAreaName</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">29</td>
 <td style="text-align: right;">38</td>
@@ -539,19 +530,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Region</td>
-<td style="text-align: right;">884222</td>
-<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">948286</td>
+<td style="text-align: right;">0.11</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ActivityType</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">6</td>
@@ -559,9 +550,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">SampleDate</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">23</td>
@@ -569,9 +560,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2134</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ActivityDepth_m</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -579,9 +570,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">RelativeDepth</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">7</td>
@@ -589,9 +580,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">TotalDepth_m</td>
-<td style="text-align: right;">1003945</td>
+<td style="text-align: right;">1068009</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">8</td>
@@ -599,9 +590,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">MDL</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -609,9 +600,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">PQL</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -619,9 +610,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">DetectionUnit</td>
-<td style="text-align: right;">1001842</td>
+<td style="text-align: right;">1065906</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">4</td>
@@ -629,19 +620,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ValueQualifier</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ValueQualifierSource</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -650,8 +631,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">SampleFraction</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: left;">ValueQualifierSource</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -660,8 +641,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">SampleFraction</td>
+<td style="text-align: right;">1068072</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">ResultComments</td>
-<td style="text-align: right;">1001842</td>
+<td style="text-align: right;">1065906</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">21</td>
@@ -669,9 +660,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SEACAR_QAQCFlagCode</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">13</td>
@@ -679,9 +670,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">26</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">SEACAR_QAQC_Description</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">31</td>
 <td style="text-align: right;">195</td>
@@ -689,9 +680,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">26</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SEACAR_EventID</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">36</td>
 <td style="text-align: right;">36</td>
@@ -699,9 +690,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2394</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ExportVersion</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">23</td>
@@ -709,9 +700,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">data_source</td>
-<td style="text-align: right;">975042</td>
+<td style="text-align: right;">1039106</td>
 <td style="text-align: right;">0.03</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">10</td>
@@ -719,9 +710,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">CLIENT SAMPLE ID</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">3</td>
@@ -729,9 +720,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">70</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">LAB SAMPLE ID</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">11</td>
@@ -739,9 +730,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">494</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">MATRIX</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">5</td>
@@ -749,9 +740,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">COLLECTED</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
@@ -759,9 +750,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ANALYTE</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">27</td>
@@ -769,9 +760,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SAMPLE RESULT</td>
-<td style="text-align: right;">999053</td>
+<td style="text-align: right;">1063117</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">9</td>
@@ -779,9 +770,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">1545</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">REPORTING LIMIT</td>
-<td style="text-align: right;">1000551</td>
+<td style="text-align: right;">1064615</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">6</td>
@@ -789,9 +780,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">UNITS</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">10</td>
@@ -799,9 +790,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">METHOD</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">29</td>
@@ -809,9 +800,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">DILUTION</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
@@ -819,9 +810,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ANALYZED</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
@@ -829,9 +820,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">123</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">PREPARED</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
@@ -839,9 +830,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">127</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">source_file</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">22</td>
@@ -849,9 +840,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">SAMPLE COLLECTION DATE</td>
-<td style="text-align: right;">998083</td>
+<td style="text-align: right;">1062147</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">10</td>
@@ -859,49 +850,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">DEP.Result.ID</td>
-<td style="text-align: right;">587351</td>
-<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">651415</td>
+<td style="text-align: right;">0.39</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">327085</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Activity.Type</td>
-<td style="text-align: right;">683321</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">747385</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">35</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Value.Qualifier</td>
-<td style="text-align: right;">475567</td>
-<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">539631</td>
+<td style="text-align: right;">0.49</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">184005</td>
 <td style="text-align: right;">127</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Result.Comments</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">874</td>
 <td style="text-align: right;">280333</td>
 <td style="text-align: right;">931</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">BASIN</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
@@ -909,9 +900,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">CLUSTER</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
@@ -919,9 +910,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">ZSI</td>
-<td style="text-align: right;">965983</td>
+<td style="text-align: right;">1030047</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
@@ -929,9 +920,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">ZONE</td>
-<td style="text-align: right;">997678</td>
+<td style="text-align: right;">1061742</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">3</td>
@@ -939,140 +930,130 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Long Deg</td>
-<td style="text-align: right;">908023</td>
-<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">972087</td>
+<td style="text-align: right;">0.09</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Long Min</td>
-<td style="text-align: right;">908023</td>
-<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">972087</td>
+<td style="text-align: right;">0.09</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">4494</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Lat Deg</td>
-<td style="text-align: right;">908023</td>
-<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">972087</td>
+<td style="text-align: right;">0.09</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Lat Min</td>
-<td style="text-align: right;">908023</td>
-<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">972087</td>
+<td style="text-align: right;">0.09</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">3933</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Organization.ID</td>
-<td style="text-align: right;">164291</td>
-<td style="text-align: right;">0.84</td>
+<td style="text-align: right;">228355</td>
+<td style="text-align: right;">0.79</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Org.Latitude..DD.MM.SS.SSSS.</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">309205</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Org.Longitude..DD.MM.SS.SSSS.</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">309205</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">WBID</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">37805</td>
 <td style="text-align: right;">115</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Matrix</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">13</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Sample.Collection.Type</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">10452</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Sampling.Agency.Name</td>
-<td style="text-align: right;">166971</td>
-<td style="text-align: right;">0.83</td>
+<td style="text-align: right;">231035</td>
+<td style="text-align: right;">0.78</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">58</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Activity.Depth.Unit</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">24857</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Activity.Top.Depth</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">319777</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Activity.Bottom.Depth</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">319777</td>
@@ -1080,9 +1061,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Activity.Depth.Top.Bottom.Unit</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: left;">Activity.Bottom.Depth</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">319777</td>
@@ -1090,98 +1071,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">Activity.Depth.Top.Bottom.Unit</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">319777</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;">DEP.Result.Value.Text</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">311626</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">DEP.MDL</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">110146</td>
 <td style="text-align: right;">241</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">DEP.PQL</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">110146</td>
 <td style="text-align: right;">180</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Sample.Fraction</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">131120</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Lab.ID</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">102313</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Audit.Censored.Decisions</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">319777</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">source</td>
-<td style="text-align: right;">684231</td>
-<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">748295</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Station</td>
-<td style="text-align: right;">484068</td>
-<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">548132</td>
+<td style="text-align: right;">0.49</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1237</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Date</td>
-<td style="text-align: right;">484068</td>
-<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">548132</td>
+<td style="text-align: right;">0.49</td>
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">2837</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Depth</td>
-<td style="text-align: right;">945076</td>
+<td style="text-align: right;">1009140</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">4</td>
@@ -1189,50 +1180,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Parameter</td>
-<td style="text-align: right;">486748</td>
-<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">550812</td>
+<td style="text-align: right;">0.48</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">44</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">Value</td>
-<td style="text-align: right;">486748</td>
-<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">550812</td>
+<td style="text-align: right;">0.48</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">7766</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Unit</td>
-<td style="text-align: right;">486748</td>
-<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">550812</td>
+<td style="text-align: right;">0.48</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">11023</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">VQ</td>
-<td style="text-align: right;">795344</td>
-<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">859408</td>
+<td style="text-align: right;">0.20</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">43</td>
 <td style="text-align: right;">0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Value.1</td>
-<td style="text-align: right;">545680</td>
-<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">609744</td>
+<td style="text-align: right;">0.43</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0</td>
@@ -1266,12 +1257,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Activity.Start.Date.Time</td>
-<td style="text-align: right;">105935</td>
-<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">105957</td>
+<td style="text-align: right;">0.9</td>
 <td style="text-align: left;">23-09-01</td>
-<td style="text-align: left;">2020-12-30</td>
-<td style="text-align: left;">2020-05-08</td>
-<td style="text-align: right;">1664</td>
+<td style="text-align: left;">2024-11-17</td>
+<td style="text-align: left;">2020-05-10</td>
+<td style="text-align: right;">1948</td>
 </tr>
 </tbody>
 </table>
@@ -1289,56 +1280,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">nisk_start</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">nisk_end</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TIME</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">DETECTION LIMITS</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NO3 DL</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">DIN DL</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TON DL</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">APA DL</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1068072</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
@@ -1378,163 +1369,163 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">year</td>
-<td style="text-align: right;">1003098</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">2016.81</td>
-<td style="text-align: right;">0.99</td>
-<td style="text-align: right;">2015.00</td>
-<td style="text-align: right;">2016.00</td>
-<td style="text-align: right;">2017.00</td>
+<td style="text-align: right;">1003120</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">2020.05</td>
+<td style="text-align: right;">2.98</td>
+<td style="text-align: right;">2014.00</td>
 <td style="text-align: right;">2018.00</td>
-<td style="text-align: right;">2019.00</td>
-<td style="text-align: left;">▂▆▇▇▁</td>
+<td style="text-align: right;">2021.00</td>
+<td style="text-align: right;">2023.00</td>
+<td style="text-align: right;">2024.00</td>
+<td style="text-align: left;">▅▅▅▇▇</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">month</td>
 <td style="text-align: right;">1003098</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">6.61</td>
+<td style="text-align: right;">3.54</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">6.91</td>
-<td style="text-align: right;">3.52</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">3.00</td>
 <td style="text-align: right;">7.00</td>
 <td style="text-align: right;">10.00</td>
 <td style="text-align: right;">12.00</td>
-<td style="text-align: left;">▆▅▃▅▇</td>
+<td style="text-align: left;">▅▅▇▅▇</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">day</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NaN</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;"></td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">14.45</td>
+<td style="text-align: right;">8.62</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">7.00</td>
+<td style="text-align: right;">14.00</td>
+<td style="text-align: right;">22.00</td>
+<td style="text-align: right;">31.00</td>
+<td style="text-align: left;">▇▆▆▆▃</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Org.Decimal.Longitude</td>
-<td style="text-align: right;">549586</td>
-<td style="text-align: right;">0.45</td>
-<td style="text-align: right;">-80.47</td>
-<td style="text-align: right;">0.48</td>
+<td style="text-align: right;">549608</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">-67.43</td>
+<td style="text-align: right;">34.74</td>
 <td style="text-align: right;">-82.59</td>
-<td style="text-align: right;">-80.71</td>
-<td style="text-align: right;">-80.28</td>
-<td style="text-align: right;">-80.14</td>
-<td style="text-align: right;">-79.29</td>
-<td style="text-align: left;">▁▁▂▇▁</td>
+<td style="text-align: right;">-80.61</td>
+<td style="text-align: right;">-80.22</td>
+<td style="text-align: right;">-80.09</td>
+<td style="text-align: right;">28.00</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lat_min</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NaN</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;"></td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">30.33</td>
+<td style="text-align: right;">15.94</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">20.41</td>
+<td style="text-align: right;">33.09</td>
+<td style="text-align: right;">42.61</td>
+<td style="text-align: right;">59.83</td>
+<td style="text-align: left;">▆▅▇▇▅</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lat_dec</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NaN</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;"></td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">25.59</td>
+<td style="text-align: right;">0.93</td>
+<td style="text-align: right;">24.40</td>
+<td style="text-align: right;">24.92</td>
+<td style="text-align: right;">25.35</td>
+<td style="text-align: right;">25.94</td>
+<td style="text-align: right;">28.78</td>
+<td style="text-align: left;">▇▆▂▂▁</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Org.Decimal.Latitude</td>
-<td style="text-align: right;">549586</td>
-<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">549608</td>
+<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">12.47</td>
+<td style="text-align: right;">35.14</td>
+<td style="text-align: right;">-85.00</td>
+<td style="text-align: right;">25.02</td>
 <td style="text-align: right;">25.66</td>
-<td style="text-align: right;">0.57</td>
-<td style="text-align: right;">24.45</td>
-<td style="text-align: right;">25.17</td>
-<td style="text-align: right;">25.75</td>
-<td style="text-align: right;">25.93</td>
+<td style="text-align: right;">25.90</td>
 <td style="text-align: right;">27.17</td>
-<td style="text-align: left;">▂▅▇▂▁</td>
+<td style="text-align: left;">▁▁▁▁▇</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">lon_min</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">26.43</td>
+<td style="text-align: right;">17.03</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NaN</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;"></td>
+<td style="text-align: right;">12.14</td>
+<td style="text-align: right;">22.53</td>
+<td style="text-align: right;">42.96</td>
+<td style="text-align: right;">60.00</td>
+<td style="text-align: left;">▇▇▅▃▅</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">lon_dec</td>
-<td style="text-align: right;">1004008</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NaN</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;"></td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">-81.57</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">-85.02</td>
+<td style="text-align: right;">-82.04</td>
+<td style="text-align: right;">-81.41</td>
+<td style="text-align: right;">-81.09</td>
+<td style="text-align: right;">-80.04</td>
+<td style="text-align: left;">▁▁▃▇▃</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Activity.Depth</td>
-<td style="text-align: right;">623197</td>
-<td style="text-align: right;">0.38</td>
-<td style="text-align: right;">0.53</td>
-<td style="text-align: right;">0.21</td>
+<td style="text-align: right;">623219</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.27</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.50</td>
 <td style="text-align: right;">0.50</td>
 <td style="text-align: right;">0.50</td>
 <td style="text-align: right;">1.00</td>
-<td style="text-align: left;">▂▁▇▂▁</td>
+<td style="text-align: left;">▃▁▇▂▁</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">cast</td>
-<td style="text-align: right;">1004008</td>
+<td style="text-align: right;">1004030</td>
+<td style="text-align: right;">0.06</td>
+<td style="text-align: right;">0.59</td>
+<td style="text-align: right;">0.50</td>
 <td style="text-align: right;">0.00</td>
-<td style="text-align: right;">NaN</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;"></td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2.00</td>
+<td style="text-align: left;">▆▁▇▁▁</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">DEP.Result.Value.Number</td>
-<td style="text-align: right;">61998</td>
+<td style="text-align: right;">69186</td>
 <td style="text-align: right;">0.94</td>
-<td style="text-align: right;">189.37</td>
-<td style="text-align: right;">2066.34</td>
+<td style="text-align: right;">179.02</td>
+<td style="text-align: right;">2007.09</td>
 <td style="text-align: right;">-0.83</td>
 <td style="text-align: right;">0.10</td>
-<td style="text-align: right;">0.90</td>
-<td style="text-align: right;">2.96</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">3.00</td>
 <td style="text-align: right;">125600.00</td>
 <td style="text-align: left;">▇▁▁▁▁</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">RowID</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1009723.34</td>
 <td style="text-align: right;">798651.12</td>
@@ -1547,7 +1538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ProgramID</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">4057.96</td>
 <td style="text-align: right;">0.19</td>
@@ -1560,7 +1551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">IndicatorID</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">6.73</td>
 <td style="text-align: right;">0.63</td>
@@ -1573,7 +1564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ParameterID</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">8.60</td>
 <td style="text-align: right;">6.56</td>
@@ -1586,7 +1577,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">AreaID</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">6.09</td>
 <td style="text-align: right;">0.89</td>
@@ -1599,7 +1590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ResultValue</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">12.86</td>
 <td style="text-align: right;">41.22</td>
@@ -1612,7 +1603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Year</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">2019.17</td>
 <td style="text-align: right;">2.12</td>
@@ -1625,7 +1616,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">Month</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">6.55</td>
 <td style="text-align: right;">3.44</td>
@@ -1638,7 +1629,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">OriginalLatitude</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">25.80</td>
 <td style="text-align: right;">0.02</td>
@@ -1651,7 +1642,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">OriginalLongitude</td>
-<td style="text-align: right;">980967</td>
+<td style="text-align: right;">1045031</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">-80.15</td>
 <td style="text-align: right;">0.01</td>
@@ -1664,7 +1655,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Include</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.03</td>
@@ -1677,7 +1668,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">MADup</td>
-<td style="text-align: right;">980057</td>
+<td style="text-align: right;">1044121</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1690,7 +1681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">SURV</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">126.86</td>
 <td style="text-align: right;">50.82</td>
@@ -1703,7 +1694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">STA</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">101.40</td>
 <td style="text-align: right;">138.18</td>
@@ -1716,7 +1707,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">YEAR</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2001.70</td>
 <td style="text-align: right;">4.23</td>
@@ -1729,7 +1720,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">NOX DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1742,7 +1733,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NO2 DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1755,7 +1746,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">NH4 DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1768,7 +1759,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TN DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.03</td>
 <td style="text-align: right;">0.03</td>
@@ -1781,7 +1772,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">TP DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1794,7 +1785,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">SRP DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
@@ -1807,7 +1798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">CHLA DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.10</td>
 <td style="text-align: right;">0.00</td>
@@ -1820,7 +1811,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">TOC DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.12</td>
 <td style="text-align: right;">0.04</td>
@@ -1833,7 +1824,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">SiO2 DL</td>
-<td style="text-align: right;">965578</td>
+<td style="text-align: right;">1029642</td>
 <td style="text-align: right;">0.04</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">0.00</td>
