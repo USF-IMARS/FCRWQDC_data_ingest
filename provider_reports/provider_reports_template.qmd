@@ -19,7 +19,7 @@ librarian::shelf(
 ```{R getData}
 #| code-summary: read in data
 
-# # read data from source files (takes a long time)
+# read data from source files (takes a long time)
 # source(here("R/getData.R"))
 # df <- getData(params$org_id) %>%
 #   mutate(
@@ -34,7 +34,7 @@ librarian::shelf(
 #     .keep = "none"
 #   ) %>%
 #   mutate(
-#     sample_depth = if ("Activity.Depth" %in% names(.)) Activity.Depth 
+#     sample_depth = if ("Activity.Depth" %in% names(.)) Activity.Depth
 #     else NA
 #   ) %>%
 #   filter(source == params$org_id)

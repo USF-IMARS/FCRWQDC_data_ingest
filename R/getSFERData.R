@@ -5,7 +5,7 @@ library(glue)
 source(here("R/getFpath.R"))
 
 # Get data from SFER CSV format files
-getSFERData <- function(programName=NULL, fpath=NULL) {
+getSFERData <- function(programName="SFER", fpath=NULL) {
   fpath <- getFpath(
     programName, 
     fpath, 
@@ -64,7 +64,7 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
       Activity.Start.Date.Time = as.Date(
         Activity.Start.Date.Time, 
       ),
-      DEP.Analyte.Name <- recode(
+      DEP.Analyte.Name = recode(
         DEP.Analyte.Name,
         "temp"             = "Temperature",
         "sal"              = "Salinity",
