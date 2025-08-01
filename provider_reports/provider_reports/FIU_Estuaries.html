@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>value)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>datetime <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df<span class="sc">$</span>datetime, <span class="at">format =</span> <span class="st">"%m/%d/%Y %H:%M:%S"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>datetime <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df<span class="sc">$</span>datetime, <span class="at">format =</span> <span class="st">"%Y-%m-%d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
@@ -310,8 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-779d10212cf7bb0e5918" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-779d10212cf7bb0e5918">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.2536,25.15048,25.8075,25.77,25.78417,25.796,25.753,25.7175,25.7125,25.67017,25.9,25.9298,25.73133,26.04217,26.29167,26.0257,25.8895],[-80.44414999999999,-80.80922,-81.34950000000001,-81.38333,-81.33217,-81.28,-81.2555,-81.23050000000001,-81.20699999999999,-81.16867000000001,-81.51600000000001,-81.60032,-81.28467000000001,-81.76158,-81.81999999999999,-81.7332,-81.4765],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: Highway Creek","Monitoring Location: Garfield Bight","Monitoring Location: Chokoloskee","Monitoring Location: Rabbit Key Pass","Monitoring Location: Lopez Bay","Monitoring Location: Sunday Bay","Monitoring Location: Huston Bay","Monitoring Location: Upper Chatham River","Monitoring Location: Chevalier Bay","Monitoring Location: Alligator Bay","Monitoring Location: Faka Union River","Monitoring Location: Blackwater River","Monitoring Location: Huston River","Monitoring Location: First National","Monitoring Location: Wiggins Pass","Monitoring Location: Henderson Creek","Monitoring Location: Fakahatchee Bay"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.15048,26.29167],"lng":[-81.81999999999999,-80.44414999999999]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-6b01e92bda9ff790827f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-6b01e92bda9ff790827f">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.2536,25.15048,25.8075,25.77,25.78417,25.796,25.753,25.7175,25.7125,25.67017,25.9,25.9298,25.73133,26.04217,26.29167,26.0257,25.8895],[-80.44414999999999,-80.80922,-81.34950000000001,-81.38333,-81.33217,-81.28,-81.2555,-81.23050000000001,-81.20699999999999,-81.16867000000001,-81.51600000000001,-81.60032,-81.28467000000001,-81.76158,-81.81999999999999,-81.7332,-81.4765],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: Highway Creek","Monitoring Location: Garfield Bight","Monitoring Location: Chokoloskee","Monitoring Location: Rabbit Key Pass","Monitoring Location: Lopez Bay","Monitoring Location: Sunday Bay","Monitoring Location: Huston Bay","Monitoring Location: Upper Chatham River","Monitoring Location: Chevalier Bay","Monitoring Location: Alligator Bay","Monitoring Location: Faka Union River","Monitoring Location: Blackwater River","Monitoring Location: Huston River","Monitoring Location: First National","Monitoring Location: Wiggins Pass","Monitoring Location: Henderson Creek","Monitoring Location: Fakahatchee Bay"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.15048,26.29167],"lng":[-81.81999999999999,-80.44414999999999]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -377,25 +377,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"No sampling events with valid dates &amp; IDs"</span>)</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "No sampling events with valid dates &amp; IDs"</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="FIU_Estuaries_files/figure-html/sampling heatmap-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>date_range <span class="ot">&lt;-</span> <span class="fu">range</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">datetime</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Earliest sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">1</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>date_range <span class="ot">&lt;-</span> <span class="fu">range</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">datetime</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Earliest sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">1</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Earliest sampling date:  Inf </code></pre>
+<pre><code>Earliest sampling date:  1991-03-14 00:00:00 </code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Latest   sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">2</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Latest   sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">2</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Latest   sampling date:  -Inf </code></pre>
+<pre><code>Latest   sampling date:  2008-09-23 00:00:00 </code></pre>
 </div>
 </div>
 
