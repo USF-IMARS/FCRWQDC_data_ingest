@@ -52,7 +52,8 @@ Download data for this analyte [here](data/exports/`r params$analyte`.csv)
 library(ggplot2)
 ggplot(df, aes(x = value)) +
   geom_histogram(bins = 30, fill = "blue", color = "black") +
-  labs(title = "Histogram of Values", x = "Value", y = "Count")
+  scale_y_log10() +
+  labs(title = "Histogram of Values", x = "Value", y = "Log10(Count)")
 ```
 
 
