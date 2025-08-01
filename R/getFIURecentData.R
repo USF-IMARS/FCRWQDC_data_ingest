@@ -26,7 +26,7 @@ getFIURecentData <- function(programName=NULL, fpath=NULL) {
     mutate(
       Monitoring.Location.ID = as.character(Station),
       Activity.Start.Date.Time = as.Date(
-        date(), 
+        Date, 
         format = "%m/%d/%Y %H:%M"
       ),
       Organization.ID = "FIU_WQMP",
