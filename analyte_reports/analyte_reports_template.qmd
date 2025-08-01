@@ -80,8 +80,8 @@ samples_df <- df %>%
   filter(!is.na(site)) %>%
   # drop any with empty Activity.Start.Date.Time
   filter(!is.na(datetime)) %>%
-  # parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct
-  mutate(datetime = mdy_hms(
+  # parse the "YYYY-MM-DD" strings into POSIXct
+  mutate(datetime = ymd(
           datetime,
           tz = "UTC")) %>%
   distinct()
