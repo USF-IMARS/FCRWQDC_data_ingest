@@ -155,8 +155,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#histogram-of-value" id="toc-histogram-of-value" class="nav-link active" data-scroll-target="#histogram-of-value">Histogram of <code>value</code>:</a></li>
-  <li><a href="#station-statistics" id="toc-station-statistics" class="nav-link" data-scroll-target="#station-statistics">Station Statistics:</a></li>
   <li><a href="#reporting-programs" id="toc-reporting-programs" class="nav-link" data-scroll-target="#reporting-programs">Reporting Programs:</a></li>
+  <li><a href="#station-statistics" id="toc-station-statistics" class="nav-link" data-scroll-target="#station-statistics">Station Statistics:</a></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +228,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Values"</span>, <span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Histogram of Values"</span>, <span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Log10(Count)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -239,154 +240,168 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+<section id="reporting-programs" class="level3">
+<h3 class="anchored" data-anchor-id="reporting-programs">Reporting Programs:</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>display reporting programs</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Nitrate_files/figure-html/display reporting programs-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="station-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="station-statistics">Station Statistics:</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>create station statistics dataframe</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/seasonalMannKendall.R"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)  <span class="co"># for mdy_hms()</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)  <span class="co"># for display</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create table of samples for each station</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>samples_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(site)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(datetime)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "MM/DD/YYYY HH:MM:SS" strings into POSIXct</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">datetime =</span> <span class="fu">mdy_hms</span>(</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>          datetime,</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source, site) <span class="sc">%&gt;%</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        datetime,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        value</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(value),</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(value),</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(value) <span class="sc">/</span> <span class="fu">mean</span>(value)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop unwanted columns added by seasonalMannKendall</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>z,</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>tau,</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>chi_square</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/seasonalMannKendall.R"</span>))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)  <span class="co"># for mdy_hms()</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)  <span class="co"># for display</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create table of samples for each station</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>samples_df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Monitoring.Location.ID</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(site)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop any with empty Activity.Start.Date.Time</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(datetime)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># parse the "YYYY-MM-DD" strings into POSIXct</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">datetime =</span> <span class="fu">ymd</span>(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>          datetime,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">tz =</span> <span class="st">"UTC"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># add statistics for each station</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="ot">&lt;-</span> samples_df <span class="sc">%&gt;%</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source, site) <span class="sc">%&gt;%</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>      tmp <span class="ot">&lt;-</span> <span class="fu">seasonalMannKendallVectorized</span>(</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        datetime,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        value</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_values =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(value),</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">coefficient.of.variation =</span> <span class="fu">sd</span>(value) <span class="sc">/</span> <span class="fu">mean</span>(value)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create column significant_slope</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant_slope =</span> <span class="fu">ifelse</span>(z <span class="sc">&lt;=</span> <span class="fl">0.05</span>, slope, <span class="cn">NA_real_</span>),</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">pvalue =</span> z</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop unwanted columns added by seasonalMannKendall</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>z,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>tau,</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span>chi_square</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="co"># print(head(sample_stats_df))</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="co"># # display sample_stats_df with pander</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a><span class="co"># pander(sample_stats_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>save stats to csv</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"seasonal-mann-kendall-stats"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_stats_df <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">here</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"seasonal-mann-kendall-stats"</span>, <span class="fu">paste0</span>(params<span class="sc">$</span>analyte, <span class="st">".csv"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Download data for this analyte’s statistics <a href="data/exports/seasonal-mann-kendall-stats/Nitrate.csv">here</a></p>
 <div class="cell">
 <details class="code-fold">
 <summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyselect)  <span class="co"># for all_of()</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer) <span class="co"># for brewer.pal()</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ── color_column() ─────────────────────────────────────────────────────────────</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gt_tbl   : a gt object that you’ve already created (e.g. `sample_stats_df %&gt;% gt()`)</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df       : the original data.frame (must contain the column you want to color)</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># column   : a string, e.g. "slope" or "n_values"</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># palette  : a character vector of colours to feed to col_numeric()</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>color_column <span class="ot">&lt;-</span> <span class="cf">function</span>(gt_tbl, df, column, </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"orange"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"violet"</span>),</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">domain =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1) Pull out that column’s numeric values</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> df[[column]]</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(vals)) {</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="fu">sprintf</span>(<span class="st">"`%s` is not numeric; data_color() requires a numeric column."</span>, column))</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2) Compute its min and max (ignoring NA)</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  min_val <span class="ot">&lt;-</span> <span class="fu">min</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  max_val <span class="ot">&lt;-</span> <span class="fu">max</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(domain)) {</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    domain <span class="ot">&lt;-</span> <span class="fu">c</span>(min_val, max_val)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3) Call data_color() on the gt table for that single column</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="sc">%&gt;%</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_color</span>(</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> <span class="fu">all_of</span>(column),</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">colors  =</span> <span class="fu">col_numeric</span>(</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">palette =</span> palette,</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">domain  =</span> domain</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) First build your gt table as usual:</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>gt_tbl <span class="ot">&lt;-</span> sample_stats_df <span class="sc">%&gt;%</span> </span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co"># slope blue (-) to red (+) (0 centered)</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>  min_slope <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>  max_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  max_abs_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_slope), <span class="fu">abs</span>(max_slope))</span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"slope"</span>,</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_slope, max_abs_slope)</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in slope color column"</span>)</span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in slope color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pvalue Z</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"z"</span>, </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in z color column"</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyselect)  <span class="co"># for all_of()</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer) <span class="co"># for brewer.pal()</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ── color_column() ─────────────────────────────────────────────────────────────</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gt_tbl   : a gt object that you’ve already created (e.g. `sample_stats_df %&gt;% gt()`)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df       : the original data.frame (must contain the column you want to color)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># column   : a string, e.g. "slope" or "n_values"</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># palette  : a character vector of colours to feed to col_numeric()</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>color_column <span class="ot">&lt;-</span> <span class="cf">function</span>(gt_tbl, df, column, </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"orange"</span>, <span class="st">"yellow"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"violet"</span>),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">domain =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1) Pull out that column’s numeric values</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> df[[column]]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(vals)) {</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="fu">sprintf</span>(<span class="st">"`%s` is not numeric; data_color() requires a numeric column."</span>, column))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2) Compute its min and max (ignoring NA)</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  min_val <span class="ot">&lt;-</span> <span class="fu">min</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  max_val <span class="ot">&lt;-</span> <span class="fu">max</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(domain)) {</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    domain <span class="ot">&lt;-</span> <span class="fu">c</span>(min_val, max_val)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3) Call data_color() on the gt table for that single column</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="sc">%&gt;%</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data_color</span>(</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">columns =</span> <span class="fu">all_of</span>(column),</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">colors  =</span> <span class="fu">col_numeric</span>(</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">palette =</span> palette,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">domain  =</span> domain</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) First build your gt table as usual:</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>gt_tbl <span class="ot">&lt;-</span> sample_stats_df <span class="sc">%&gt;%</span> </span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co"># slope blue (-) to red (+) (0 centered)</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>  min_slope <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>  max_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>  max_abs_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_slope), <span class="fu">abs</span>(max_slope))</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"slope"</span>,</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_slope, max_abs_slope)</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in slope color column"</span>)</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pvalue Z</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"z"</span>, </span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in z color column"</span>)</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Error in z color column"
@@ -394,119 +409,113 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <details class="code-fold">
 <summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># slope blue (-) to red (+) (0 centered)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  min_slope <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>significant_slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  max_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>significant_slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  max_abs_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_slope), <span class="fu">abs</span>(max_slope))</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"significant_slope"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_slope, max_abs_slope)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in significant_slope color column"</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in significant_slope color column"
-&lt;simpleError in color_column(gt_tbl, df = sample_stats_df, column = "significant_slope",     palette = rev(brewer.pal(11, "RdBu")), domain = c(-max_abs_slope,         max_abs_slope)): `significant_slope` is not numeric; data_color() requires a numeric column.&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mean values blue to red (0 centered)</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  min_mean <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  max_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  max_abs_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_mean), <span class="fu">abs</span>(max_mean))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"mean"</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_mean, max_abs_mean)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in mean color column"</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># slope blue (-) to red (+) (0 centered)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  min_slope <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>significant_slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  max_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>significant_slope,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  max_abs_slope <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_slope), <span class="fu">abs</span>(max_slope))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"significant_slope"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_slope, max_abs_slope)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in significant_slope color column"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mean values blue to red (0 centered)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  min_mean <span class="ot">&lt;-</span> <span class="fu">min</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  max_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(sample_stats_df<span class="sc">$</span>mean,  <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  max_abs_mean <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(min_mean), <span class="fu">abs</span>(max_mean))</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">df     =</span> sample_stats_df, </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">column =</span> <span class="st">"mean"</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain  =</span> <span class="fu">c</span>(<span class="sc">-</span>max_abs_mean, max_abs_mean)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in mean color column"</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="vgddlvxjnc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vgddlvxjnc table {
+<div id="cythmiddge" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#cythmiddge table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vgddlvxjnc thead, #vgddlvxjnc tbody, #vgddlvxjnc tfoot, #vgddlvxjnc tr, #vgddlvxjnc td, #vgddlvxjnc th {
+#cythmiddge thead, #cythmiddge tbody, #cythmiddge tfoot, #cythmiddge tr, #cythmiddge td, #cythmiddge th {
   border-style: none;
 }
 
-#vgddlvxjnc p {
+#cythmiddge p {
   margin: 0;
   padding: 0;
 }
 
-#vgddlvxjnc .gt_table {
+#cythmiddge .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -532,12 +541,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_caption {
+#cythmiddge .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vgddlvxjnc .gt_title {
+#cythmiddge .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -549,7 +558,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#vgddlvxjnc .gt_subtitle {
+#cythmiddge .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -561,7 +570,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#vgddlvxjnc .gt_heading {
+#cythmiddge .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -573,13 +582,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_bottom_border {
+#cythmiddge .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_col_headings {
+#cythmiddge .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -594,7 +603,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_col_heading {
+#cythmiddge .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -614,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#vgddlvxjnc .gt_column_spanner_outer {
+#cythmiddge .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -626,15 +635,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#vgddlvxjnc .gt_column_spanner_outer:first-child {
+#cythmiddge .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vgddlvxjnc .gt_column_spanner_outer:last-child {
+#cythmiddge .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vgddlvxjnc .gt_column_spanner {
+#cythmiddge .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -646,11 +655,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#vgddlvxjnc .gt_spanner_row {
+#cythmiddge .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vgddlvxjnc .gt_group_heading {
+#cythmiddge .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -676,7 +685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#vgddlvxjnc .gt_empty_group_heading {
+#cythmiddge .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -691,15 +700,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#vgddlvxjnc .gt_from_md > :first-child {
+#cythmiddge .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vgddlvxjnc .gt_from_md > :last-child {
+#cythmiddge .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vgddlvxjnc .gt_row {
+#cythmiddge .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -718,7 +727,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#vgddlvxjnc .gt_stub {
+#cythmiddge .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -731,7 +740,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vgddlvxjnc .gt_stub_row_group {
+#cythmiddge .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -745,15 +754,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#vgddlvxjnc .gt_row_group_first td {
+#cythmiddge .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vgddlvxjnc .gt_row_group_first th {
+#cythmiddge .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vgddlvxjnc .gt_summary_row {
+#cythmiddge .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -763,16 +772,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vgddlvxjnc .gt_first_summary_row {
+#cythmiddge .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_first_summary_row.thick {
+#cythmiddge .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vgddlvxjnc .gt_last_summary_row {
+#cythmiddge .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -782,7 +791,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_grand_summary_row {
+#cythmiddge .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -792,7 +801,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vgddlvxjnc .gt_first_grand_summary_row {
+#cythmiddge .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -802,7 +811,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_last_grand_summary_row_top {
+#cythmiddge .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -812,11 +821,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_striped {
+#cythmiddge .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vgddlvxjnc .gt_table_body {
+#cythmiddge .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -825,7 +834,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_footnotes {
+#cythmiddge .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -839,7 +848,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_footnote {
+#cythmiddge .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -848,7 +857,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vgddlvxjnc .gt_sourcenotes {
+#cythmiddge .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -862,7 +871,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#vgddlvxjnc .gt_sourcenote {
+#cythmiddge .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -870,72 +879,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#vgddlvxjnc .gt_left {
+#cythmiddge .gt_left {
   text-align: left;
 }
 
-#vgddlvxjnc .gt_center {
+#cythmiddge .gt_center {
   text-align: center;
 }
 
-#vgddlvxjnc .gt_right {
+#cythmiddge .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vgddlvxjnc .gt_font_normal {
+#cythmiddge .gt_font_normal {
   font-weight: normal;
 }
 
-#vgddlvxjnc .gt_font_bold {
+#cythmiddge .gt_font_bold {
   font-weight: bold;
 }
 
-#vgddlvxjnc .gt_font_italic {
+#cythmiddge .gt_font_italic {
   font-style: italic;
 }
 
-#vgddlvxjnc .gt_super {
+#cythmiddge .gt_super {
   font-size: 65%;
 }
 
-#vgddlvxjnc .gt_footnote_marks {
+#cythmiddge .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vgddlvxjnc .gt_asterisk {
+#cythmiddge .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vgddlvxjnc .gt_indent_1 {
+#cythmiddge .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vgddlvxjnc .gt_indent_2 {
+#cythmiddge .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vgddlvxjnc .gt_indent_3 {
+#cythmiddge .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vgddlvxjnc .gt_indent_4 {
+#cythmiddge .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vgddlvxjnc .gt_indent_5 {
+#cythmiddge .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vgddlvxjnc .katex-display {
+#cythmiddge .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vgddlvxjnc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#cythmiddge div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -951,7 +960,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th id="min" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">min</th>
 <th id="max" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">max</th>
 <th id="coefficient.of.variation" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">coefficient.of.variation</th>
-<th id="significant_slope" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">significant_slope</th>
+<th id="significant_slope" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">significant_slope</th>
 <th id="pvalue" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">pvalue</th>
 </tr>
 </thead>
@@ -959,673 +968,654 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Alligator Bay</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #DBEAF2; color: #000000">-0.10375448</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #289049; color: #FFFFFF">155</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.549488321</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Blackwater River</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">0.01133078</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #19813D; color: #FFFFFF">168</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.922795615</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Chevalier Bay</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #F6AB8A; color: #000000">0.26586000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #1B823E; color: #FFFFFF">167</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.123425740</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Chokoloskee</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #EFF3F5; color: #000000">-0.03181290</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #278F48; color: #FFFFFF">156</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.717574354</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Faka Union River</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #92C5DE; color: #000000">-0.28262530</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #19813D; color: #FFFFFF">168</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #92C5DE; color: #000000">-0.2826253</td>
+<td class="gt_row gt_right" headers="pvalue">0.043512524</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Fakahatchee Bay</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #BB2F33; color: #FFFFFF">0.53050553</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #E5F5E0; color: #000000">27</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.672143970</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">First National</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #E47F64; color: #FFFFFF">0.36059623</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #61BA6C; color: #000000">117</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #E47F64; color: #FFFFFF">0.3605962</td>
+<td class="gt_row gt_right" headers="pvalue">0.040004462</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Garfield Bight</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #FDDAC6; color: #000000">0.14295211</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00471C; color: #FFFFFF">210</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #FDDAC6; color: #000000">0.1429521</td>
+<td class="gt_row gt_right" headers="pvalue">0.001281104</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Henderson Creek</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #F5F6F7; color: #000000">-0.00632261</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #A1D99B; color: #000000">80</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">1.000000000</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Highway Creek</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #FDD9C5; color: #000000">0.14556250</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">212</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.090220173</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Huston Bay</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #FDDCC8; color: #000000">0.13850521</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #19813D; color: #FFFFFF">168</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.366840412</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Huston River</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #FAECE3; color: #000000">0.05740000</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #289049; color: #FFFFFF">155</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.654532352</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Lopez Bay</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #BDDAEA; color: #000000">-0.18849059</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #19813D; color: #FFFFFF">168</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.162598484</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Rabbit Key Pass</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #F9F0EB; color: #000000">0.03501376</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #19813D; color: #FFFFFF">168</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.537306225</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Sunday Bay</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #EDF2F5; color: #000000">-0.03624375</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #19813D; color: #FFFFFF">168</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.708663003</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Upper Chatham River</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #67001F; color: #FFFFFF">0.70625625</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #238B45; color: #FFFFFF">159</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #67001F; color: #FFFFFF">0.7062563</td>
+<td class="gt_row gt_right" headers="pvalue">0.015890398</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Wigging Pass</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F1FAEE; color: #000000">10</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #67001F; color: #FFFFFF">18.71421</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #08306B; color: #FFFFFF">0.6459994</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #08306B; color: #FFFFFF">108.4516</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #6BAED6; color: #000000">1.730591</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_Estuaries</td>
 <td class="gt_row gt_left" headers="site">Wiggins Pass</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #F2F5F6; color: #000000">-0.01732500</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #75C477; color: #000000">106</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
-<td class="gt_row gt_right" headers="pvalue">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_right" headers="pvalue">0.900796238</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">10</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">0.02800</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0280000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">0.0280</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">11</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B8E3B2; color: #000000">64</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">12A</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D0EDC9; color: #000000">46</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">13</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #B1E0AB; color: #000000">69</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">14</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F4FBF2; color: #000000">5</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">15</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D1EDCB; color: #000000">45</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">16</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D2EDCC; color: #000000">44</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">18A</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F4FBF2; color: #000000">5</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">18C</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #BDE5B6; color: #000000">61</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">18D</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #C8E9C1; color: #000000">53</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">22</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #DCF2D7; color: #000000">35</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">24</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D9F0D3; color: #000000">38</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">27A</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D1EDCB; color: #000000">45</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">27B</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D6EFCF; color: #000000">41</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">28</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF3; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">28A</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF3; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">31B</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF3; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">31C</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D3EECD; color: #000000">43</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">31D</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF3; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">31E</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D3EECD; color: #000000">43</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">37B</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D3EECD; color: #000000">43</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">38B</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D0EDC9; color: #000000">46</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">52</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7EFD1; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">57</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7EFD1; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">61</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D8F0D2; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">62</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7EFD1; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">63</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D8F0D2; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">64</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7EFD1; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">65</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7EFD1; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">66</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D8F0D2; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">67</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F6; color: #000000">0.05000</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.0500000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">0.0500</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">68</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7EFD1; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">69</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D7EFD1; color: #000000">40</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">7</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF3; color: #000000">4</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">70</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #D8F0D2; color: #000000">39</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">PALMBEACH</td>
 <td class="gt_row gt_left" headers="site">G92</td>
-<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F3FAF0; color: #000000">7</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 </tbody>
 </table>
 
-</div>
-</div>
-</div>
-</section>
-<section id="reporting-programs" class="level3">
-<h3 class="anchored" data-anchor-id="reporting-programs">Reporting Programs:</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>display reporting programs</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Nitrate_files/figure-html/display reporting programs-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
 </div>
 </div>
