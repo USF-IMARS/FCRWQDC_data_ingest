@@ -47,7 +47,7 @@ df <- df_allData
 
 
 df$value <- as.numeric(df$value)
-df$datetime <- as.POSIXct(df$datetime, format = "%m/%d/%Y %H:%M:%S")
+df$datetime <- as.POSIXct(df$datetime, format = "%Y-%m-%d")
 ```
 
 ```{R create violin plot}
