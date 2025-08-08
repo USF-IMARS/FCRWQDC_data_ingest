@@ -79,7 +79,34 @@ getSFERData <- function(programName="SFER", fpath=NULL) {
         "avg_chl_a"        = "Chlorophyll_a",
         "avg_phaeo"        = "Pheophytin",
         "notes"            = "Notes"
-      )
+      ),
+      RowID = "",
+      ProgramID = "",
+      Habitat = "",
+      IndicatorID = "",
+      IndicatorName = "",
+      ParameterID = "",
+      AreaID = "",
+      ManagedAreaName = "",
+      Activity.Type = "",
+      Year = year,
+      Month = month,
+      Activity.Depth = "",
+      RelativeDepth = depth_class,
+      TotalDepth_m = "",
+      MDL = "",
+      PQL = "",
+      DetectionUnit = "",
+      Value.Qualifier = "",
+      ValueQualifierSource = "",
+      Result.Comments = notes,
+      SEACAR_QAQCFlagCode = "",
+      SEACAR_QAQC_Description = "",
+      Include = "",
+      MADup = "",
+      ExportVersion = "",
+      Region = "",
+      Activity.ID = ""
     )
   
   df$DEP.Result.Unit = NA
