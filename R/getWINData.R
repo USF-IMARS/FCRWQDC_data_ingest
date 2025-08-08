@@ -3,6 +3,7 @@ library(dplyr)
 library(here)
 library(glue)
 source(here("R/getFpath.R"))
+library(lubridate)
 
 # Get data from WIN format files
 getWINData <- function(programName=NULL, fpath=NULL){
@@ -98,7 +99,31 @@ getWINData <- function(programName=NULL, fpath=NULL){
   result_df <-result_df %>%
     mutate(
       Monitoring.Location.ID = as.character(Monitoring.Location.ID),
-      Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time, format="%m/%d/%y")
+      Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time, format="%m/%d/%y"),
+      Year                      = year(Activity.Start.Date.Time),
+      Month                     = month(Activity.Start.Date.Time),
+      # === additional columns for STORET mapping
+      Habitat = Matrix,
+      RowID = "",
+      ProgramID = "",
+      IndicatorID = "",
+      IndicatorName = "",
+      ParameterID = "",
+      AreaID = "",
+      ManagedAreaName = "",
+      Region = "",
+      RelativeDepth = "",
+      TotalDepth_m = "",
+      MDL = DEP.MDL,
+      PQL = DEP.PQL,
+      DetectionUnit = "",
+      ValueQualifierSource = "",
+      SEACAR_QAQCFlagCode = "",
+      SEACAR_QAQC_Description = "",
+      Include = "",
+      MADup = "",
+      ExportVersion = "",
+      .keep = 'unused'
     )
       
   # Return the dataframe

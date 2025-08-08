@@ -57,7 +57,7 @@ getData <- function(programName) {
       DEP.Result.Value.Number = Value,
       DEP.Result.Unit = Unit,
       Value.Qualifier = VQ,
-      # .keep = "none"  # "unused"
+      .keep = 'unused'
     )
 
     # Ensure consistent data types before binding rows

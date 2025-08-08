@@ -70,7 +70,35 @@ getFIUEstuariesData <- function(){
       Activity.Start.Date.Time = as.Date(
         .data$Activity.Start.Date.Time,
         format="%m/%d/%y"
-      )
+      ),
+      RowID = "",
+      ProgramID = "",
+      Habitat = "",
+      IndicatorID = "",
+      IndicatorName = "",
+      ParameterID = "",
+      AreaID = "",
+      ManagedAreaName = "",
+      Activity.Type = "",
+      Year = YEAR,
+      Month = month(Activity.Start.Date.Time),
+      Activity.Depth = "",
+      RelativeDepth = "",
+      TotalDepth_m = "",
+      MDL = "",
+      PQL = "",
+      DetectionUnit = "",
+      Value.Qualifier = "",
+      ValueQualifierSource = "",
+      Result.Comments = "",
+      SEACAR_QAQCFlagCode = "",
+      SEACAR_QAQC_Description = "",
+      Include = "",
+      MADup = "",
+      ExportVersion = "",
+      Region = "",
+      Activity.ID = ""
+      
     )
   
   return(df)

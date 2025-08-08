@@ -326,7 +326,12 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       # Convert result value to numeric
       DEP.Result.Value.Number = as.numeric(as.character(.data$DEP.Result.Value.Number)),
       # Add program identifier (using mixed case to match getListOfPrograms)
-      program = "MiamiBeach"
+      program = "MiamiBeach",
+      Activity.Type = "",
+      Activity.Depth = "",
+      Value.Qualifier = "",
+      Result.Comments = "",
+      Activity.ID = ""
     )
   
   # cat(glue("Final Miami Beach dataset has {nrow(merged_df)} rows for {length(unique(merged_df$Monitoring.Location.ID))} monitoring locations\n"))

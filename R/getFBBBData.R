@@ -3,7 +3,7 @@ library(here)
 library(tidyr)
 library(dplyr)
 library(stringr)
-
+library(lubridate)
 
 getFBBBData <- function(){
   fname <- here::here(
@@ -47,7 +47,8 @@ getFBBBData <- function(){
   
   # === map columns
   # from input data:
-  # Record #	Cruise ID	Date	Station	Region	Long Deg	Long Min	Longitude	Lat Deg	Lat Min	Latitude	Temp	Salinity	Zp	Zcol	% Xmis	CDOM QSU	Tripton (mg/L)	NH4	PO4	N+N   	NO2	NO3	Si	TDP	DOP	pH	TDN	DON	DIN	DIC	Chl a (µg/L)	Phaeo (µg/L)	Kt	TSS (mg/L)  
+  # Record #	Cruise ID	Date	Station	Region	Long Deg	Long Min	Longitude	Lat Deg	Lat Min	Latitude	Temp	Salinity	Zp	Zcol	% Xmis	CDOM QSU	Tripton (mg/L)	NH4	PO4	N+N   	NO2	NO3	Si	TDP	DOP	pH	TDN	DON	DIN	DIC	Chl a (µg/L)	Phaeo (µg/L)	Kt	TSS (mg/L) 
+  
   # WIN standard columns
   # DEP.Result.ID Activity.ID year month day  time   Activity.Start.Date.Time lat_deg lat_min Org.Decimal.Latitude lon_deg lon_min   Org.Decimal.Longitude Monitoring.Location.ID Activity.Type Activity.Depth   Activity.Depth.Unit Activity.Depth.Top.Bottom.Unit Sample.Collection.Type   Activity.Top.Depth Activity.Bottom.Depth Value.Qualifier Result.Comments   DEP.Analyte.Name DEP.Result.Value.Number DEP.Result.Unit
   
@@ -85,7 +86,33 @@ getFBBBData <- function(){
         "DON"       = "Total_Kjeldahl_Nitrogen",
         "TSS"       = "Turbidity",
         "pH"        = "pH"
-      )
+      ),
+      # columsn for STORET mapping
+      RowID = "",
+      ProgramID = "",
+      Habitat = "",
+      IndicatorID = "",
+      IndicatorName = "",
+      ParameterID = "",
+      AreaID = "",
+      ManagedAreaName = "",
+      Activity.Type = "",
+      Year = year(Activity.Start.Date.Time),
+      Month = month(Activity.Start.Date.Time),
+      Activity.Depth = "",
+      RelativeDepth = "",
+      TotalDepth_m = "",
+      MDL = "",
+      PQL = "",
+      DetectionUnit = "",
+      Value.Qualifier = "",
+      ValueQualifierSource = "",
+      Result.Comments = "",
+      SEACAR_QAQCFlagCode = "",
+      SEACAR_QAQC_Description = "",
+      Include = "",
+      MADup = "",
+      ExportVersion = ""
     )
   
   return(df)

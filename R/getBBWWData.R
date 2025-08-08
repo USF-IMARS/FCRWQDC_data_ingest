@@ -22,8 +22,8 @@ getBBWWData <- function() {
     rename(
       `DEP.Result.ID`                   = RowID,
       `Activity.ID`                     = SEACAR_EventID,
-      year                              = Year,
-      month                             = Month,
+      Year                              = Year,
+      Month                             = Month,
       `Activity.Start.Date.Time`       = SampleDate,
       `Org.Decimal.Latitude`           = OriginalLatitude,
       `Org.Decimal.Longitude`          = OriginalLongitude,
@@ -38,7 +38,8 @@ getBBWWData <- function() {
     ) %>%    
     dplyr::mutate(
       # Convert date/time if needed
-      Activity.Start.Date.Time = as.Date(.data$Activity.Start.Date.Time)
+      Activity.Start.Date.Time = as.Date(.data$Activity.Start.Date.Time),
+      RowID = ""
     )
   
   return(df)
