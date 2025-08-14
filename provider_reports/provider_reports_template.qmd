@@ -4,7 +4,14 @@ format: html
 params: 
   org_id: BROWARD #FIU_WQMP #AOML_BBWW #DERM_BBWQ  # must be BROWARD before rendering
 ---
-
+```{R setup}
+librarian::shelf(
+  dplyr,
+  glue,
+  here,
+  tidyr
+)
+```
 ```{R evaluate dataset completeness}
 # read data from source files (takes a long time)
 source(here("R/getData.R"))
@@ -58,15 +65,6 @@ print(extra_columns)
 ```
 
 Provider Data Assessment
-
-```{R setup}
-librarian::shelf(
-  dplyr,
-  glue,
-  here,
-  tidyr
-)
-```
 
 ```{R getData}
 #| code-summary: read in data
