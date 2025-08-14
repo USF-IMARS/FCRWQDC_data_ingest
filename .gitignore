@@ -1,3 +1,6 @@
+# files too big for github:
+exports/data/allData.csv
+
 # generated reports
 analyte_reports/analyte_reports/*
 provider_reports/provider_reports/*
