@@ -1,5 +1,5 @@
 # files too big for github:
-exports/data/allData.csv
+data/exports/allData.csv
 
 # generated reports
 analyte_reports/analyte_reports/*

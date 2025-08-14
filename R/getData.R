@@ -33,7 +33,10 @@ getData <- function(programName) {
   } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
     # For programs with both WIN and historical data
     # cat("\n--- Loading WIN Data ---\n")
-    df <- getWINData(programName)
+    df <- getWINData(programName) %>%
+      mutate(
+        RowID = as.character(RowID)
+    )
     
     # load & append historical STORET data
     # cat("\n--- Loading Historical STORET Data ---\n")
@@ -57,6 +60,7 @@ getData <- function(programName) {
       DEP.Result.Value.Number = Value,
       DEP.Result.Unit = Unit,
       Value.Qualifier = VQ,
+      RowID = "",
       .keep = 'unused'
     )
 
@@ -132,6 +136,13 @@ getData <- function(programName) {
     "Monitoring.Location.ID" = as.character,
     "Station" = as.character,
     "DEP.Result.Unit" = as.character,
+    "RowID" = as.character,
+    "ProgramID" = as.character,
+    "IndicatorID" = as.character,
+    "ParameterID" = as.character,
+    "AreaID" = as.character,
+    "Include" = as.character,
+    "MADup" = as.character,
     
     # Numeric columns - need safe conversion
     "DEP.Result.Value.Number" = function(x) as.numeric(as.character(x)),
