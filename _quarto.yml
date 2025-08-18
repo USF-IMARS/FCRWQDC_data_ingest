@@ -5,7 +5,9 @@ project:
     - pre_render/analyte_reports.R
   render:
     - "*.qmd"
-
+  post-render:
+    - scripts/rm-csv-files.sh
+    
 website:
   title: "WIN_data_ingest"
   navbar:
