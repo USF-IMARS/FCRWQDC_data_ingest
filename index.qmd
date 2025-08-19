@@ -24,8 +24,11 @@ df <- getAllData()
 ```{R, create .csv of all data}
 #| code-summary: create .csv of all data
 source(here("R/mutateWINTo2025.R"))
+source(here("R/mutateWINToSTORET.R"))
 # reduce to only cols we need & save to csv
 write.csv(mutateWINTo2025(df), here("data", "exports", "allData.csv"))
+# write STORET .csv
+write.csv(mutateWINToSTORET(df), here("data", "exports", "allDataSTORET.csv"))
 ```
 
 ### List of Analytes:
