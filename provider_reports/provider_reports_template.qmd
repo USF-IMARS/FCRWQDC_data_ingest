@@ -12,63 +12,16 @@ librarian::shelf(
   tidyr
 )
 ```
-```{R evaluate dataset completeness}
-## read data from source files (takes a long time)
-#source(here("R/getData.R"))
-#df <- getData(params$org_id)
-#source(here("R/mutateWINToSTORET.R"))
-#df <- df %>% mutateWINToSTORET(.keep = "unused")
-#STORET_COLUMNS <- c(
-#  "ExportVersion","RowID","ProgramID","ProgramName","Habitat",
-#  "IndicatorID","IndicatorName","ParameterID","ParameterName",
-#  "ParameterUnits","ProgramLocationID","AreaID","ManagedAreaName",
-#  "Region","ActivityType","SampleDate","ResultValue","Year","Month",
-#  "ActivityDepth_m","RelativeDepth","TotalDepth_m","MDL","PQL",
-#  "DetectionUnit","ValueQualifier","ValueQualifierSource",
-#  "SampleFraction","ResultComments","OriginalLatitude",
-#  "OriginalLongitude","SEACAR_QAQCFlagCode",
-#  "SEACAR_QAQC_Description","Include","SEACAR_EventID","MADup"
-#)
-#
-## figure out which are actually present
-#present_cols <- intersect(STORET_COLUMNS, names(df))
-#missing_cols <- setdiff(STORET_COLUMNS, names(df))
-#
-#if (length(missing_cols) > 0) {
-#  warning("\nThese STORET_COLUMNS were not found in df:\n  ",
-#          paste(missing_cols, collapse = ", "))
-#}
-#
-## compute percent‐complete only over the present ones
-#completeness <- df %>%
-#  summarise(
-#    across(
-#      any_of(present_cols),
-#      ~ mean(!is.na(.)) * 100,
-#      .names = "pct_complete_{col}"
-#    )
-#  ) %>%
-#  pivot_longer(
-#    cols      = everything(),
-#    names_to  = "column",
-#    values_to = "pct_complete"
-#  ) %>%
-#  mutate(column = sub("^pct_complete_", "", column))
-#
-#print(completeness)
-#
-## 2) Any additional columns in df that are not mapped to STORET
-#extra_columns <- setdiff(names(df), STORET_COLUMNS)
-#cat("\nColumns from source data that are not mapped to STORET columns:\n")
-#print(extra_columns)
-```
 
 Provider Data Assessment
 
 ```{R getData}
 #| code-summary: read in data
+## === read data from source files (can take a long time)
+#source(here("R/getData.R"))
+#df <- getData(params$org_id)
 
-# read from cached file produced by index.qmd
+# === read from cached file produced by index.qmd
 df_allData <- read.csv(here("data", "exports", "allData.csv")) %>%
   filter(source == params$org_id)
 df <- df_allData

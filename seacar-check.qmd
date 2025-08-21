@@ -2,7 +2,7 @@ In 2026 management of this data is being transferred to SEACAR
 In this file we prepare a transformation of the dataset for SEACAR ingestion,
 and perform some checks.
 
-The data here should align with standards described in ...
+The data here should align with standards described in `SEACAR_Metadata_UnifiedWQ_ID10006.xlsx`.
 
 ```{R setup}
 librarian::shelf(
@@ -38,3 +38,53 @@ unique(df$ParameterName)
 ```
 # TODO: check analyte names match SEACAR's vocab.
 # TODO: create report to check all analytes are getting mapped?
+
+
+```{R evaluate dataset completeness}
+
+source(here("R/mutateWINToSEACAR.R"))
+df <- df_all %>% mutateWINToSEACAR(.keep = "unused")
+SEACAR_COLUMNS <- c(
+ "ExportVersion","RowID","ProgramID","ProgramName","Habitat",
+ "IndicatorID","IndicatorName","ParameterID","ParameterName",
+ "ParameterUnits","ProgramLocationID","AreaID","ManagedAreaName",
+ "Region","ActivityType","SampleDate","ResultValue","Year","Month",
+ "ActivityDepth_m","RelativeDepth","TotalDepth_m","MDL","PQL",
+ "DetectionUnit","ValueQualifier","ValueQualifierSource",
+ "SampleFraction","ResultComments","OriginalLatitude",
+ "OriginalLongitude","SEACAR_QAQCFlagCode",
+ "SEACAR_QAQC_Description","Include","SEACAR_EventID","MADup"
+)
+
+# figure out which are actually present
+present_cols <- intersect(SEACAR_COLUMNS, names(df))
+missing_cols <- setdiff(SEACAR_COLUMNS, names(df))
+
+if (length(missing_cols) > 0) {
+ warning("\nThese SEACAR_COLUMNS were not found in df:\n  ",
+         paste(missing_cols, collapse = ", "))
+}
+
+# compute percent‐complete only over the present ones
+completeness <- df %>%
+ summarise(
+   across(
+     any_of(present_cols),
+     ~ mean(!is.na(.)) * 100,
+     .names = "pct_complete_{col}"
+   )
+ ) %>%
+ pivot_longer(
+   cols      = everything(),
+   names_to  = "column",
+   values_to = "pct_complete"
+ ) %>%
+ mutate(column = sub("^pct_complete_", "", column))
+
+print(completeness)
+
+# 2) Any additional columns in df that are not mapped to SEACAR
+extra_columns <- setdiff(names(df), SEACAR_COLUMNS)
+cat("\nColumns from source data that are not (directly) mapped to SEACAR columns:\n")
+print(extra_columns)
+```
