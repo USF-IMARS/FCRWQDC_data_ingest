@@ -1,0 +1,40 @@
+In 2026 management of this data is being transferred to SEACAR
+In this file we prepare a transformation of the dataset for SEACAR ingestion,
+and perform some checks.
+
+The data here should align with standards described in ...
+
+```{R setup}
+librarian::shelf(
+  dplyr,
+  glue,
+  here,
+  tidyr
+)
+```
+
+```{R, load data, convert to SEACAR format, save .csv}
+source(here("R/getAllData.R"))
+df_all <- getAllData()
+
+source(here("R/mutateWINToSEACAR.R"))
+df <- mutateWINToSEACAR.R(df_all)
+
+# write SEACAR .csv
+write.csv(df, here("data", "exports", "allDataSEACAR.csv"))
+
+```
+
+## Summary of column completeness
+
+```{R, skimr of columns}
+skimr::skim(df)
+```
+
+## List unique analyte names
+
+```{R, list unique analyte names}
+unique(df$ParameterName)
+```
+# TODO: check analyte names match SEACAR's vocab.
+# TODO: create report to check all analytes are getting mapped?

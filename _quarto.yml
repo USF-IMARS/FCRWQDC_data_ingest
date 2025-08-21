@@ -4,7 +4,10 @@ project:
     - pre_render/provider_reports.R
     - pre_render/analyte_reports.R
   render:
-    - "*.qmd"
+    - index.qmd
+    - seacar-check.qmd
+    - analyte_reports/*.qmd
+    - provider_reports/*.qmd
   post-render:
     - scripts/rm-csv-files.sh
     
@@ -18,6 +21,8 @@ website:
       - provider_reports/provider_reports.qmd
       - href: https://github.com/USF-IMaRS/WIN_data_ingest
         text: Source Code on GitHub
+      - href: seacar-check.qmd
+        text: SEACAR Export
 format:
   html:
     theme: cosmo
