@@ -18,7 +18,7 @@ source(here("R/getAllData.R"))
 df_all <- getAllData()
 
 source(here("R/mutateWINToSEACAR.R"))
-df <- mutateWINToSEACAR.R(df_all)
+df <- mutateWINToSEACAR(df_all)
 
 # write SEACAR .csv
 write.csv(df, here("data", "exports", "allDataSEACAR.csv"))
@@ -36,8 +36,6 @@ skimr::skim(df)
 ```{R, list unique analyte names}
 unique(df$ParameterName)
 ```
-# TODO: check analyte names match SEACAR's vocab.
-# TODO: create report to check all analytes are getting mapped?
 
 
 ```{R evaluate dataset completeness}
