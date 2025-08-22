@@ -126,17 +126,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./analyte_reports/analyte_reports.html"> 
-<span class="menu-text">Analyte Reports</span></a>
+  <li class="nav-item compact">
+    <a class="nav-link" href="./analyte_reports/analyte_reports.qmd"> 
+<span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./provider_reports/provider_reports.html"> 
-<span class="menu-text">Provider Reports</span></a>
+  <li class="nav-item compact">
+    <a class="nav-link" href="./provider_reports/provider_reports.qmd"> 
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://github.com/USF-IMaRS/WIN_data_ingest"> 
 <span class="menu-text">Source Code on GitHub</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./seacar-check.html"> 
+<span class="menu-text">SEACAR Export</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -181,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Data ingestion and initial analysis from FL WIN water quality database and other sources. Below are some statistics on data across all analytes and programs. For more information on specific analytes and providers, see the <a href="./analyte_reports/analyte_reports.html">analyte reports</a> and <a href="./provider_reports/provider_reports.html">provider reports</a>.</p>
+<p>Data ingestion and initial analysis from FL WIN water quality database and other sources. Below are some statistics on data across all analytes and programs. For more information on specific analytes and providers, see the <a href="analyte_reports/analyte_reports.qmd">analyte reports</a> and <a href="provider_reports/provider_reports.qmd">provider reports</a>.</p>
 <p>Data for each analyte can be downloaded from the relevant analyte report. The full compiled data can be downloaded from the University of South Florida <a href="data/exports/allData.csv">here</a></p>
 <p>Florida Coral Reef Water Quality Database Compilation (FCRWQDC). This work is a product of the University of South Florida Institute for Marine Remote Sensing (IMaRS), funded by the Florida Department of Environmental Protection (FDEP).</p>
 <div class="cell">
@@ -220,11 +224,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>create .csv of all data</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/mutateWINTo2025.R"</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/mutateWINToSTORET.R"</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce to only cols we need &amp; save to csv</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">mutateWINTo2025</span>(df), <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># write STORET .csv</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">mutateWINToSTORET</span>(df), <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allDataSTORET.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce to only cols we need &amp; save to csv</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">mutateWINTo2025</span>(df), <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allData.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="list-of-analytes" class="level3">
