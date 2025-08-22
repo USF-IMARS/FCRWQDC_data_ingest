@@ -6,8 +6,8 @@ project:
   render:
     - index.qmd
     - seacar-check.qmd
-    - analyte_reports/*.qmd
-    - provider_reports/*.qmd
+    - analyte_reports/analyte_reports/*.qmd
+    - provider_reports/provider_reports/*.qmd
   post-render:
     - scripts/rm-csv-files.sh
     
