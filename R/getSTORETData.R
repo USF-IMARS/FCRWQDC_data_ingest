@@ -12,7 +12,7 @@ STORETFileToDataFrame <- function(fpath){
     sep            = "|",
     header         = TRUE,
     stringsAsFactors = FALSE,
-    na.strings     = c("", "NA")
+    na.strings     = c(NA, "NA")
   )
   
   # Store the original column count

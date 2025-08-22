@@ -66,7 +66,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       sep = "|",  # Pipe delimiter
       header = TRUE,
       stringsAsFactors = FALSE,
-      na.strings = c("", "NA")
+      na.strings = c(NA, "NA")
     )
     
     # cat(glue("Loaded {nrow(df)} rows and {ncol(df)} columns from historical file\n"))
@@ -327,11 +327,11 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       DEP.Result.Value.Number = as.numeric(as.character(.data$DEP.Result.Value.Number)),
       # Add program identifier (using mixed case to match getListOfPrograms)
       program = "MiamiBeach",
-      Activity.Type = "",
-      Activity.Depth = "",
-      Value.Qualifier = "",
-      Result.Comments = "",
-      Activity.ID = ""
+      Activity.Type = NA,
+      Activity.Depth = NA,
+      Value.Qualifier = NA,
+      Result.Comments = NA,
+      Activity.ID = NA
     )
   
   # cat(glue("Final Miami Beach dataset has {nrow(merged_df)} rows for {length(unique(merged_df$Monitoring.Location.ID))} monitoring locations\n"))

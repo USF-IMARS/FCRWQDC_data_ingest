@@ -39,7 +39,7 @@ getBBWWData <- function() {
     dplyr::mutate(
       # Convert date/time if needed
       Activity.Start.Date.Time = as.Date(.data$Activity.Start.Date.Time),
-      RowID = ""
+      RowID = NA
     )
   
   return(df)

@@ -30,11 +30,11 @@ getWINData <- function(programName=NULL, fpath=NULL){
   
   # Reassemble rows by combining lines until the number of delimiters (pipes) matches expectation.
   combined_rows <- character(0)
-  temp_row <- ""
+  temp_row <- NA
   
   for (line in raw_data_lines) {
     # Start a new temporary row or append to the existing one
-    temp_row <- if (temp_row == "") line else paste(temp_row, line, sep = "\n")
+    temp_row <- if (is.na(temp_row)) line else paste(temp_row, line, sep = "\n")
     
     # Count the number of pipe delimiters in temp_row
     n_delim <- length(gregexpr("\\|", temp_row)[[1]])
@@ -42,12 +42,12 @@ getWINData <- function(programName=NULL, fpath=NULL){
     # If the row has the expected number of delimiters (one less than columns), it's complete.
     if (n_delim == (expected_cols - 1)) {
       combined_rows <- c(combined_rows, temp_row)
-      temp_row <- ""  # Reset for the next record
+      temp_row <- NA  # Reset for the next record
     }
   }
   
   # In case any data remains in temp_row, add it as a record
-  if (temp_row != "") {
+  if (is.na(temp_row)) {
     combined_rows <- c(combined_rows, temp_row)
   }
   
@@ -104,25 +104,25 @@ getWINData <- function(programName=NULL, fpath=NULL){
       Month                     = month(Activity.Start.Date.Time),
       # === additional columns for STORET mapping
       Habitat = Matrix,
-      RowID = "",
-      ProgramID = "",
-      IndicatorID = "",
-      IndicatorName = "",
-      ParameterID = "",
-      AreaID = "",
-      ManagedAreaName = "",
-      Region = "",
-      RelativeDepth = "",
-      TotalDepth_m = "",
+      RowID = NA,
+      ProgramID = NA,
+      IndicatorID = NA,
+      IndicatorName = NA,
+      ParameterID = NA,
+      AreaID = NA,
+      ManagedAreaName = NA,
+      Region = NA,
+      RelativeDepth = NA,
+      TotalDepth_m = NA,
       MDL = DEP.MDL,
       PQL = DEP.PQL,
-      DetectionUnit = "",
-      ValueQualifierSource = "",
-      SEACAR_QAQCFlagCode = "",
-      SEACAR_QAQC_Description = "",
-      Include = "",
-      MADup = "",
-      ExportVersion = "",
+      DetectionUnit = NA,
+      ValueQualifierSource = NA,
+      SEACAR_QAQCFlagCode = NA,
+      SEACAR_QAQC_Description = NA,
+      Include = NA,
+      MADup = NA,
+      ExportVersion = NA,
       .keep = 'unused'
     )
       
