@@ -1,5 +1,5 @@
 getListOfAnalytes <- function(){
-  # NOTE: instead of reading all data here, we hardcode the list of analytes
+  # NOTE: instead of reading all data here, we hardcode the list of analytes. Other analytes will be ignored.
   analytes <- c(
     # === subset of desired analytes
     # NOTE: this should align with getData
@@ -8,9 +8,9 @@ getListOfAnalytes <- function(){
     "Ammonia",
     "Chlorophyll_a",
     "Dissolved_Oxygen",
-    "Specific_Conductivity",
-    "Fecal_Coliforms",
-    "Enterococci",
+    # "Specific_Conductivity",
+    # "Fecal_Coliforms",      
+    # "Enterococci",    
     "Nitrite",
     "Nitrate",
     "Nitrate+Nitrite",
@@ -20,7 +20,7 @@ getListOfAnalytes <- function(){
     "pH",
     "Salinity",
     "Silicate",
-    "Temperature",
+    "Water_Temperature",  # should be water temperature (check?)
     "Total_Nitrogen",
     "Total_Kjeldahl_Nitrogen",
     "Turbidity"

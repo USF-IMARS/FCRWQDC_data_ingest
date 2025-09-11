@@ -239,11 +239,11 @@ getData <- function(programName) {
     original.analyte.name == "Silica__SiO2_"                               ~ "Silicate",
     original.analyte.name == "Silicate"                                    ~ "Silicate",
 
-    original.analyte.name == "Temperature"                                 ~ "Temperature",
-    original.analyte.name == "Temperature__Water"                          ~ "Temperature",
-    original.analyte.name == "Temperature__water"                          ~ "Temperature",
-    original.analyte.name == "Field_Temperature"                           ~ "Temperature",
-    original.analyte.name == "Water_Temperature"                           ~ "Temperature",
+    original.analyte.name == "Temperature"                                 ~ "Water_Temperature",
+    original.analyte.name == "Temperature__Water"                          ~ "Water_Temperature",
+    original.analyte.name == "Temperature__water"                          ~ "Water_Temperature",
+    original.analyte.name == "Field_Temperature"                           ~ "Water_Temperature",
+    original.analyte.name == "Water_Temperature"                           ~ "Water_Temperature",
 
     original.analyte.name == "Total_Nitrogen"                              ~ "Total_Nitrogen",
     original.analyte.name == "Nitrogen-_Total"                             ~ "Total_Nitrogen",
