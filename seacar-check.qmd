@@ -31,10 +31,23 @@ write.csv(df, here("data", "exports", "allDataSEACAR.csv"))
 skimr::skim(df)
 ```
 
-## List unique analyte names
+```{R, Plot providers row count grouped by analyte}
+#| code-summary: Plot providers row count grouped by analyte
+library(ggplot2)
 
-```{R, list unique analyte names}
-unique(df$ParameterName)
+# --- Create the plot with the legend at the bottom ---
+ggplot(df, aes(x = ProgramName, fill = ParameterName)) +
+  geom_bar() +
+  scale_y_log10() +
+  labs(
+    title = "Count of Observations by Program and Parameter",
+    x = "Program Name",
+    y = "Count (Log Scale)",
+    fill = "Parameter"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom") # This line moves the legend
+
 ```
 
 
