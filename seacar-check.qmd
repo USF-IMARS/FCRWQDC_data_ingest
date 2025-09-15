@@ -35,7 +35,6 @@ skimr::skim(df)
 #| code-summary: Plot providers row count grouped by analyte
 library(ggplot2)
 
-# --- Create the plot with the legend at the bottom ---
 ggplot(df, aes(x = ProgramName, fill = ParameterName)) +
   geom_bar() +
   scale_y_log10() +
@@ -46,8 +45,10 @@ ggplot(df, aes(x = ProgramName, fill = ParameterName)) +
     fill = "Parameter"
   ) +
   theme_minimal() +
-  theme(legend.position = "bottom") # This line moves the legend
-
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 ```
 
 
