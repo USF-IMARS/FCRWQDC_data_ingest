@@ -29,9 +29,24 @@ write.csv(mutateWINTo2025(df), here("data", "exports", "allData.csv"))
 ```
 
 ### List of Analytes:
-```{R, list all analytes}
-#| code-summary: list all analytes
-print(unique(df$DEP.Analyte.Name))
+```{R, Plot providers row count grouped by analyte}
+#| code-summary: Plot providers row count grouped by analyte
+library(ggplot2)
+
+ggplot(df, aes(x = program, fill = DEP.Analyte.Name)) +
+  geom_bar() +
+  scale_y_log10() +
+  labs(
+    title = "Count of Observations by Program and Parameter",
+    x = "Program Name",
+    y = "Count (Log Scale)",
+    fill = "Parameter"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 ```
 
 
