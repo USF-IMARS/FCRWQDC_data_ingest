@@ -29,8 +29,8 @@ getSFERData <- function(programName="SFER", fpath=NULL) {
       `Activity.ID` = `cruise_id`,
       `Activity.Start.Date.Time` = datetime,
       `Monitoring.Location.ID` = station,
-      `Org.Decimal.Longitude` = lon_deg,
-      `Org.Decimal.Latitude` = lat_deg,
+      `Org.Decimal.Longitude` = lon_dec,
+      `Org.Decimal.Latitude` = lat_dec,
       Activity.Depth = depth,
     )
   
