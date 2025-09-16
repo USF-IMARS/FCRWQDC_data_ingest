@@ -20,7 +20,7 @@ getListOfAnalytes <- function(){
     "pH",
     "Salinity",
     "Silicate",
-    "Water_Temperature",  # should be water temperature (check?)
+    "Water_Temperature",
     "Total_Nitrogen",
     "Total_Kjeldahl_Nitrogen",
     "Turbidity"
