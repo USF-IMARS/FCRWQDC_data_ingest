@@ -267,25 +267,28 @@ getData <- function(programName) {
 
 
   # convert all analyte values to mg/L using DEP.Result.Unit
-  df <- df %>% 
-    mutate(
-      DEP.Result.Value.Number = case_when(
-        DEP.Result.Unit == "mg/L" ~ DEP.Result.Value.Number,
-        DEP.Result.Unit == "ppm" ~ DEP.Result.Value.Number * 1000,
-        DEP.Result.Unit == "mg/m3" ~ DEP.Result.Value.Number / 1000,
-        DEP.Result.Unit == "umol/L" ~ case_when(
-          DEP.Analyte.Name == "Nitrite" ~ DEP.Result.Value.Number * 0.0461,
-          DEP.Analyte.Name == "Nitrate" ~ DEP.Result.Value.Number * 0.0620, 
-          DEP.Analyte.Name == "Nitrate+Nitrite" ~ DEP.Result.Value.Number * 0.108,
-          DEP.Analyte.Name == "Ammonium" ~ DEP.Result.Value.Number * 0.018,
-          DEP.Analyte.Name == "Orthophosphate" ~ DEP.Result.Value.Number * 0.095,
-          DEP.Analyte.Name == "Phosphorus" ~ DEP.Result.Value.Number * 0.031,
-          DEP.Analyte.Name == "Silicate" ~ DEP.Result.Value.Number * 0.0601,
-          TRUE ~ DEP.Result.Value.Number
-        ),
-        TRUE ~ DEP.Result.Value.Number
-      )
-    )
+  # TODO: skip this for pH
+  # df <- df %>% 
+  #   mutate(
+  #     DEP.Result.Value.Number = case_when(
+  #       DEP.Result.Unit == "mg/L" ~ DEP.Result.Value.Number,
+  #       DEP.Result.Unit == "ppm" ~ DEP.Result.Value.Number * 1000,
+  #       DEP.Result.Unit == "mg/m3" ~ DEP.Result.Value.Number / 1000,
+  #       DEP.Result.Unit == "umol/L" ~ case_when(
+  #         DEP.Analyte.Name == "Nitrite" ~ DEP.Result.Value.Number * 0.0461,
+  #         DEP.Analyte.Name == "Nitrate" ~ DEP.Result.Value.Number * 0.0620, 
+  #         DEP.Analyte.Name == "Nitrate+Nitrite" ~ DEP.Result.Value.Number * 0.108,
+  #         DEP.Analyte.Name == "Ammonium" ~ DEP.Result.Value.Number * 0.018,
+  #         DEP.Analyte.Name == "Orthophosphate" ~ DEP.Result.Value.Number * 0.095,
+  #         DEP.Analyte.Name == "Phosphorus" ~ DEP.Result.Value.Number * 0.031,
+  #         DEP.Analyte.Name == "Silicate" ~ DEP.Result.Value.Number * 0.0601,
+  #         # TODO: other values (like "Ammonia") are not handled
+  #         # TODO: the DEP.Result.Unit value is not changed. Use orig unit & orig value to retain.
+  #         TRUE ~ DEP.Result.Value.Number
+  #       ),
+  #       TRUE ~ DEP.Result.Value.Number
+  #     )
+  #   )
     df$program <- programName 
     if ("Activity.Depth" %in% names(df)) {
       # drop rows with depth > 1m, keep any with depth==NA or depth==NULL
