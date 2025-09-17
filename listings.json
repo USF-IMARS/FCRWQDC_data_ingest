@@ -1,28 +1,5 @@
 [
   {
-    "listing": "/analyte_reports/analyte_reports.html",
-    "items": [
-      "/analyte_reports/analyte_reports/Ammonia.html",
-      "/analyte_reports/analyte_reports/Ammonia+Ammonium.html",
-      "/analyte_reports/analyte_reports/Ammonium.html",
-      "/analyte_reports/analyte_reports/Chlorophyll_a.html",
-      "/analyte_reports/analyte_reports/Dissolved_Oxygen.html",
-      "/analyte_reports/analyte_reports/Nitrate.html",
-      "/analyte_reports/analyte_reports/Nitrate+Nitrite.html",
-      "/analyte_reports/analyte_reports/Nitrite.html",
-      "/analyte_reports/analyte_reports/Orthophosphate.html",
-      "/analyte_reports/analyte_reports/Pheophytin.html",
-      "/analyte_reports/analyte_reports/Phosphorus.html",
-      "/analyte_reports/analyte_reports/Salinity.html",
-      "/analyte_reports/analyte_reports/Silicate.html",
-      "/analyte_reports/analyte_reports/Total_Kjeldahl_Nitrogen.html",
-      "/analyte_reports/analyte_reports/Total_Nitrogen.html",
-      "/analyte_reports/analyte_reports/Turbidity.html",
-      "/analyte_reports/analyte_reports/Water_Temperature.html",
-      "/analyte_reports/analyte_reports/pH.html"
-    ]
-  },
-  {
     "listing": "/provider_reports/provider_reports.html",
     "items": [
       "/provider_reports/provider_reports/AOML_FBBB.html",
@@ -36,6 +13,32 @@
       "/provider_reports/provider_reports/MiamiBeach.html",
       "/provider_reports/provider_reports/PALMBEACH.html",
       "/provider_reports/provider_reports/SFER.html"
+    ]
+  },
+  {
+    "listing": "/analyte_reports/analyte_reports.html",
+    "items": [
+      "/analyte_reports/analyte_reports/Ammonia+Ammonium.html",
+      "/analyte_reports/analyte_reports/Ammonia, Un-ionized (NH3).html",
+      "/analyte_reports/analyte_reports/Ammonium, Filtered (NH4).html",
+      "/analyte_reports/analyte_reports/Chlorophyll a, Corrected for Pheophytin.html",
+      "/analyte_reports/analyte_reports/Chlorophyll a, Uncorrected for Pheophytin.html",
+      "/analyte_reports/analyte_reports/Chlorophyll_a.html",
+      "/analyte_reports/analyte_reports/Dissolved Oxygen.html",
+      "/analyte_reports/analyte_reports/Nitrate (NO3).html",
+      "/analyte_reports/analyte_reports/Nitrate+Nitrite.html",
+      "/analyte_reports/analyte_reports/Nitrite (NO2).html",
+      "/analyte_reports/analyte_reports/Pheophytin.html",
+      "/analyte_reports/analyte_reports/Phosphate, Filtered (PO4).html",
+      "/analyte_reports/analyte_reports/Salinity.html",
+      "/analyte_reports/analyte_reports/Silicate.html",
+      "/analyte_reports/analyte_reports/Specific Conductivity.html",
+      "/analyte_reports/analyte_reports/Total Kjeldahl Nitrogen.html",
+      "/analyte_reports/analyte_reports/Total Nitrogen.html",
+      "/analyte_reports/analyte_reports/Total Phosphorus.html",
+      "/analyte_reports/analyte_reports/Turbidity.html",
+      "/analyte_reports/analyte_reports/Water Temperature.html",
+      "/analyte_reports/analyte_reports/pH.html"
     ]
   }
 ]

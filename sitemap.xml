@@ -1,135 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/SFER.html</loc>
-    <lastmod>2025-09-16T13:21:10.571Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/pH.html</loc>
+    <lastmod>2025-09-17T19:59:30.477Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/MiamiBeach.html</loc>
-    <lastmod>2025-09-16T13:21:10.577Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Turbidity.html</loc>
+    <lastmod>2025-09-17T19:59:30.500Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/FIU_Estuaries.html</loc>
-    <lastmod>2025-09-16T13:21:10.583Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Total Nitrogen.html</loc>
+    <lastmod>2025-09-17T19:59:30.493Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/DEP.html</loc>
-    <lastmod>2025-09-16T13:21:10.592Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Specific Conductivity.html</loc>
+    <lastmod>2025-09-17T19:59:30.424Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/BBWW.html</loc>
-    <lastmod>2025-09-16T13:21:10.580Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Salinity.html</loc>
+    <lastmod>2025-09-17T19:59:30.481Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/AOML_FBBB.html</loc>
-    <lastmod>2025-09-16T13:21:10.585Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Pheophytin.html</loc>
+    <lastmod>2025-09-17T19:59:30.474Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Water_Temperature.html</loc>
-    <lastmod>2025-09-16T13:21:11.203Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Nitrate+Nitrite.html</loc>
+    <lastmod>2025-09-17T19:59:30.463Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Total_Nitrogen.html</loc>
-    <lastmod>2025-09-16T13:21:11.206Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Dissolved Oxygen.html</loc>
+    <lastmod>2025-09-17T19:59:30.420Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Silicate.html</loc>
-    <lastmod>2025-09-16T13:21:11.198Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Chlorophyll a, Uncorrected for Pheophytin.html</loc>
+    <lastmod>2025-09-17T19:59:30.416Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Phosphorus.html</loc>
-    <lastmod>2025-09-16T13:21:11.184Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Orthophosphate.html</loc>
-    <lastmod>2025-09-16T13:21:11.181Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Nitrate.html</loc>
-    <lastmod>2025-09-16T13:21:11.146Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Dissolved_Oxygen.html</loc>
-    <lastmod>2025-09-16T13:21:11.137Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Ammonium.html</loc>
-    <lastmod>2025-09-16T13:21:11.117Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Ammonium, Filtered (NH4).html</loc>
+    <lastmod>2025-09-17T19:59:30.393Z</lastmod>
   </url>
   <url>
     <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Ammonia+Ammonium.html</loc>
-    <lastmod>2025-09-16T13:21:11.126Z</lastmod>
+    <lastmod>2025-09-17T19:59:30.402Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/seacar-check.html</loc>
-    <lastmod>2025-09-15T18:29:03.215Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/PALMBEACH.html</loc>
+    <lastmod>2025-09-17T19:59:29.871Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports.html</loc>
-    <lastmod>2025-08-20T14:30:02.821Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/FIU_WQMP.html</loc>
+    <lastmod>2025-09-17T19:59:29.868Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports.html</loc>
-    <lastmod>2025-08-20T14:30:03.808Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/DERM_BBWQ.html</loc>
+    <lastmod>2025-09-17T19:59:29.866Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/BROWARD.html</loc>
+    <lastmod>2025-09-17T19:59:29.861Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/BBAP.html</loc>
+    <lastmod>2025-09-17T19:59:29.859Z</lastmod>
   </url>
   <url>
     <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/index.html</loc>
     <lastmod>2025-09-16T12:49:08.969Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Ammonia.html</loc>
-    <lastmod>2025-09-16T13:21:11.130Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports.html</loc>
+    <lastmod>2025-08-20T14:30:03.808Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports.html</loc>
+    <lastmod>2025-08-20T14:30:02.821Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/seacar-check.html</loc>
+    <lastmod>2025-09-15T18:29:03.215Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/AOML_FBBB.html</loc>
+    <lastmod>2025-09-17T19:59:29.856Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/BBWW.html</loc>
+    <lastmod>2025-09-17T19:59:29.852Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/DEP.html</loc>
+    <lastmod>2025-09-17T19:59:29.863Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/FIU_Estuaries.html</loc>
+    <lastmod>2025-09-17T19:59:29.854Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/MiamiBeach.html</loc>
+    <lastmod>2025-09-17T19:59:29.850Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/SFER.html</loc>
+    <lastmod>2025-09-17T19:59:29.845Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Ammonia, Un-ionized (NH3).html</loc>
+    <lastmod>2025-09-17T19:59:30.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Chlorophyll a, Corrected for Pheophytin.html</loc>
+    <lastmod>2025-09-17T19:59:30.413Z</lastmod>
   </url>
   <url>
     <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Chlorophyll_a.html</loc>
-    <lastmod>2025-09-16T13:21:11.134Z</lastmod>
+    <lastmod>2025-09-17T19:59:30.409Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Nitrate+Nitrite.html</loc>
-    <lastmod>2025-09-16T13:21:11.150Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Nitrate (NO3).html</loc>
+    <lastmod>2025-09-17T19:59:30.460Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Nitrite.html</loc>
-    <lastmod>2025-09-16T13:21:11.141Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Nitrite (NO2).html</loc>
+    <lastmod>2025-09-17T19:59:30.456Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Pheophytin.html</loc>
-    <lastmod>2025-09-16T13:21:11.187Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Phosphate, Filtered (PO4).html</loc>
+    <lastmod>2025-09-17T19:59:30.467Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Salinity.html</loc>
-    <lastmod>2025-09-16T13:21:11.194Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Silicate.html</loc>
+    <lastmod>2025-09-17T19:59:30.485Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Total_Kjeldahl_Nitrogen.html</loc>
-    <lastmod>2025-09-16T13:21:11.210Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Total Kjeldahl Nitrogen.html</loc>
+    <lastmod>2025-09-17T19:59:30.497Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Turbidity.html</loc>
-    <lastmod>2025-09-16T13:21:11.213Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Total Phosphorus.html</loc>
+    <lastmod>2025-09-17T19:59:30.470Z</lastmod>
   </url>
   <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/pH.html</loc>
-    <lastmod>2025-09-16T13:21:11.190Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/BBAP.html</loc>
-    <lastmod>2025-09-16T13:21:10.587Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/BROWARD.html</loc>
-    <lastmod>2025-09-16T13:21:10.590Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/DERM_BBWQ.html</loc>
-    <lastmod>2025-09-16T13:21:10.595Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/FIU_WQMP.html</loc>
-    <lastmod>2025-09-16T13:21:10.597Z</lastmod>
-  </url>
-  <url>
-    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/provider_reports/provider_reports/PALMBEACH.html</loc>
-    <lastmod>2025-09-16T13:21:10.599Z</lastmod>
+    <loc>https://USF-IMARS.github.io/FCRWQDC_data_ingest/analyte_reports/analyte_reports/Water Temperature.html</loc>
+    <lastmod>2025-09-17T19:59:30.489Z</lastmod>
   </url>
 </urlset>
