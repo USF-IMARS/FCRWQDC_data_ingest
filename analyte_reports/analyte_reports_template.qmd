@@ -56,6 +56,18 @@ ggplot(df, aes(x = value)) +
   labs(title = "Histogram of Values", x = "Value", y = "Log10(Count)")
 ```
 
+Note that values are often not directly comparable due to the use of different units.
+
+```{R, Show number of records per unit}
+#| code-summary: Show number of records per unit
+
+library(ggplot2)
+ggplot(df, aes(x = units)) +
+  geom_bar() +
+  labs(title = "Reported units", x = "unit", y = "Count") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
 ### Reporting Programs:
 ```{R, Show number of records per program}
 #| code-summary: Show number of records per program
