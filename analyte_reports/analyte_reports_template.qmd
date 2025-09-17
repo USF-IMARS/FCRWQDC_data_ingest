@@ -55,15 +55,29 @@ ggplot(df, aes(x = value)) +
   scale_y_log10() +
   labs(title = "Histogram of Values", x = "Value", y = "Log10(Count)")
 ```
+
 ### Reporting Programs:
-```{R, display reporting programs}
-#| code-summary: display reporting programs
+```{R, Show number of records per program}
+#| code-summary: Show number of records per program
 
 library(ggplot2)
 ggplot(df, aes(x = source)) +
   geom_bar() +
   labs(title = "Reporting Programs", x = "Program", y = "Count") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{R, Show value distributions for each program}
+#| code-summary: Show value distributions for each program
+library(ggplot2)
+
+ggplot(df, aes(x = source, y = value)) +
+  geom_violin(width = 1.2, adjust = 10, fill = "skyblue", color = "black") +
+  geom_boxplot(width = 0.1, outlier.shape = NA) +
+  scale_y_log10() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "Program", y = "Log10(Value)", title = "Violin + Boxplot")
+
 ```
 
 ### Station Statistics:
