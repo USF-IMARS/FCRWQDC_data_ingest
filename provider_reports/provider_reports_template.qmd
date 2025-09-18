@@ -2,7 +2,7 @@
 title: "BROWARD Data"
 format: html
 params: 
-  org_id: BROWARD #FIU_WQMP #AOML_BBWW #DERM_BBWQ  # must be BROWARD before rendering
+  org_id: BROWARD #FIU_WQMP #AOML_BBWW #DERM_BBWQ  # must be BROWARD before `quarto publish`
 ---
 ```{R setup}
 librarian::shelf(
