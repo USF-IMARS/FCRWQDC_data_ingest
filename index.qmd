@@ -50,7 +50,7 @@ ggplot(df, aes(x = program, fill = DEP.Analyte.Name)) +
   )
 ```
 
-The following analytes are reported by some programs but not included in the output csv files or other analyses.
+The following analytes are reported by some programs but not included in the output csv files or other analyses. These may be analytes that are not included in the SEACAR vocabulary or they may not have been properly mapped to the SEACAR vocabulary.
 
 
 ```{R, print excluded analytes & associated programs}

@@ -84,7 +84,7 @@ getData <- function(programName) {
     df <- df1 %>%
       bind_rows(df2)
       bind_rows(df3)
-    # cat("nrows combined: ", nrow(df), "\n")
+      
   } else if(programName == "FIU_Estuaries"){
     df <- getFIUEstuariesData()
   } else if (programName == "BBWW"){
@@ -164,96 +164,78 @@ getData <- function(programName) {
   # preserve original analyte names
   df$original.analyte.name <- df$DEP.Analyte.Name
 
-  # === combine synonymous analytes
+  # === map analytes to SEACAR standard vocabulary
   df <- df %>% 
-  mutate(
-
-    DEP.Analyte.Name = case_when(
-    original.analyte.name == "Ammonium"                                    ~ "Ammonium, Filtered (NH4)",
-
-    original.analyte.name == "Nitrogen__ammonia__NH3__+_ammonium__NH4_"    ~ "Ammonia+Ammonium",
-
-    original.analyte.name == "Nitrogen__ammonia_as_N"                      ~ "Ammonia, as N",
-    original.analyte.name == "Nitrogen__ammonia__NH3__as_NH3"              ~ "Ammonia, Un-ionized (NH3)",
-    original.analyte.name == "Ammonia__N_"                                 ~ "Ammonia, as N",
-    original.analyte.name == "Nitrogen__Ammonia"                           ~ "Ammonia, as N",
-
-    original.analyte.name == "Chlorophyll_a"                               ~ "Chlorophyll_a",
-    original.analyte.name == "Chlorophyll_a-_uncorrected"                  ~ "Chlorophyll a, Uncorrected for Pheophytin",
-    original.analyte.name == "Chlorophyll_a__uncorrected_for_pheophytin"   ~ "Chlorophyll a, Uncorrected for Pheophytin",
-    original.analyte.name == "Chlorophyll_a__free_of_pheophytin"           ~ "Chlorophyll a, Corrected for Pheophytin",
-    original.analyte.name == "Chlorophyll_a-_corrected"                    ~ "Chlorophyll a, Corrected for Pheophytin",
-    original.analyte.name == "Chlorophyll_a__corrected_for_pheophytin"     ~ "Chlorophyll a, Corrected for Pheophytin",
-
-    original.analyte.name == "Dissolved_oxygen__DO_"                       ~ "Dissolved Oxygen",
-    original.analyte.name == "Oxygen__Dissolved"                           ~ "Dissolved Oxygen",
-    original.analyte.name == "Dissolved_Oxygen__Discrete_"                 ~ "Dissolved Oxygen",
-    original.analyte.name == "Dissolved_Oxygen__CTD_"                      ~ "Dissolved Oxygen",
-    original.analyte.name == "Dissolved_Oxygen"                            ~ "Dissolved Oxygen",
-
-    original.analyte.name == "Specific_Conductivity"                       ~ "Specific Conductivity",
-    original.analyte.name == "Field_Specific_Conductance"                  ~ "Specific Conductivity",
-
-    original.analyte.name == "Fecal_Coliforms"                             ~ "Fecal_Coliforms",
-
-    original.analyte.name == "Enterococci"                                 ~ "Enterococci",
+  mutate(DEP.Analyte.Name = case_when(
+    #original.analyte.name == "% Xmis" ~ "
+    #original.analyte.name == "Alkaline_Phosphatase_Activity" ~ "
+    #original.analyte.name == "Ammonia" ~ "
+    #original.analyte.name == "Ammonia (N)" ~ "
+    #original.analyte.name == "CDOM QSU" ~ "
+    original.analyte.name == "Chlorophyll a, corrected for pheophytin" ~ "Chlorophyll a, Corrected for Pheophytin",
+    original.analyte.name == "Chlorophyll a, free of pheophytin" ~ "Chlorophyll a, Corrected for Pheophytin",
+    original.analyte.name == "Chlorophyll a, uncorrected for pheophytin" ~ "Chlorophyll a, Uncorrected for Pheophytin",
+    original.analyte.name == "Chlorophyll a- corrected" ~ "Chlorophyll a, Corrected for Pheophytin",
+    original.analyte.name == "Chlorophyll a- uncorrected" ~ "Chlorophyll a, Uncorrected for Pheophytin",
+    #original.analyte.name == "DIC" ~ "
+    original.analyte.name == "DIN" ~ "Dissolved_Inorganic_Nitrogen",
+    #original.analyte.name == "DOP" ~ "
+    #original.analyte.name == "DO_B" ~ "
+    #original.analyte.name == "Diffuse_Attenuation_Coefficient" ~ "
+    original.analyte.name == "Dissolved oxygen (DO)" ~ "Dissolved Oxygen",
+    #original.analyte.name == "Dissolved_Inorganic_Nitrogen" ~ "
+    original.analyte.name == "Dissolved_Oxygen_CTD" ~ "Dissolved Oxygen",
+    #original.analyte.name == "Enterococci" ~ "
+    #original.analyte.name == "Fecal Coliforms" ~ "
+    #original.analyte.name == "Field Specific Conductance" ~ "
+    original.analyte.name == "Field Temperature" ~ "Water Temperature",
+    original.analyte.name == "Field pH" ~ "pH",
+    #original.analyte.name == "Kt" ~ "
+    original.analyte.name == "NO2" ~ "Nitrite (NO2)",
+    original.analyte.name == "Nitrate (N)" ~ "Nitrate (NO3)",
+    #original.analyte.name == "Nitrate-Nitrite (N)" ~ "
+    #original.analyte.name == "Nitrate.Nitrite" ~ "
+    original.analyte.name == "Nitrite (N)" ~ "Nitrite (NO2)",
+    #original.analyte.name == "Nitrogen, Ammonia" ~ "
+    original.analyte.name == "Nitrogen, Kjeldahl" ~ "Total Kjeldahl Nitrogen",
+    original.analyte.name == "Nitrogen, Kjeldahl, Total" ~ "Total Kjeldahl Nitrogen",
+    #original.analyte.name == "Nitrogen, NO2 plus NO3" ~ "
+    #original.analyte.name == "Nitrogen, Nitrate (NO3) as N" ~ "
+    original.analyte.name == "Nitrogen, Nitrate (NO3) as NO3" ~ "Nitrate (NO3)",
+    #original.analyte.name == "Nitrogen, Nitrite (NO2) + Nitrate (NO3) as N" ~ ",
+    #original.analyte.name == "Nitrogen, Nitrite (NO2) as N" ~ "
+    original.analyte.name == "Nitrogen, Nitrite (NO2) as NO2" ~ "Nitrite (NO2)",
+    #original.analyte.name == "Nitrogen, ammonia (NH3) + ammonium (NH4)" ~ "
+    original.analyte.name == "Nitrogen, ammonia (NH3) as NH3" ~ "Ammonia, Un-ionized (NH3)",
+    #original.analyte.name == "Nitrogen, ammonia as N" ~ "
+    original.analyte.name == "Nitrogen- Total" ~ "Total Nitrogen",
+    original.analyte.name == "Nitrogen- Total Kjeldahl" ~ "Total Kjeldahl Nitrogen",
+    original.analyte.name == "Orthophosphate (P)" ~ "Phosphate, Filtered (PO4)",
+    original.analyte.name == "Oxygen, Dissolved" ~ "Dissolved Oxygen",
+    original.analyte.name == "Phosphate" ~ "Phosphate, Filtered (PO4)",
+    #original.analyte.name == "Phosphorus as P" ~ "
+    original.analyte.name == "Phosphorus as PO4" ~ "Phosphate, Filtered (PO4)",
+    #original.analyte.name == "Phosphorus, Total (as P) LL" ~ "
+    #original.analyte.name == "Phosphorus, orthophosphate as P" ~ "
+    original.analyte.name == "Phosphorus, orthophosphate as PO4" ~ "Phosphate, Filtered (PO4)",
+    original.analyte.name == "Phosphorus- Total" ~ "Phosphorus, Total (as P) LL",
+    original.analyte.name == "Phosphorus- Total" ~ "Total Phosphorus",
+    #original.analyte.name == "SAL_B" ~ "  # salinity bottom (or bottle?)
+    #original.analyte.name == "Si" ~ "
+    #original.analyte.name == "Silica (SiO2)" ~ "
+    #original.analyte.name == "TEMP_B" ~ "  # temperature bottom (or bottle?)
+    original.analyte.name == "TN" ~ "Total Nitrogen",
+    original.analyte.name == "TP" ~ "Total Phosphorus",
+    original.analyte.name == "Temperature, Water" ~ "Water Temperature",
+    original.analyte.name == "Temperature, water" ~ "Water Temperature",
+    #original.analyte.name == "Total_Organic_Carbon" ~ "
+    #original.analyte.name == "Tripton" ~ "
+    #original.analyte.name == "Zcol" ~ "
+    #original.analyte.name == "Zp" ~ "
     
-    original.analyte.name == "Nitrite"                                     ~ "Nitrite (NO2)",
-    original.analyte.name == "Nitrite__N_"                                 ~ "Nitrite, as N",
-    original.analyte.name == "Nitrogen__Nitrite__NO2__as_N"                ~ "Nitrite, as N",
-    original.analyte.name == "Nitrogen__Nitrite__NO2__as_NO2"              ~ "Nitrite (NO2)",
-    original.analyte.name == "NO2"                                         ~ "Nitrite (NO2)",
-
-    original.analyte.name == "Nitrate"                                     ~ "Nitrate (NO3)",
-    original.analyte.name == "Nitrate__N_"                                 ~ "Nitrate, as N",
-    original.analyte.name == "Nitrogen__Nitrate__NO3__as_N"                ~ "Nitrate, as N",
-    original.analyte.name == "Nitrogen__Nitrate__NO3__as_NO3"              ~ "Nitrate (NO3)",
     
-    original.analyte.name == "NO2+3__Filtered"                             ~ "NO2+3, Filtered",
-    original.analyte.name == "Nitrate+Nitrite"                             ~ "NO2+3, Filtered",
-    original.analyte.name == "Nitrogen__Nitrite__NO2__+_Nitrate__NO3__as_N"~ "NO2+3, Filtered, as N",
-    original.analyte.name == "Nitrate-Nitrite__N_"                         ~ "NO2+3, Filtered, as N",
-    original.analyte.name == "Nitrogen__NO2_plus_NO3"                      ~ "NO2+3, Filtered",
-    
-
-
-    original.analyte.name == "Orthophosphate__P_"                          ~ "Phosphate, Filtered (PO4)",
-    original.analyte.name == "Phosphorus__orthophosphate_as_P"             ~ "Phosphate, Filtered (PO4)",
-    original.analyte.name == "Phosphate"                                   ~ "Phosphate, Filtered (PO4)",
-
-    original.analyte.name == "Phosphorus__Total__as_P__LL"                 ~ "Phosphate, Filtered, as P",
-    original.analyte.name == "Total_Phosphorus"                            ~ "Total Phosphorus",
-    original.analyte.name == "Phosphorus-_Total"                           ~ "Total Phosphorus",
-    original.analyte.name == "Phosphorus_as_P"                             ~ "Phosphate, Filtered, as P",
-
-    original.analyte.name == "Pheophytin"                                  ~ "Pheophytin",
-
-    original.analyte.name == "Field_pH"                                    ~ "pH",
-    original.analyte.name == "pH"                                          ~ "pH",
-
-    original.analyte.name == "Salinity"                                    ~ "Salinity",
-
-    original.analyte.name == "Silica__SiO2_"                               ~ "Silicate",
-    original.analyte.name == "Silicate"                                    ~ "Silicate",
-
-    original.analyte.name == "Temperature"                                 ~ "Water Temperature",
-    original.analyte.name == "Temperature__Water"                          ~ "Water Temperature",
-    original.analyte.name == "Temperature__water"                          ~ "Water Temperature",
-    original.analyte.name == "Field_Temperature"                           ~ "Water Temperature",
-    original.analyte.name == "Water_Temperature"                           ~ "Water Temperature",
-
-    original.analyte.name == "Total_Nitrogen"                              ~ "Total Nitrogen",
-    original.analyte.name == "Nitrogen-_Total"                             ~ "Total Nitrogen",
-
-    original.analyte.name == "Total_Kjeldahl_Nitrogen"                     ~ "Total Kjeldahl Nitrogen",
-    original.analyte.name == "Nitrogen__Kjeldahl"                          ~ "Total Kjeldahl Nitrogen",
-    original.analyte.name == "Nitrogen-_Total_Kjeldahl"                    ~ "Total Kjeldahl Nitrogen",
-    original.analyte.name == "Nitrogen__Kjeldahl__Total"                   ~ "Total Kjeldahl Nitrogen",
-
-    original.analyte.name == "Turbidity"                                   ~ "Turbidity",
     TRUE ~ original.analyte.name
-    )
-  )
+  ))
 
   # convert all analyte values to mg/L using DEP.Result.Unit
   # TODO: skip this for pH
