@@ -14,11 +14,13 @@ librarian::shelf(
 ```
 
 ```{R, load data, convert to SEACAR format, save .csv}
-source(here("R/getAllData.R"))
-df_all <- getAllData()
+library("here")
+df_all <- read.csv(here("data/exports/allDataRaw.csv"))
+source(here("R/dropNonStandardAnalytes.R"))
+df <- dropNonStandardAnalytes(df_all)
 
 source(here("R/mutateWINToSEACAR.R"))
-df <- mutateWINToSEACAR(df_all)
+df <- mutateWINToSEACAR(df)
 
 # write SEACAR .csv
 write.csv(df, here("data", "exports", "allDataSEACAR.csv"))
