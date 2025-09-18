@@ -18,7 +18,6 @@
   {
     "listing": "/analyte_reports/analyte_reports.html",
     "items": [
-      "/analyte_reports/analyte_reports/Ammonia+Ammonium.html",
       "/analyte_reports/analyte_reports/Ammonia, Un-ionized (NH3).html",
       "/analyte_reports/analyte_reports/Ammonium, Filtered (NH4).html",
       "/analyte_reports/analyte_reports/Chlorophyll a, Corrected for Pheophytin.html",
@@ -26,7 +25,6 @@
       "/analyte_reports/analyte_reports/Chlorophyll_a.html",
       "/analyte_reports/analyte_reports/Dissolved Oxygen.html",
       "/analyte_reports/analyte_reports/Nitrate (NO3).html",
-      "/analyte_reports/analyte_reports/Nitrate+Nitrite.html",
       "/analyte_reports/analyte_reports/Nitrite (NO2).html",
       "/analyte_reports/analyte_reports/Pheophytin.html",
       "/analyte_reports/analyte_reports/Phosphate, Filtered (PO4).html",
