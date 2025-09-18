@@ -164,9 +164,6 @@ getData <- function(programName) {
   # preserve original analyte names
   df$original.analyte.name <- df$DEP.Analyte.Name
 
-  # replace spaces, parentheses, commas in DEP.Analyte.Name
-  df$original.analyte.name <- gsub("[ \\(\\)|,]", "_", df$original.analyte.name)
-
   # === combine synonymous analytes
   df <- df %>% 
   mutate(
@@ -257,14 +254,6 @@ getData <- function(programName) {
     TRUE ~ original.analyte.name
     )
   )
-
-  
-  # === drop any non-standard analyte names  
-  valid_analytes <- getListOfAnalytes()
-
-  df <- df %>%
-    filter(DEP.Analyte.Name %in% valid_analytes)
-
 
   # convert all analyte values to mg/L using DEP.Result.Unit
   # TODO: skip this for pH

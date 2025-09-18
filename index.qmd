@@ -18,7 +18,9 @@ This work is a product of the University of South Florida Institute for Marine R
 #| warning: false
 library("here")
 source(here("R/getAllData.R"))
-df <- getAllData()
+df_all <- getAllData()
+source(here("R/dropNonStandardAnalytes.R"))
+df <- dropNonStandardAnalytes(df_all)
 ```
 
 ```{R, create .csv of all data}
@@ -47,6 +49,36 @@ ggplot(df, aes(x = program, fill = DEP.Analyte.Name)) +
     legend.position = "bottom",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+```
+
+The following analytes are reported by some programs but not included in the output csv files or other analyses.
+
+```{R, print excluded analytes}
+#| code-summary: print excluded analytes
+print(
+  setdiff(
+    unique(df_all$DEP.Analyte.Name), 
+    unique(df$DEP.Analyte.Name)
+  )
+)
+```
+
+```{R, print excluded analytes & associated programs}
+# First, ensure you have the dplyr package installed and loaded
+# install.packages("dplyr")
+library(dplyr)
+
+# 1. Get the list of analyte names that are in df_all but not in df
+diff_analytes <- setdiff(unique(df_all$DEP.Analyte.Name), unique(df$DEP.Analyte.Name))
+
+# 2. Filter df_all for those analytes and create a summary
+analyte_programs_summary <- df_all %>%
+  filter(DEP.Analyte.Name %in% diff_analytes) %>%
+  group_by(DEP.Analyte.Name) %>%
+  summarise(Associated.Programs = paste(unique(program), collapse = ", "))
+
+# 3. Print the resulting summary table
+print(analyte_programs_summary)
 ```
 
 

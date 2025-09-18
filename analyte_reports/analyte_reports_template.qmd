@@ -2,7 +2,7 @@
 title: "Salinity Report"
 format: html
 params:
-  analyte: "Salinity"  # must be "Salinity" before rendering
+  analyte: "Salinity"  # must be "Salinity" before `quarto publish`
 ---
 
 ```{R, get data across all programs, filter for analyte}
@@ -42,7 +42,7 @@ df %>%
   write.csv(here("data", "exports", "unified-wq-db-samples", paste0(params$analyte, ".csv")))
 ```
 
-Download data for this analyte [here](data/exports/`r params$analyte`.csv)
+Download data for this analyte [here](../../data/exports/`r params$analyte`.csv)
 
 ### Histogram of `value`:
 
