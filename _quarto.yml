@@ -15,7 +15,7 @@ project:
     - scripts/rm-csv-files.sh
     
 website:
-  title: "WIN_data_ingest"
+  title: "Florida Coral Reef Water Quality Data Compliation Ingest Reports"
   navbar:
     left:
       - href: index.qmd
