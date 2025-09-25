@@ -27,13 +27,14 @@ getFIUHistoricalData <- function(){
   # DEP.Result.ID Activity.ID year month day  time   Activity.Start.Date.Time lat_deg lat_min Org.Decimal.Latitude lon_deg lon_min   Org.Decimal.Longitude Monitoring.Location.ID Activity.Type Activity.Depth   Activity.Depth.Unit Activity.Depth.Top.Bottom.Unit Sample.Collection.Type   Activity.Top.Depth Activity.Bottom.Depth Value.Qualifier Result.Comments   DEP.Analyte.Name DEP.Result.Value.Number DEP.Result.Unit
   
   df <- df %>%
-    rename(
-      Org.Decimal.Latitude = LATDEC,
-      Org.Decimal.Longitude = LONDEC,
-      Activity.Depth = DEPTH,
-      time = TIME,
-      Activity.Start.Date.Time = DATE,
-      Monitoring.Location.ID = STATION,  # or SITE, depending on usage
+    mutate(
+      Activity.Depth = as.character(DEPTH),
+      time = as.character(TIME),
+      Activity.Start.Date.Time = as.character(DATE),
+      Monitoring.Location.ID = as.character(STATION), # for short code
+      # Monitoring.Location.ID = as.character(SITE),  # for human readable name
+      Org.Decimal.Latitude = as.character(LATDEC),
+      Org.Decimal.Longitude = as.character(LONDEC)
     )
   
   # === map analyte names to standard from unique(df$DEP.Analyte.Name))
@@ -68,6 +69,9 @@ getFIUHistoricalData <- function(){
     ),
     Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time)
   )
+  
+  # xlsx says all units are ppm
+  df$DEP.Result.Unit <- "ppm"
   
   return(df)
 }
