@@ -44,7 +44,7 @@ df %>%
 
 Download data for this analyte [here](../../data/exports/`r params$analyte`.csv)
 
-### Histogram of `value`:
+### Overall `value`s:
 
 ```{R, display histogram of values}
 #| code-summary: display histogram of values
@@ -78,16 +78,7 @@ ggplot(df, aes(x = source, fill = units)) +
   )
 ```
 
-### Reporting Programs:
-```{R, Show number of records per program}
-#| code-summary: Show number of records per program
-
-library(ggplot2)
-ggplot(df, aes(x = source)) +
-  geom_bar() +
-  labs(title = "Reporting Programs", x = "Program", y = "Count") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
+### Values Reported By Program:
 
 ```{R, Show value distributions for each program}
 #| code-summary: Show value distributions for each program
