@@ -69,7 +69,7 @@ ggplot(df, aes(x = source, fill = units)) +
     title = "Count of Observations by Program and Units",
     x = "Program Name",
     y = "Count (Log Scale)",
-    fill = "Parameter"
+    fill = "Units Reported"
   ) +
   theme_minimal() +
   theme(
