@@ -82,7 +82,7 @@ getData <- function(programName) {
     df3 <- getFIUHistoricalData()
     # combine dataframes
     df <- df1 %>%
-      bind_rows(df2)
+      bind_rows(df2) %>%
       bind_rows(df3)
       
   } else if(programName == "FIU_Estuaries"){
