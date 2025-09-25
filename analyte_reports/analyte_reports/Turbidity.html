@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Turbidity Report – WIN_data_ingest</title>
+<title>Turbidity Report – Florida Coral Reef Water Quality Data Compliation Ingest Reports</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">WIN_data_ingest</span>
+    <span class="navbar-title">Florida Coral Reef Water Quality Data Compliation Ingest Reports</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -159,7 +159,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#histogram-of-value" id="toc-histogram-of-value" class="nav-link active" data-scroll-target="#histogram-of-value">Histogram of <code>value</code>:</a></li>
-  <li><a href="#reporting-programs" id="toc-reporting-programs" class="nav-link" data-scroll-target="#reporting-programs">Reporting Programs:</a></li>
   <li><a href="#station-statistics" id="toc-station-statistics" class="nav-link" data-scroll-target="#station-statistics">Station Statistics:</a></li>
   </ul>
 </nav>
@@ -246,33 +245,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note that values are often not directly comparable due to the use of different units.</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Show number of records per unit</summary>
+<summary>Show usage of different units</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> units)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reported units"</span>, <span class="at">x =</span> <span class="st">"unit"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source, <span class="at">fill =</span> units)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Count of Observations by Program and Units"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Program Name"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count (Log Scale)"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Parameter"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Turbidity_files/figure-html/Show number of records per unit-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Turbidity_files/figure-html/Show usage of different units-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="reporting-programs" class="level3">
-<h3 class="anchored" data-anchor-id="reporting-programs">Reporting Programs:</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Show number of records per program</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<pre><code>
+### Reporting Programs:
+::: {.cell}
+
+```{.r .cell-code  code-summary="Show number of records per program"}
+library(ggplot2)
+ggplot(df, aes(x = source)) +
+  geom_bar() +
+  labs(title = "Reporting Programs", x = "Program", y = "Count") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -280,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-</div>
+<p>:::</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show value distributions for each program</summary>
@@ -541,23 +549,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="mjgctstsaw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mjgctstsaw table {
+<div id="iumpzwclmw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iumpzwclmw table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mjgctstsaw thead, #mjgctstsaw tbody, #mjgctstsaw tfoot, #mjgctstsaw tr, #mjgctstsaw td, #mjgctstsaw th {
+#iumpzwclmw thead, #iumpzwclmw tbody, #iumpzwclmw tfoot, #iumpzwclmw tr, #iumpzwclmw td, #iumpzwclmw th {
   border-style: none;
 }
 
-#mjgctstsaw p {
+#iumpzwclmw p {
   margin: 0;
   padding: 0;
 }
 
-#mjgctstsaw .gt_table {
+#iumpzwclmw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -583,12 +591,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_caption {
+#iumpzwclmw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mjgctstsaw .gt_title {
+#iumpzwclmw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -600,7 +608,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#mjgctstsaw .gt_subtitle {
+#iumpzwclmw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -612,7 +620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#mjgctstsaw .gt_heading {
+#iumpzwclmw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -624,13 +632,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_bottom_border {
+#iumpzwclmw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_col_headings {
+#iumpzwclmw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -645,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_col_heading {
+#iumpzwclmw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -665,7 +673,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#mjgctstsaw .gt_column_spanner_outer {
+#iumpzwclmw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -677,15 +685,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#mjgctstsaw .gt_column_spanner_outer:first-child {
+#iumpzwclmw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mjgctstsaw .gt_column_spanner_outer:last-child {
+#iumpzwclmw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mjgctstsaw .gt_column_spanner {
+#iumpzwclmw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -697,11 +705,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#mjgctstsaw .gt_spanner_row {
+#iumpzwclmw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mjgctstsaw .gt_group_heading {
+#iumpzwclmw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -727,7 +735,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#mjgctstsaw .gt_empty_group_heading {
+#iumpzwclmw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -742,15 +750,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#mjgctstsaw .gt_from_md > :first-child {
+#iumpzwclmw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mjgctstsaw .gt_from_md > :last-child {
+#iumpzwclmw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mjgctstsaw .gt_row {
+#iumpzwclmw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -769,7 +777,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#mjgctstsaw .gt_stub {
+#iumpzwclmw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -782,7 +790,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mjgctstsaw .gt_stub_row_group {
+#iumpzwclmw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -796,15 +804,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#mjgctstsaw .gt_row_group_first td {
+#iumpzwclmw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mjgctstsaw .gt_row_group_first th {
+#iumpzwclmw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mjgctstsaw .gt_summary_row {
+#iumpzwclmw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -814,16 +822,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mjgctstsaw .gt_first_summary_row {
+#iumpzwclmw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_first_summary_row.thick {
+#iumpzwclmw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mjgctstsaw .gt_last_summary_row {
+#iumpzwclmw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -833,7 +841,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_grand_summary_row {
+#iumpzwclmw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -843,7 +851,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mjgctstsaw .gt_first_grand_summary_row {
+#iumpzwclmw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -853,7 +861,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_last_grand_summary_row_top {
+#iumpzwclmw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -863,11 +871,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_striped {
+#iumpzwclmw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mjgctstsaw .gt_table_body {
+#iumpzwclmw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -876,7 +884,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_footnotes {
+#iumpzwclmw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -890,7 +898,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_footnote {
+#iumpzwclmw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -899,7 +907,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mjgctstsaw .gt_sourcenotes {
+#iumpzwclmw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -913,7 +921,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#mjgctstsaw .gt_sourcenote {
+#iumpzwclmw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -921,72 +929,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#mjgctstsaw .gt_left {
+#iumpzwclmw .gt_left {
   text-align: left;
 }
 
-#mjgctstsaw .gt_center {
+#iumpzwclmw .gt_center {
   text-align: center;
 }
 
-#mjgctstsaw .gt_right {
+#iumpzwclmw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mjgctstsaw .gt_font_normal {
+#iumpzwclmw .gt_font_normal {
   font-weight: normal;
 }
 
-#mjgctstsaw .gt_font_bold {
+#iumpzwclmw .gt_font_bold {
   font-weight: bold;
 }
 
-#mjgctstsaw .gt_font_italic {
+#iumpzwclmw .gt_font_italic {
   font-style: italic;
 }
 
-#mjgctstsaw .gt_super {
+#iumpzwclmw .gt_super {
   font-size: 65%;
 }
 
-#mjgctstsaw .gt_footnote_marks {
+#iumpzwclmw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mjgctstsaw .gt_asterisk {
+#iumpzwclmw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mjgctstsaw .gt_indent_1 {
+#iumpzwclmw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mjgctstsaw .gt_indent_2 {
+#iumpzwclmw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mjgctstsaw .gt_indent_3 {
+#iumpzwclmw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mjgctstsaw .gt_indent_4 {
+#iumpzwclmw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mjgctstsaw .gt_indent_5 {
+#iumpzwclmw .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mjgctstsaw .katex-display {
+#iumpzwclmw .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mjgctstsaw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#iumpzwclmw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
