@@ -4,7 +4,7 @@ getListOfAnalytes <- function(){
     # === subset of desired analytes
     # NOTE: this should align with getData
     "Ammonium, Filtered (NH4)",
-    "Ammonia+Ammonium",
+    # "Ammonia+Ammonium",
     "Ammonia, Un-ionized (NH3)",
     "Chlorophyll_a",
     "Chlorophyll a, Corrected for Pheophytin",
@@ -15,7 +15,7 @@ getListOfAnalytes <- function(){
     # "Enterococci",    
     "Nitrite (NO2)",
     "Nitrate (NO3)",
-    "Nitrate+Nitrite",
+    # "Nitrate+Nitrite",
     "Phosphate, Filtered (PO4)",
     "Total Phosphorus",
     "Pheophytin",
