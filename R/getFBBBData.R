@@ -28,20 +28,36 @@ getFBBBData <- function(){
     )
   
   # set DEP.Result.Unit from DEP.Analyte.Name where appropriate
-  # & drop unit from DEP.Analyte.Name
+  # Mapping is from metadata sheet in xlsx file
   df <- df %>%
     mutate(
-      # Assign units based on matching patterns
       DEP.Result.Unit = case_when(
-        str_detect(DEP.Analyte.Name, fixed("Tripton (mg/L)")) ~ "mg/L",
-        str_detect(DEP.Analyte.Name, fixed("Chl a (µg/L)"))   ~ "µg/L",
-        str_detect(DEP.Analyte.Name, fixed("Phaeo (µg/L)"))   ~ "µg/L",
-        str_detect(DEP.Analyte.Name, fixed("TSS (mg/L)"))     ~ "mg/L",
-        TRUE ~ NA_character_
-      ),
-      # Clean up analyte names by removing units
-      DEP.Analyte.Name = str_remove(DEP.Analyte.Name, fixed(" (mg/L)")) %>%
-        str_remove(fixed(" (µg/L)"))
+        DEP.Analyte.Name == "Temp"              ~ "degrees C",
+        DEP.Analyte.Name == "Salinity"          ~ "",
+        DEP.Analyte.Name == "Zp"                ~ "m",
+        DEP.Analyte.Name == "Zcol"              ~ "m",
+        DEP.Analyte.Name == "% Xmis"            ~ "%",
+        DEP.Analyte.Name == "CDOM QSU"          ~ "Quinine Sulfate Units",
+        DEP.Analyte.Name == "Tripton (mg/L)"    ~ "mg/L",
+        DEP.Analyte.Name == "NH4"               ~ "µmol/L",
+        DEP.Analyte.Name == "PO4"               ~ "µmol/L",
+        DEP.Analyte.Name == "N+N"               ~ "µmol/L",
+        DEP.Analyte.Name == "NO2"               ~ "µmol/L",
+        DEP.Analyte.Name == "NO3"               ~ "µmol/L",
+        DEP.Analyte.Name == "Si"                ~ "µmol/L",
+        DEP.Analyte.Name == "TDP"               ~ "µmol/L",
+        DEP.Analyte.Name == "DOP"               ~ "µmol/L",
+        DEP.Analyte.Name == "pH"                ~ "",
+        DEP.Analyte.Name == "TDN"               ~ "µmol/L",
+        DEP.Analyte.Name == "DON"               ~ "µmol/L",
+        DEP.Analyte.Name == "DIN"               ~ "µmol/L",
+        DEP.Analyte.Name == "DIC"               ~ "µmol/L",
+        DEP.Analyte.Name == "Chl a (µg/L)"      ~ "µg/L",
+        DEP.Analyte.Name == "Phaeo (µg/L)"      ~ "µg/L",
+        DEP.Analyte.Name == "Kt"                ~ "",
+        DEP.Analyte.Name == "TSS (mg/L)"        ~ "mg/L",
+        TRUE                                    ~ NA_character_   # default if no match
+      )
     )
   
   
@@ -77,14 +93,12 @@ getFBBBData <- function(){
         "NO3"       = "Nitrite (NO2)",
         "PO4"       = "Phosphate, Filtered (PO4)",
         "TDP"       = "Total Phosphorus",
-        "Phaeo"     = "Pheophytin",
-        "Chl a"     = "Chlorophyll_a",
+        "Phaeo (µg/L)"     = "Pheophytin",
+        "Chl a (µg/L)"     = "Chlorophyll_a",
         "Salinity"  = "Salinity",
         "Si"        = "Silicate",
         "Temp"      = "Water Temperature",
         "TDN"       = "Total Nitrogen",
-        "DON"       = "Total Kjeldahl Nitrogen",
-        "TSS"       = "Turbidity",
         "pH"        = "pH"
       ),
       # columsn for STORET mapping
