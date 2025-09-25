@@ -77,7 +77,6 @@ ggplot(df, aes(x = source, fill = units)) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 ```
-```
 
 ### Reporting Programs:
 ```{R, Show number of records per program}
