@@ -58,14 +58,25 @@ ggplot(df, aes(x = value)) +
 
 Note that values are often not directly comparable due to the use of different units.
 
-```{R, Show number of records per unit}
-#| code-summary: Show number of records per unit
-
+```{R, Show usage of different units}
+#| code-summary: Show usage of different units
 library(ggplot2)
-ggplot(df, aes(x = units)) +
+
+ggplot(df, aes(x = source, fill = units)) +
   geom_bar() +
-  labs(title = "Reported units", x = "unit", y = "Count") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  scale_y_log10() +
+  labs(
+    title = "Count of Observations by Program and Units",
+    x = "Program Name",
+    y = "Count (Log Scale)",
+    fill = "Parameter"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
 ```
 
 ### Reporting Programs:
