@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>pH Report – Florida Coral Reef Water Quality Data Compliation Ingest Reports</title>
+<title>pH Report – FCRWQDC Ingest Reports</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Florida Coral Reef Water Quality Data Compliation Ingest Reports</span>
+    <span class="navbar-title">FCRWQDC Ingest Reports</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -159,6 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#histogram-of-value" id="toc-histogram-of-value" class="nav-link active" data-scroll-target="#histogram-of-value">Histogram of <code>value</code>:</a></li>
+  <li><a href="#reporting-programs" id="toc-reporting-programs" class="nav-link" data-scroll-target="#reporting-programs">Reporting Programs:</a></li>
   <li><a href="#station-statistics" id="toc-station-statistics" class="nav-link" data-scroll-target="#station-statistics">Station Statistics:</a></li>
   </ul>
 </nav>
@@ -271,16 +272,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<pre><code>
-### Reporting Programs:
-::: {.cell}
-
-```{.r .cell-code  code-summary="Show number of records per program"}
-library(ggplot2)
-ggplot(df, aes(x = source)) +
-  geom_bar() +
-  labs(title = "Reporting Programs", x = "Program", y = "Count") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
+</section>
+<section id="reporting-programs" class="level3">
+<h3 class="anchored" data-anchor-id="reporting-programs">Reporting Programs:</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show number of records per program</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -288,7 +291,7 @@ ggplot(df, aes(x = source)) +
 </figure>
 </div>
 </div>
-<p>:::</p>
+</div>
 <div class="cell">
 <details class="code-fold">
 <summary>Show value distributions for each program</summary>
@@ -555,23 +558,23 @@ ggplot(df, aes(x = source)) +
 <span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="twyfavufro" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#twyfavufro table {
+<div id="vinkuwpzfa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vinkuwpzfa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#twyfavufro thead, #twyfavufro tbody, #twyfavufro tfoot, #twyfavufro tr, #twyfavufro td, #twyfavufro th {
+#vinkuwpzfa thead, #vinkuwpzfa tbody, #vinkuwpzfa tfoot, #vinkuwpzfa tr, #vinkuwpzfa td, #vinkuwpzfa th {
   border-style: none;
 }
 
-#twyfavufro p {
+#vinkuwpzfa p {
   margin: 0;
   padding: 0;
 }
 
-#twyfavufro .gt_table {
+#vinkuwpzfa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -597,12 +600,12 @@ ggplot(df, aes(x = source)) +
   border-left-color: #D3D3D3;
 }
 
-#twyfavufro .gt_caption {
+#vinkuwpzfa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#twyfavufro .gt_title {
+#vinkuwpzfa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -614,7 +617,7 @@ ggplot(df, aes(x = source)) +
   border-bottom-width: 0;
 }
 
-#twyfavufro .gt_subtitle {
+#vinkuwpzfa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -626,7 +629,7 @@ ggplot(df, aes(x = source)) +
   border-top-width: 0;
 }
 
-#twyfavufro .gt_heading {
+#vinkuwpzfa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -638,13 +641,13 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#twyfavufro .gt_bottom_border {
+#vinkuwpzfa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#twyfavufro .gt_col_headings {
+#vinkuwpzfa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -659,7 +662,7 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#twyfavufro .gt_col_heading {
+#vinkuwpzfa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -679,7 +682,7 @@ ggplot(df, aes(x = source)) +
   overflow-x: hidden;
 }
 
-#twyfavufro .gt_column_spanner_outer {
+#vinkuwpzfa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -691,15 +694,15 @@ ggplot(df, aes(x = source)) +
   padding-right: 4px;
 }
 
-#twyfavufro .gt_column_spanner_outer:first-child {
+#vinkuwpzfa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#twyfavufro .gt_column_spanner_outer:last-child {
+#vinkuwpzfa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#twyfavufro .gt_column_spanner {
+#vinkuwpzfa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -711,11 +714,11 @@ ggplot(df, aes(x = source)) +
   width: 100%;
 }
 
-#twyfavufro .gt_spanner_row {
+#vinkuwpzfa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#twyfavufro .gt_group_heading {
+#vinkuwpzfa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -741,7 +744,7 @@ ggplot(df, aes(x = source)) +
   text-align: left;
 }
 
-#twyfavufro .gt_empty_group_heading {
+#vinkuwpzfa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -756,15 +759,15 @@ ggplot(df, aes(x = source)) +
   vertical-align: middle;
 }
 
-#twyfavufro .gt_from_md > :first-child {
+#vinkuwpzfa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#twyfavufro .gt_from_md > :last-child {
+#vinkuwpzfa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#twyfavufro .gt_row {
+#vinkuwpzfa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -783,7 +786,7 @@ ggplot(df, aes(x = source)) +
   overflow-x: hidden;
 }
 
-#twyfavufro .gt_stub {
+#vinkuwpzfa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -796,7 +799,7 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#twyfavufro .gt_stub_row_group {
+#vinkuwpzfa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -810,15 +813,15 @@ ggplot(df, aes(x = source)) +
   vertical-align: top;
 }
 
-#twyfavufro .gt_row_group_first td {
+#vinkuwpzfa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#twyfavufro .gt_row_group_first th {
+#vinkuwpzfa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#twyfavufro .gt_summary_row {
+#vinkuwpzfa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -828,16 +831,16 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#twyfavufro .gt_first_summary_row {
+#vinkuwpzfa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#twyfavufro .gt_first_summary_row.thick {
+#vinkuwpzfa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#twyfavufro .gt_last_summary_row {
+#vinkuwpzfa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -847,7 +850,7 @@ ggplot(df, aes(x = source)) +
   border-bottom-color: #D3D3D3;
 }
 
-#twyfavufro .gt_grand_summary_row {
+#vinkuwpzfa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -857,7 +860,7 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#twyfavufro .gt_first_grand_summary_row {
+#vinkuwpzfa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -867,7 +870,7 @@ ggplot(df, aes(x = source)) +
   border-top-color: #D3D3D3;
 }
 
-#twyfavufro .gt_last_grand_summary_row_top {
+#vinkuwpzfa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -877,11 +880,11 @@ ggplot(df, aes(x = source)) +
   border-bottom-color: #D3D3D3;
 }
 
-#twyfavufro .gt_striped {
+#vinkuwpzfa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#twyfavufro .gt_table_body {
+#vinkuwpzfa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -890,7 +893,7 @@ ggplot(df, aes(x = source)) +
   border-bottom-color: #D3D3D3;
 }
 
-#twyfavufro .gt_footnotes {
+#vinkuwpzfa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -904,7 +907,7 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#twyfavufro .gt_footnote {
+#vinkuwpzfa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -913,7 +916,7 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#twyfavufro .gt_sourcenotes {
+#vinkuwpzfa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -927,7 +930,7 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#twyfavufro .gt_sourcenote {
+#vinkuwpzfa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -935,72 +938,72 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#twyfavufro .gt_left {
+#vinkuwpzfa .gt_left {
   text-align: left;
 }
 
-#twyfavufro .gt_center {
+#vinkuwpzfa .gt_center {
   text-align: center;
 }
 
-#twyfavufro .gt_right {
+#vinkuwpzfa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#twyfavufro .gt_font_normal {
+#vinkuwpzfa .gt_font_normal {
   font-weight: normal;
 }
 
-#twyfavufro .gt_font_bold {
+#vinkuwpzfa .gt_font_bold {
   font-weight: bold;
 }
 
-#twyfavufro .gt_font_italic {
+#vinkuwpzfa .gt_font_italic {
   font-style: italic;
 }
 
-#twyfavufro .gt_super {
+#vinkuwpzfa .gt_super {
   font-size: 65%;
 }
 
-#twyfavufro .gt_footnote_marks {
+#vinkuwpzfa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#twyfavufro .gt_asterisk {
+#vinkuwpzfa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#twyfavufro .gt_indent_1 {
+#vinkuwpzfa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#twyfavufro .gt_indent_2 {
+#vinkuwpzfa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#twyfavufro .gt_indent_3 {
+#vinkuwpzfa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#twyfavufro .gt_indent_4 {
+#vinkuwpzfa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#twyfavufro .gt_indent_5 {
+#vinkuwpzfa .gt_indent_5 {
   text-indent: 25px;
 }
 
-#twyfavufro .katex-display {
+#vinkuwpzfa .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#twyfavufro div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vinkuwpzfa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>

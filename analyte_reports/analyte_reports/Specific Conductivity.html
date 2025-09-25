@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Specific Conductivity Report – Florida Coral Reef Water Quality Data Compliation Ingest Reports</title>
+<title>Specific Conductivity Report – FCRWQDC Ingest Reports</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Florida Coral Reef Water Quality Data Compliation Ingest Reports</span>
+    <span class="navbar-title">FCRWQDC Ingest Reports</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -159,6 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#histogram-of-value" id="toc-histogram-of-value" class="nav-link active" data-scroll-target="#histogram-of-value">Histogram of <code>value</code>:</a></li>
+  <li><a href="#reporting-programs" id="toc-reporting-programs" class="nav-link" data-scroll-target="#reporting-programs">Reporting Programs:</a></li>
   <li><a href="#station-statistics" id="toc-station-statistics" class="nav-link" data-scroll-target="#station-statistics">Station Statistics:</a></li>
   </ul>
 </nav>
@@ -271,16 +272,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<pre><code>
-### Reporting Programs:
-::: {.cell}
-
-```{.r .cell-code  code-summary="Show number of records per program"}
-library(ggplot2)
-ggplot(df, aes(x = source)) +
-  geom_bar() +
-  labs(title = "Reporting Programs", x = "Program", y = "Count") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
+</section>
+<section id="reporting-programs" class="level3">
+<h3 class="anchored" data-anchor-id="reporting-programs">Reporting Programs:</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show number of records per program</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Reporting Programs"</span>, <span class="at">x =</span> <span class="st">"Program"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -288,7 +291,7 @@ ggplot(df, aes(x = source)) +
 </figure>
 </div>
 </div>
-<p>:::</p>
+</div>
 <div class="cell">
 <details class="code-fold">
 <summary>Show value distributions for each program</summary>
@@ -561,23 +564,23 @@ ggplot(df, aes(x = source)) +
 <span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="olgkialgfb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#olgkialgfb table {
+<div id="qtbbefewfv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qtbbefewfv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#olgkialgfb thead, #olgkialgfb tbody, #olgkialgfb tfoot, #olgkialgfb tr, #olgkialgfb td, #olgkialgfb th {
+#qtbbefewfv thead, #qtbbefewfv tbody, #qtbbefewfv tfoot, #qtbbefewfv tr, #qtbbefewfv td, #qtbbefewfv th {
   border-style: none;
 }
 
-#olgkialgfb p {
+#qtbbefewfv p {
   margin: 0;
   padding: 0;
 }
 
-#olgkialgfb .gt_table {
+#qtbbefewfv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -603,12 +606,12 @@ ggplot(df, aes(x = source)) +
   border-left-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_caption {
+#qtbbefewfv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#olgkialgfb .gt_title {
+#qtbbefewfv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -620,7 +623,7 @@ ggplot(df, aes(x = source)) +
   border-bottom-width: 0;
 }
 
-#olgkialgfb .gt_subtitle {
+#qtbbefewfv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -632,7 +635,7 @@ ggplot(df, aes(x = source)) +
   border-top-width: 0;
 }
 
-#olgkialgfb .gt_heading {
+#qtbbefewfv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -644,13 +647,13 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_bottom_border {
+#qtbbefewfv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_col_headings {
+#qtbbefewfv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -665,7 +668,7 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_col_heading {
+#qtbbefewfv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -685,7 +688,7 @@ ggplot(df, aes(x = source)) +
   overflow-x: hidden;
 }
 
-#olgkialgfb .gt_column_spanner_outer {
+#qtbbefewfv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -697,15 +700,15 @@ ggplot(df, aes(x = source)) +
   padding-right: 4px;
 }
 
-#olgkialgfb .gt_column_spanner_outer:first-child {
+#qtbbefewfv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#olgkialgfb .gt_column_spanner_outer:last-child {
+#qtbbefewfv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#olgkialgfb .gt_column_spanner {
+#qtbbefewfv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -717,11 +720,11 @@ ggplot(df, aes(x = source)) +
   width: 100%;
 }
 
-#olgkialgfb .gt_spanner_row {
+#qtbbefewfv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#olgkialgfb .gt_group_heading {
+#qtbbefewfv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -747,7 +750,7 @@ ggplot(df, aes(x = source)) +
   text-align: left;
 }
 
-#olgkialgfb .gt_empty_group_heading {
+#qtbbefewfv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -762,15 +765,15 @@ ggplot(df, aes(x = source)) +
   vertical-align: middle;
 }
 
-#olgkialgfb .gt_from_md > :first-child {
+#qtbbefewfv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#olgkialgfb .gt_from_md > :last-child {
+#qtbbefewfv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#olgkialgfb .gt_row {
+#qtbbefewfv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -789,7 +792,7 @@ ggplot(df, aes(x = source)) +
   overflow-x: hidden;
 }
 
-#olgkialgfb .gt_stub {
+#qtbbefewfv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -802,7 +805,7 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#olgkialgfb .gt_stub_row_group {
+#qtbbefewfv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -816,15 +819,15 @@ ggplot(df, aes(x = source)) +
   vertical-align: top;
 }
 
-#olgkialgfb .gt_row_group_first td {
+#qtbbefewfv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#olgkialgfb .gt_row_group_first th {
+#qtbbefewfv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#olgkialgfb .gt_summary_row {
+#qtbbefewfv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -834,16 +837,16 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#olgkialgfb .gt_first_summary_row {
+#qtbbefewfv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_first_summary_row.thick {
+#qtbbefewfv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#olgkialgfb .gt_last_summary_row {
+#qtbbefewfv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -853,7 +856,7 @@ ggplot(df, aes(x = source)) +
   border-bottom-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_grand_summary_row {
+#qtbbefewfv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -863,7 +866,7 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#olgkialgfb .gt_first_grand_summary_row {
+#qtbbefewfv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -873,7 +876,7 @@ ggplot(df, aes(x = source)) +
   border-top-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_last_grand_summary_row_top {
+#qtbbefewfv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -883,11 +886,11 @@ ggplot(df, aes(x = source)) +
   border-bottom-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_striped {
+#qtbbefewfv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#olgkialgfb .gt_table_body {
+#qtbbefewfv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -896,7 +899,7 @@ ggplot(df, aes(x = source)) +
   border-bottom-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_footnotes {
+#qtbbefewfv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -910,7 +913,7 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_footnote {
+#qtbbefewfv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -919,7 +922,7 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#olgkialgfb .gt_sourcenotes {
+#qtbbefewfv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -933,7 +936,7 @@ ggplot(df, aes(x = source)) +
   border-right-color: #D3D3D3;
 }
 
-#olgkialgfb .gt_sourcenote {
+#qtbbefewfv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -941,72 +944,72 @@ ggplot(df, aes(x = source)) +
   padding-right: 5px;
 }
 
-#olgkialgfb .gt_left {
+#qtbbefewfv .gt_left {
   text-align: left;
 }
 
-#olgkialgfb .gt_center {
+#qtbbefewfv .gt_center {
   text-align: center;
 }
 
-#olgkialgfb .gt_right {
+#qtbbefewfv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#olgkialgfb .gt_font_normal {
+#qtbbefewfv .gt_font_normal {
   font-weight: normal;
 }
 
-#olgkialgfb .gt_font_bold {
+#qtbbefewfv .gt_font_bold {
   font-weight: bold;
 }
 
-#olgkialgfb .gt_font_italic {
+#qtbbefewfv .gt_font_italic {
   font-style: italic;
 }
 
-#olgkialgfb .gt_super {
+#qtbbefewfv .gt_super {
   font-size: 65%;
 }
 
-#olgkialgfb .gt_footnote_marks {
+#qtbbefewfv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#olgkialgfb .gt_asterisk {
+#qtbbefewfv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#olgkialgfb .gt_indent_1 {
+#qtbbefewfv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#olgkialgfb .gt_indent_2 {
+#qtbbefewfv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#olgkialgfb .gt_indent_3 {
+#qtbbefewfv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#olgkialgfb .gt_indent_4 {
+#qtbbefewfv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#olgkialgfb .gt_indent_5 {
+#qtbbefewfv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#olgkialgfb .katex-display {
+#qtbbefewfv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#olgkialgfb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#qtbbefewfv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
