@@ -44,7 +44,7 @@ df %>%
 
 Download data for this analyte [here](../../data/exports/`r params$analyte`.csv)
 
-### Overall `value`s:
+### `value` Distribution Across All Datasets
 
 ```{R, display histogram of values}
 #| code-summary: display histogram of values
@@ -76,6 +76,19 @@ ggplot(df, aes(x = source, fill = units)) +
     legend.position = "bottom",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+```
+
+```{R, Show value distributions for each unit}
+#| code-summary: Show value distributions for each program
+library(ggplot2)
+
+ggplot(df, aes(x = units, y = value)) +
+  geom_violin(width = 1.2, adjust = 10, fill = "skyblue", color = "black") +
+  geom_boxplot(width = 0.1, outlier.shape = NA) +
+  scale_y_log10() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = "unit", y = "Log10(Value)", title = "Violin + Boxplot")
+
 ```
 
 ### Values Reported By Program:
