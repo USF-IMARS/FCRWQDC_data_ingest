@@ -42,8 +42,6 @@ df %>%
   write.csv(here("data", "exports", "unified-wq-db-samples", paste0(params$analyte, ".csv")))
 ```
 
-Download data for this analyte [here](../../data/exports/`r params$analyte`.csv)
-
 ### `value` Distribution Across All Datasets
 
 ```{R, display histogram of values}
