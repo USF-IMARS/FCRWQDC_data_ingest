@@ -162,6 +162,12 @@ print(glue("{length(invalid_value)} Invalid 'value's"))
 print(head(df[invalid_value, ]))
 printed_rows <- c(printed_rows, invalid_value)
 
+invalid_value <- which(is.na(df$site) | df$site == "")
+print(glue("{length(invalid_value)} Invalid 'site's"))
+print(head(df[invalid_value, ]))
+printed_rows <- c(printed_rows, invalid_value)
+
+
 invalid_units <- which((is.na(df$units) | df$units == "") & !(seq_len(nrow(df)) %in% printed_rows))
 print(glue("{length(invalid_units)} Invalid 'units' (excluding already printed)"))
 print(head(df[invalid_units, ]))
