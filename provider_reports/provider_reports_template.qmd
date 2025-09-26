@@ -152,4 +152,28 @@ date_range <- range(df$`datetime`, na.rm = TRUE)
   cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
 ```
 
+## Missing Data
+```{R print rows with missing values in critical columns}
+# Track which rows we’ve already printed
+printed_rows <- integer(0)
+
+invalid_value <- which(is.na(df$value) | df$value == "")
+print(glue("{length(invalid_value)} Invalid 'value's"))
+print(head(df[invalid_value, ]))
+printed_rows <- c(printed_rows, invalid_value)
+
+invalid_units <- which((is.na(df$units) | df$units == "") & !(seq_len(nrow(df)) %in% printed_rows))
+print(glue("{length(invalid_units)} Invalid 'units' (excluding already printed)"))
+print(head(df[invalid_units, ]))
+printed_rows <- c(printed_rows, invalid_units)
+
+invalid_latlon <- which((
+  is.na(df$latitude) | df$latitude == "" |
+  is.na(df$longitude) | df$longitude == ""
+) & !(seq_len(nrow(df)) %in% printed_rows))
+print(glue("{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"))
+print(head(df[invalid_latlon, ]))
+printed_rows <- c(printed_rows, invalid_latlon)
+
+```
 
