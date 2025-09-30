@@ -23,7 +23,6 @@ REPORT_TEMPLATE <- here(glue("{REPORT_NAME}/{REPORT_NAME}_template.qmd"))
 REPORTS_DIR <- here(glue("{REPORT_NAME}/{REPORT_NAME}"))
 
 # create the template
-# TODO: do this using `double_param_the_yaml()`
 templ <- readLines(REPORT_TEMPLATE)
 templ <- gsub(
   "BROWARD", "{{org_id}}", templ
