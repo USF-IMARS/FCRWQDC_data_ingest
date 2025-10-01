@@ -165,8 +165,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link active" data-scroll-target="#missing-data">Missing Data</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -229,9 +235,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> analyte, <span class="at">y =</span> value)) <span class="sc">+</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">width =</span> <span class="fl">1.2</span>, <span class="at">adjust =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -298,8 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-d7a4ab7cf90ba6a42c90" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-d7a4ab7cf90ba6a42c90">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.59,24.57717,24.6255,25.2462,24.85163,24.7555,24.675,25.15897,24.81682,24.65941,24.55943,24.65083,24.57037,24.86267,24.69193,24.94677,24.575,24.49862,24.65752,25.23667,24.84667,24.52162,25.1073,24.4929,25.29452,24.83442,25.00167,24.54167,24.53008,24.79333,25.22,24.46083,24.5355,25.0084,24.59133,24.95012,24.65333,24.62168,25.06018,24.79152,24.72254,25.11053,24.50548,24.76852,24.65978,24.54843,24.86667,24.87123,25.142,24.58782,24.9265,24.83265,24.58577,24.629,24.65792,25.43082,25.26312,24.93965,24.853,24.71208,24.52143,25.48053,24.61105,24.483,24.77258,25.30788,24.745,24.72503,25.08535,25.41497,24.77775,24.55667,24.63,24.454,24.97667,24.69772,24.80128,24.7915,24.45833,24.88333,25.07237,24.5523,24.80998,24.66533,24.47538,24.5857,25.03082,24.80247,25.36443,24.495,24.9205,24.64537,24.76312,24.71318,25.325,25.11355,24.925,24.58497,25.51,24.80223,25.17332,24.75043,24.60693,24.71317,24.69309,24.63325,24.57375,24.92703,24.69167,24.87667,24.45363,25.017,24.84085,24.63333,24.61762,24.64157,24.72935,24.78333,24.73753,24.70882,24.68737,24.74077,24.5737472222222,24.5522888888889,24.9204972222222,25.110525,25.0853472222222,24.7225388888889,24.9265027777778,24.6930916666667,24.6454,24.712075,25.2945],[-80.09999999999999,-82.49133,-81.41661999999999,-80.29918000000001,-81.35123,-81.17218,-80.95829999999999,-80.29455,-81.14678000000001,-81.38327,-81.55955,-81.90467,-81.32167,-81.21623,-81.18245,-80.45947,-81.78833,-81.81895,-81.63265,-80.28897000000001,-81.00833,-81.56432,-80.3064,-81.6571,-80.24542,-80.74683,-80.47490000000001,-82.09999999999999,-81.4873,-80.86333,-80.217,-82.38317000000001,-82.36733,-80.50148,-82.58783,-80.56218,-82.15833000000001,-81.24308000000001,-80.42312,-81.28908,-81.04338,-80.43420999999999,-81.65433,-81.55500000000001,-81.76343,-81.39742,-80.88500000000001,-80.66865,-80.258,-81.57698000000001,-80.62067,-80.64906999999999,-81.80240000000001,-82.07133,-81.26502000000001,-80.19553000000001,-80.18773,-80.55162,-80.622,-81.10071000000001,-81.74422,-80.11767999999999,-81.50527,-81.7,-81.39664999999999,-80.26165,-80.78333000000001,-81.52052,-80.43346,-80.143,-81.033,-81.66667,-81.11199999999999,-82.224,-80.45,-81.68317999999999,-81.48227,-80.81225000000001,-81.98166999999999,-81.08333,-80.31277,-81.74939999999999,-80.92028000000001,-82.374,-81.73742,-81.72272,-80.39527,-80.80889999999999,-80.21508,-81.89167,-80.63477,-81.30723,-81.11248000000001,-81.01115,-80.1636,-80.37342,-80.503,-81.23408000000001,-80.16500000000001,-80.7162,-80.33985,-81.43577999999999,-81.15442,-80.85813,-81.35463,-81.82827,-81.76014000000001,-80.59851999999999,-80.96666999999999,-80.95833,-81.84365,-80.3674,-81.43112000000001,-81.33732000000001,-81.65008,-81.7321,-80.79348,-80.92395,-81.1093,-81.30923,-81.34182,-81.21118,-81.7601388888889,-81.74940833333331,-80.6347694444444,-80.4342111111111,-80.43345833333331,-81.043375,-80.6206722222222,-81.35462777777779,-81.30719999999999,-81.1007083333333,-80.2454],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: 200-W","Monitoring Location: 333-W","Monitoring Location: 260-W","Monitoring Location: 214-W","Monitoring Location: 295-W","Monitoring Location: 294-W","Monitoring Location: 249-W","Monitoring Location: 218-W","Monitoring Location: 291-W","Monitoring Location: 506-W","Monitoring Location: 269-W","Monitoring Location: 318-W","Monitoring Location: 259-W","Monitoring Location: 290-W","Monitoring Location: 250-W","Monitoring Location: 264-W","Monitoring Location: 317-W","Monitoring Location: 278-W","Monitoring Location: 310-W","Monitoring Location: 215-W","Monitoring Location: 287-W","Monitoring Location: 270-W","Monitoring Location: 400-W","Monitoring Location: 273-W","Monitoring Location: 212-W","Monitoring Location: 238-W","Monitoring Location: 227-W","Monitoring Location: 325-W","Monitoring Location: 267-W","Monitoring Location: 244-W","Monitoring Location: 216-W","Monitoring Location: 335-W","Monitoring Location: 332-W","Monitoring Location: 226-W","Monitoring Location: 337-W","Monitoring Location: 229-W","Monitoring Location: 324-W","Monitoring Location: 255-W","Monitoring Location: 223-W","Monitoring Location: 296-W","Monitoring Location: 504-W","Monitoring Location: 501-W","Monitoring Location: 272-W","Monitoring Location: 305-W","Monitoring Location: 312-W","Monitoring Location: 263-W","Monitoring Location: 282-W","Monitoring Location: 235-W","Monitoring Location: 219-W","Monitoring Location: 268-W","Monitoring Location: 502-W","Monitoring Location: 237-W","Monitoring Location: 316-W","Monitoring Location: 319-W","Monitoring Location: 254-W","Monitoring Location: 204-W","Monitoring Location: 213-W","Monitoring Location: 230-W","Monitoring Location: 401-W","Monitoring Location: 505-W","Monitoring Location: 275-W","Monitoring Location: 203-W","Monitoring Location: 266-W","Monitoring Location: 403-W","Monitoring Location: 301-W","Monitoring Location: 211-W","Monitoring Location: 243-W","Monitoring Location: 307-W","Monitoring Location: 500-W","Monitoring Location: 206-W","Monitoring Location: 289-W","Monitoring Location: 271-W","Monitoring Location: 402-W","Monitoring Location: 328-W","Monitoring Location: 228-W","Monitoring Location: 309-W","Monitoring Location: 302-W","Monitoring Location: 242-W","Monitoring Location: 322-W","Monitoring Location: 288-W","Monitoring Location: 222-W","Monitoring Location: 509-W","Monitoring Location: 285-W","Monitoring Location: 330-W","Monitoring Location: 276-W","Monitoring Location: 209-W","Monitoring Location: 224-W","Monitoring Location: 241-W","Monitoring Location: 207-W","Monitoring Location: 281-W","Monitoring Location: 503-W","Monitoring Location: 253-W","Monitoring Location: 292-W","Monitoring Location: 247-W","Monitoring Location: 210-W","Monitoring Location: 220-W","Monitoring Location: 231-W","Monitoring Location: 256-W","Monitoring Location: 201-W","Monitoring Location: 239-W","Monitoring Location: 217-W","Monitoring Location: 314-W","Monitoring Location: 252-W","Monitoring Location: 246-W","Monitoring Location: 507-W","Monitoring Location: 315-W","Monitoring Location: 508-W","Monitoring Location: 232-W","Monitoring Location: 248-W","Monitoring Location: 284-W","Monitoring Location: 280-W","Monitoring Location: 225-W","Monitoring Location: 298-W","Monitoring Location: 257","Monitoring Location: 311","Monitoring Location: 313","Monitoring Location: 243i","Monitoring Location: 286","Monitoring Location: 293","Monitoring Location: 300","Monitoring Location: 299","Monitoring Location: 297","Monitoring Location: 508","Monitoring Location: 509","Monitoring Location: 503","Monitoring Location: 501","Monitoring Location: 500","Monitoring Location: 504","Monitoring Location: 502","Monitoring Location: 507","Monitoring Location: 253","Monitoring Location: 505","Monitoring Location: 212"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[24.45363,25.59],"lng":[-82.58783,-80.09999999999999]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-ef9a758b0b2a4ef0466f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-ef9a758b0b2a4ef0466f">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.59,24.57717,24.6255,25.2462,24.85163,24.7555,24.675,25.15897,24.81682,24.65941,24.55943,24.65083,24.57037,24.86267,24.69193,24.94677,24.575,24.49862,24.65752,25.23667,24.84667,24.52162,25.1073,24.4929,25.29452,24.83442,25.00167,24.54167,24.53008,24.79333,25.22,24.46083,24.5355,25.0084,24.59133,24.95012,24.65333,24.62168,25.06018,24.79152,24.72254,25.11053,24.50548,24.76852,24.65978,24.54843,24.86667,24.87123,25.142,24.58782,24.9265,24.83265,24.58577,24.629,24.65792,25.43082,25.26312,24.93965,24.853,24.71208,24.52143,25.48053,24.61105,24.483,24.77258,25.30788,24.745,24.72503,25.08535,25.41497,24.77775,24.55667,24.63,24.454,24.97667,24.69772,24.80128,24.7915,24.45833,24.88333,25.07237,24.5523,24.80998,24.66533,24.47538,24.5857,25.03082,24.80247,25.36443,24.495,24.9205,24.64537,24.76312,24.71318,25.325,25.11355,24.925,24.58497,25.51,24.80223,25.17332,24.75043,24.60693,24.71317,24.69309,24.63325,24.57375,24.92703,24.69167,24.87667,24.45363,25.017,24.84085,24.63333,24.61762,24.64157,24.72935,24.78333,24.73753,24.70882,24.68737,24.74077,24.5737472222222,24.5522888888889,24.9204972222222,25.110525,25.0853472222222,24.7225388888889,24.9265027777778,24.6930916666667,24.6454,24.712075,25.2945],[-80.09999999999999,-82.49133,-81.41661999999999,-80.29918000000001,-81.35123,-81.17218,-80.95829999999999,-80.29455,-81.14678000000001,-81.38327,-81.55955,-81.90467,-81.32167,-81.21623,-81.18245,-80.45947,-81.78833,-81.81895,-81.63265,-80.28897000000001,-81.00833,-81.56432,-80.3064,-81.6571,-80.24542,-80.74683,-80.47490000000001,-82.09999999999999,-81.4873,-80.86333,-80.217,-82.38317000000001,-82.36733,-80.50148,-82.58783,-80.56218,-82.15833000000001,-81.24308000000001,-80.42312,-81.28908,-81.04338,-80.43420999999999,-81.65433,-81.55500000000001,-81.76343,-81.39742,-80.88500000000001,-80.66865,-80.258,-81.57698000000001,-80.62067,-80.64906999999999,-81.80240000000001,-82.07133,-81.26502000000001,-80.19553000000001,-80.18773,-80.55162,-80.622,-81.10071000000001,-81.74422,-80.11767999999999,-81.50527,-81.7,-81.39664999999999,-80.26165,-80.78333000000001,-81.52052,-80.43346,-80.143,-81.033,-81.66667,-81.11199999999999,-82.224,-80.45,-81.68317999999999,-81.48227,-80.81225000000001,-81.98166999999999,-81.08333,-80.31277,-81.74939999999999,-80.92028000000001,-82.374,-81.73742,-81.72272,-80.39527,-80.80889999999999,-80.21508,-81.89167,-80.63477,-81.30723,-81.11248000000001,-81.01115,-80.1636,-80.37342,-80.503,-81.23408000000001,-80.16500000000001,-80.7162,-80.33985,-81.43577999999999,-81.15442,-80.85813,-81.35463,-81.82827,-81.76014000000001,-80.59851999999999,-80.96666999999999,-80.95833,-81.84365,-80.3674,-81.43112000000001,-81.33732000000001,-81.65008,-81.7321,-80.79348,-80.92395,-81.1093,-81.30923,-81.34182,-81.21118,-81.7601388888889,-81.74940833333331,-80.6347694444444,-80.4342111111111,-80.43345833333331,-81.043375,-80.6206722222222,-81.35462777777779,-81.30719999999999,-81.1007083333333,-80.2454],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: 200-W","Monitoring Location: 333-W","Monitoring Location: 260-W","Monitoring Location: 214-W","Monitoring Location: 295-W","Monitoring Location: 294-W","Monitoring Location: 249-W","Monitoring Location: 218-W","Monitoring Location: 291-W","Monitoring Location: 506-W","Monitoring Location: 269-W","Monitoring Location: 318-W","Monitoring Location: 259-W","Monitoring Location: 290-W","Monitoring Location: 250-W","Monitoring Location: 264-W","Monitoring Location: 317-W","Monitoring Location: 278-W","Monitoring Location: 310-W","Monitoring Location: 215-W","Monitoring Location: 287-W","Monitoring Location: 270-W","Monitoring Location: 400-W","Monitoring Location: 273-W","Monitoring Location: 212-W","Monitoring Location: 238-W","Monitoring Location: 227-W","Monitoring Location: 325-W","Monitoring Location: 267-W","Monitoring Location: 244-W","Monitoring Location: 216-W","Monitoring Location: 335-W","Monitoring Location: 332-W","Monitoring Location: 226-W","Monitoring Location: 337-W","Monitoring Location: 229-W","Monitoring Location: 324-W","Monitoring Location: 255-W","Monitoring Location: 223-W","Monitoring Location: 296-W","Monitoring Location: 504-W","Monitoring Location: 501-W","Monitoring Location: 272-W","Monitoring Location: 305-W","Monitoring Location: 312-W","Monitoring Location: 263-W","Monitoring Location: 282-W","Monitoring Location: 235-W","Monitoring Location: 219-W","Monitoring Location: 268-W","Monitoring Location: 502-W","Monitoring Location: 237-W","Monitoring Location: 316-W","Monitoring Location: 319-W","Monitoring Location: 254-W","Monitoring Location: 204-W","Monitoring Location: 213-W","Monitoring Location: 230-W","Monitoring Location: 401-W","Monitoring Location: 505-W","Monitoring Location: 275-W","Monitoring Location: 203-W","Monitoring Location: 266-W","Monitoring Location: 403-W","Monitoring Location: 301-W","Monitoring Location: 211-W","Monitoring Location: 243-W","Monitoring Location: 307-W","Monitoring Location: 500-W","Monitoring Location: 206-W","Monitoring Location: 289-W","Monitoring Location: 271-W","Monitoring Location: 402-W","Monitoring Location: 328-W","Monitoring Location: 228-W","Monitoring Location: 309-W","Monitoring Location: 302-W","Monitoring Location: 242-W","Monitoring Location: 322-W","Monitoring Location: 288-W","Monitoring Location: 222-W","Monitoring Location: 509-W","Monitoring Location: 285-W","Monitoring Location: 330-W","Monitoring Location: 276-W","Monitoring Location: 209-W","Monitoring Location: 224-W","Monitoring Location: 241-W","Monitoring Location: 207-W","Monitoring Location: 281-W","Monitoring Location: 503-W","Monitoring Location: 253-W","Monitoring Location: 292-W","Monitoring Location: 247-W","Monitoring Location: 210-W","Monitoring Location: 220-W","Monitoring Location: 231-W","Monitoring Location: 256-W","Monitoring Location: 201-W","Monitoring Location: 239-W","Monitoring Location: 217-W","Monitoring Location: 314-W","Monitoring Location: 252-W","Monitoring Location: 246-W","Monitoring Location: 507-W","Monitoring Location: 315-W","Monitoring Location: 508-W","Monitoring Location: 232-W","Monitoring Location: 248-W","Monitoring Location: 284-W","Monitoring Location: 280-W","Monitoring Location: 225-W","Monitoring Location: 298-W","Monitoring Location: 257","Monitoring Location: 311","Monitoring Location: 313","Monitoring Location: 243i","Monitoring Location: 286","Monitoring Location: 293","Monitoring Location: 300","Monitoring Location: 299","Monitoring Location: 297","Monitoring Location: 508","Monitoring Location: 509","Monitoring Location: 503","Monitoring Location: 501","Monitoring Location: 500","Monitoring Location: 504","Monitoring Location: 502","Monitoring Location: 507","Monitoring Location: 253","Monitoring Location: 505","Monitoring Location: 212"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[24.45363,25.59],"lng":[-82.58783,-80.09999999999999]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -390,8 +395,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Latest   sampling date:  2022-12-05 00:00:00 </code></pre>
 </div>
 </div>
+<section id="missing-data" class="level2">
+<h2 class="anchored" data-anchor-id="missing-data">Missing Data</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Track which rows we’ve already printed</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">integer</span>(<span class="dv">0</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>value) <span class="sc">|</span> df<span class="sc">$</span>value <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'value's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1775 Invalid 'value's</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_value, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           X   source  site   datetime   analyte value units latitude longitude
+310  1190417 FIU_WQMP 307-W 2020-02-18 Turbidity    NA   NTU 24.72503 -81.52052
+436  1190543 FIU_WQMP 310-W 2020-09-10 Turbidity    NA   NTU 24.65752 -81.63265
+668  1190775 FIU_WQMP 505-W 2020-06-04 Turbidity    NA   NTU 24.71208 -81.10071
+1050 1191157 FIU_WQMP 501-W 2020-09-12 Turbidity    NA   NTU 25.11053 -80.43421
+1082 1191189 FIU_WQMP 273-W 2020-02-12 Turbidity    NA   NTU 24.49290 -81.65710
+1139 1191246 FIU_WQMP 310-W 2020-06-17 Turbidity    NA   NTU 24.65752 -81.63265
+     sample_depth
+310          0.71
+436          0.99
+668          0.67
+1050         0.87
+1082         0.72
+1139         0.94</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>site) <span class="sc">|</span> df<span class="sc">$</span>site <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'site's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>2611 Invalid 'site's</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_value, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           X   source site   datetime                                   analyte
+2262 1192369 FIU_WQMP      2020-08-11 Chlorophyll a, Uncorrected for Pheophytin
+2263 1192370 FIU_WQMP      2020-08-11                            Total Nitrogen
+2264 1192371 FIU_WQMP      2020-08-11                             Nitrite (NO2)
+2265 1192372 FIU_WQMP      2020-08-12 Chlorophyll a, Uncorrected for Pheophytin
+2266 1192373 FIU_WQMP      2020-08-12                            Total Nitrogen
+2267 1192374 FIU_WQMP      2020-08-12                             Nitrite (NO2)
+       value units latitude longitude sample_depth
+2262 0.10000  ug/L       NA        NA           NA
+2263 0.04127  mg/L       NA        NA           NA
+2264 0.00017  mg/L       NA        NA           NA
+2265 0.10000  ug/L       NA        NA           NA
+2266 0.04127  mg/L       NA        NA           NA
+2267 0.00017  mg/L       NA        NA           NA</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>invalid_units <span class="ot">&lt;-</span> <span class="fu">which</span>((<span class="fu">is.na</span>(df<span class="sc">$</span>units) <span class="sc">|</span> df<span class="sc">$</span>units <span class="sc">==</span> <span class="st">""</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_units)} Invalid 'units' (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>2600 Invalid 'units' (excluding already printed)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_units, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>            X   source site datetime          analyte      value units latitude
+34041 1224148 FIU_WQMP  200 23-09-22    Nitrite (NO2) 0.00047600  &lt;NA&gt;       NA
+34042 1224149 FIU_WQMP  200 23-09-22   Total Nitrogen 0.06331434  &lt;NA&gt;       NA
+34043 1224150 FIU_WQMP  200 23-09-22 Total Phosphorus 0.00716100  &lt;NA&gt;       NA
+34045 1224152 FIU_WQMP  200 23-09-22    Chlorophyll_a 0.22565844  &lt;NA&gt;       NA
+34046 1224153 FIU_WQMP  201 23-09-22    Nitrite (NO2) 0.00088200  &lt;NA&gt;       NA
+34047 1224154 FIU_WQMP  201 23-09-22   Total Nitrogen 0.07610648  &lt;NA&gt;       NA
+      longitude sample_depth
+34041        NA           NA
+34042        NA           NA
+34043        NA           NA
+34045        NA           NA
+34046        NA           NA
+34047        NA           NA</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_units)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>invalid_latlon <span class="ot">&lt;-</span> <span class="fu">which</span>((</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>latitude) <span class="sc">|</span> df<span class="sc">$</span>latitude <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>longitude) <span class="sc">|</span> df<span class="sc">$</span>longitude <span class="sc">==</span> <span class="st">""</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 Invalid spatial coordinates (excluding already printed)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_latlon, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] X            source       site         datetime     analyte     
+ [6] value        units        latitude     longitude    sample_depth
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_latlon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

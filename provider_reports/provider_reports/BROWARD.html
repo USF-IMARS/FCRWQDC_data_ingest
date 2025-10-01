@@ -165,8 +165,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link active" data-scroll-target="#missing-data">Missing Data</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -229,9 +235,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> analyte, <span class="at">y =</span> value)) <span class="sc">+</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">width =</span> <span class="fl">1.2</span>, <span class="at">adjust =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -298,8 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-aa200ad61c1f3f9782b4" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-aa200ad61c1f3f9782b4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[26.35132,26.1183,26.0595,26.3277,26.229646,26.03485,26.21857,26.12837,26.13687,26.06768,26.0655,26.14965,26.10898,26.23132,26.06812,26.19035,26.13533,26.16392,26.11607,26.09062,26.2062,26.06565,26.17312,26.10265,25.98717,26.32458,26.1733,26.16428,26.32555,26.26352,26.2305,25.95677,26.2511,26.09983,26.12202,26.08717,26.02595,26.04815,26.13877,26.13581667,26.22162,26.06153,25.9642,26.32783,26.06385,26.31338,26.15322,26.1289],[-80.28333000000001,-80.14363,-80.14398,-80.13158,-80.281948,-80.11713,-80.17055000000001,-80.17503000000001,-80.11832,-80.18218,-80.11408,-80.44182000000001,-80.15908,-80.12687,-80.1686,-80.10250000000001,-80.20202,-80.12632000000001,-80.31659999999999,-80.17882,-80.13263000000001,-80.21588,-80.18698000000001,-80.11868,-80.12145,-80.099,-80.17093,-80.25662,-80.09014999999999,-80.08240000000001,-80.20484999999999,-80.43062,-80.08962,-80.25017,-80.14653,-80.18547,-80.16338,-80.15513,-80.10807,-80.1942,-80.10303,-80.43357,-80.31062,-80.20302,-80.31325,-80.0806,-80.12933,-80.11855],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: 4","Monitoring Location: 15","Monitoring Location: 24","Monitoring Location: 2","Monitoring Location: 89","Monitoring Location: 40","Monitoring Location: 7","Monitoring Location: 64","Monitoring Location: 10","Monitoring Location: 128","Monitoring Location: 39","Monitoring Location: 23","Monitoring Location: 19","Monitoring Location: 110","Monitoring Location: 26","Monitoring Location: 36","Monitoring Location: 121","Monitoring Location: 112","Monitoring Location: 22","Monitoring Location: 123","Monitoring Location: 6","Monitoring Location: 124","Monitoring Location: 12","Monitoring Location: 38","Monitoring Location: 41","Monitoring Location: 120","Monitoring Location: 11","Monitoring Location: 14","Monitoring Location: 1","Monitoring Location: 34","Monitoring Location: 8","Monitoring Location: 32","Monitoring Location: 35","Monitoring Location: 122","Monitoring Location: 16","Monitoring Location: 20","Monitoring Location: 129","Monitoring Location: 25","Monitoring Location: 37","Monitoring Location: 17","Monitoring Location: 5","Monitoring Location: 29","Monitoring Location: 31","Monitoring Location: 3","Monitoring Location: 28","Monitoring Location: 33","Monitoring Location: 111","Monitoring Location: 125"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.95677,26.35132],"lng":[-80.44182000000001,-80.0806]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-9c28fb193dd87a249889" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-9c28fb193dd87a249889">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[26.35132,26.1183,26.0595,26.3277,26.229646,26.03485,26.21857,26.12837,26.13687,26.06768,26.0655,26.14965,26.10898,26.23132,26.06812,26.19035,26.13533,26.16392,26.11607,26.09062,26.2062,26.06565,26.17312,26.10265,25.98717,26.32458,26.1733,26.16428,26.32555,26.26352,26.2305,25.95677,26.2511,26.09983,26.12202,26.08717,26.02595,26.04815,26.13877,26.13581667,26.22162,26.06153,25.9642,26.32783,26.06385,26.31338,26.15322,26.1289],[-80.28333000000001,-80.14363,-80.14398,-80.13158,-80.281948,-80.11713,-80.17055000000001,-80.17503000000001,-80.11832,-80.18218,-80.11408,-80.44182000000001,-80.15908,-80.12687,-80.1686,-80.10250000000001,-80.20202,-80.12632000000001,-80.31659999999999,-80.17882,-80.13263000000001,-80.21588,-80.18698000000001,-80.11868,-80.12145,-80.099,-80.17093,-80.25662,-80.09014999999999,-80.08240000000001,-80.20484999999999,-80.43062,-80.08962,-80.25017,-80.14653,-80.18547,-80.16338,-80.15513,-80.10807,-80.1942,-80.10303,-80.43357,-80.31062,-80.20302,-80.31325,-80.0806,-80.12933,-80.11855],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: 4","Monitoring Location: 15","Monitoring Location: 24","Monitoring Location: 2","Monitoring Location: 89","Monitoring Location: 40","Monitoring Location: 7","Monitoring Location: 64","Monitoring Location: 10","Monitoring Location: 128","Monitoring Location: 39","Monitoring Location: 23","Monitoring Location: 19","Monitoring Location: 110","Monitoring Location: 26","Monitoring Location: 36","Monitoring Location: 121","Monitoring Location: 112","Monitoring Location: 22","Monitoring Location: 123","Monitoring Location: 6","Monitoring Location: 124","Monitoring Location: 12","Monitoring Location: 38","Monitoring Location: 41","Monitoring Location: 120","Monitoring Location: 11","Monitoring Location: 14","Monitoring Location: 1","Monitoring Location: 34","Monitoring Location: 8","Monitoring Location: 32","Monitoring Location: 35","Monitoring Location: 122","Monitoring Location: 16","Monitoring Location: 20","Monitoring Location: 129","Monitoring Location: 25","Monitoring Location: 37","Monitoring Location: 17","Monitoring Location: 5","Monitoring Location: 29","Monitoring Location: 31","Monitoring Location: 3","Monitoring Location: 28","Monitoring Location: 33","Monitoring Location: 111","Monitoring Location: 125"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.95677,26.35132],"lng":[-80.44182000000001,-80.0806]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -390,8 +395,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Latest   sampling date:  2020-12-17 00:00:00 </code></pre>
 </div>
 </div>
+<section id="missing-data" class="level2">
+<h2 class="anchored" data-anchor-id="missing-data">Missing Data</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Track which rows we’ve already printed</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">integer</span>(<span class="dv">0</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>value) <span class="sc">|</span> df<span class="sc">$</span>value <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'value's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>1410 Invalid 'value's</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_value, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           X  source site datetime   analyte value units latitude longitude
+14416 555197 BROWARD   17     &lt;NA&gt;  Salinity    NA  ppth       NA        NA
+14422 555203 BROWARD   90     &lt;NA&gt; Turbidity    NA   NTU       NA        NA
+14430 555211 BROWARD   47     &lt;NA&gt; Turbidity    NA   NTU       NA        NA
+14434 555215 BROWARD   41     &lt;NA&gt; Turbidity    NA   NTU       NA        NA
+14443 555224 BROWARD   41     &lt;NA&gt; Turbidity    NA   NTU       NA        NA
+14457 555238 BROWARD   38     &lt;NA&gt; Turbidity    NA   NTU       NA        NA
+      sample_depth
+14416           NA
+14422           NA
+14430           NA
+14434           NA
+14443           NA
+14457           NA</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>site) <span class="sc">|</span> df<span class="sc">$</span>site <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'site's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>865 Invalid 'site's</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_value, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        X  source site   datetime                                 analyte value
+34 540815 BROWARD      2020-08-25               Phosphate, Filtered (PO4) 0.003
+50 540831 BROWARD      2020-05-25               Phosphate, Filtered (PO4) 0.003
+51 540832 BROWARD      2020-05-25 Chlorophyll a, Corrected for Pheophytin 0.125
+70 540851 BROWARD      2020-11-15 Chlorophyll a, Corrected for Pheophytin 0.125
+81 540862 BROWARD      2020-03-05                               Turbidity 0.080
+82 540863 BROWARD      2020-05-28                 Total Kjeldahl Nitrogen 0.038
+   units latitude longitude sample_depth
+34  mg/L       NA        NA           NA
+50  mg/L       NA        NA           NA
+51  ug/L       NA        NA           NA
+70  ug/L       NA        NA           NA
+81   NTU       NA        NA           NA
+82  mg/L       NA        NA           NA</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>invalid_units <span class="ot">&lt;-</span> <span class="fu">which</span>((<span class="fu">is.na</span>(df<span class="sc">$</span>units) <span class="sc">|</span> df<span class="sc">$</span>units <span class="sc">==</span> <span class="st">""</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_units)} Invalid 'units' (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 Invalid 'units' (excluding already printed)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_units, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] X            source       site         datetime     analyte     
+ [6] value        units        latitude     longitude    sample_depth
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_units)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>invalid_latlon <span class="ot">&lt;-</span> <span class="fu">which</span>((</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>latitude) <span class="sc">|</span> df<span class="sc">$</span>latitude <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>longitude) <span class="sc">|</span> df<span class="sc">$</span>longitude <span class="sc">==</span> <span class="st">""</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>22880 Invalid spatial coordinates (excluding already printed)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_latlon, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           X  source site datetime                                 analyte
+14417 555198 BROWARD   90     &lt;NA&gt;                                      pH
+14418 555199 BROWARD   90     &lt;NA&gt;                                Salinity
+14419 555200 BROWARD   90     &lt;NA&gt;                       Water Temperature
+14420 555201 BROWARD   90     &lt;NA&gt;                        Dissolved Oxygen
+14421 555202 BROWARD   90     &lt;NA&gt;                 Total Kjeldahl Nitrogen
+14423 555204 BROWARD   90     &lt;NA&gt; Chlorophyll a, Corrected for Pheophytin
+      value units latitude longitude sample_depth
+14417  7.50  None       NA        NA           NA
+14418 13.30  ppth       NA        NA           NA
+14419 33.60 deg C       NA        NA           NA
+14420  4.91  mg/l       NA        NA           NA
+14421  1.13  mg/l       NA        NA           NA
+14423  1.79 mg/m3       NA        NA           NA</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_latlon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

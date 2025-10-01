@@ -165,8 +165,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link active" data-scroll-target="#missing-data">Missing Data</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -229,9 +235,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> analyte, <span class="at">y =</span> value)) <span class="sc">+</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">width =</span> <span class="fl">1.2</span>, <span class="at">adjust =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -298,8 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-712d8313dae1c01e2d83" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-712d8313dae1c01e2d83">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.7942,25.7876,25.7804,25.7858,25.7949,25.7933,25.8015,25.8463,25.8388,25.8052,25.7852,25.7825,25.767,25.7876,25.7876,25.7917,25.767,25.7741,25.7775,25.8002,25.8499,25.8586,25.8262,25.8134,25.7813,25.7776,25.7943,25.7874,25.7823,25.7933,25.8642,25.867,25.8234,25.796,25.7741,25.7878,25.788,25.7933,25.7813,25.8167,25.8051,25.8078,25.7965,25.7806,25.8549,25.8531,25.8075,25.781,25.7954,25.7808,25.840485,25.802142,25.840614],[-80.1628,-80.1576,-80.14319999999999,-80.1656,-80.1553,-80.16289999999999,-80.1401,-80.12820000000001,-80.1225,-80.1268,-80.1653,-80.1682,-80.137,-80.1626,-80.15770000000001,-80.1451,-80.1371,-80.1418,-80.1562,-80.12779999999999,-80.1367,-80.1259,-80.134,-80.1246,-80.15560000000001,-80.15649999999999,-80.1553,-80.155,-80.16800000000001,-80.1451,-80.12909999999999,-80.12430000000001,-80.1232,-80.15900000000001,-80.14190000000001,-80.155,-80.1627,-80.14530000000001,-80.15519999999999,-80.139,-80.12690000000001,-80.1253,-80.1425,-80.1618,-80.1374,-80.12949999999999,-80.1251,-80.16160000000001,-80.1592,-80.1617,-80.132921,-80.126487,-80.132824],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: 22","Monitoring Location: 30","Monitoring Location: 52","Monitoring Location: 34","Monitoring Location: 26","Monitoring Location: 21","Monitoring Location: 42","Monitoring Location: 4","Monitoring Location: 67","Monitoring Location: 17","Monitoring Location: 33","Monitoring Location: 36","Monitoring Location: 45","Monitoring Location: 32","Monitoring Location: 29","Monitoring Location: 56","Monitoring Location: 46","Monitoring Location: 47","Monitoring Location: 38","Monitoring Location: 9","Monitoring Location: 78","Monitoring Location: 69","Monitoring Location: 61","Monitoring Location: 19","Monitoring Location: 39","Monitoring Location: 37","Monitoring Location: 25","Monitoring Location: 28","Monitoring Location: 35","Monitoring Location: 59","Monitoring Location: 70","Monitoring Location: 71","Monitoring Location: 66","Monitoring Location: 24","Monitoring Location: 48","Monitoring Location: 27","Monitoring Location: 31","Monitoring Location: 60","Monitoring Location: 40","Monitoring Location: 2","Monitoring Location: 16","Monitoring Location: 64","Monitoring Location: 54","Monitoring Location: 74","Monitoring Location: 68","Monitoring Location: 79","Monitoring Location: 18","Monitoring Location: 63","Monitoring Location: 23","Monitoring Location: 62","Monitoring Location: 82","Monitoring Location: 81","Monitoring Location: 3A"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.767,25.867],"lng":[-80.1682,-80.1225]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-de1323a1a53551ea4e72" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-de1323a1a53551ea4e72">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.7942,25.7876,25.7804,25.7858,25.7949,25.7933,25.8015,25.8463,25.8388,25.8052,25.7852,25.7825,25.767,25.7876,25.7876,25.7917,25.767,25.7741,25.7775,25.8002,25.8499,25.8586,25.8262,25.8134,25.7813,25.7776,25.7943,25.7874,25.7823,25.7933,25.8642,25.867,25.8234,25.796,25.7741,25.7878,25.788,25.7933,25.7813,25.8167,25.8051,25.8078,25.7965,25.7806,25.8549,25.8531,25.8075,25.781,25.7954,25.7808,25.840485,25.802142,25.840614],[-80.1628,-80.1576,-80.14319999999999,-80.1656,-80.1553,-80.16289999999999,-80.1401,-80.12820000000001,-80.1225,-80.1268,-80.1653,-80.1682,-80.137,-80.1626,-80.15770000000001,-80.1451,-80.1371,-80.1418,-80.1562,-80.12779999999999,-80.1367,-80.1259,-80.134,-80.1246,-80.15560000000001,-80.15649999999999,-80.1553,-80.155,-80.16800000000001,-80.1451,-80.12909999999999,-80.12430000000001,-80.1232,-80.15900000000001,-80.14190000000001,-80.155,-80.1627,-80.14530000000001,-80.15519999999999,-80.139,-80.12690000000001,-80.1253,-80.1425,-80.1618,-80.1374,-80.12949999999999,-80.1251,-80.16160000000001,-80.1592,-80.1617,-80.132921,-80.126487,-80.132824],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: 22","Monitoring Location: 30","Monitoring Location: 52","Monitoring Location: 34","Monitoring Location: 26","Monitoring Location: 21","Monitoring Location: 42","Monitoring Location: 4","Monitoring Location: 67","Monitoring Location: 17","Monitoring Location: 33","Monitoring Location: 36","Monitoring Location: 45","Monitoring Location: 32","Monitoring Location: 29","Monitoring Location: 56","Monitoring Location: 46","Monitoring Location: 47","Monitoring Location: 38","Monitoring Location: 9","Monitoring Location: 78","Monitoring Location: 69","Monitoring Location: 61","Monitoring Location: 19","Monitoring Location: 39","Monitoring Location: 37","Monitoring Location: 25","Monitoring Location: 28","Monitoring Location: 35","Monitoring Location: 59","Monitoring Location: 70","Monitoring Location: 71","Monitoring Location: 66","Monitoring Location: 24","Monitoring Location: 48","Monitoring Location: 27","Monitoring Location: 31","Monitoring Location: 60","Monitoring Location: 40","Monitoring Location: 2","Monitoring Location: 16","Monitoring Location: 64","Monitoring Location: 54","Monitoring Location: 74","Monitoring Location: 68","Monitoring Location: 79","Monitoring Location: 18","Monitoring Location: 63","Monitoring Location: 23","Monitoring Location: 62","Monitoring Location: 82","Monitoring Location: 81","Monitoring Location: 3A"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.767,25.867],"lng":[-80.1682,-80.1225]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -390,8 +395,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Latest   sampling date:  2020-12-30 00:00:00 </code></pre>
 </div>
 </div>
+<section id="missing-data" class="level2">
+<h2 class="anchored" data-anchor-id="missing-data">Missing Data</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Track which rows we’ve already printed</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">integer</span>(<span class="dv">0</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>value) <span class="sc">|</span> df<span class="sc">$</span>value <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'value's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>28 Invalid 'value's</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_value, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           X     source site   datetime                 analyte value units
+21244 114414 MiamiBeach   21 2020-02-16 Total Kjeldahl Nitrogen    NA  mg/L
+21245 114415 MiamiBeach   20 2020-02-16 Total Kjeldahl Nitrogen    NA  mg/L
+21246 114416 MiamiBeach   15 2020-02-16 Total Kjeldahl Nitrogen    NA  mg/L
+21247 114417 MiamiBeach   16 2020-02-16 Total Kjeldahl Nitrogen    NA  mg/L
+21248 114418 MiamiBeach   17 2020-02-16 Total Kjeldahl Nitrogen    NA  mg/L
+21249 114419 MiamiBeach   18 2020-02-16 Total Kjeldahl Nitrogen    NA  mg/L
+      latitude longitude sample_depth
+21244       NA        NA           NA
+21245       NA        NA           NA
+21246       NA        NA           NA
+21247       NA        NA           NA
+21248       NA        NA           NA
+21249       NA        NA           NA</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>site) <span class="sc">|</span> df<span class="sc">$</span>site <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'site's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 Invalid 'site's</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_value, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] X            source       site         datetime     analyte     
+ [6] value        units        latitude     longitude    sample_depth
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>invalid_units <span class="ot">&lt;-</span> <span class="fu">which</span>((<span class="fu">is.na</span>(df<span class="sc">$</span>units) <span class="sc">|</span> df<span class="sc">$</span>units <span class="sc">==</span> <span class="st">""</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_units)} Invalid 'units' (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>0 Invalid 'units' (excluding already printed)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_units, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] X            source       site         datetime     analyte     
+ [6] value        units        latitude     longitude    sample_depth
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_units)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>invalid_latlon <span class="ot">&lt;-</span> <span class="fu">which</span>((</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>latitude) <span class="sc">|</span> df<span class="sc">$</span>latitude <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>longitude) <span class="sc">|</span> df<span class="sc">$</span>longitude <span class="sc">==</span> <span class="st">""</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>2933 Invalid spatial coordinates (excluding already printed)</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(df[invalid_latlon, ]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           X     source site   datetime                 analyte value
+20770 113940 MiamiBeach   22 2020-01-16                Salinity 33.60
+20771 113941 MiamiBeach   22 2020-01-16                      pH  7.88
+20772 113942 MiamiBeach   22 2020-01-16       Water Temperature 25.40
+20773 113943 MiamiBeach   22 2020-01-16        Dissolved Oxygen 70.00
+20774 113944 MiamiBeach   22 2020-01-16               Turbidity  3.80
+20775 113945 MiamiBeach   22 2020-01-16 Total Kjeldahl Nitrogen  0.27
+           units latitude longitude sample_depth
+20770        ppt       NA        NA           NA
+20771 Std. Units       NA        NA           NA
+20772      deg C       NA        NA           NA
+20773       mg/L       NA        NA           NA
+20774        NTU       NA        NA           NA
+20775       mg/L       NA        NA           NA</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_latlon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
