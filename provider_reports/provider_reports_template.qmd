@@ -190,18 +190,18 @@ printed_rows <- integer(0)
 
 invalid_value <- which(is.na(df$DEP.Result.Value.Number) | df$DEP.Result.Value.Number == "")
 print(glue("{length(invalid_value)} Invalid 'value's"))
-print(head(df[invalid_value, ]))
+DT::datatable(df[invalid_value, ])
 printed_rows <- c(printed_rows, invalid_value)
 
 invalid_value <- which(is.na(df$Monitoring.Location.ID) | df$Monitoring.Location.ID == "")
 print(glue("{length(invalid_value)} Invalid 'site's"))
-print(head(df[invalid_value, ]))
+DT::datatable(df[invalid_value, ])
 printed_rows <- c(printed_rows, invalid_value)
 
 
 invalid_units <- which((is.na(df$units) | df$units == "") & !(seq_len(nrow(df)) %in% printed_rows))
 print(glue("{length(invalid_units)} Invalid 'units' (excluding already printed)"))
-print(head(df[invalid_units, ]))
+DT::datatable(df[invalid_units, ])
 printed_rows <- c(printed_rows, invalid_units)
 
 invalid_latlon <- which((
@@ -209,7 +209,7 @@ invalid_latlon <- which((
   is.na(df$Org.Decimal.Longitude) | df$Org.Decimal.Longitude == ""
 ) & !(seq_len(nrow(df)) %in% printed_rows))
 print(glue("{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"))
-print(head(df[invalid_latlon, ]))
+DT::datatable(df[invalid_latlon, ])
 printed_rows <- c(printed_rows, invalid_latlon)
 
 ```
