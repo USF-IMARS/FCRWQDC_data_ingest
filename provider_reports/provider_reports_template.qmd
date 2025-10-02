@@ -17,26 +17,30 @@ Provider Data Assessment
 
 ```{R getData}
 #| code-summary: read in data
-## === read data from source files (can take a long time)
-#source(here("R/getData.R"))
-#df <- getData(params$org_id)
+# === read data from source files (can take a long time)
+# source(here("R/getData.R"))
+# df <- getData(params$org_id)
 
-# === read from cached file produced by index.qmd
-df_allData <- read.csv(here("data", "exports", "allData.csv")) %>%
-  filter(source == params$org_id)
+# === read from cleaned file generated in pre-render
+# df_allData <- read.csv(here("data", "exports", "allData.csv")) %>%
+#   filter(source == params$org_id)
+# df <- df_allData
+
+# === read from raw file generated in pre-render
+df_allData <- read.csv(here("data/exports/allDataRaw.csv")) %>%
+  filter(program == params$org_id)
 df <- df_allData
 
 
-
-df$value <- as.numeric(df$value)
-df$datetime <- as.POSIXct(df$datetime, format = "%Y-%m-%d")
+df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
+df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d")
 ```
 
 ```{R create violin plot}
 # Load ggplot2
 library(ggplot2)
 
-ggplot(df, aes(x = analyte, y = value)) +
+ggplot(df, aes(x = DEP.Analyte.Name, y = DEP.Result.Value.Number)) +
   geom_violin(width = 1.2, adjust = 10, fill = "skyblue", color = "black") +
   geom_boxplot(width = 0.1, outlier.shape = NA) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
@@ -51,11 +55,20 @@ library(ggplot2)
 
 source(here::here("R/presenceTable.R"))
 
-heat_long <- getPresenceHeatmapTable(df)
+heat_long <- getPresenceHeatmapTable(
+  df, 
+  analyte_col = "DEP.Analyte.Name", 
+  site_col = "Monitoring.Location.ID",
+  value_col = "DEP.Result.Value.Number"
+)
 ```
 
-```{R analyte presence table, fig.width=10, fig.height=min(max(6, length(unique(heat_long$site)) * 0.2),20)}
-plotHeatmap(heat_long)
+```{R analyte presence table, fig.width=10, fig.height=min(max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2),20)}
+plotHeatmap(
+  heat_long, 
+  analyte_col = "DEP.Analyte.Name", 
+  site_col = "Monitoring.Location.ID"
+)
 ```
 
 
@@ -63,7 +76,7 @@ plotHeatmap(heat_long)
 #| code-summary: create map with unique points
 
 # check for missing lat/lon
-if (all(is.na(df$latitude)) || all(is.na(df$longitude))) {
+if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude))) {
   cat("Cannot make map: All rows have missing latitude or longitude.")
 } else {
   library(leaflet)
@@ -71,20 +84,20 @@ if (all(is.na(df$latitude)) || all(is.na(df$longitude))) {
 
   # 1. Filter out rows & keep only one per unique lat/lon
   df_unique_locs <- df %>%
-    filter(!is.na(latitude), !is.na(longitude)) %>%
-    distinct(latitude, longitude, .keep_all = TRUE)
+    filter(!is.na(Org.Decimal.Latitude), !is.na(Org.Decimal.Longitude)) %>%
+    distinct(Org.Decimal.Latitude, Org.Decimal.Longitude, .keep_all = TRUE)
 
   # 2. Plot all unique points (no clustering)
   leaflet(df_unique_locs) %>%
     addProviderTiles(providers$OpenStreetMap) %>%
     addCircleMarkers(
-      lng         = ~longitude,
-      lat         = ~latitude,
+      lng         = ~Org.Decimal.Longitude,
+      lat         = ~Org.Decimal.Latitude,
       radius      = 4,
       color       = "blue",
       fillOpacity = 0.5,
       popup       = ~paste0(
-        "Monitoring Location: ", site
+        "Monitoring Location: ", Monitoring.Location.ID
       )
       # clusterOptions removed to show every point at all zoom levels
     )
@@ -98,13 +111,13 @@ library(lubridate)
 
 # Create a dataframe with unique sampling events
 sampling_events <- df %>%
-  distinct(datetime, site) %>%
-  arrange(datetime)
+  distinct(Activity.Start.Date.Time, Monitoring.Location.ID) %>%
+  arrange(Activity.Start.Date.Time)
 ```
 
 ```{R time distribution plot}
 #| code-summary: Create time distribution plot
-ggplot(sampling_events, aes(x = datetime)) +
+ggplot(sampling_events, aes(x = Activity.Start.Date.Time)) +
   geom_histogram(bins = 30, fill = "steelblue", color = "white", alpha = 0.7) +
   labs(
     title = "Distribution of Sampling Events Over Time",
@@ -119,21 +132,21 @@ ggplot(sampling_events, aes(x = datetime)) +
 
 ```
 
-```{R sampling heatmap, fig.width=10, fig.height=min(max(6, length(unique(heat_long$site)) * 0.2),20)}
+```{R sampling heatmap, fig.width=10, fig.height=min(max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2),20)}
 # Create a heatmap of sampling locations over time
 # drop rows with missing dates or IDs
 sampling_events <- sampling_events %>%
-  filter(!is.na(datetime), !is.na(site))
+  filter(!is.na(Activity.Start.Date.Time), !is.na(Monitoring.Location.ID))
 # if sampling_events is empty, skip this plot
 if (nrow(sampling_events) > 0) {
   ggplot(sampling_events, 
-          aes(x = datetime, 
-              y = site)) +
+          aes(x = Activity.Start.Date.Time, 
+              y = Monitoring.Location.ID)) +
       geom_point(color = "steelblue", alpha = 0.7) +
       labs(
         title = "Sampling Locations Over Time",
         x = "Date",
-        y = "site"
+        y = "Monitoring.Location.ID"
       ) +
       theme_minimal() +
       theme(
@@ -146,9 +159,28 @@ if (nrow(sampling_events) > 0) {
 ```
 
 ```{R print start + end dates}
-date_range <- range(df$`datetime`, na.rm = TRUE)
+date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
   cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
   cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
+```
+
+## Analyte Misalignments
+The following analytes are provided by this program and not mapped for inclusion in the exported datasets.
+
+```{R show non-standard analytes}
+library(dplyr)
+
+# 1. Get the list of analyte names that are in df_allData but not in df
+diff_analytes <- setdiff(unique(df_allData$DEP.Analyte.Name), unique(df$DEP.Analyte.Name))
+
+# 2. Filter df_allData for those analytes and create a summary
+analyte_programs_summary <- df_allData %>%
+  filter(DEP.Analyte.Name %in% diff_analytes) %>%
+  group_by(DEP.Analyte.Name) %>%
+  summarise(Associated.Programs = paste(unique(program), collapse = ", "))
+
+# 3. Print the resulting summary table
+DT::datatable(analyte_programs_summary)
 ```
 
 ## Missing Data
@@ -156,12 +188,12 @@ date_range <- range(df$`datetime`, na.rm = TRUE)
 # Track which rows we’ve already printed
 printed_rows <- integer(0)
 
-invalid_value <- which(is.na(df$value) | df$value == "")
+invalid_value <- which(is.na(df$DEP.Result.Value.Number) | df$DEP.Result.Value.Number == "")
 print(glue("{length(invalid_value)} Invalid 'value's"))
 print(head(df[invalid_value, ]))
 printed_rows <- c(printed_rows, invalid_value)
 
-invalid_value <- which(is.na(df$site) | df$site == "")
+invalid_value <- which(is.na(df$Monitoring.Location.ID) | df$Monitoring.Location.ID == "")
 print(glue("{length(invalid_value)} Invalid 'site's"))
 print(head(df[invalid_value, ]))
 printed_rows <- c(printed_rows, invalid_value)
@@ -173,8 +205,8 @@ print(head(df[invalid_units, ]))
 printed_rows <- c(printed_rows, invalid_units)
 
 invalid_latlon <- which((
-  is.na(df$latitude) | df$latitude == "" |
-  is.na(df$longitude) | df$longitude == ""
+  is.na(df$Org.Decimal.Latitude) | df$Org.Decimal.Latitude == "" |
+  is.na(df$Org.Decimal.Longitude) | df$Org.Decimal.Longitude == ""
 ) & !(seq_len(nrow(df)) %in% printed_rows))
 print(glue("{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"))
 print(head(df[invalid_latlon, ]))
