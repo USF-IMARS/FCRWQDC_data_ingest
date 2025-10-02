@@ -29,6 +29,17 @@ Provider Data Assessment
 # === read from raw file generated in pre-render
 df_allData <- read.csv(here("data/exports/allDataRaw.csv")) %>%
   filter(program == params$org_id)
+# keep only these columns to reduce RAM usage
+ keepCols <- as.vector(c(
+   "DEP.Result.Value.Number",
+   "Activity.Start.Date.Time",
+   "Monitoring.Location.ID",
+   "DEP.Analyte.Name",
+   "Org.Decimal.Latitude",
+   "Org.Decimal.Longitude",
+   "program"
+ ))
+df_allData <- df_allData[,keepCols]
 df <- df_allData
 
 
@@ -162,25 +173,6 @@ if (nrow(sampling_events) > 0) {
 date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
   cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
   cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
-```
-
-## Analyte Misalignments
-The following analytes are provided by this program and not mapped for inclusion in the exported datasets.
-
-```{R show non-standard analytes}
-library(dplyr)
-
-# 1. Get the list of analyte names that are in df_allData but not in df
-diff_analytes <- setdiff(unique(df_allData$DEP.Analyte.Name), unique(df$DEP.Analyte.Name))
-
-# 2. Filter df_allData for those analytes and create a summary
-analyte_programs_summary <- df_allData %>%
-  filter(DEP.Analyte.Name %in% diff_analytes) %>%
-  group_by(DEP.Analyte.Name) %>%
-  summarise(Associated.Programs = paste(unique(program), collapse = ", "))
-
-# 3. Print the resulting summary table
-DT::datatable(analyte_programs_summary)
 ```
 
 ## Missing Data
