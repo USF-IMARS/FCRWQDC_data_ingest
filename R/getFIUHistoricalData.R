@@ -63,7 +63,7 @@ getFIUHistoricalData <- function(){
      "N:P"     = "N_to_P_Ratio",
      "DIN:TP"  = "DIN_to_TP_Ratio",
      "Si:DIN"  = "Si_to_DIN_Ratio",
-     "%SAT-S"  = "Oxygen_Saturation",
+     "%SAT-S"  = "Dissolved Oxygen Saturation",
      "%Io"     = "Surface_Light_Penetration",
      "DSIGT"   = "Sigma_T_Density_Difference"
     ),

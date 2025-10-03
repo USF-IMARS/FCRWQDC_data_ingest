@@ -123,7 +123,21 @@ getWINData <- function(programName=NULL, fpath=NULL){
       Include = NA,
       MADup = NA,
       ExportVersion = NA,
-      .keep = 'unused'
+      .keep = 'unused',
+      
+      DEP.Analyte.Name = recode(
+        DEP.Analyte.Name,
+        "Ammonia (N)"             = "Ammonia, Un-ionized (NH3)",
+        "Chlorophyll a- corrected" = "Chlorophyll a, Corrected for Pheophytin",
+        "Chlorophyll a- uncorrected" = "Chlorophyll a, Uncorrected for Pheophytin",
+        "Nitrate (N)" = "Nitrate (NO3)",
+        "Nitrate-Nitrite (N)" = "NO2+3, Filtered",
+        "Nitrite (N)" = "Nitrite (NO2)",
+        "Nitrogen- Total" = "Total Nitrogen",
+        "Nitrogen- Total Kjeldahl" = "Total Kjeldahl Nitrogen",
+        "Phosphorus- Total" = "Total Phosphorus",
+        "Temperature, Water" = "Water Temperature"
+      )
     )
       
   # Return the dataframe

@@ -90,7 +90,7 @@ getFBBBData <- function(){
         "NH4"       = "Ammonium, Filtered (NH4)",
         "N+N"       = "NO2+3, Filtered",
         "NO2"       = "Nitrite (NO2)",
-        "NO3"       = "Nitrite (NO2)",
+        "NO3"       = "Nitrate (NO3)",
         "PO4"       = "Phosphate, Filtered (PO4)",
         "TDP"       = "Total Phosphorus",
         "Phaeo (µg/L)"     = "Pheophytin",
@@ -99,7 +99,9 @@ getFBBBData <- function(){
         "Si"        = "Silicate",
         "Temp"      = "Water Temperature",
         "TDN"       = "Total Nitrogen",
-        "pH"        = "pH"
+        "pH"        = "pH",
+        "DON"       = "Nitrogen, organic",
+        "TSS (mg/L)" = "Total Suspended Solids"
       ),
       # columsn for STORET mapping
       RowID = NA,

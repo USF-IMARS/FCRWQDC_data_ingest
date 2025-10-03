@@ -1,31 +1,31 @@
 getListOfAnalytes <- function(){
   # NOTE: instead of reading all data here, we hardcode the list of analytes. Other analytes will be ignored.
   analytes <- c(
-    # === subset of desired analytes
-    # NOTE: this should align with getData
-    "Ammonium, Filtered (NH4)",
-    # "Ammonia+Ammonium",
+    # === subset of desired analytes (SEACAR vocab)
     "Ammonia, Un-ionized (NH3)",
-    "Chlorophyll_a",
+    "Ammonium, Filtered (NH4)",
+    "Nitrate (NO3)",
+    "Nitrite (NO2)",
+    "Nitrogen, organic",
+    "NO2+3, Filtered",
+    "Phosphate, Filtered (PO4)",
+    "Total Kjeldahl Nitrogen",
+    "Total Nitrogen",
+    "Total Phosphorus",
     "Chlorophyll a, Corrected for Pheophytin",
     "Chlorophyll a, Uncorrected for Pheophytin",
+    "Colored Dissolved Organic Matter",
+    "Fluorescent Dissolved Organic Matter",
+    "Light Extinction Coefficient",
+    "Secchi Depth",
+    "Total Suspended Solids",
+    "Turbidity",
     "Dissolved Oxygen",
-    "Specific Conductivity",
-    # "Fecal_Coliforms",      
-    # "Enterococci",    
-    "Nitrite (NO2)",
-    "Nitrate (NO3)",
-    # "Nitrate+Nitrite",
-    "Phosphate, Filtered (PO4)",
-    "Total Phosphorus",
-    "Pheophytin",
+    "Dissolved Oxygen Saturation",
     "pH",
     "Salinity",
-    "Silicate",
-    "Water Temperature",
-    "Total Nitrogen",
-    "Total Kjeldahl Nitrogen",
-    "Turbidity"
+    "Specific Conductivity",
+    "Water Temperature"
   )
 
   return(analytes)

@@ -21,7 +21,7 @@ getFIURecentData <- function(programName=NULL, fpath=NULL) {
       names_to = "DEP.Analyte.Name",
       values_to = "DEP.Result.Value.Number"
     )
-
+  
   df <- df %>%
     mutate(
       Monitoring.Location.ID = as.character(Station),
@@ -30,7 +30,16 @@ getFIURecentData <- function(programName=NULL, fpath=NULL) {
         format = "%m/%d/%Y %H:%M"
       ),
       Organization.ID = "FIU_WQMP",
-      program = "FIU_WQMP"
+      # map analytes
+      DEP.Analyte.Name = recode(
+        DEP.Analyte.Name,
+        "Ammonia"             = "Ammonia, Un-ionized (NH3)",
+        "NO2" = "Nitrite (NO2)",
+        "Nitrate.Nitrite" = "NO2+3, Filtered",
+        "Phosphate" = "Phosphate, Filtered (PO4)",
+        "TN" = "Total Nitrogen",
+        "TP" = "Total Phosphorus"
+      )
     )
   return(df)
 }

@@ -331,7 +331,18 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
       Activity.Depth = NA,
       Value.Qualifier = NA,
       Result.Comments = NA,
-      Activity.ID = NA
+      Activity.ID = NA,
+      DEP.Analyte.Name = recode(
+        DEP.Analyte.Name,
+        "Field Specific Conductance"             = "Specific Conductivity",
+        "Field Temperature" = "Water Temperature",
+        "Field pH" = "pH",
+        "Nitrogen, Ammonia" = "Ammonia, Un-ionized (NH3)",
+        "Nitrogen, Kjeldahl, Total" = "Total Kjeldahl Nitrogen",
+        "Nitrogen, NO2 plus NO3" = "NO2+3, Filtered",
+        "Oxygen, Dissolved" = "Dissolved Oxygen",
+        "Phosphorus, Total (as P) LL" = "Total Phosphorus"
+      ),
     )
   
   # cat(glue("Final Miami Beach dataset has {nrow(merged_df)} rows for {length(unique(merged_df$Monitoring.Location.ID))} monitoring locations\n"))

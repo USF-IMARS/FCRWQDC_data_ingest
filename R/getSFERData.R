@@ -68,7 +68,7 @@ getSFERData <- function(programName="SFER", fpath=NULL) {
         DEP.Analyte.Name,
         "temp"             = "Water Temperature",
         "sal"              = "Salinity",
-        "o2_ctd"           = "Dissolved_Oxygen_CTD",
+        "o2_ctd"           = "Dissolved Oxygen",
         "o2_disc"          = "Dissolved Oxygen",
         "nh4"              = "Ammonium, Filtered (NH4)",
         "no2"              = "Nitrite (NO2)",
@@ -78,7 +78,8 @@ getSFERData <- function(programName="SFER", fpath=NULL) {
         "si"               = "Silicate",
         "avg_chl_a"        = "Chlorophyll_a",
         "avg_phaeo"        = "Pheophytin",
-        "notes"            = "Notes"
+        "notes"            = "Notes",
+        
       ),
       RowID = NA,
       ProgramID = NA,

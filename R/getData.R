@@ -24,67 +24,20 @@ getData <- function(programName) {
   # Determine which data source to use based on program name
   if(programName == "SFER") {
     df <- getSFERData(programName)
-    
-    # cat("\n--- Data Summary ---\n")
-    # cat(glue("Total rows: {nrow(df)}\n"))
-    # cat(glue("Total columns: {ncol(df)}\n"))
-    # cat("------------------\n")
-  
   } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
-    # For programs with both WIN and historical data
     # cat("\n--- Loading WIN Data ---\n")
     df <- getWINData(programName) %>%
       mutate(
         RowID = as.character(RowID)
     )
-    
-    # load & append historical STORET data
-    # cat("\n--- Loading Historical STORET Data ---\n")
-    # NOTE: this method is for loading "old" STORET data format
-    # hist_data <- getSTORETData(programName)
-
-    # To load "new" STORET data format:
-    hist_data <- read.csv(here::here(
-      glue("data/STORET_historical/{programName}_STORET_ALL.csv")),
-      colClasses='character'
-    )
-    # align hist_data to WIN format
-    hist_data <- hist_data %>% mutate(
-      Organization.ID = programName,
-      Sampling.Agency.Name = programName,
-      Monitoring.Location.ID = as.character(Station),
-      Activity.Start.Date.Time = as.Date(gsub("'", NA, Date), format = "%m/%d/%y"),
-      # special exception for DERM_BBWQ (missing depth)
-      Activity.Depth = if ("Depth" %in% colnames(.)) .data$Depth else NA_real_,
-      DEP.Analyte.Name = Parameter,
-      DEP.Result.Value.Number = Value,
-      DEP.Result.Unit = Unit,
-      Value.Qualifier = VQ,
-      RowID = NA,
-      .keep = 'unused'
-    )
-
-    # Ensure consistent data types before binding rows
-    # cat("\n--- Merging Data Sources ---\n")
-    df <- mergeWithHistoricalData(df, hist_data)
-    
-    # cat("\n--- Merged Data Summary ---\n")
-    # cat(glue("WIN records: {win_rows} rows, {win_cols} columns\n"))
-    # cat(glue("STORET records: {hist_rows} rows, {hist_cols} columns\n"))
-    # cat(glue("Total after merging: {merged_rows} rows, {merged_cols} columns\n"))
-    # cat("-------------------------\n")
-    
+  } else if (programName %in% c("BROWARD_STORET", "DERM_BBWQ_STORET", "PALMBEACH_STORET")) {
+    df <- getSTORETData(programName)
   } else if (programName == "MiamiBeach") {
     df <- getMiamiBeachData(programName)
-  } else if (programName == "FIU_WQMP") {
-    df1 <- getWINData(programName)
-    df2 <- getFIURecentData()
-    df3 <- getFIUHistoricalData()
-    # combine dataframes
-    df <- df1 %>%
-      bind_rows(df2) %>%
-      bind_rows(df3)
-      
+  } else if (programName == "FIU_WQMP_RECENT") {
+    df <- getFIURecentData()
+  } else if (programName == "FIU_WQMP_HISTORICAL") {
+    df <- getFIUHistoricalData()
   } else if(programName == "FIU_Estuaries"){
     df <- getFIUEstuariesData()
   } else if (programName == "BBWW"){
@@ -275,55 +228,6 @@ getData <- function(programName) {
     #   print()
   }
   return(df)
-}
-
-
-# NOTE: this function is for use with "old" STORET data format
-# Merge WIN data with historical STORET data, ensuring consistent types
-mergeWithHistoricalData <- function(df, hist_data) {
-  # === coerce column types where necessary           
-  # Make sure DEP.Result.Value.Number is consistently numeric in both dataframes
-  if ("DEP.Result.Value.Number" %in% names(df) && "DEP.Result.Value.Number" %in% names(hist_data)) {
-    # Convert to numeric, handling potential conversion issues with as.numeric
-    df$DEP.Result.Value.Number <- as.numeric(as.character(df$DEP.Result.Value.Number))
-    hist_data$DEP.Result.Value.Number <- as.numeric(as.character(hist_data$DEP.Result.Value.Number))
-  }
-  
-  # Ensure consistent character type for ID columns
-  df$Monitoring.Location.ID <- as.character(df$Monitoring.Location.ID)
-  hist_data$Monitoring.Location.ID <- as.character(hist_data$Monitoring.Location.ID)
-  
-  # Handle WBID column type inconsistency (character vs integer)
-  if ("WBID" %in% names(df) && "WBID" %in% names(hist_data)) {
-    df$WBID <- as.character(df$WBID)
-    hist_data$WBID <- as.character(hist_data$WBID)
-  }
-  
-  # Check for other common columns and ensure they have consistent types
-  common_cols <- intersect(names(df), names(hist_data))
-  for (col in common_cols) {
-    if (!identical(class(df[[col]]), class(hist_data[[col]]))) {
-      # Convert to character type for string columns
-      if (is.character(df[[col]]) || is.character(hist_data[[col]])) {
-        df[[col]] <- as.character(df[[col]])
-        hist_data[[col]] <- as.character(hist_data[[col]])
-      }
-      # Convert to numeric for number columns
-      else if (is.numeric(df[[col]]) || is.numeric(hist_data[[col]])) {
-        df[[col]] <- as.numeric(as.character(df[[col]]))
-        hist_data[[col]] <- as.numeric(as.character(hist_data[[col]]))
-      }
-      # Default to character for any other mismatches
-      else {
-        df[[col]] <- as.character(df[[col]])
-        hist_data[[col]] <- as.character(hist_data[[col]])
-      }
-    }
-  }
-  
-  # Now bind the rows with compatible types
-  merged_df <- dplyr::bind_rows(df, hist_data)
-  return(merged_df)
 }
 
 # Process DMS coordinates to calculate decimal lat/lon when missing

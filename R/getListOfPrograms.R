@@ -1,6 +1,17 @@
 getListOfPrograms <- function(){
     # hardcode programs that don't have a WIN file
-    programs <- c("SFER", "MiamiBeach", "BBWW", "FIU_Estuaries", "AOML_FBBB")
+    programs <- c(
+      "SFER", 
+      "MiamiBeach", 
+      "BBWW", 
+      "FIU_Estuaries", 
+      "FIU_WQMP_RECENT",
+      "FIU_WQMP_HISTORICAL",
+      "AOML_FBBB",
+      "BROWARD_STORET",
+      "DERM_BBWQ_STORET", 
+      "PALMBEACH_STORET"
+    )
 
     # for each WIN data file in /data directory:
     data_files <- list.files(here("data/WIN"), pattern = "_WIN_WAVES_OTIS_.*\\.txt$", full.names = FALSE)
