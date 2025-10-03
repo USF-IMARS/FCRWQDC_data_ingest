@@ -508,111 +508,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in mean color column"</span>)</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in mean color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in n_values color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in min color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in max color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Error in coefficient.of.variation color column"
-&lt;rlang_error in col_numeric(palette = palette, domain = domain): Wasn't able to determine range of `domain`&gt;</code></pre>
-</div>
-<details class="code-fold">
-<summary>display with gt</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># n values white to green</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"n_values"</span>, </span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)(<span class="dv">9</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in n_values color column"</span>)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># min</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"min"</span>, </span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in min color column"</span>)</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># max</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"max"</span>, </span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in max color column"</span>)</span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a><span class="fu">tryCatch</span>({</span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coefficient.of.variation</span></span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>  gt_tbl <span class="ot">&lt;-</span> <span class="fu">color_column</span>(</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>    gt_tbl, </span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">df      =</span> sample_stats_df, </span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">column  =</span> <span class="st">"coefficient.of.variation"</span>, </span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> scales<span class="sc">::</span><span class="fu">brewer_pal</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)(<span class="dv">9</span>)</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Error in coefficient.of.variation color column"</span>)</span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(e)</span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Render/display:</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="sylornxerz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sylornxerz table {
+<div id="svbwlizsfn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#svbwlizsfn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sylornxerz thead, #sylornxerz tbody, #sylornxerz tfoot, #sylornxerz tr, #sylornxerz td, #sylornxerz th {
+#svbwlizsfn thead, #svbwlizsfn tbody, #svbwlizsfn tfoot, #svbwlizsfn tr, #svbwlizsfn td, #svbwlizsfn th {
   border-style: none;
 }
 
-#sylornxerz p {
+#svbwlizsfn p {
   margin: 0;
   padding: 0;
 }
 
-#sylornxerz .gt_table {
+#svbwlizsfn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -638,12 +608,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#sylornxerz .gt_caption {
+#svbwlizsfn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sylornxerz .gt_title {
+#svbwlizsfn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -655,7 +625,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#sylornxerz .gt_subtitle {
+#svbwlizsfn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -667,7 +637,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#sylornxerz .gt_heading {
+#svbwlizsfn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -679,13 +649,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sylornxerz .gt_bottom_border {
+#svbwlizsfn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sylornxerz .gt_col_headings {
+#svbwlizsfn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -700,7 +670,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sylornxerz .gt_col_heading {
+#svbwlizsfn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -720,7 +690,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#sylornxerz .gt_column_spanner_outer {
+#svbwlizsfn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -732,15 +702,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#sylornxerz .gt_column_spanner_outer:first-child {
+#svbwlizsfn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sylornxerz .gt_column_spanner_outer:last-child {
+#svbwlizsfn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sylornxerz .gt_column_spanner {
+#svbwlizsfn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -752,11 +722,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#sylornxerz .gt_spanner_row {
+#svbwlizsfn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sylornxerz .gt_group_heading {
+#svbwlizsfn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -782,7 +752,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#sylornxerz .gt_empty_group_heading {
+#svbwlizsfn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -797,15 +767,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#sylornxerz .gt_from_md > :first-child {
+#svbwlizsfn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sylornxerz .gt_from_md > :last-child {
+#svbwlizsfn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sylornxerz .gt_row {
+#svbwlizsfn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -824,7 +794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#sylornxerz .gt_stub {
+#svbwlizsfn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -837,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sylornxerz .gt_stub_row_group {
+#svbwlizsfn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -851,15 +821,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#sylornxerz .gt_row_group_first td {
+#svbwlizsfn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sylornxerz .gt_row_group_first th {
+#svbwlizsfn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sylornxerz .gt_summary_row {
+#svbwlizsfn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -869,16 +839,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sylornxerz .gt_first_summary_row {
+#svbwlizsfn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sylornxerz .gt_first_summary_row.thick {
+#svbwlizsfn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sylornxerz .gt_last_summary_row {
+#svbwlizsfn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -888,7 +858,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#sylornxerz .gt_grand_summary_row {
+#svbwlizsfn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -898,7 +868,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sylornxerz .gt_first_grand_summary_row {
+#svbwlizsfn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -908,7 +878,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#sylornxerz .gt_last_grand_summary_row_top {
+#svbwlizsfn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -918,11 +888,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#sylornxerz .gt_striped {
+#svbwlizsfn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sylornxerz .gt_table_body {
+#svbwlizsfn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -931,7 +901,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#sylornxerz .gt_footnotes {
+#svbwlizsfn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -945,7 +915,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sylornxerz .gt_footnote {
+#svbwlizsfn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -954,7 +924,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sylornxerz .gt_sourcenotes {
+#svbwlizsfn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -968,7 +938,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sylornxerz .gt_sourcenote {
+#svbwlizsfn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -976,77 +946,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sylornxerz .gt_left {
+#svbwlizsfn .gt_left {
   text-align: left;
 }
 
-#sylornxerz .gt_center {
+#svbwlizsfn .gt_center {
   text-align: center;
 }
 
-#sylornxerz .gt_right {
+#svbwlizsfn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sylornxerz .gt_font_normal {
+#svbwlizsfn .gt_font_normal {
   font-weight: normal;
 }
 
-#sylornxerz .gt_font_bold {
+#svbwlizsfn .gt_font_bold {
   font-weight: bold;
 }
 
-#sylornxerz .gt_font_italic {
+#svbwlizsfn .gt_font_italic {
   font-style: italic;
 }
 
-#sylornxerz .gt_super {
+#svbwlizsfn .gt_super {
   font-size: 65%;
 }
 
-#sylornxerz .gt_footnote_marks {
+#svbwlizsfn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sylornxerz .gt_asterisk {
+#svbwlizsfn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sylornxerz .gt_indent_1 {
+#svbwlizsfn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sylornxerz .gt_indent_2 {
+#svbwlizsfn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sylornxerz .gt_indent_3 {
+#svbwlizsfn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sylornxerz .gt_indent_4 {
+#svbwlizsfn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sylornxerz .gt_indent_5 {
+#svbwlizsfn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sylornxerz .katex-display {
+#svbwlizsfn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sylornxerz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#svbwlizsfn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_col_headings">
 <th id="source" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">source</th>
@@ -1062,6 +1032,2250 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </thead>
 <tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site"></td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #A3DA9D; color: #000000">215</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">0.1062744</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.059</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F7FBFF; color: #000000">0.2854572</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">1</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBC7AC; color: #000000">6.2206667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #8CBFDD; color: #000000">1.370</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #CEE0F2; color: #000000">14.700</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E7F1FA; color: #000000">0.4643092</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">10</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDFCD; color: #000000">3.9376667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #8FC1DE; color: #000000">1.340</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D1E2F2; color: #000000">13.700</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D0E2F2; color: #000000">0.7184912</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">11</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">56</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #D96651; color: #FFFFFF">13.1908929</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #A6CDE4; color: #000000">1.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #509BCB; color: #FFFFFF">40.800</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D2E3F3; color: #000000">0.7007882</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">110</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #E7866A; color: #FFFFFF">11.0560000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #5BA2CF; color: #FFFFFF">1.770</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #95C5DF; color: #000000">27.800</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DFEBF7; color: #000000">0.5566461</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">111</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8B799; color: #000000">7.4980000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #7EB8DA; color: #000000">1.470</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #C0D8ED; color: #000000">18.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D8E7F5; color: #000000">0.6332112</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">112</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">29</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDD6C1; color: #000000">4.9255172</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B2D2E8; color: #000000">1.030</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #C8DCF0; color: #000000">16.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDDFF1; color: #000000">0.7623300</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">12</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE2D3; color: #000000">3.4065333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #DAE8F6; color: #000000">0.510</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DAE8F6; color: #000000">10.300</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.8064612</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">120</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7B394; color: #000000">7.8566667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #6AADD6; color: #000000">1.620</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #C0D8ED; color: #000000">18.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DCEAF6; color: #000000">0.5876111</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">121</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">57</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #EC9172; color: #000000">10.3872982</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #59A1CF; color: #FFFFFF">38.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BCD7EB; color: #000000">0.9086196</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">122</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #ECF8E8; color: #000000">45</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE4D6; color: #000000">3.0444000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.160</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D2E3F3; color: #000000">13.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BED8EC; color: #000000">0.8954940</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">123</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">28</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F5AA88; color: #000000">8.6103571</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #2B79B9; color: #FFFFFF">2.290</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #4F9ACB; color: #FFFFFF">41.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BFD8EC; color: #000000">0.8912742</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">124</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">56</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8B697; color: #000000">7.6296786</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.152</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #97C6DF; color: #000000">27.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DCEF; color: #000000">0.8219126</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">125</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">28</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDDCA; color: #000000">4.2610714</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #9ECAE1; color: #000000">1.220</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DBE9F6; color: #000000">10.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D9E7F5; color: #000000">0.6252694</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">128</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F2FAEF; color: #000000">23</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBC6AC; color: #000000">6.2773913</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #A7CEE4; color: #000000">1.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #91C2DE; color: #000000">28.600</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B8D5EA; color: #000000">0.9364455</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">129</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F2FAEF; color: #000000">23</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #E58266; color: #FFFFFF">11.3800000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #A5CDE3; color: #000000">1.160</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #529CCC; color: #FFFFFF">40.400</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CBDEF1; color: #000000">0.7812575</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">14</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9BB9D; color: #000000">7.2236667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #6AADD6; color: #000000">1.620</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D5E5F4; color: #000000">12.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E9F2FB; color: #000000">0.4402229</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">15</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #ECF8E8; color: #000000">45</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE5D7; color: #000000">2.9727333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D0E2F2; color: #000000">0.675</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D1E2F3; color: #000000">13.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CBDEF1; color: #000000">0.7849257</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">16</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">28</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #C94940; color: #FFFFFF">15.2453571</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #62A7D2; color: #FFFFFF">1.700</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #4694C7; color: #FFFFFF">42.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D3E4F3; color: #000000">0.6863932</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">17</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F2FAEF; color: #000000">23</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #C33F3B; color: #FFFFFF">15.9108696</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #08306B; color: #FFFFFF">3.160</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #519CCC; color: #FFFFFF">40.600</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDE0F1; color: #000000">0.7556315</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">19</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #ECF8E8; color: #000000">46</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDD5BF; color: #000000">5.0053043</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #C7DCEF; color: #000000">0.820</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #A3CCE3; color: #000000">25.100</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BED7EC; color: #000000">0.8974112</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">2</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAC2A7; color: #000000">6.5670000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #94C4DF; color: #000000">1.300</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #A8CEE5; color: #000000">24.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D0E2F2; color: #000000">0.7229248</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">20</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #ECF8E8; color: #000000">45</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F5AA88; color: #000000">8.6466667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #81B9DB; color: #000000">1.450</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #4F9ACB; color: #FFFFFF">41.100</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BAD6EB; color: #000000">0.9252024</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">22</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE2D3; color: #000000">3.3273333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #C2D9EE; color: #000000">0.870</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D9E8F5; color: #000000">10.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DCE9F6; color: #000000">0.5904830</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">23</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE1D1; color: #000000">3.5340556</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D7E6F5; color: #000000">0.564</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #CCDFF1; color: #000000">15.200</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BED8EC; color: #000000">0.8922152</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">24</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE7DC; color: #000000">2.5297667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D7E6F5; color: #000000">0.556</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DFECF7; color: #000000">8.310</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D2E3F3; color: #000000">0.6979038</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">25</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #EE9676; color: #000000">10.0461667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D1E2F2; color: #000000">0.665</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #96C5DF; color: #000000">27.600</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.8001762</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">26</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCD1BA; color: #000000">5.3165667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #C7DCEF; color: #000000">0.817</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #A2CCE2; color: #000000">25.400</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B4D3E9; color: #000000">0.9638097</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">28</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAC4A9; color: #000000">6.4596667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #7CB7D9; color: #000000">1.490</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #C8DDF0; color: #000000">16.600</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D9E7F5; color: #000000">0.6227786</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">29</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCD1BB; color: #000000">5.3045667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D5E5F4; color: #000000">0.600</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #CFE1F2; color: #000000">14.300</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D0E1F2; color: #000000">0.7270021</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">3</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F5A886; color: #000000">8.7696667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #8ABEDD; color: #000000">1.380</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #ADD0E6; color: #000000">22.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D1E2F3; color: #000000">0.7161716</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">31</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBEAE1; color: #000000">2.0877333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D7E6F5; color: #000000">0.560</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E1EDF8; color: #000000">7.660</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D3E4F3; color: #000000">0.6856147</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">32</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D5; color: #000000">3.2170000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #E7F1FA; color: #000000">0.310</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E5EFF9; color: #000000">6.430</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E5EFF9; color: #000000">0.4859700</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">33</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDBC7; color: #000000">4.5100000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #69ACD5; color: #000000">1.630</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DAE8F6; color: #000000">10.400</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E3EEF9; color: #000000">0.5079490</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">34</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE9DE; color: #000000">2.3042667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #E4EFF9; color: #000000">0.360</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E8F1FA; color: #000000">5.340</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D5E5F4; color: #000000">0.6675532</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">35</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">56</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE4D6; color: #000000">3.1101786</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D1E2F3; color: #000000">0.660</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DBE9F6; color: #000000">9.740</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D2E3F3; color: #000000">0.6978608</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">36</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCCFB7; color: #000000">5.5180000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #A0CBE2; color: #000000">1.200</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #CEE0F2; color: #000000">14.600</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D9E8F5; color: #000000">0.6212937</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">37</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDCC8; color: #000000">4.3823667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #ECF4FB; color: #000000">0.231</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #C0D8ED; color: #000000">18.800</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DCEF; color: #000000">0.8293558</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">38</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE8DE; color: #000000">2.3390000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #ACD0E6; color: #000000">1.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E7F1FA; color: #000000">5.600</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E8F1FA; color: #000000">0.4560043</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">39</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">29</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">1.4391379</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D1E3F3; color: #000000">0.650</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">4.170</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E4EFF9; color: #000000">0.4904841</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">4</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">56</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F5AA89; color: #000000">8.5741071</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #92C3DE; color: #000000">1.320</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #4F9ACB; color: #FFFFFF">41.100</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C0D9ED; color: #000000">0.8792586</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">40</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">56</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">1.2897321</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D9E8F5; color: #000000">0.530</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">2.260</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F3F8FE; color: #000000">0.3313479</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">41</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE4D7; color: #000000">2.9903333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #CEE0F2; color: #000000">0.710</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D5E5F4; color: #000000">12.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CFE1F2; color: #000000">0.7350539</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">5</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCD0B8; color: #000000">5.4630000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #4493C7; color: #FFFFFF">1.980</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D5E5F4; color: #000000">12.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E9F2FB; color: #000000">0.4351929</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">6</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE2D2; color: #000000">3.4520000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #9CC9E0; color: #000000">1.240</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DBE9F6; color: #000000">9.880</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DBE9F6; color: #000000">0.5939989</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">64</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #ECF8E8; color: #000000">45</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #67001F; color: #FFFFFF">22.5637778</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #97C6DF; color: #000000">1.280</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #093C7D; color: #FFFFFF">66.400</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D1E2F3; color: #000000">0.7126605</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">7</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">28</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDECC; color: #000000">4.0246429</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #D6E5F4; color: #000000">0.580</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D4E4F4; color: #000000">12.400</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C8DDF0; color: #000000">0.8110568</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">8</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE4D6; color: #000000">3.0587333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #CEE0F2; color: #000000">0.712</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DEEBF7; color: #000000">8.920</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D4E4F4; color: #000000">0.6824216</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">BROWARD</td>
+<td class="gt_row gt_left" headers="site">89</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F0F9ED; color: #000000">30</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D5; color: #000000">3.1890000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #74B2D8; color: #000000">1.550</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DAE8F6; color: #000000">10.300</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DDEBF7; color: #000000">0.5687701</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site"></td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #00441B; color: #FFFFFF">584</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">0.1064161</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.078</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F6FAFF; color: #000000">0.542</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #F5FAFE; color: #000000">0.3076626</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK020</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9EFEA; color: #000000">1.2428462</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF5FC; color: #000000">0.210</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #CCDFF1; color: #000000">15.300</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #569FCD; color: #FFFFFF">1.5417297</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK021</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7353962</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.110</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">4.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B5D4E9; color: #000000">0.9575119</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK022</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7305849</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EEF5FC; color: #000000">0.200</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">3.310</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C8DCF0; color: #000000">0.8153959</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK023</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.9778769</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E3EEF9; color: #000000">6.970</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A6CDE4; color: #000000">1.0597442</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK024</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5623333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.078</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.670</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C4DAEE; color: #000000">0.8536213</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK025</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6491385</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.680</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DCEF; color: #000000">0.8292433</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK026</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5620000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.610</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C0D9ED; color: #000000">0.8793787</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK027</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.6013208</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F7FD; color: #000000">2.510</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B8D5EA; color: #000000">0.9407332</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK028</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5901887</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.620</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDE0F1; color: #000000">0.7583311</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK029</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5736769</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.170</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">2.120</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D0E2F2; color: #000000">0.7216053</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK030</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4952923</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F7FD; color: #000000">2.370</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CFE1F2; color: #000000">0.7308482</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK031</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.5039412</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FE; color: #000000">0.130</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">1.800</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D7E7F5; color: #000000">0.6381239</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK032</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4972353</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.160</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">2.260</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.8099357</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BAK033</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4922941</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">2.230</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DCEF; color: #000000">0.8274845</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC070</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E6F6E2; color: #000000">68</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE7; color: #000000">1.5227206</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EEF5FC; color: #000000">0.200</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">7.410</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C4DAEE; color: #000000">0.8550915</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC071</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">57</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.9271754</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FC; color: #000000">0.190</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EAF3FB; color: #000000">4.640</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C2D9ED; color: #000000">0.8686462</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC072</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.6983585</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EEF5FC; color: #000000">0.200</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.650</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C6DBEF; color: #000000">0.8361221</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC073</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.9850303</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">4.300</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BDD7EC; color: #000000">0.9031367</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC074</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.7194154</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF4FB; color: #000000">4.130</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C3DAEE; color: #000000">0.8602303</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC075</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7321509</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EEF5FC; color: #000000">0.200</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">3.210</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BED8EC; color: #000000">0.8924789</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC076</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EB; color: #000000">1.0902879</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FC; color: #000000">0.190</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EAF3FB; color: #000000">4.490</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C4DAEE; color: #000000">0.8529396</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC077</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.7129608</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF4FC; color: #000000">0.220</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">4.280</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B7D4EA; color: #000000">0.9458189</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC078</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6271509</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF4FC; color: #000000">0.220</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">2.220</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DEEBF7; color: #000000">0.5597227</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC079</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.7132157</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EBF3FB; color: #000000">0.250</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EDF4FC; color: #000000">3.690</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C3DAEE; color: #000000">0.8596967</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC080</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4538788</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">0.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F7FD; color: #000000">2.460</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C2D9EE; color: #000000">0.8643817</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC081</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4603529</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.078</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">1.770</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CCDFF1; color: #000000">0.7696677</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC082</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4958235</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">0.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F7FD; color: #000000">2.450</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BED7EC; color: #000000">0.8961257</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOC083</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6066275</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">3.400</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A9CFE5; color: #000000">1.0422999</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY090</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEAE1; color: #000000">2.0417692</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.078</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E1EDF8; color: #000000">7.590</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C8DDF0; color: #000000">0.8117862</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY091</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EB; color: #000000">1.1546000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">0.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E1EDF8; color: #000000">7.610</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #8ABEDC; color: #000000">1.2319227</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY092</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5766038</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.080</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">1.840</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DAE8F6; color: #000000">0.6086017</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY093</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">1.0295660</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">0.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">3.920</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BFD8EC; color: #000000">0.8892416</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY094</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6564314</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.120</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E7F1FA; color: #000000">5.650</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #69ACD5; color: #000000">1.4084871</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY095</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F1; color: #000000">0.5408039</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">4.350</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #71B1D7; color: #000000">1.3619143</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY096</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6419020</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">0.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D6E6F4; color: #000000">11.700</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #08306C; color: #FFFFFF">2.4964031</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY097</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5889846</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.120</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E2EDF8; color: #000000">7.480</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #3684BF; color: #FFFFFF">1.7869888</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY098</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4210000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">0.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F8FE; color: #000000">1.510</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D3E4F3; color: #000000">0.6846036</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY099</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3942353</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.190</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DAE8F6; color: #000000">0.6110236</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY100</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3678302</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.110</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F9FE; color: #000000">1.340</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D5E5F4; color: #000000">0.6644964</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOY101</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.7172923</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.110</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EEF5FC; color: #000000">3.190</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B8D5EA; color: #000000">0.9364980</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">BOYPB4</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F7F6F6; color: #000000">0.1000000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC001</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4743333</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.120</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F8FE; color: #000000">1.640</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DEEBF7; color: #000000">0.5656048</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC002</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6079077</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EEF5FC; color: #000000">0.200</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F7FD; color: #000000">2.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E3EEF8; color: #000000">0.5110262</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC003</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6112615</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">1.870</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DFECF7; color: #000000">0.5518742</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC004</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.6019811</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FE; color: #000000">0.130</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FE; color: #000000">1.720</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DCE9F6; color: #000000">0.5911051</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC005</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5633137</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EFF6FC; color: #000000">3.060</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BAD6EB; color: #000000">0.9226892</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC006</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4616154</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F9FE; color: #000000">1.410</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D6E5F4; color: #000000">0.6569882</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC007</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5714151</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.160</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.660</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C2D9EE; color: #000000">0.8638466</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC008</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5803846</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.149</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EFF6FD; color: #000000">2.760</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CADEF0; color: #000000">0.7917741</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC009</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4508039</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FE; color: #000000">0.130</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">1.750</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DBEF; color: #000000">0.8319665</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC010</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F3; color: #000000">0.4063396</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F8FE; color: #000000">1.580</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CADDF0; color: #000000">0.7958030</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC011</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4520784</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F9FE; color: #000000">1.390</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DEEBF7; color: #000000">0.5627763</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC012</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4275294</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">1.830</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CFE1F2; color: #000000">0.7301587</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC013</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3595294</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.078</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.120</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D8E7F5; color: #000000">0.6363766</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC014</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3740462</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F9FE; color: #000000">1.350</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DFECF7; color: #000000">0.5463787</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">GOC015</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4448039</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FE; color: #000000">1.680</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CCDFF1; color: #000000">0.7674610</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL050</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">1.4312273</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D2E3F3; color: #000000">13.000</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #6DAFD6; color: #000000">1.3847231</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL051</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">57</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6826140</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EDF5FC; color: #000000">3.460</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.8095835</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL052</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9EFEA; color: #000000">1.2324151</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #E7F1FA; color: #000000">0.310</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DAE9F6; color: #000000">10.100</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #77B4D8; color: #000000">1.3317970</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL053</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7815758</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E7F1FA; color: #000000">5.530</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A4CCE3; color: #000000">1.0773174</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL054</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6551321</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #ECF4FC; color: #000000">0.226</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EFF6FC; color: #000000">2.830</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DCEF; color: #000000">0.8275135</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL055</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6351569</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FC; color: #000000">0.190</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EAF2FB; color: #000000">4.800</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A9CEE5; color: #000000">1.0430581</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL056</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.7168824</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EAF2FB; color: #000000">4.750</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A5CDE3; color: #000000">1.0717608</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL057</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.9934091</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E5EFF9; color: #000000">6.450</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #AFD1E7; color: #000000">0.9984456</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL058</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7428491</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.170</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">4.430</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BDD7EC; color: #000000">0.9025475</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL059</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.9132121</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF4FC; color: #000000">0.218</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E3EEF9; color: #000000">7.150</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #8EC0DD; color: #000000">1.2093532</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL060</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.5092273</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E5F0F9; color: #000000">6.220</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #5BA2CF; color: #FFFFFF">1.5061482</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL061</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4940784</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E8F1FA; color: #000000">5.340</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #5DA4D0; color: #FFFFFF">1.4950826</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL062</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4215294</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.078</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F8FE; color: #000000">1.460</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CEE0F2; color: #000000">0.7436828</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">HIL063</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F3; color: #000000">0.4065490</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F6FAFF; color: #000000">0.078</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.320</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D8E7F5; color: #000000">0.6313119</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW110</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6756769</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F5FAFE; color: #000000">0.090</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E9F2FB; color: #000000">4.820</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #9DC9E1; color: #000000">1.1237024</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW111</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4751667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.170</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FE; color: #000000">1.710</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D9E7F5; color: #000000">0.6251353</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW112</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3830000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F5FAFE; color: #000000">0.740</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EFF6FC; color: #000000">0.3782925</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW113</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F1; color: #000000">0.5214615</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F7FD; color: #000000">2.380</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BED7EC; color: #000000">0.8974462</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW114</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4184630</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FD; color: #000000">0.180</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.230</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E2EDF8; color: #000000">0.5189568</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW115</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3746364</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.010</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EBF3FB; color: #000000">0.4215964</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW116</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4428154</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.560</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D2E3F3; color: #000000">0.7051825</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW117</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">52</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3874615</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.050</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E5EFF9; color: #000000">0.4891366</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW118</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3932037</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.110</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E9F2FB; color: #000000">0.4382298</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">ILW119</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F5F3; color: #000000">0.3873396</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.170</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F5FAFE; color: #000000">0.850</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #EDF4FC; color: #000000">0.3980095</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP120</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEDE6; color: #000000">1.5762154</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FE; color: #000000">0.130</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E8F1FA; color: #000000">5.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D1E2F2; color: #000000">0.7181908</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP121</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6627593</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EFF6FD; color: #000000">2.820</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C6DBEF; color: #000000">0.8405098</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP122</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.8111667</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F4F9FE; color: #000000">0.100</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">2.270</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D6E6F4; color: #000000">0.6506751</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP123</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">1.4137077</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FE; color: #000000">0.130</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EAF3FB; color: #000000">4.690</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CADEF0; color: #000000">0.7904473</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP124</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4693385</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F7FD; color: #000000">2.510</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.8004624</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP125</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4633231</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F1F7FD; color: #000000">2.240</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D3E4F3; color: #000000">0.6866559</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP126</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">52</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6229615</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">4.290</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A5CDE3; color: #000000">1.0715946</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP127</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3EF; color: #000000">0.7081852</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EBF3FB; color: #000000">4.270</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A8CEE4; color: #000000">1.0495494</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP128</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6963519</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.150</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EDF4FC; color: #000000">3.650</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #9FCBE1; color: #000000">1.1068742</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">JUP129</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">52</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5831346</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.140</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EFF6FC; color: #000000">2.940</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C7DCEF; color: #000000">0.8232033</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV040</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9EFEA; color: #000000">1.2474000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF5FC; color: #000000">0.210</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E6F0F9; color: #000000">6.180</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BCD7EB; color: #000000">0.9107794</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV041</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9EFE9; color: #000000">1.2591887</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF4FC; color: #000000">0.220</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #DFECF7; color: #000000">8.440</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #94C4DF; color: #000000">1.1734083</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV042</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">1.0028302</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FD; color: #000000">0.180</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E4EFF9; color: #000000">6.610</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #8ABEDC; color: #000000">1.2301834</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV043</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.9299697</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EBF3FB; color: #000000">0.250</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EDF5FC; color: #000000">3.550</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.8034591</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV044</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6702642</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.170</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.610</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C6DBEF; color: #000000">0.8391580</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV045</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6571538</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FC; color: #000000">0.190</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.590</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D9E8F5; color: #000000">0.6187930</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV046</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7230154</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F7FD; color: #000000">0.164</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EFF6FC; color: #000000">2.920</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DAE8F6; color: #000000">0.6063961</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV047</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F0; color: #000000">0.6886471</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF4FC; color: #000000">0.220</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #ECF4FC; color: #000000">3.860</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CADDF0; color: #000000">0.7968107</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV048</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F3F1; color: #000000">0.5899216</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.160</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #ECF4FB; color: #000000">4.050</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #AED1E7; color: #000000">1.0060863</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV049</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F1; color: #000000">0.5201509</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F1F7FD; color: #000000">0.160</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.690</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D0E1F2; color: #000000">0.7278157</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV050</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E3; color: #000000">65</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4580615</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F8FD; color: #000000">1.790</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D9E7F5; color: #000000">0.6249574</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV051</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4640588</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F7FD; color: #000000">0.164</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F4F9FE; color: #000000">1.120</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E2EEF8; color: #000000">0.5183956</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV052</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4778039</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F2F7FD; color: #000000">2.010</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D2E3F3; color: #000000">0.6986524</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">PEV053</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EBF7E7; color: #000000">51</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F4F2; color: #000000">0.4278039</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.120</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F3F9FE; color: #000000">1.440</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D8E7F5; color: #000000">0.6287967</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL161</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBE7DB; color: #000000">2.5791212</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #E6F0FA; color: #000000">0.320</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D9E8F5; color: #000000">10.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CADEF0; color: #000000">0.7921808</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL162</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E9F7E5; color: #000000">56</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE8; color: #000000">1.4261607</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EDF5FC; color: #000000">0.210</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E1EDF8; color: #000000">7.710</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C8DCF0; color: #000000">0.8203000</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL163</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F0EA; color: #000000">1.1847727</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FC; color: #000000">0.187</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E6F0FA; color: #000000">6.060</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B9D5EA; color: #000000">0.9333778</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL164</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">54</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.8972593</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.170</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E8F1FA; color: #000000">5.270</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C0D8ED; color: #000000">0.8839604</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL165</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1EC; color: #000000">0.9770000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F2F8FD; color: #000000">0.136</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E9F2FB; color: #000000">4.970</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BDD7EC; color: #000000">0.9011681</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL166</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E7F6E2; color: #000000">66</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEDE6; color: #000000">1.5513939</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EFF6FD; color: #000000">0.180</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">7.240</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">0.8059144</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL167</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E5; color: #000000">55</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F2EE; color: #000000">0.8045273</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #EDF4FC; color: #000000">3.760</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B7D5EA; color: #000000">0.9410974</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL168</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E5; color: #000000">55</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7851091</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #ECF4FC; color: #000000">3.810</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BAD6EB; color: #000000">0.9254401</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL169</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEEE7; color: #000000">1.5253019</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #EBF4FB; color: #000000">0.240</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E5EFF9; color: #000000">6.480</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CFE1F2; color: #000000">0.7351046</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL170</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F8F2EF; color: #000000">0.7647170</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F0F6FD; color: #000000">0.170</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F0F6FD; color: #000000">2.540</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C8DCF0; color: #000000">0.8200172</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL171</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAEDE6; color: #000000">1.6109811</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #ECF4FB; color: #000000">0.230</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E2EEF8; color: #000000">7.250</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C2D9EE; color: #000000">0.8672640</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STL172</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EAF7E6; color: #000000">53</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.9711698</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #F3F8FE; color: #000000">0.125</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #E5EFF9; color: #000000">6.370</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #83BBDB; color: #000000">1.2676157</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">DEP</td>
+<td class="gt_row gt_left" headers="site">STLMC1</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F7FCF5; color: #000000">1</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9F1ED; color: #000000">0.9300000</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #BCD7EC; color: #000000">0.930</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #F5F9FE; color: #000000">0.930</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #808080; color: #FFFFFF">NA</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">11</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">71</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE3D5; color: #000000">3.1774648</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #2775B7; color: #FFFFFF">1.9082311</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">12A</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #E68568; color: #FFFFFF">11.1785714</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #BED8EC; color: #000000">0.8954182</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">13</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">70</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE1D1; color: #000000">3.5442857</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #3F8EC4; color: #FFFFFF">1.6999634</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">15</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCE4D7; color: #000000">3.0404762</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #08306B; color: #FFFFFF">2.4995563</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">16</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDBC6; color: #000000">4.5476190</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #3785BF; color: #FFFFFF">1.7768410</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">18C</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">71</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDFCE; color: #000000">3.8690141</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #CADEF0; color: #000000">15.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDDFF1; color: #000000">0.7620280</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">18D</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #E6F5E1; color: #000000">71</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FDDECD; color: #000000">3.9661972</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #C5DBEF; color: #000000">17.700</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B8D5EA; color: #000000">0.9346530</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">22</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EEF8EA; color: #000000">39</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #EB9071; color: #000000">10.4102564</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #99C7E0; color: #000000">1.1420616</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">24</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #EB8F70; color: #000000">10.4976190</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B5D4E9; color: #000000">0.9593192</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">27A</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">43</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F9BDA1; color: #000000">6.9813953</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #78B5D9; color: #000000">1.3267775</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">27B</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EEF8EA; color: #000000">38</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #D7614E; color: #FFFFFF">13.4657895</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B8D5EA; color: #000000">0.9396376</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">28</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">43</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #F19E7C; color: #000000">9.5116279</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #ABD0E6; color: #000000">1.0248145</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">31B</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #E98A6D; color: #000000">10.8047619</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #A6CDE4; color: #000000">1.0597728</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">31C</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">41</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #C33E3A; color: #FFFFFF">15.9756098</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #0A529D; color: #FFFFFF">60.600</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B0D2E7; color: #000000">0.9911612</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">31E</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #C8483F; color: #FFFFFF">15.2761905</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #1A65AC; color: #FFFFFF">55.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #B9D5EA; color: #000000">0.9303343</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">37B</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EEF8EA; color: #000000">39</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FAC2A7; color: #000000">6.5948718</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #86BCDC; color: #000000">1.2514759</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">38B</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">43</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #EE9676; color: #000000">10.0441860</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #08306B; color: #FFFFFF">69.700</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #77B4D8; color: #000000">1.3343940</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">39</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FBC6AB; color: #000000">6.2976190</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #2978B9; color: #FFFFFF">50.500</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #85BBDB; color: #000000">1.2586318</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">43</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #EDF8E9; color: #000000">42</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #E27B60; color: #FFFFFF">11.8380952</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #08509B; color: #FFFFFF">61.200</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #9BC8E0; color: #000000">1.1341722</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="source">PALMBEACH</td>
+<td class="gt_row gt_left" headers="site">C17S44</td>
+<td class="gt_row gt_right" headers="slope">NA</td>
+<td class="gt_row gt_right" headers="n_values" style="background-color: #F5FBF3; color: #000000">9</td>
+<td class="gt_row gt_right" headers="mean" style="background-color: #FCCFB7; color: #000000">5.5444444</td>
+<td class="gt_row gt_right" headers="min" style="background-color: #B5D4E9; color: #000000">1.000</td>
+<td class="gt_row gt_right" headers="max" style="background-color: #D5E5F4; color: #000000">11.900</td>
+<td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D2E3F3; color: #000000">0.7030085</td>
+<td class="gt_row gt_center" headers="significant_slope">NA</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
+</tr>
 </tbody>
 </table>
 
