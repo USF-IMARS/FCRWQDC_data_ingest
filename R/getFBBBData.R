@@ -101,7 +101,8 @@ getFBBBData <- function(){
         "TDN"       = "Total Nitrogen",
         "pH"        = "pH",
         "DON"       = "Nitrogen, organic",
-        "TSS (mg/L)" = "Total Suspended Solids"
+        "TSS (mg/L)" = "Total Suspended Solids",
+        "DIN"       = "Inorganic Nitrogen"
       ),
       # columsn for STORET mapping
       RowID = NA,

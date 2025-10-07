@@ -45,7 +45,7 @@ getFIUHistoricalData <- function(){
      "NO2-S"   = "Nitrite (NO2)",
      "NH4-S"   = "Ammonium, Filtered (NH4)",
      "TN-S"    = "Total Nitrogen",
-     "DIN-S"   = "Dissolved_Inorganic_Nitrogen",
+     "DIN-S"   = "Inorganic Nitrogen",
      "TON-S"   = "Total Kjeldahl Nitrogen",
      "TP-S"    = "Total Phosphorus",
      "SRP-S"   = "Phosphate, Filtered (PO4)",

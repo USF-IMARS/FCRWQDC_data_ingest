@@ -46,7 +46,7 @@ getFIUEstuariesData <- function(){
            "NO2"      = "Nitrite (NO2)",
            "NH4"      = "Ammonium, Filtered (NH4)",
            "TN"       = "Total Nitrogen",
-           "DIN"      = "Dissolved_Inorganic_Nitrogen",
+           "DIN"      = "Inorganic Nitrogen",
            "TON"      = "Total Kjeldahl Nitrogen",
            "TP"       = "Total Phosphorus",
            "SRP"      = "Phosphate, Filtered (PO4)",
