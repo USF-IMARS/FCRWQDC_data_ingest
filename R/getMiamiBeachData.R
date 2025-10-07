@@ -337,7 +337,7 @@ getMiamiBeachData <- function(programName=NULL, fpath=NULL) {
         "Field Specific Conductance"             = "Specific Conductivity",
         "Field Temperature" = "Water Temperature",
         "Field pH" = "pH",
-        "Nitrogen, Ammonia" = "Ammonia, Un-ionized (NH3)",
+        "Nitrogen, Ammonia" = "Ammonia (N)",
         "Nitrogen, Kjeldahl, Total" = "Total Kjeldahl Nitrogen",
         "Nitrogen, NO2 plus NO3" = "NO2+3, Filtered",
         "Oxygen, Dissolved" = "Dissolved Oxygen",

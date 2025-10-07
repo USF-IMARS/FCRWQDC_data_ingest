@@ -127,8 +127,9 @@ getWINData <- function(programName=NULL, fpath=NULL){
       
       DEP.Analyte.Name = recode(
         DEP.Analyte.Name,
-        "Ammonia (N)"             = "Ammonia, Un-ionized (NH3)",
+        "Ammonia (N)"             = "Total Ammonia",
         "Chlorophyll a- corrected" = "Chlorophyll a, Corrected for Pheophytin",
+        "Chlorophyll a, free of pheophytin" = "Chlorophyll a, Corrected for Pheophytin",
         "Chlorophyll a- uncorrected" = "Chlorophyll a, Uncorrected for Pheophytin",
         "Nitrate (N)" = "Nitrate (NO3)",
         "Nitrate-Nitrite (N)" = "NO2+3, Filtered",

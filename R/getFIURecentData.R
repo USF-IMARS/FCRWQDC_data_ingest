@@ -33,7 +33,7 @@ getFIURecentData <- function(programName=NULL, fpath=NULL) {
       # map analytes
       DEP.Analyte.Name = recode(
         DEP.Analyte.Name,
-        "Ammonia"             = "Ammonia, Un-ionized (NH3)",
+        "Ammonia"             = "Total Ammonia",
         "NO2" = "Nitrite (NO2)",
         "Nitrate.Nitrite" = "NO2+3, Filtered",
         "Phosphate" = "Phosphate, Filtered (PO4)",
