@@ -56,8 +56,8 @@ ggplot(df, aes(x = value)) +
 
 Note that values are often not directly comparable due to the use of different units.
 
-```{R, Show usage of different units}
-#| code-summary: Show usage of different units
+```{R, Show units used by each program}
+#| code-summary: Show units used by each program
 library(ggplot2)
 
 ggplot(df, aes(x = source, fill = units)) +
@@ -76,8 +76,8 @@ ggplot(df, aes(x = source, fill = units)) +
   )
 ```
 
-```{R, Show value distributions for each unit}
-#| code-summary: Show value distributions for each program
+```{R, Show values grouped by units}
+#| code-summary: Show values grouped by units
 library(ggplot2)
 
 ggplot(df, aes(x = units, y = value)) +
