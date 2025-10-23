@@ -221,6 +221,15 @@ getData <- function(programName) {
         is.na(Activity.Depth) | Activity.Depth <= 1)
     }
   # cat("===========================================\n")
+    
+  # prepend `20` to any two-digit years in column `Activity.Start.Date.Time`
+  df$Activity.Start.Date.Time <- gsub(
+    "(?<=\\b\\d{1,2}/\\d{1,2}/)\\d{2}(?=\\b)", 
+    "20\\0", 
+    df$Activity.Start.Date.Time, 
+    perl = TRUE
+  )
+    
   if(any(is.na(df$Monitoring.Location.ID)) > 0){
     print("WARN - rows found with no location ID")
     # df %>%
