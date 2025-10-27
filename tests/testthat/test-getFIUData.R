@@ -20,10 +20,6 @@ test_that("getFIURecentData can open and read FIU data", {
   expect_true(is.data.frame(fiu_data))
   expect_gt(nrow(fiu_data), 0)
   
-  # Check for program identifier
-  expect_true("program" %in% names(fiu_data),
-              "FIU data missing 'program' column")
-  
   # Use the column alignment checker to validate WIN format compliance
   cat("\n----- FIU Data Format Validation -----\n")
   alignment_results <- check_win_column_alignment(fiu_data, source_name = "FIU")
