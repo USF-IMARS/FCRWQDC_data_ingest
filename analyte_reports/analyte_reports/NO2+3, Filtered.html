@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note that values are often not directly comparable due to the use of different units.</p>
 <div class="cell">
 <details class="code-fold">
-<summary>Show usage of different units</summary>
+<summary>Show units used by each program</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> source, <span class="at">fill =</span> units)) <span class="sc">+</span></span>
@@ -266,14 +266,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="NO2+3,-Filtered_files/figure-html/Show usage of different units-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="NO2+3,-Filtered_files/figure-html/Show units used by each program-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>Show value distributions for each program</summary>
+<summary>Show values grouped by units</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> units, <span class="at">y =</span> value)) <span class="sc">+</span></span>
@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="NO2+3,-Filtered_files/figure-html/Show value distributions for each unit-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="NO2+3,-Filtered_files/figure-html/Show values grouped by units-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -554,23 +554,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>gt_tbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="sqhgegbuhd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#sqhgegbuhd table {
+<div id="okavfkydec" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#okavfkydec table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sqhgegbuhd thead, #sqhgegbuhd tbody, #sqhgegbuhd tfoot, #sqhgegbuhd tr, #sqhgegbuhd td, #sqhgegbuhd th {
+#okavfkydec thead, #okavfkydec tbody, #okavfkydec tfoot, #okavfkydec tr, #okavfkydec td, #okavfkydec th {
   border-style: none;
 }
 
-#sqhgegbuhd p {
+#okavfkydec p {
   margin: 0;
   padding: 0;
 }
 
-#sqhgegbuhd .gt_table {
+#okavfkydec .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -596,12 +596,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_caption {
+#okavfkydec .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sqhgegbuhd .gt_title {
+#okavfkydec .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -613,7 +613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#sqhgegbuhd .gt_subtitle {
+#okavfkydec .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -625,7 +625,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#sqhgegbuhd .gt_heading {
+#okavfkydec .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -637,13 +637,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_bottom_border {
+#okavfkydec .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_col_headings {
+#okavfkydec .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -658,7 +658,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_col_heading {
+#okavfkydec .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -678,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#sqhgegbuhd .gt_column_spanner_outer {
+#okavfkydec .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -690,15 +690,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#sqhgegbuhd .gt_column_spanner_outer:first-child {
+#okavfkydec .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sqhgegbuhd .gt_column_spanner_outer:last-child {
+#okavfkydec .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sqhgegbuhd .gt_column_spanner {
+#okavfkydec .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -710,11 +710,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#sqhgegbuhd .gt_spanner_row {
+#okavfkydec .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sqhgegbuhd .gt_group_heading {
+#okavfkydec .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +740,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#sqhgegbuhd .gt_empty_group_heading {
+#okavfkydec .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -755,15 +755,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#sqhgegbuhd .gt_from_md > :first-child {
+#okavfkydec .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sqhgegbuhd .gt_from_md > :last-child {
+#okavfkydec .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sqhgegbuhd .gt_row {
+#okavfkydec .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -782,7 +782,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#sqhgegbuhd .gt_stub {
+#okavfkydec .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -795,7 +795,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sqhgegbuhd .gt_stub_row_group {
+#okavfkydec .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -809,15 +809,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#sqhgegbuhd .gt_row_group_first td {
+#okavfkydec .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sqhgegbuhd .gt_row_group_first th {
+#okavfkydec .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sqhgegbuhd .gt_summary_row {
+#okavfkydec .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -827,16 +827,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sqhgegbuhd .gt_first_summary_row {
+#okavfkydec .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_first_summary_row.thick {
+#okavfkydec .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sqhgegbuhd .gt_last_summary_row {
+#okavfkydec .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -846,7 +846,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_grand_summary_row {
+#okavfkydec .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -856,7 +856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sqhgegbuhd .gt_first_grand_summary_row {
+#okavfkydec .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -866,7 +866,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_last_grand_summary_row_top {
+#okavfkydec .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -876,11 +876,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_striped {
+#okavfkydec .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sqhgegbuhd .gt_table_body {
+#okavfkydec .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -889,7 +889,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_footnotes {
+#okavfkydec .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -903,7 +903,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_footnote {
+#okavfkydec .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -912,7 +912,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sqhgegbuhd .gt_sourcenotes {
+#okavfkydec .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -926,7 +926,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#sqhgegbuhd .gt_sourcenote {
+#okavfkydec .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -934,72 +934,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#sqhgegbuhd .gt_left {
+#okavfkydec .gt_left {
   text-align: left;
 }
 
-#sqhgegbuhd .gt_center {
+#okavfkydec .gt_center {
   text-align: center;
 }
 
-#sqhgegbuhd .gt_right {
+#okavfkydec .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sqhgegbuhd .gt_font_normal {
+#okavfkydec .gt_font_normal {
   font-weight: normal;
 }
 
-#sqhgegbuhd .gt_font_bold {
+#okavfkydec .gt_font_bold {
   font-weight: bold;
 }
 
-#sqhgegbuhd .gt_font_italic {
+#okavfkydec .gt_font_italic {
   font-style: italic;
 }
 
-#sqhgegbuhd .gt_super {
+#okavfkydec .gt_super {
   font-size: 65%;
 }
 
-#sqhgegbuhd .gt_footnote_marks {
+#okavfkydec .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sqhgegbuhd .gt_asterisk {
+#okavfkydec .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sqhgegbuhd .gt_indent_1 {
+#okavfkydec .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sqhgegbuhd .gt_indent_2 {
+#okavfkydec .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sqhgegbuhd .gt_indent_3 {
+#okavfkydec .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sqhgegbuhd .gt_indent_4 {
+#okavfkydec .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sqhgegbuhd .gt_indent_5 {
+#okavfkydec .gt_indent_5 {
   text-indent: 25px;
 }
 
-#sqhgegbuhd .katex-display {
+#okavfkydec .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#sqhgegbuhd div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#okavfkydec div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -9519,26 +9519,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">224</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F3; color: #000000">3.178000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">2.408000e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0003780000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">8.610000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #CDE0F1; color: #000000">1.286185282</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">225</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F5F4; color: #000000">2.792300e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">5.359900e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0011200000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.307600e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DBE9F6; color: #000000">0.843833265</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -9567,14 +9567,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">228</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F4F6F7; color: #000000">-2.937550e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">1.770183e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0004620000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">3.663100e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DCEAF6; color: #000000">0.812403982</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -9603,14 +9603,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">231</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F7; color: #000000">-3.105900e-04</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">4.905530e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0006160000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">7.700000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E5F0F9; color: #000000">0.537098326</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -9663,14 +9663,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">239</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #FAEEE7; color: #000000">1.402835e-02</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">8.031217e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0012040000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">2.286200e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D4E5F4; color: #000000">1.064029691</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -9879,14 +9879,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">264</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F3F0; color: #000000">6.332130e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">5.733957e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0008960000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.271200e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DDEAF7; color: #000000">0.803957786</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -10047,122 +10047,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">282</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F3F5F6; color: #000000">-4.018000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">3.976000e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0013580000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.164800e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #D8E7F5; color: #000000">0.960202939</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">284</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F6; color: #000000">8.750000e-04</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">1.899333e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0006160000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">3.556000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E4EFF9; color: #000000">0.585160811</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">285</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F6F7F7; color: #000000">-1.169000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">3.929333e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0013300000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">9.324000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DDEAF7; color: #000000">0.800943990</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">287</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #FAEDE5; color: #000000">1.601859e-02</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">9.094470e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0011760000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">3.497200e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #C9DDF0; color: #000000">1.408595446</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">288</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F6F6F7; color: #000000">-1.234590e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">1.211863e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0005040000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">2.324000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E2EEF8; color: #000000">0.632235609</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">289</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F7; color: #000000">4.200000e-04</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">5.303667e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0003360000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.106000e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DBE9F6; color: #000000">0.857996001</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">290</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F6F7F7; color: #000000">-7.499800e-04</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">1.169327e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0006020000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.947960e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E8F2FA; color: #000000">0.444348785</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">291</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F7; color: #000000">-3.010000e-06</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">1.583003e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0006860000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">2.660000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E9F2FA; color: #000000">0.435012497</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">292</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F3F1; color: #000000">5.642000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">7.833000e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0010920000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.402800e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E4EFF9; color: #000000">0.575734448</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">294</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F4F2; color: #000000">4.781000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">3.262000e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0003780000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">7.742000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DAE8F6; color: #000000">0.876634000</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -10239,26 +10239,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">309</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F3F0; color: #000000">5.901000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">3.516333e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0005880000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">8.344000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DBE9F6; color: #000000">0.863171191</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">310</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F3F0; color: #000000">6.608000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">4.160333e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0003500000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">9.954000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DCEAF6; color: #000000">0.824488651</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -10275,14 +10275,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">314</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F8F3EF; color: #000000">6.825000e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">6.034000e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0008260000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.577800e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DBE9F6; color: #000000">0.857319102</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -10467,14 +10467,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">401</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F7F7F7; color: #000000">-4.803400e-04</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">1.905447e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0002100000</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">3.906000e-03</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #DDEAF7; color: #000000">0.789021210</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">4.795001e-01</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
@@ -10563,14 +10563,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
 <td class="gt_row gt_left" headers="site">505</td>
-<td class="gt_row gt_right" headers="slope" style="background-color: #F7F6F5; color: #000000">1.625680e-03</td>
+<td class="gt_row gt_right" headers="slope" style="background-color: #808080; color: #FFFFFF">NA</td>
 <td class="gt_row gt_right" headers="n_values" style="background-color: #F6FCF4; color: #000000">6</td>
 <td class="gt_row gt_right" headers="mean" style="background-color: #F7F7F7; color: #000000">9.085440e-03</td>
 <td class="gt_row gt_right" headers="min" style="background-color: #F7FBFF; color: #000000">0.0043786400</td>
 <td class="gt_row gt_right" headers="max" style="background-color: #F7FBFF; color: #000000">1.414000e-02</td>
 <td class="gt_row gt_right" headers="coefficient.of.variation" style="background-color: #E8F1FA; color: #000000">0.457330592</td>
 <td class="gt_row gt_right" headers="significant_slope" style="background-color: #808080; color: #FFFFFF">NA</td>
-<td class="gt_row gt_right" headers="pvalue">1.000000e+00</td>
+<td class="gt_row gt_right" headers="pvalue">NA</td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="source">FIU_WQMP_RECENT</td>
