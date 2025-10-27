@@ -37,6 +37,15 @@ getFIUEstuariesData <- function(){
     ) %>%
     mutate(Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time))
   
+  # set df$RelativeDepth using _B and _S in analyte names
+  df <- df %>%
+    mutate(
+      RelativeDepth = case_when(
+        DEP.Analyte.Name %in% c("SAL_S", "TEMP_S", "DO_S") ~ "Surface",
+        DEP.Analyte.Name %in% c("SAL_B", "TEMP_B", "DO_B") ~ "Bottom",
+        TRUE ~ DEP.Analyte.Name
+      )
+    )
   
   # === map analyte names to standard from unique(df$DEP.Analyte.Name))
   df <- df %>%
@@ -66,16 +75,6 @@ getFIUEstuariesData <- function(){
            "TEMP_B"   = "Water Temperature",
            "DO_B"     = "Dissolved Oxygen"
     ))
-  
-  # set df$RelativeDepth using _B and _S in analyte names
-  df <- df %>%
-    mutate(
-      RelativeDepth = case_when(
-        DEP.Analyte.Name %in% c("SAL_S", "TEMP_S", "DO_S") ~ "Surface",
-        DEP.Analyte.Name %in% c("SAL_B", "TEMP_B", "DO_B") ~ "Bottom",
-        TRUE ~ DEP.Analyte.Name
-      )
-    )
   
   df$`DEP.Result.Unit` = "ppm"
   
