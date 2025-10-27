@@ -19,10 +19,19 @@ Some datasets are missing crucial values and have other unhandled issues:
   * Miami Beach some sites have an extra '#' in front (site1 and #site1)
 
 ### Notes about the final data
-* getData applies depth filtering >=1m dropped
 * getData files attempt to align all columns to WIN column names
   * for column mappings between projects see relevant `R/get*Data.R` and `R/align_*_df.R` files
-* exported .csv files do not contain all columns. Many more are returned by getData.
+* most exported .csv files do not contain all columns. Many more are returned by getData. For all data see the allDataRaw.csv
+
+#### chlorophyll a
+Chlorophyll a values are special because some are  corrected for pheophytin.
+
+At time of writing corrected/uncorrected is not known for some programs:
+* FIU_Estuaries
+* MiamiBeach
+* SFER
+
+For these programs the chlorophyll_a values are not included.
 
 ## tests
 ```bash
