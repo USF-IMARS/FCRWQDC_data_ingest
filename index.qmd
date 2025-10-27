@@ -18,7 +18,49 @@ This work is a product of the University of South Florida Institute for Marine R
 #| warning: false
 library("here")
 df_all <- read.csv(here("data/exports/allDataRaw.csv"))
+```
 
+```{R, show missing station IDs}
+#| code-summary: show percent of missing station IDs
+library(dplyr)
+library(scales)
+# show percentage of missing or na rows in df$Monitoring.Location.ID grouped by df$program
+# 1. Get the total number of rows for each program
+total_counts <- df_all %>%
+  count(program, name = "total_rows")
+
+# 2. Get the number of NA rows for each program
+na_counts <- df_all %>%
+  filter(is.na(Monitoring.Location.ID)) %>%
+  count(program, name = "missing_rows")
+
+# 3. Combine total and NA counts, calculate percentage
+percentage_table <- total_counts %>%
+  left_join(na_counts, by = "program") %>%
+  mutate(
+    # If a program had no NAs, na_counts will be NA. Replace with 0.
+    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
+    
+    # Calculate the percentage
+    percentage_raw = missing_rows / total_rows,
+    
+    # Format the percentage for clean table output
+    percentage = scales::percent(percentage_raw, accuracy = 0.1)
+  ) %>%
+  
+  # Select and order the columns for the final table
+  select(program, missing_rows, total_rows, percentage) %>%
+  
+  # Sort by program name
+  arrange(program)
+
+# 4. Print the final data frame (which R displays as a table)
+print(percentage_table)
+```
+
+
+```{R, select subset}
+#| code-summary: select subset
 # select subset of reported analytes
 source(here("R/dropNonStandardAnalytes.R"))
 df <- dropNonStandardAnalytes(df_all)
@@ -27,7 +69,6 @@ df <- dropNonStandardAnalytes(df_all)
 df <- filter(
   df,
   is.na(Activity.Depth) | Activity.Depth <= 1)
-
 ```
 
 ```{R, create .csv of all data}
