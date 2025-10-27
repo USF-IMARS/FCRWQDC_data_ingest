@@ -65,7 +65,7 @@ mutateWINToSEACAR <- function(df, .keep = "none"){
     mutate(
       RelativeDepth = if_else(
         is.na(RelativeDepth),  # do not replace existing RelativeDepth values
-        if_else(ActivityDepth <= 1, "Surface", "Bottom"),
+        if_else(ActivityDepth_m <= 1, "Surface", "Bottom"),
         RelativeDepth
       )
     )

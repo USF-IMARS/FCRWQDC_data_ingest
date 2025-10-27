@@ -53,6 +53,19 @@ ggplot(df, aes(x = ProgramName, fill = ParameterName)) +
   )
 ```
 
+```{R show n samples from bottom & surface}
+#| code-summary: show n samples from bottom & surface
+library(ggplot2)
+
+ggplot(df, aes(x = RelativeDepth)) +
+  geom_bar(fill = "steelblue") +
+  labs(
+    title = "Number of Samples by Relative Depth",
+    x = "Relative Depth",
+    y = "Number of Samples"
+  ) +
+  theme_minimal()
+```
 
 ```{R evaluate dataset completeness}
 

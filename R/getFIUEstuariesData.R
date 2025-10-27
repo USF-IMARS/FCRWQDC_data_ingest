@@ -54,13 +54,28 @@ getFIUEstuariesData <- function(){
            "CHLA"     = "Chlorophyll_a",
            "TOC"      = "Total_Organic_Carbon",
            "SiO2"     = "Silicate",
+           "TURB"     = "Turbidity",
+           "pH"       = "pH",
+           "Kd"       = "Diffuse_Attenuation_Coefficient",
+           # surface
            "SAL_S"    = "Salinity",
            "TEMP_S"   = "Water Temperature",
            "DO_S"     = "Dissolved Oxygen",
-           "TURB"     = "Turbidity",
-           "pH"       = "pH",
-           "Kd"       = "Diffuse_Attenuation_Coefficient"
+           # bottom
+           "SAL_B"    = "Salinity",
+           "TEMP_B"   = "Water Temperature",
+           "DO_B"     = "Dissolved Oxygen"
     ))
+  
+  # set df$RelativeDepth using _B and _S in analyte names
+  df <- df %>%
+    mutate(
+      RelativeDepth = case_when(
+        DEP.Analyte.Name %in% c("SAL_S", "TEMP_S", "DO_S") ~ "Surface",
+        DEP.Analyte.Name %in% c("SAL_B", "TEMP_B", "DO_B") ~ "Bottom",
+        TRUE ~ DEP.Analyte.Name
+      )
+    )
   
   df$`DEP.Result.Unit` = "ppm"
   
