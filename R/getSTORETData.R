@@ -4,12 +4,20 @@ library(here)
 library(glue)
 source(here("R/getFpath.R"))
 
-getSTORETData <- function(programName){
-  pName <- stringr::str_replace(programName, "_STORET", "")
-  df <- read.csv(here::here(
-    glue("data/STORET_historical/{pName}_STORET_ALL.csv")),
-    colClasses='character'
-  )
+getSTORETData <- function(programName, fpath=NULL){
+  if(!is.null(fpath)){
+    df <- read.csv(here::here(fpath),
+      colClasses='character'
+    )
+  } else {
+    pName <- stringr::str_replace(programName, "_STORET", "")
+    df <- read.csv(here::here(
+      glue("data/STORET_historical/{pName}_STORET_ALL.csv")),
+      colClasses='character'
+    )
+  }
+  
+  
   # align hist_data to WIN format
   df <- df %>% mutate(
     Organization.ID = programName,
