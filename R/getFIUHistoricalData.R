@@ -81,7 +81,7 @@ getFIUHistoricalData <- function(){
           "TEMP-B",
           "DO-B"
         ) ~ "Bottom",
-        TRUE ~ RelativeDepth
+        TRUE ~ ""
       )
     )
   
