@@ -13,12 +13,10 @@ Additional data is provided in custom formats by some providers:
   * newer FIU data from a custom file format
   * MiamiBeach data is a custom format
 
-* Some datasets are missing crucial values
-  * STORET data has no lat, lon. (can we add these based on station names?)
-  * newer FIU data has no lat, lon. (can we add these based on station names?)
-  * STORET DERM_BBWQ has no depth
+Some datasets are missing crucial values and have other unhandled issues:
   * SFER data has no units
   * `data/FIU_recent_all.csv` has no units
+  * Miami Beach some sites have an extra '#' in front (site1 and #site1)
 
 ### Notes about the final data
 * getData applies depth filtering >=1m dropped
@@ -47,33 +45,4 @@ testthat::test_dir(here::here('tests/testthat'))
   * include relevant logic in `getData.R`
     * new `get{provider}Data` call
     * analyte name mappings
-
-
-## Old Notes & Issues
-These noted issues need to be re-checked.
-Many of them may have been resolved.
-
-FIU data:
-- Sites do not have coordinates
-- 2017 data has missing site names
-- The dates are formatted differently
-- The units and sample depths are all NA
-- Orthophosphate values are NA.
-- There are lots of NA values in general for the different analytes
-- Looks like there might be some data missing in Florida Bay for FIU
-- Site names are different, don't have the "-W"
-- Analytes have different names then the others
-
-Miami Beach:
-- Some sites do not have coordinates (some of those sites are only present in the 2024 data and we could not find coordinates for previous years)
-- Some sites had an extra '#' in front
-
-Palm Beach:
-- Some Dates were formatted differently with quotation marks and no time stamp
-- Some analytes values are NA for SFER; BBAP; BROWARD, DERM_WQ, MiamiBeach, PALMBEACH, FIU_WQMP.
-
-For the slopes:
-- Some NA values; would it be possible to include site coordinates in the slope tables? 
-- Also we thought moving forward we could include two columns with the year when sampling started and when sampling ended for that site, which could be useful?
-
  
