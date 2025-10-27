@@ -37,9 +37,66 @@ getFIUHistoricalData <- function(){
       Org.Decimal.Longitude = as.character(LONDEC)
     )
   
+  # set df$RelativeDepth using _B and _S in analyte names
+  df <- df %>%
+    mutate(
+      RelativeDepth = case_when(
+        DEP.Analyte.Name %in% c(
+          "NOX-S",
+          "NO3_S",
+          "NO2-S",
+          "NH4-S",
+          "TN-S",
+          "DIN-S",
+          "TON-S",
+          "TP-S",
+          "SRP-S",
+          "APA-S",
+          "CHLA-S",
+          "TOC-S",
+          "SiO2-S",
+          "TURB-S",
+          "SAL-S",
+          "TEMP-S"
+          "DO-S"
+        ) ~ "Surface",
+        DEP.Analyte.Name %in% c(
+          "NOX-B",
+          "NO3_B",
+          "NO2-B",
+          "NH4-B",
+          "TN-B",
+          "DIN-B",
+          "TON-B",
+          "TP-B",
+          "SRP-B",
+          "APA-B",
+          "CHLA-B",
+          "TOC-B",
+          "SiO2-B",
+          "TURB-B",
+          "SAL-B",
+          "TEMP-B"
+          "DO-B"
+        ) ~ "Bottom",
+        TRUE ~ DEP.Analyte.Name
+      )
+    )
+  
   # === map analyte names to standard from unique(df$DEP.Analyte.Name))
   df <- df %>%
     mutate(DEP.Analyte.Name = recode(DEP.Analyte.Name,
+     "Kd"      = "Diffuse_Attenuation_Coefficient",
+     "pH"      = "pH",
+     "TN:TP"   = "TN_to_TP_Ratio",
+     "N:P"     = "N_to_P_Ratio",
+     "DIN:TP"  = "DIN_to_TP_Ratio",
+     "Si:DIN"  = "Si_to_DIN_Ratio",
+     "%SAT-S"  = "Dissolved Oxygen Saturation",
+     "%Io"     = "Surface_Light_Penetration",
+     "DSIGT"   = "Sigma_T_Density_Difference",
+     
+     # surface
      "NOX-S"   = "NO2+3, Filtered",
      "NO3_S"   = "Nitrate (NO3)",
      "NO2-S"   = "Nitrite (NO2)",
@@ -51,22 +108,32 @@ getFIUHistoricalData <- function(){
      "SRP-S"   = "Phosphate, Filtered (PO4)",
      "APA-S"   = "Alkaline_Phosphatase_Activity",
      "CHLA-S"  = "Chlorophyll a, Uncorrected for Pheophytin",
-
      "TOC-S"   = "Total_Organic_Carbon",
      "SiO2-S"  = "Silicate",
      "TURB-S"  = "Turbidity",
      "SAL-S"   = "Salinity",
      "TEMP-S"  = "Water Temperature",
      "DO-S"    = "Dissolved Oxygen",
-     "Kd"      = "Diffuse_Attenuation_Coefficient",
-     "pH"      = "pH",
-     "TN:TP"   = "TN_to_TP_Ratio",
-     "N:P"     = "N_to_P_Ratio",
-     "DIN:TP"  = "DIN_to_TP_Ratio",
-     "Si:DIN"  = "Si_to_DIN_Ratio",
-     "%SAT-S"  = "Dissolved Oxygen Saturation",
-     "%Io"     = "Surface_Light_Penetration",
-     "DSIGT"   = "Sigma_T_Density_Difference"
+     
+     # bottom
+     "NOX-B"   = "NO2+3, Filtered",
+     "NO3_B"   = "Nitrate (NO3)",
+     "NO2-"   = "Nitrite (NO2)",
+     "NH4-B"   = "Ammonium, Filtered (NH4)",
+     "TN-B"    = "Total Nitrogen",
+     "DIN-B"   = "Inorganic Nitrogen",
+     "TON-B"   = "Total Kjeldahl Nitrogen",
+     "TP-B"    = "Total Phosphorus",
+     "SRP-B"   = "Phosphate, Filtered (PO4)",
+     "APA-B"   = "Alkaline_Phosphatase_Activity",
+     "CHLA-B"  = "Chlorophyll a, Uncorrected for Pheophytin",
+     "TOC-B"   = "Total_Organic_Carbon",
+     "SiO2-B"  = "Silicate",
+     "TURB-B"  = "Turbidity",
+     "SAL-B"   = "Salinity",
+     "TEMP-B"  = "Water Temperature",
+     "DO-B"    = "Dissolved Oxygen",
+     
     ),
     Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time)
   )
