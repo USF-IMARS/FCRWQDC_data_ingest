@@ -214,14 +214,7 @@ getData <- function(programName) {
   #     )
   #   )
     df$program <- programName 
-    if ("Activity.Depth" %in% names(df)) {
-      # drop rows with depth > 1m, keep any with depth==NA or depth==NULL
-      df <- filter(
-        df,
-        is.na(Activity.Depth) | Activity.Depth <= 1)
-    }
-  # cat("===========================================\n")
-    
+
   # prepend `20` to any two-digit years in column `Activity.Start.Date.Time`
   df$Activity.Start.Date.Time <- gsub(
     "^\\s*(\\d{2})-(\\d{2})-(\\d{2})(.*)$",
@@ -230,8 +223,6 @@ getData <- function(programName) {
     perl = TRUE
   )
   
-  
-    
   if(any(is.na(df$Monitoring.Location.ID)) > 0){
     print("WARN - rows found with no location ID")
     # df %>%

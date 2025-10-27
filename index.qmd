@@ -18,8 +18,16 @@ This work is a product of the University of South Florida Institute for Marine R
 #| warning: false
 library("here")
 df_all <- read.csv(here("data/exports/allDataRaw.csv"))
+
+# select subset of reported analytes
 source(here("R/dropNonStandardAnalytes.R"))
 df <- dropNonStandardAnalytes(df_all)
+
+# drop rows with depth > 1m, keep any with depth==NA or depth==NULL
+df <- filter(
+  df,
+  is.na(Activity.Depth) | Activity.Depth <= 1)
+
 ```
 
 ```{R, create .csv of all data}
