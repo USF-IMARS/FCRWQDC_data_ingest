@@ -50,7 +50,8 @@ getFIUHistoricalData <- function(){
      "TP-S"    = "Total Phosphorus",
      "SRP-S"   = "Phosphate, Filtered (PO4)",
      "APA-S"   = "Alkaline_Phosphatase_Activity",
-     "CHLA-S"  = "Chlorophyll_a",
+     "CHLA-S"  = "Chlorophyll a, Uncorrected for Pheophytin",
+
      "TOC-S"   = "Total_Organic_Carbon",
      "SiO2-S"  = "Silicate",
      "TURB-S"  = "Turbidity",

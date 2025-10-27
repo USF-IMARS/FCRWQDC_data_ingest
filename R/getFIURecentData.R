@@ -38,7 +38,8 @@ getFIURecentData <- function(programName=NULL, fpath=NULL) {
         "Nitrate.Nitrite" = "NO2+3, Filtered",
         "Phosphate" = "Phosphate, Filtered (PO4)",
         "TN" = "Total Nitrogen",
-        "TP" = "Total Phosphorus"
+        "TP" = "Total Phosphorus",
+        "Chlorophyll_a" = "Chlorophyll a, Uncorrected for Pheophytin"
       )
     )
   return(df)
