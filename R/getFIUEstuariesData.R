@@ -43,7 +43,7 @@ getFIUEstuariesData <- function(){
       RelativeDepth = case_when(
         DEP.Analyte.Name %in% c("SAL_S", "TEMP_S", "DO_S") ~ "Surface",
         DEP.Analyte.Name %in% c("SAL_B", "TEMP_B", "DO_B") ~ "Bottom",
-        TRUE ~ DEP.Analyte.Name
+        TRUE ~ RelativeDepth
       )
     )
   

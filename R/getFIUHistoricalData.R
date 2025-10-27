@@ -42,6 +42,7 @@ getFIUHistoricalData <- function(){
     mutate(
       RelativeDepth = case_when(
         DEP.Analyte.Name %in% c(
+          "%SAT-S",
           "NOX-S",
           "NO3_S",
           "NO2-S",
@@ -57,10 +58,11 @@ getFIUHistoricalData <- function(){
           "SiO2-S",
           "TURB-S",
           "SAL-S",
-          "TEMP-S"
+          "TEMP-S",
           "DO-S"
         ) ~ "Surface",
         DEP.Analyte.Name %in% c(
+          "%SAT-B",
           "NOX-B",
           "NO3_B",
           "NO2-B",
@@ -76,10 +78,10 @@ getFIUHistoricalData <- function(){
           "SiO2-B",
           "TURB-B",
           "SAL-B",
-          "TEMP-B"
+          "TEMP-B",
           "DO-B"
         ) ~ "Bottom",
-        TRUE ~ DEP.Analyte.Name
+        TRUE ~ RelativeDepth
       )
     )
   
@@ -92,11 +94,11 @@ getFIUHistoricalData <- function(){
      "N:P"     = "N_to_P_Ratio",
      "DIN:TP"  = "DIN_to_TP_Ratio",
      "Si:DIN"  = "Si_to_DIN_Ratio",
-     "%SAT-S"  = "Dissolved Oxygen Saturation",
      "%Io"     = "Surface_Light_Penetration",
      "DSIGT"   = "Sigma_T_Density_Difference",
      
      # surface
+     "%SAT-S"  = "Dissolved Oxygen Saturation",
      "NOX-S"   = "NO2+3, Filtered",
      "NO3_S"   = "Nitrate (NO3)",
      "NO2-S"   = "Nitrite (NO2)",
@@ -116,6 +118,7 @@ getFIUHistoricalData <- function(){
      "DO-S"    = "Dissolved Oxygen",
      
      # bottom
+     "%SAT-B"  = "Dissolved Oxygen Saturation",
      "NOX-B"   = "NO2+3, Filtered",
      "NO3_B"   = "Nitrate (NO3)",
      "NO2-"   = "Nitrite (NO2)",
@@ -132,7 +135,7 @@ getFIUHistoricalData <- function(){
      "TURB-B"  = "Turbidity",
      "SAL-B"   = "Salinity",
      "TEMP-B"  = "Water Temperature",
-     "DO-B"    = "Dissolved Oxygen",
+     "DO-B"    = "Dissolved Oxygen"
      
     ),
     Activity.Start.Date.Time = as.Date(Activity.Start.Date.Time)
