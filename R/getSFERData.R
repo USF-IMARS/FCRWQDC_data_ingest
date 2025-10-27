@@ -79,8 +79,7 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
         "no3_no2"          = "NO2+3, Filtered",
         "po4"              = "Phosphate, Filtered (PO4)",
         "si"               = "Silicate",
-        # Ian Smith from AOML said that their chlorophyll-a samples are corrected for phaeophytin – “We take discrete chl-a samples at all stations/depths shallower than 200m on our surveys. These samples are analyzed and corrected for phaeo. There is also the raw fluorescence chl data from the ships underway and CTD, historically this has been calibrated using the discrete samples”
-        "avg_chl_a"        = "Chlorophyll a, Corrected for Pheophytin",
+        "avg_chl_a"        = "Chlorophyll_a",
         "avg_phaeo"        = "Pheophytin",
         "notes"            = "Notes",
         
