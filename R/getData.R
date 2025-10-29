@@ -47,13 +47,29 @@ getData <- function(programName) {
   } else {
     # Default case - use WIN data
     df <- getWINData(programName)
-    
-    # cat("\n--- Data Summary ---\n")
-    # cat(glue("Total rows: {nrow(df)}\n"))
-    # cat(glue("Total columns: {ncol(df)}\n"))
-    # cat("------------------\n")
   }
   
+  # set SEACAR `ProgramID`s
+  program_ids <- c(
+    AOML_FBBB = NA,
+    BBAP = 5026,
+    BBWW = 4057,
+    BROWARD = 10013,
+    BROWARD_STORET = NA,
+    DEP = 5033,
+    DERM_BBWQ = 4018,
+    DERM_BBWQ_STORET = NA,
+    FIU_Estuaries = 509,
+    FIU_WQMP = 297,
+    FIU_WQMP_HISTORICAL = NA,
+    FIU_WQMP_RECENT = NA,
+    MiamiBeach = 4058,
+    PALMBEACH = 10012,
+    PALMBEACH_STORET = NA,
+    SFER = 3
+  )
+  df$ProgramID <- program_ids[[programName]]
+    
   # set any literal "NULL" text strings to na
   df <- df %>%
     mutate(across(where(~ is.character(.) || is.factor(.)), ~ na_if(as.character(.), "NULL")))
