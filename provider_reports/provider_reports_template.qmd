@@ -52,6 +52,7 @@ df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = 
 library(ggplot2)
 
 ggplot(df, aes(x = DEP.Analyte.Name, y = DEP.Result.Value.Number)) +
+  scale_y_log10() +
   geom_violin(width = 1.2, adjust = 10, fill = "skyblue", color = "black") +
   geom_boxplot(width = 0.1, outlier.shape = NA) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +

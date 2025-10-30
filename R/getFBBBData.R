@@ -94,7 +94,7 @@ getFBBBData <- function(){
         "PO4"       = "Phosphate, Filtered (PO4)",
         "TDP"       = "Total Phosphorus",
         "Phaeo (µg/L)"     = "Pheophytin",
-        "Chl a (µg/L)"     = "Chlorophyll a, Uncorrected for Pheophytin",
+        "Chl a (µg/L)"     = "Chlorophyll a, corrected for pheophytin",
         "Salinity"  = "Salinity",
         "Si"        = "Silicate",
         "Temp"      = "Water Temperature",
