@@ -196,12 +196,398 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"exports"</span>, <span class="st">"allDataSEACAR.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<div class="cell">
+<details class="code-fold">
+<summary>show percent of missing programID</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show percentage of missing or na rows </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get the total number of rows for each program</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>total_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"total_rows"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the number of NA rows for each program</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>na_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(ProgramID)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"missing_rows"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combine total and NA counts, calculate percentage</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>percentage_table <span class="ot">&lt;-</span> total_counts <span class="sc">%&gt;%</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(na_counts, <span class="at">by =</span> <span class="st">"ProgramName"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If a program had no NAs, na_counts will be NA. Replace with 0.</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_rows =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(missing_rows), <span class="dv">0</span>, missing_rows),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the percentage</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage_raw =</span> missing_rows <span class="sc">/</span> total_rows,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format the percentage for clean table output</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> scales<span class="sc">::</span><span class="fu">percent</span>(percentage_raw, <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and order the columns for the final table</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ProgramName, missing_rows, total_rows, percentage) <span class="sc">%&gt;%</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort by program name</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ProgramName)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print the final data frame (which R displays as a table)</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(percentage_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           ProgramName missing_rows total_rows percentage
+1            AOML_FBBB        43401      43401     100.0%
+2                 BBAP            0      18554       0.0%
+3                 BBWW            0        910       0.0%
+4              BROWARD            0      16213       0.0%
+5       BROWARD_STORET        24290      24290     100.0%
+6                  DEP            0     104111       0.0%
+7            DERM_BBWQ            0     144946       0.0%
+8     DERM_BBWQ_STORET       442825     442825     100.0%
+9        FIU_Estuaries            0     388128       0.0%
+10            FIU_WQMP            0      65895       0.0%
+11 FIU_WQMP_HISTORICAL       484218     484218     100.0%
+12     FIU_WQMP_RECENT         4020       4020     100.0%
+13          MiamiBeach            0      27484       0.0%
+14           PALMBEACH            0       8309       0.0%
+15    PALMBEACH_STORET        13145      13145     100.0%
+16                SFER            0      76230       0.0%</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>show percent of missing SampleDate</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show percentage of missing or na rows </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get the total number of rows for each program</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>total_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"total_rows"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the number of NA rows for each program</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>na_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(SampleDate)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"missing_rows"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combine total and NA counts, calculate percentage</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>percentage_table <span class="ot">&lt;-</span> total_counts <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(na_counts, <span class="at">by =</span> <span class="st">"ProgramName"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If a program had no NAs, na_counts will be NA. Replace with 0.</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_rows =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(missing_rows), <span class="dv">0</span>, missing_rows),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the percentage</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage_raw =</span> missing_rows <span class="sc">/</span> total_rows,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format the percentage for clean table output</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> scales<span class="sc">::</span><span class="fu">percent</span>(percentage_raw, <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and order the columns for the final table</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ProgramName, missing_rows, total_rows, percentage) <span class="sc">%&gt;%</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort by program name</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ProgramName)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print the final data frame (which R displays as a table)</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(percentage_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           ProgramName missing_rows total_rows percentage
+1            AOML_FBBB            0      43401       0.0%
+2                 BBAP         7634      18554      41.1%
+3                 BBWW            0        910       0.0%
+4              BROWARD            0      16213       0.0%
+5       BROWARD_STORET        24290      24290     100.0%
+6                  DEP            0     104111       0.0%
+7            DERM_BBWQ            0     144946       0.0%
+8     DERM_BBWQ_STORET       442825     442825     100.0%
+9        FIU_Estuaries            0     388128       0.0%
+10            FIU_WQMP            0      65895       0.0%
+11 FIU_WQMP_HISTORICAL            0     484218       0.0%
+12     FIU_WQMP_RECENT            0       4020       0.0%
+13          MiamiBeach            0      27484       0.0%
+14           PALMBEACH            0       8309       0.0%
+15    PALMBEACH_STORET        13145      13145     100.0%
+16                SFER           18      76230       0.0%</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>show percent of missing ResultValue</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show percentage of missing or na rows </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get the total number of rows for each program</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>total_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"total_rows"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the number of NA rows for each program</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>na_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(ResultValue)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"missing_rows"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combine total and NA counts, calculate percentage</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>percentage_table <span class="ot">&lt;-</span> total_counts <span class="sc">%&gt;%</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(na_counts, <span class="at">by =</span> <span class="st">"ProgramName"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If a program had no NAs, na_counts will be NA. Replace with 0.</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_rows =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(missing_rows), <span class="dv">0</span>, missing_rows),</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the percentage</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage_raw =</span> missing_rows <span class="sc">/</span> total_rows,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format the percentage for clean table output</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> scales<span class="sc">::</span><span class="fu">percent</span>(percentage_raw, <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and order the columns for the final table</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ProgramName, missing_rows, total_rows, percentage) <span class="sc">%&gt;%</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort by program name</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ProgramName)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print the final data frame (which R displays as a table)</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(percentage_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           ProgramName missing_rows total_rows percentage
+1            AOML_FBBB            0      43401       0.0%
+2                 BBAP         6008      18554      32.4%
+3                 BBWW            0        910       0.0%
+4              BROWARD            0      16213       0.0%
+5       BROWARD_STORET         1410      24290       5.8%
+6                  DEP            0     104111       0.0%
+7            DERM_BBWQ           15     144946       0.0%
+8     DERM_BBWQ_STORET         2850     442825       0.6%
+9        FIU_Estuaries        21510     388128       5.5%
+10            FIU_WQMP         2838      65895       4.3%
+11 FIU_WQMP_HISTORICAL       121735     484218      25.1%
+12     FIU_WQMP_RECENT          773       4020      19.2%
+13          MiamiBeach          347      27484       1.3%
+14           PALMBEACH           44       8309       0.5%
+15    PALMBEACH_STORET          329      13145       2.5%
+16                SFER        14482      76230      19.0%</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>show percent of missing coordinates</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show percentage of missing or na rows in df$Monitoring.Location.ID grouped by df$program</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get the total number of rows for each program</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>total_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"total_rows"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the number of NA rows for each program</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>na_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(OriginalLatitude) <span class="sc">|</span> <span class="fu">is.na</span>(OriginalLongitude)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"missing_rows"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combine total and NA counts, calculate percentage</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>percentage_table <span class="ot">&lt;-</span> total_counts <span class="sc">%&gt;%</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(na_counts, <span class="at">by =</span> <span class="st">"ProgramName"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If a program had no NAs, na_counts will be NA. Replace with 0.</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_rows =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(missing_rows), <span class="dv">0</span>, missing_rows),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the percentage</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage_raw =</span> missing_rows <span class="sc">/</span> total_rows,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format the percentage for clean table output</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> scales<span class="sc">::</span><span class="fu">percent</span>(percentage_raw, <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and order the columns for the final table</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ProgramName, missing_rows, total_rows, percentage) <span class="sc">%&gt;%</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort by program name</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ProgramName)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print the final data frame (which R displays as a table)</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(percentage_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           ProgramName missing_rows total_rows percentage
+1            AOML_FBBB            0      43401       0.0%
+2                 BBAP         7960      18554      42.9%
+3                 BBWW            0        910       0.0%
+4              BROWARD         1071      16213       6.6%
+5       BROWARD_STORET        24290      24290     100.0%
+6                  DEP         4580     104111       4.4%
+7            DERM_BBWQ            0     144946       0.0%
+8     DERM_BBWQ_STORET       442825     442825     100.0%
+9        FIU_Estuaries            0     388128       0.0%
+10            FIU_WQMP         3274      65895       5.0%
+11 FIU_WQMP_HISTORICAL           54     484218       0.0%
+12     FIU_WQMP_RECENT         4020       4020     100.0%
+13          MiamiBeach         4443      27484      16.2%
+14           PALMBEACH         8309       8309     100.0%
+15    PALMBEACH_STORET        13145      13145     100.0%
+16                SFER           18      76230       0.0%</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>show percent of missing ProgramLocationID</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show percentage of missing or na rows </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get the total number of rows for each program</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>total_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"total_rows"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the number of NA rows for each program</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>na_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(ProgramLocationID)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"missing_rows"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combine total and NA counts, calculate percentage</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>percentage_table <span class="ot">&lt;-</span> total_counts <span class="sc">%&gt;%</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(na_counts, <span class="at">by =</span> <span class="st">"ProgramName"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If a program had no NAs, na_counts will be NA. Replace with 0.</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_rows =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(missing_rows), <span class="dv">0</span>, missing_rows),</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the percentage</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage_raw =</span> missing_rows <span class="sc">/</span> total_rows,</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format the percentage for clean table output</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> scales<span class="sc">::</span><span class="fu">percent</span>(percentage_raw, <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and order the columns for the final table</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ProgramName, missing_rows, total_rows, percentage) <span class="sc">%&gt;%</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort by program name</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ProgramName)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print the final data frame (which R displays as a table)</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(percentage_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           ProgramName missing_rows total_rows percentage
+1            AOML_FBBB            0      43401       0.0%
+2                 BBAP            0      18554       0.0%
+3                 BBWW            0        910       0.0%
+4              BROWARD            0      16213       0.0%
+5       BROWARD_STORET            0      24290       0.0%
+6                  DEP            0     104111       0.0%
+7            DERM_BBWQ            0     144946       0.0%
+8     DERM_BBWQ_STORET            0     442825       0.0%
+9        FIU_Estuaries            0     388128       0.0%
+10            FIU_WQMP            0      65895       0.0%
+11 FIU_WQMP_HISTORICAL            0     484218       0.0%
+12     FIU_WQMP_RECENT            0       4020       0.0%
+13          MiamiBeach            0      27484       0.0%
+14           PALMBEACH            0       8309       0.0%
+15    PALMBEACH_STORET            0      13145       0.0%
+16                SFER           18      76230       0.0%</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>show percent of missing DetectionUnit</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show percentage of missing or na rows </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Get the total number of rows for each program</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>total_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"total_rows"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the number of NA rows for each program</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>na_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(DetectionUnit)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"missing_rows"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combine total and NA counts, calculate percentage</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>percentage_table <span class="ot">&lt;-</span> total_counts <span class="sc">%&gt;%</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(na_counts, <span class="at">by =</span> <span class="st">"ProgramName"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If a program had no NAs, na_counts will be NA. Replace with 0.</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_rows =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(missing_rows), <span class="dv">0</span>, missing_rows),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate the percentage</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage_raw =</span> missing_rows <span class="sc">/</span> total_rows,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Format the percentage for clean table output</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> scales<span class="sc">::</span><span class="fu">percent</span>(percentage_raw, <span class="at">accuracy =</span> <span class="fl">0.1</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and order the columns for the final table</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ProgramName, missing_rows, total_rows, percentage) <span class="sc">%&gt;%</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort by program name</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(ProgramName)</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Print the final data frame (which R displays as a table)</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(percentage_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           ProgramName missing_rows total_rows percentage
+1            AOML_FBBB        43401      43401     100.0%
+2                 BBAP        18554      18554     100.0%
+3                 BBWW          910        910     100.0%
+4              BROWARD        16213      16213     100.0%
+5       BROWARD_STORET        24290      24290     100.0%
+6                  DEP       104111     104111     100.0%
+7            DERM_BBWQ       144946     144946     100.0%
+8     DERM_BBWQ_STORET       442825     442825     100.0%
+9        FIU_Estuaries       388128     388128     100.0%
+10            FIU_WQMP        65895      65895     100.0%
+11 FIU_WQMP_HISTORICAL       484218     484218     100.0%
+12     FIU_WQMP_RECENT         4020       4020     100.0%
+13          MiamiBeach        25318      27484      92.1%
+14           PALMBEACH         8309       8309     100.0%
+15    PALMBEACH_STORET        13145      13145     100.0%
+16                SFER        76230      76230     100.0%</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#show table from df with a row for each unique of </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (ProgramLocationID and ProgramName) with columns </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># programLocationID, ProgramName, and N_locations, </span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># where N_locations is the number of unique OriginalLatitude and</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># OriginalLongitude pairs for the programLocationID+ProgramName.</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ProgramLocationID, ProgramName) <span class="sc">%&gt;%</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">N_locations =</span> <span class="fu">n_distinct</span>(<span class="fu">paste</span>(OriginalLatitude, OriginalLongitude)),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(N_locations <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>summary_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 292 × 3
+   ProgramLocationID ProgramName N_locations
+   &lt;chr&gt;             &lt;chr&gt;             &lt;int&gt;
+ 1 1                 AOML_FBBB           133
+ 2 1                 SFER                 51
+ 3 10                AOML_FBBB           113
+ 4 10                SFER                 53
+ 5 11                AOML_FBBB           117
+ 6 11                SFER                 55
+ 7 12                AOML_FBBB           116
+ 8 12                SFER                 57
+ 9 13                AOML_FBBB           119
+10 13                SFER                 54
+# ℹ 282 more rows</code></pre>
+</div>
+</div>
 <section id="summary-of-column-completeness" class="level2">
 <h2 class="anchored" data-anchor-id="summary-of-column-completeness">Summary of column completeness</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -213,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">1896066</td>
+<td style="text-align: left;">1862679</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Number of columns</td>
@@ -276,8 +662,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Habitat</td>
-<td style="text-align: right;">1514087</td>
-<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">1480700</td>
+<td style="text-align: right;">0.21</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
@@ -286,7 +672,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">IndicatorName</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">9</td>
 <td style="text-align: right;">13</td>
@@ -296,7 +682,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ManagedAreaName</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">29</td>
 <td style="text-align: right;">38</td>
@@ -306,8 +692,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">RelativeDepth</td>
-<td style="text-align: right;">940743</td>
-<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">907356</td>
+<td style="text-align: right;">0.51</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">17934</td>
@@ -316,7 +702,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">DetectionUnit</td>
-<td style="text-align: right;">1893900</td>
+<td style="text-align: right;">1860513</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">4</td>
@@ -326,7 +712,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEACAR_QAQCFlagCode</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">13</td>
@@ -336,7 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">SEACAR_QAQC_Description</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">31</td>
 <td style="text-align: right;">195</td>
@@ -346,7 +732,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ExportVersion</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">23</td>
 <td style="text-align: right;">23</td>
@@ -356,8 +742,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Region</td>
-<td style="text-align: right;">1795447</td>
-<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">1795347</td>
+<td style="text-align: right;">0.04</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">0</td>
@@ -390,7 +776,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: right;">0.96</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">10</td>
-<td style="text-align: right;">26412</td>
+<td style="text-align: right;">20867</td>
 <td style="text-align: right;">20</td>
 <td style="text-align: right;">0</td>
 </tr>
@@ -406,7 +792,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ActivityType</td>
-<td style="text-align: right;">1537128</td>
+<td style="text-align: right;">1503741</td>
 <td style="text-align: right;">0.19</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">35</td>
@@ -416,18 +802,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">SampleDate</td>
-<td style="text-align: right;">564700</td>
-<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">487912</td>
+<td style="text-align: right;">0.74</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">3274</td>
+<td style="text-align: right;">3441</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ValueQualifier</td>
-<td style="text-align: right;">1338929</td>
-<td style="text-align: right;">0.29</td>
+<td style="text-align: right;">1305542</td>
+<td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">227472</td>
@@ -436,7 +822,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ResultComments</td>
-<td style="text-align: right;">1537966</td>
+<td style="text-align: right;">1504579</td>
 <td style="text-align: right;">0.19</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">874</td>
@@ -446,7 +832,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">SEACAR_EventID</td>
-<td style="text-align: right;">1873025</td>
+<td style="text-align: right;">1839638</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">36</td>
 <td style="text-align: right;">36</td>
@@ -470,7 +856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">ValueQualifierSource</td>
-<td style="text-align: right;">1896066</td>
+<td style="text-align: right;">1862679</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">NaN</td>
 <td style="text-align: left;">:</td>
@@ -510,7 +896,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">RowID</td>
-<td style="text-align: right;">1873025</td>
+<td style="text-align: right;">1839638</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">1009723.34</td>
 <td style="text-align: right;">798651.12</td>
@@ -523,8 +909,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ProgramID</td>
-<td style="text-align: right;">1045286</td>
-<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">1011899</td>
+<td style="text-align: right;">0.46</td>
 <td style="text-align: right;">2089.55</td>
 <td style="text-align: right;">2366.26</td>
 <td style="text-align: right;">3.00</td>
@@ -536,7 +922,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">IndicatorID</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">6.73</td>
 <td style="text-align: right;">0.63</td>
@@ -549,7 +935,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ParameterID</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">8.60</td>
 <td style="text-align: right;">6.56</td>
@@ -562,7 +948,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">AreaID</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">6.09</td>
 <td style="text-align: right;">0.89</td>
@@ -575,23 +961,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">Year</td>
-<td style="text-align: right;">1057381</td>
-<td style="text-align: right;">0.44</td>
-<td style="text-align: right;">2011.34</td>
-<td style="text-align: right;">9.89</td>
+<td style="text-align: right;">980593</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">2011.08</td>
+<td style="text-align: right;">9.76</td>
 <td style="text-align: right;">1989.48</td>
-<td style="text-align: right;">2002.12</td>
-<td style="text-align: right;">2018.00</td>
+<td style="text-align: right;">2002.18</td>
+<td style="text-align: right;">2016.00</td>
 <td style="text-align: right;">2020.00</td>
 <td style="text-align: right;">2024.00</td>
 <td style="text-align: left;">▁▃▃▁▇</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Month</td>
-<td style="text-align: right;">1057363</td>
-<td style="text-align: right;">0.44</td>
-<td style="text-align: right;">6.58</td>
-<td style="text-align: right;">3.45</td>
+<td style="text-align: right;">980575</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">6.59</td>
+<td style="text-align: right;">3.44</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">4.00</td>
 <td style="text-align: right;">7.00</td>
@@ -601,7 +987,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">TotalDepth_m</td>
-<td style="text-align: right;">1896003</td>
+<td style="text-align: right;">1862616</td>
 <td style="text-align: right;">0.00</td>
 <td style="text-align: right;">62.22</td>
 <td style="text-align: right;">105.84</td>
@@ -614,7 +1000,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MDL</td>
-<td style="text-align: right;">1696454</td>
+<td style="text-align: right;">1663067</td>
 <td style="text-align: right;">0.11</td>
 <td style="text-align: right;">0.06</td>
 <td style="text-align: right;">0.48</td>
@@ -627,7 +1013,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">PQL</td>
-<td style="text-align: right;">1696454</td>
+<td style="text-align: right;">1663067</td>
 <td style="text-align: right;">0.11</td>
 <td style="text-align: right;">0.18</td>
 <td style="text-align: right;">2.34</td>
@@ -640,7 +1026,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Include</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.03</td>
@@ -653,7 +1039,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">MADup</td>
-<td style="text-align: right;">1872115</td>
+<td style="text-align: right;">1838728</td>
 <td style="text-align: right;">0.01</td>
 <td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.00</td>
@@ -666,8 +1052,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ResultValue</td>
-<td style="text-align: right;">205728</td>
-<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">172341</td>
+<td style="text-align: right;">0.91</td>
 <td style="text-align: right;">10.94</td>
 <td style="text-align: right;">388.30</td>
 <td style="text-align: right;">-0.03</td>
@@ -679,8 +1065,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">ActivityDepth_m</td>
-<td style="text-align: right;">1041878</td>
-<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">1008491</td>
+<td style="text-align: right;">0.46</td>
 <td style="text-align: right;">6.28</td>
 <td style="text-align: right;">14.51</td>
 <td style="text-align: right;">0.00</td>
@@ -693,25 +1079,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: left;">OriginalLatitude</td>
 <td style="text-align: right;">513935</td>
-<td style="text-align: right;">0.73</td>
-<td style="text-align: right;">25.34</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">25.35</td>
 <td style="text-align: right;">0.62</td>
 <td style="text-align: right;">24.38</td>
-<td style="text-align: right;">24.85</td>
-<td style="text-align: right;">25.27</td>
-<td style="text-align: right;">25.77</td>
+<td style="text-align: right;">24.83</td>
+<td style="text-align: right;">25.28</td>
+<td style="text-align: right;">25.78</td>
 <td style="text-align: right;">28.78</td>
-<td style="text-align: left;">▇▆▁▁▁</td>
+<td style="text-align: left;">▇▇▁▁▁</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">OriginalLongitude</td>
 <td style="text-align: right;">513989</td>
-<td style="text-align: right;">0.73</td>
-<td style="text-align: right;">-80.97</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">-80.98</td>
 <td style="text-align: right;">0.74</td>
 <td style="text-align: right;">-85.02</td>
-<td style="text-align: right;">-81.50</td>
-<td style="text-align: right;">-80.91</td>
+<td style="text-align: right;">-81.52</td>
+<td style="text-align: right;">-80.93</td>
 <td style="text-align: right;">-80.29</td>
 <td style="text-align: right;">-80.02</td>
 <td style="text-align: left;">▁▁▁▆▇</td>
@@ -723,22 +1109,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Plot providers row count grouped by analyte</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> ProgramName, <span class="at">fill =</span> ParameterName)) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Count of Observations by Program and Parameter"</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Program Name"</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count (Log Scale)"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Parameter"</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> ProgramName, <span class="at">fill =</span> ParameterName)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Count of Observations by Program and Parameter"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Program Name"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count (Log Scale)"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Parameter"</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -751,16 +1137,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>show n samples from bottom &amp; surface</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> RelativeDepth)) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Number of Samples by Relative Depth"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Relative Depth"</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Samples"</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> RelativeDepth)) <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Number of Samples by Relative Depth"</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Relative Depth"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Samples"</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -773,32 +1159,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/mutateWINToSEACAR.R"</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_all <span class="sc">%&gt;%</span> <span class="fu">mutateWINToSEACAR</span>(<span class="at">.keep =</span> <span class="st">"unused"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>SEACAR_COLUMNS <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="st">"ExportVersion"</span>,<span class="st">"RowID"</span>,<span class="st">"ProgramID"</span>,<span class="st">"ProgramName"</span>,<span class="st">"Habitat"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="st">"IndicatorID"</span>,<span class="st">"IndicatorName"</span>,<span class="st">"ParameterID"</span>,<span class="st">"ParameterName"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> <span class="st">"ParameterUnits"</span>,<span class="st">"ProgramLocationID"</span>,<span class="st">"AreaID"</span>,<span class="st">"ManagedAreaName"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a> <span class="st">"Region"</span>,<span class="st">"ActivityType"</span>,<span class="st">"SampleDate"</span>,<span class="st">"ResultValue"</span>,<span class="st">"Year"</span>,<span class="st">"Month"</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> <span class="st">"ActivityDepth_m"</span>,<span class="st">"RelativeDepth"</span>,<span class="st">"TotalDepth_m"</span>,<span class="st">"MDL"</span>,<span class="st">"PQL"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="st">"DetectionUnit"</span>,<span class="st">"ValueQualifier"</span>,<span class="st">"ValueQualifierSource"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a> <span class="st">"SampleFraction"</span>,<span class="st">"ResultComments"</span>,<span class="st">"OriginalLatitude"</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a> <span class="st">"OriginalLongitude"</span>,<span class="st">"SEACAR_QAQCFlagCode"</span>,</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a> <span class="st">"SEACAR_QAQC_Description"</span>,<span class="st">"Include"</span>,<span class="st">"SEACAR_EventID"</span>,<span class="st">"MADup"</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># figure out which are actually present</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>present_cols <span class="ot">&lt;-</span> <span class="fu">intersect</span>(SEACAR_COLUMNS, <span class="fu">names</span>(df))</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>missing_cols <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(SEACAR_COLUMNS, <span class="fu">names</span>(df))</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing_cols) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">warning</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">These SEACAR_COLUMNS were not found in df:</span><span class="sc">\n</span><span class="st">  "</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>         <span class="fu">paste</span>(missing_cols, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Any additional columns in df that are not mapped to SEACAR</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>extra_columns <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">names</span>(df), SEACAR_COLUMNS)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Columns from source data that are not (directly) mapped to SEACAR columns:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/mutateWINToSEACAR.R"</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_all <span class="sc">%&gt;%</span> <span class="fu">mutateWINToSEACAR</span>(<span class="at">.keep =</span> <span class="st">"unused"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>SEACAR_COLUMNS <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a> <span class="st">"ExportVersion"</span>,<span class="st">"RowID"</span>,<span class="st">"ProgramID"</span>,<span class="st">"ProgramName"</span>,<span class="st">"Habitat"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a> <span class="st">"IndicatorID"</span>,<span class="st">"IndicatorName"</span>,<span class="st">"ParameterID"</span>,<span class="st">"ParameterName"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a> <span class="st">"ParameterUnits"</span>,<span class="st">"ProgramLocationID"</span>,<span class="st">"AreaID"</span>,<span class="st">"ManagedAreaName"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a> <span class="st">"Region"</span>,<span class="st">"ActivityType"</span>,<span class="st">"SampleDate"</span>,<span class="st">"ResultValue"</span>,<span class="st">"Year"</span>,<span class="st">"Month"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a> <span class="st">"ActivityDepth_m"</span>,<span class="st">"RelativeDepth"</span>,<span class="st">"TotalDepth_m"</span>,<span class="st">"MDL"</span>,<span class="st">"PQL"</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a> <span class="st">"DetectionUnit"</span>,<span class="st">"ValueQualifier"</span>,<span class="st">"ValueQualifierSource"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a> <span class="st">"SampleFraction"</span>,<span class="st">"ResultComments"</span>,<span class="st">"OriginalLatitude"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a> <span class="st">"OriginalLongitude"</span>,<span class="st">"SEACAR_QAQCFlagCode"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a> <span class="st">"SEACAR_QAQC_Description"</span>,<span class="st">"Include"</span>,<span class="st">"SEACAR_EventID"</span>,<span class="st">"MADup"</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># figure out which are actually present</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>present_cols <span class="ot">&lt;-</span> <span class="fu">intersect</span>(SEACAR_COLUMNS, <span class="fu">names</span>(df))</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>missing_cols <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(SEACAR_COLUMNS, <span class="fu">names</span>(df))</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing_cols) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a> <span class="fu">warning</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">These SEACAR_COLUMNS were not found in df:</span><span class="sc">\n</span><span class="st">  "</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>         <span class="fu">paste</span>(missing_cols, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Any additional columns in df that are not mapped to SEACAR</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>extra_columns <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">names</span>(df), SEACAR_COLUMNS)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Columns from source data that are not (directly) mapped to SEACAR columns:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -806,7 +1192,7 @@ Columns from source data that are not (directly) mapped to SEACAR columns:</code
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extra_columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(extra_columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "X"                              "keyfield"                      
