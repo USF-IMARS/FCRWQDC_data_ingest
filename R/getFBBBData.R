@@ -27,6 +27,10 @@ getFBBBData <- function(){
       values_to = "DEP.Result.Value.Number"
     )
   
+  
+  # drop NA rows introduced by pivot
+  df <- filter(df, !is.na(`DEP.Result.Value.Number`))
+  
   # set DEP.Result.Unit from DEP.Analyte.Name where appropriate
   # Mapping is from metadata sheet in xlsx file
   df <- df %>%
