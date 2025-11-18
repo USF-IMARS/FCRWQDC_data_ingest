@@ -81,10 +81,7 @@ getFBBBData <- function(){
   # === map analyte names to standard from unique(df$DEP.Analyte.Name))
   df <- df %>%
     mutate(
-      Activity.Start.Date.Time = as.Date(
-        Activity.Start.Date.Time, 
-        format="%m/%d/%y"
-      ),
+      Activity.Start.Date.Time = as.Date(as.numeric(Activity.Start.Date.Time), origin = "1899-12-30"),  # convert from excel date format
       DEP.Analyte.Name = recode(
         DEP.Analyte.Name,
         "NH4"       = "Ammonium, Filtered (NH4)",
