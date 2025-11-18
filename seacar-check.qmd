@@ -27,6 +27,259 @@ write.csv(df, here("data", "exports", "allDataSEACAR.csv"))
 
 ```
 
+```{R, show percent missing ProgramID}
+#| code-summary: show percent of missing programID
+library(dplyr)
+library(scales)
+# show percentage of missing or na rows 
+# 1. Get the total number of rows for each program
+total_counts <- df %>%
+  count(ProgramName, name = "total_rows")
+
+# 2. Get the number of NA rows for each program
+na_counts <- df %>%
+  filter(is.na(ProgramID)) %>%
+  count(ProgramName, name = "missing_rows")
+
+# 3. Combine total and NA counts, calculate percentage
+percentage_table <- total_counts %>%
+  left_join(na_counts, by = "ProgramName") %>%
+  mutate(
+    # If a program had no NAs, na_counts will be NA. Replace with 0.
+    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
+    
+    # Calculate the percentage
+    percentage_raw = missing_rows / total_rows,
+    
+    # Format the percentage for clean table output
+    percentage = scales::percent(percentage_raw, accuracy = 0.1)
+  ) %>%
+  
+  # Select and order the columns for the final table
+  select(ProgramName, missing_rows, total_rows, percentage) %>%
+  
+  # Sort by program name
+  arrange(ProgramName)
+
+# 4. Print the final data frame (which R displays as a table)
+print(percentage_table)
+```
+
+
+```{R, show percent missing SampleDate}
+#| code-summary: show percent of missing SampleDate
+library(dplyr)
+library(scales)
+# show percentage of missing or na rows 
+# 1. Get the total number of rows for each program
+total_counts <- df %>%
+  count(ProgramName, name = "total_rows")
+
+# 2. Get the number of NA rows for each program
+na_counts <- df %>%
+  filter(is.na(SampleDate)) %>%
+  count(ProgramName, name = "missing_rows")
+
+# 3. Combine total and NA counts, calculate percentage
+percentage_table <- total_counts %>%
+  left_join(na_counts, by = "ProgramName") %>%
+  mutate(
+    # If a program had no NAs, na_counts will be NA. Replace with 0.
+    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
+    
+    # Calculate the percentage
+    percentage_raw = missing_rows / total_rows,
+    
+    # Format the percentage for clean table output
+    percentage = scales::percent(percentage_raw, accuracy = 0.1)
+  ) %>%
+  
+  # Select and order the columns for the final table
+  select(ProgramName, missing_rows, total_rows, percentage) %>%
+  
+  # Sort by program name
+  arrange(ProgramName)
+
+# 4. Print the final data frame (which R displays as a table)
+print(percentage_table)
+```
+
+```{R, show percent missing ResultValue}
+#| code-summary: show percent of missing ResultValue
+library(dplyr)
+library(scales)
+# show percentage of missing or na rows 
+# 1. Get the total number of rows for each program
+total_counts <- df %>%
+  count(ProgramName, name = "total_rows")
+
+# 2. Get the number of NA rows for each program
+na_counts <- df %>%
+  filter(is.na(ResultValue)) %>%
+  count(ProgramName, name = "missing_rows")
+
+# 3. Combine total and NA counts, calculate percentage
+percentage_table <- total_counts %>%
+  left_join(na_counts, by = "ProgramName") %>%
+  mutate(
+    # If a program had no NAs, na_counts will be NA. Replace with 0.
+    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
+    
+    # Calculate the percentage
+    percentage_raw = missing_rows / total_rows,
+    
+    # Format the percentage for clean table output
+    percentage = scales::percent(percentage_raw, accuracy = 0.1)
+  ) %>%
+  
+  # Select and order the columns for the final table
+  select(ProgramName, missing_rows, total_rows, percentage) %>%
+  
+  # Sort by program name
+  arrange(ProgramName)
+
+# 4. Print the final data frame (which R displays as a table)
+print(percentage_table)
+```
+
+
+
+```{R, show percent missing coordinates}
+#| code-summary: show percent of missing coordinates
+library(dplyr)
+library(scales)
+# show percentage of missing or na rows in df$Monitoring.Location.ID grouped by df$program
+# 1. Get the total number of rows for each program
+total_counts <- df %>%
+  count(program, name = "total_rows")
+
+# 2. Get the number of NA rows for each program
+na_counts <- df %>%
+  filter(is.na(OriginalLatitude) | is.na(OriginalLongitude)) %>%
+  count(program, name = "missing_rows")
+
+# 3. Combine total and NA counts, calculate percentage
+percentage_table <- total_counts %>%
+  left_join(na_counts, by = "program") %>%
+  mutate(
+    # If a program had no NAs, na_counts will be NA. Replace with 0.
+    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
+    
+    # Calculate the percentage
+    percentage_raw = missing_rows / total_rows,
+    
+    # Format the percentage for clean table output
+    percentage = scales::percent(percentage_raw, accuracy = 0.1)
+  ) %>%
+  
+  # Select and order the columns for the final table
+  select(program, missing_rows, total_rows, percentage) %>%
+  
+  # Sort by program name
+  arrange(program)
+
+# 4. Print the final data frame (which R displays as a table)
+print(percentage_table)
+```
+
+```{R, show percent missing ProgramLocationID}
+#| code-summary: show percent of missing ProgramLocationID
+library(dplyr)
+library(scales)
+# show percentage of missing or na rows 
+# 1. Get the total number of rows for each program
+total_counts <- df %>%
+  count(ProgramName, name = "total_rows")
+
+# 2. Get the number of NA rows for each program
+na_counts <- df %>%
+  filter(is.na(ProgramLocationID)) %>%
+  count(ProgramName, name = "missing_rows")
+
+# 3. Combine total and NA counts, calculate percentage
+percentage_table <- total_counts %>%
+  left_join(na_counts, by = "ProgramName") %>%
+  mutate(
+    # If a program had no NAs, na_counts will be NA. Replace with 0.
+    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
+    
+    # Calculate the percentage
+    percentage_raw = missing_rows / total_rows,
+    
+    # Format the percentage for clean table output
+    percentage = scales::percent(percentage_raw, accuracy = 0.1)
+  ) %>%
+  
+  # Select and order the columns for the final table
+  select(ProgramName, missing_rows, total_rows, percentage) %>%
+  
+  # Sort by program name
+  arrange(ProgramName)
+
+# 4. Print the final data frame (which R displays as a table)
+print(percentage_table)
+```
+
+```{R, show percent missing DetectionUnit}
+#| code-summary: show percent of missing DetectionUnit
+library(dplyr)
+library(scales)
+# show percentage of missing or na rows 
+# 1. Get the total number of rows for each program
+total_counts <- df %>%
+  count(ProgramName, name = "total_rows")
+
+# 2. Get the number of NA rows for each program
+na_counts <- df %>%
+  filter(is.na(DetectionUnit)) %>%
+  count(ProgramName, name = "missing_rows")
+
+# 3. Combine total and NA counts, calculate percentage
+percentage_table <- total_counts %>%
+  left_join(na_counts, by = "ProgramName") %>%
+  mutate(
+    # If a program had no NAs, na_counts will be NA. Replace with 0.
+    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
+    
+    # Calculate the percentage
+    percentage_raw = missing_rows / total_rows,
+    
+    # Format the percentage for clean table output
+    percentage = scales::percent(percentage_raw, accuracy = 0.1)
+  ) %>%
+  
+  # Select and order the columns for the final table
+  select(ProgramName, missing_rows, total_rows, percentage) %>%
+  
+  # Sort by program name
+  arrange(ProgramName)
+
+# 4. Print the final data frame (which R displays as a table)
+print(percentage_table)
+```
+
+
+
+```{R, check for Locations having multiple pairs of Lat/Long values}
+#show table from df with a row for each unique of 
+# (ProgramLocationID and ProgramName) with columns 
+# programLocationID, ProgramName, and N_locations, 
+# where N_locations is the number of unique OriginalLatitude and
+# OriginalLongitude pairs for the programLocationID+ProgramName.
+
+library(dplyr)
+
+summary_table <- df %>%
+  group_by(ProgramLocationID, ProgramName) %>%
+  summarise(
+    N_locations = n_distinct(paste(OriginalLatitude, OriginalLongitude)),
+    .groups = "drop"
+  ) %>%
+  filter(N_locations > 1)
+
+summary_table
+```
+
 ## Summary of column completeness
 
 ```{R, skimr of columns}
