@@ -4,22 +4,21 @@ format: html
 params: 
   org_id: BROWARD #FIU_WQMP #AOML_BBWW #DERM_BBWQ  # must be BROWARD before `quarto publish`
 ---
-```{R setup}
+
+
+```{R setup and load data}
+#| code-summary: Load libraries & read in data
+
 librarian::shelf(
   dplyr,
   glue,
   here,
   tidyr
 )
-```
 
-Provider Data Assessment
-
-```{R getData}
-#| code-summary: read in data
 # === read data from source files (can take a long time)
-# source(here("R/getData.R"))
-# df <- getData(params$org_id)
+source(here("R/getData.R"))
+df <- getData(params$org_id)
 
 # === read from cleaned file generated in pre-render
 # df_allData <- read.csv(here("data", "exports", "allData.csv")) %>%
@@ -27,27 +26,49 @@ Provider Data Assessment
 # df <- df_allData
 
 # === read from raw file generated in pre-render
-df_allData <- read.csv(here("data/exports/allDataRaw.csv")) %>%
-  filter(program == params$org_id)
-# keep only these columns to reduce RAM usage
- keepCols <- as.vector(c(
-   "DEP.Result.Value.Number",
-   "Activity.Start.Date.Time",
-   "Monitoring.Location.ID",
-   "DEP.Analyte.Name",
-   "Org.Decimal.Latitude",
-   "Org.Decimal.Longitude",
-   "program"
- ))
-df_allData <- df_allData[,keepCols]
-df <- df_allData
+# df_allData <- read.csv(here("data/exports/allDataRaw.csv")) %>%
+#   filter(program == params$org_id)
+# # keep only these columns to reduce RAM usage
+#  keepCols <- as.vector(c(
+#    "DEP.Result.Value.Number",
+#    "Activity.Start.Date.Time",
+#    "Monitoring.Location.ID",
+#    "DEP.Analyte.Name",
+#    "Org.Decimal.Latitude",
+#    "Org.Decimal.Longitude",
+#    "program"
+#  ))
+# df_allData <- df_allData[,keepCols]
+# df <- df_allData
 
 
 df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
 df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d")
 ```
 
+# Summary Statistics
+```{R print start + end dates}
+date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
+  cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
+  cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
+  
+# TODO: show source file. NOTE: could use dict in getData:
+#       {
+#         BROWARD: {
+#           sourceType : WIN,
+#           sourceFile : "data/WIN/_WIN_WAVES_OTIS_BROWARD.txt"
+#           notes: ""
+#         }, 
+#       }
+```
+
+-------------------------
+
+# Data Visualizations
+
+
 ```{R create violin plot}
+#| code-summary: violin plot all analytes
 # Load ggplot2
 library(ggplot2)
 
@@ -60,7 +81,8 @@ ggplot(df, aes(x = DEP.Analyte.Name, y = DEP.Result.Value.Number)) +
 
 ```
 
-```{R create presence table}
+```{R analyte presence table, fig.width=10, fig.height=min(max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2),20)}
+#| code-summary: Table of site sampling effort.
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -73,9 +95,7 @@ heat_long <- getPresenceHeatmapTable(
   site_col = "Monitoring.Location.ID",
   value_col = "DEP.Result.Value.Number"
 )
-```
 
-```{R analyte presence table, fig.width=10, fig.height=min(max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2),20)}
 plotHeatmap(
   heat_long, 
   analyte_col = "DEP.Analyte.Name", 
@@ -85,7 +105,7 @@ plotHeatmap(
 
 
 ```{R create map }
-#| code-summary: create map with unique points
+#| code-summary: Map of sampling sites.
 
 # check for missing lat/lon
 if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude))) {
@@ -117,7 +137,7 @@ if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude)))
 ```
 
 ```{R prep data through time}
-#| code-summary: visualize distribution of points through time
+#| code-summary: Temporal distribution of sampling effort.
 library(ggplot2)
 library(lubridate)
 
@@ -125,10 +145,7 @@ library(lubridate)
 sampling_events <- df %>%
   distinct(Activity.Start.Date.Time, Monitoring.Location.ID) %>%
   arrange(Activity.Start.Date.Time)
-```
 
-```{R time distribution plot}
-#| code-summary: Create time distribution plot
 ggplot(sampling_events, aes(x = Activity.Start.Date.Time)) +
   geom_histogram(bins = 30, fill = "steelblue", color = "white", alpha = 0.7) +
   labs(
@@ -145,7 +162,7 @@ ggplot(sampling_events, aes(x = Activity.Start.Date.Time)) +
 ```
 
 ```{R sampling heatmap, fig.width=10, fig.height=min(max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2),20)}
-# Create a heatmap of sampling locations over time
+#| code-summary: Plot spatiotemporal sample locations.
 # drop rows with missing dates or IDs
 sampling_events <- sampling_events %>%
   filter(!is.na(Activity.Start.Date.Time), !is.na(Monitoring.Location.ID))
@@ -170,11 +187,7 @@ if (nrow(sampling_events) > 0) {
 }
 ```
 
-```{R print start + end dates}
-date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
-  cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
-  cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
-```
+
 
 ## Missing Data
 ```{R print rows with missing values in critical columns}
@@ -207,3 +220,45 @@ printed_rows <- c(printed_rows, invalid_latlon)
 
 ```
 
+---------------------------
+
+# SEACAR Quality Assurance & Known Issues
+```{R, Check for missing values}
+# define generic checkcol function
+checkColumn <- function(df, colName){ 
+  if(!colName %in% names(df)){
+    stop(paste("Column", colName, "not found in dataframe"))
+  }
+  
+  # Calculate percent missing
+  vals <- df[[colName]]
+  n <- length(vals)
+  n_missing <- sum(is.na(vals))
+  pct_missing <- (n_missing / n) * 100
+  
+  cat(sprintf("\n\n'%s': missing %d values (%.2f%%)\n",
+              colName, n_missing, pct_missing))
+  
+  # If missing, show first few rows with missing
+  if(n_missing > 0){
+    cat("\tFirst few rows with missing values:\n")
+    print(head(df[is.na(vals), , drop = FALSE]))
+  }
+}
+
+# convert data to SEACAR format
+source(here::here("R/mutateWINToSEACAR.R"))
+df_seacar <- mutateWINToSEACAR(df)
+
+# call checkCol fn on important columns:
+cols <- 
+
+lapply(
+  c("ProgramID", "SampleDate", "ResultValue",
+          "OriginalLatitude", "OriginalLongitude",
+          "ProgramLocationID", "DetectionUnit"), 
+  function(col){
+    checkColumn(df_seacar, col)
+  }
+)
+```

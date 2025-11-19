@@ -15,56 +15,58 @@ mutateWINToSEACAR <- function(df, .keep = "none"){
   #       +     is.na(df[[v1]]) & !is.na(df[[v2]]),
   #       +     c(v1, v2, 'program')
   #       + ]
-  # It is noted below how many rows may have information to contribute.
+
+  
+  # To make mutate() not error when a source column is missing, 
+  # and instead fill with NA, wrap each source column in a helper 
+  # `safe_col` that returns the column if it exists, else NA.
+  safe_col <- function(df, col) {
+    if (col %in% names(df)) df[[col]] else NA
+  }
+  
   df %>%
     mutate(
-      # mapping from WIN column names to SEACAR names
-      ProgramName = program,
-      ParameterName = DEP.Analyte.Name,
-      ProgramLocationID = Monitoring.Location.ID,
-      ActivityType = Activity.Type,
-      SampleDate = Activity.Start.Date.Time,
-      ResultValue = DEP.Result.Value.Number,
-      ActivityDepth_m = Activity.Depth,
-      ValueQualifier = Value.Qualifier,
-      ResultComments = Result.Comments,
-      OriginalLatitude = Org.Decimal.Latitude,
-      OriginalLongitude = Org.Decimal.Longitude,
+      ProgramName       = safe_col(cur_data(), "program"),
+      ParameterName     = safe_col(cur_data(), "DEP.Analyte.Name"),
+      ProgramLocationID = safe_col(cur_data(), "Monitoring.Location.ID"),
+      ActivityType      = safe_col(cur_data(), "Activity.Type"),
+      SampleDate        = safe_col(cur_data(), "Activity.Start.Date.Time"),
+      ResultValue       = safe_col(cur_data(), "DEP.Result.Value.Number"),
+      ActivityDepth_m   = safe_col(cur_data(), "Activity.Depth"),
+      ValueQualifier    = safe_col(cur_data(), "Value.Qualifier"),
+      ResultComments    = safe_col(cur_data(), "Result.Comments"),
+      OriginalLatitude  = safe_col(cur_data(), "Org.Decimal.Latitude"),
+      OriginalLongitude = safe_col(cur_data(), "Org.Decimal.Longitude"),
       
-      # unchanged values. these are likely only filled for data being
-      # loaded from SEACAR historical data files.
-      # There is a chance of collision here, which would only be a problem
-      # if the vocabulary of the two data sources was different for the two
-      # columns with the same name.
-      RowID = RowID,
-      ProgramID = ProgramID,
-      SEACAR_EventID = SEACAR_EventID,
-      Habitat = Habitat,
-      IndicatorID = IndicatorID,
-      IndicatorName = IndicatorName,
-      ParameterID = ParameterID,
-      ParameterUnits = DEP.Result.Unit,
-      AreaID = AreaID,
-      ManagedAreaName = ManagedAreaName,
-      Region = Region,
-      Year = Year,
-      Month = Month,
-      RelativeDepth = RelativeDepth,
-      TotalDepth_m = TotalDepth_m,
-      MDL = MDL,
-      PQL = PQL,
-      DetectionUnit = DetectionUnit,
-      ValueQualifierSource = ValueQualifierSource,
-      SEACAR_QAQCFlagCode = SEACAR_QAQCFlagCode,
-      SEACAR_QAQC_Description = SEACAR_QAQC_Description,
-      Include = Include,
-      MADup = MADup,
-      ExportVersion = ExportVersion,
-      .keep = .keep) %>%
-    # set df$RelativeDepth using df$ActivityDepth
+      RowID                = safe_col(cur_data(), "RowID"),
+      ProgramID            = safe_col(cur_data(), "ProgramID"),
+      SEACAR_EventID       = safe_col(cur_data(), "SEACAR_EventID"),
+      Habitat              = safe_col(cur_data(), "Habitat"),
+      IndicatorID          = safe_col(cur_data(), "IndicatorID"),
+      IndicatorName        = safe_col(cur_data(), "IndicatorName"),
+      ParameterID          = safe_col(cur_data(), "ParameterID"),
+      ParameterUnits       = safe_col(cur_data(), "DEP.Result.Unit"),
+      AreaID               = safe_col(cur_data(), "AreaID"),
+      ManagedAreaName      = safe_col(cur_data(), "ManagedAreaName"),
+      Region               = safe_col(cur_data(), "Region"),
+      Year                 = safe_col(cur_data(), "Year"),
+      Month                = safe_col(cur_data(), "Month"),
+      RelativeDepth        = safe_col(cur_data(), "RelativeDepth"),
+      TotalDepth_m         = safe_col(cur_data(), "TotalDepth_m"),
+      MDL                  = safe_col(cur_data(), "MDL"),
+      PQL                  = safe_col(cur_data(), "PQL"),
+      DetectionUnit        = safe_col(cur_data(), "DetectionUnit"),
+      ValueQualifierSource = safe_col(cur_data(), "ValueQualifierSource"),
+      SEACAR_QAQCFlagCode  = safe_col(cur_data(), "SEACAR_QAQCFlagCode"),
+      SEACAR_QAQC_Description = safe_col(cur_data(), "SEACAR_QAQC_Description"),
+      Include              = safe_col(cur_data(), "Include"),
+      MADup                = safe_col(cur_data(), "MADup"),
+      ExportVersion        = safe_col(cur_data(), "ExportVersion"),
+      .keep = .keep
+    ) %>%
     mutate(
       RelativeDepth = if_else(
-        is.na(RelativeDepth),  # do not replace existing RelativeDepth values
+        is.na(RelativeDepth),
         if_else(ActivityDepth_m <= 1, "Surface", "Bottom"),
         RelativeDepth
       )
