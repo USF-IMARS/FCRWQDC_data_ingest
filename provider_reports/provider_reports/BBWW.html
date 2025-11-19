@@ -177,7 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#missing-data" id="toc-missing-data" class="nav-link active" data-scroll-target="#missing-data">Missing Data</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link active" data-scroll-target="#summary-statistics">Summary Statistics</a></li>
+  <li><a href="#data-visualizations" id="toc-data-visualizations" class="nav-link" data-scroll-target="#data-visualizations">Data Visualizations</a>
+  <ul class="collapse">
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data">Missing Data</a></li>
+  </ul></li>
+  <li><a href="#seacar-quality-assurance-known-issues" id="toc-seacar-quality-assurance-known-issues" class="nav-link" data-scroll-target="#seacar-quality-assurance-known-issues">SEACAR Quality Assurance &amp; Known Issues</a></li>
   </ul>
 </nav>
     </div>
@@ -205,61 +210,95 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Load libraries &amp; read in data</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  dplyr,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  glue,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  here,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  tidyr</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : BBWW...</code></pre>
 </div>
-<p>Provider Data Assessment</p>
-<div class="cell">
 <details class="code-fold">
-<summary>read in data</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># source(here("R/getData.R"))</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- getData(params$org_id)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># === read from cleaned file generated in pre-render</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># df_allData &lt;- read.csv(here("data", "exports", "allData.csv")) %&gt;%</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(source == params$org_id)</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- df_allData</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># === read from raw file generated in pre-render</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df_allData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"data/exports/allDataRaw.csv"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(program <span class="sc">==</span> params<span class="sc">$</span>org_id)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># keep only these columns to reduce RAM usage</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a> keepCols <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">c</span>(</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>   <span class="st">"DEP.Result.Value.Number"</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Activity.Start.Date.Time"</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Monitoring.Location.ID"</span>,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>   <span class="st">"DEP.Analyte.Name"</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Org.Decimal.Latitude"</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Org.Decimal.Longitude"</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>   <span class="st">"program"</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a> ))</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>df_allData <span class="ot">&lt;-</span> df_allData[,keepCols]</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df_allData</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DEP.Result.Value.Number <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>DEP.Result.Value.Number)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Activity.Start.Date.Time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df<span class="sc">$</span>Activity.Start.Date.Time, <span class="at">format =</span> <span class="st">"%Y-%m-%d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Load libraries &amp; read in data</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># === read from cleaned file generated in pre-render</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># df_allData &lt;- read.csv(here("data", "exports", "allData.csv")) %&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(source == params$org_id)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- df_allData</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># === read from raw file generated in pre-render</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># df_allData &lt;- read.csv(here("data/exports/allDataRaw.csv")) %&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   filter(program == params$org_id)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># # keep only these columns to reduce RAM usage</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  keepCols &lt;- as.vector(c(</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#    "DEP.Result.Value.Number",</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    "Activity.Start.Date.Time",</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    "Monitoring.Location.ID",</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    "DEP.Analyte.Name",</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#    "Org.Decimal.Latitude",</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#    "Org.Decimal.Longitude",</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#    "program"</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#  ))</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># df_allData &lt;- df_allData[,keepCols]</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- df_allData</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DEP.Result.Value.Number <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df<span class="sc">$</span>DEP.Result.Value.Number)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Activity.Start.Date.Time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(df<span class="sc">$</span>Activity.Start.Date.Time, <span class="at">format =</span> <span class="st">"%Y-%m-%d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="summary-statistics" class="level1">
+<h1>Summary Statistics</h1>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load ggplot2</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> DEP.Analyte.Name, <span class="at">y =</span> DEP.Result.Value.Number)) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">width =</span> <span class="fl">1.2</span>, <span class="at">adjust =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>date_range <span class="ot">&lt;-</span> <span class="fu">range</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Earliest sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">1</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Earliest sampling date:  2015-07-08 00:00:00 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Latest   sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">2</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Latest   sampling date:  2019-08-10 00:00:00 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: show source file. </span><span class="al">NOTE</span><span class="co">: could use dict in getData:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#       {</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         BBWW: {</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#           sourceType : WIN,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#           sourceFile : "data/WIN/_WIN_WAVES_OTIS_BBWW.txt"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#           notes: ""</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#         }, </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#       }</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+</section>
+<section id="data-visualizations" class="level1">
+<h1>Data Visualizations</h1>
+<div class="cell">
+<details class="code-fold">
+<summary>violin plot all analytes</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load ggplot2</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> DEP.Analyte.Name, <span class="at">y =</span> DEP.Result.Value.Number)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">width =</span> <span class="fl">1.2</span>, <span class="at">adjust =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Analyte"</span>, <span class="at">y =</span> <span class="st">"Log10(Value)"</span>, <span class="at">title =</span> <span class="st">"Violin + Boxplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -272,28 +311,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/presenceTable.R"</span>))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>heat_long <span class="ot">&lt;-</span> <span class="fu">getPresenceHeatmapTable</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  df, </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">analyte_col =</span> <span class="st">"DEP.Analyte.Name"</span>, </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">site_col =</span> <span class="st">"Monitoring.Location.ID"</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">value_col =</span> <span class="st">"DEP.Result.Value.Number"</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/presenceTable.R"</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>heat_long <span class="ot">&lt;-</span> <span class="fu">getPresenceHeatmapTable</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  df, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">analyte_col =</span> <span class="st">"DEP.Analyte.Name"</span>, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">site_col =</span> <span class="st">"Monitoring.Location.ID"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">value_col =</span> <span class="st">"DEP.Result.Value.Number"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotHeatmap</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  heat_long, </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">analyte_col =</span> <span class="st">"DEP.Analyte.Name"</span>, </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">site_col =</span> <span class="st">"Monitoring.Location.ID"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Table of site sampling effort.</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotHeatmap</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  heat_long, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">analyte_col =</span> <span class="st">"DEP.Analyte.Name"</span>, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">site_col =</span> <span class="st">"Monitoring.Location.ID"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -305,102 +344,97 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>create map with unique points</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check for missing lat/lon</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Latitude)) <span class="sc">||</span> <span class="fu">all</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Longitude))) {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Cannot make map: All rows have missing latitude or longitude."</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(leaflet)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Filter out rows &amp; keep only one per unique lat/lon</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  df_unique_locs <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Org.Decimal.Latitude), <span class="sc">!</span><span class="fu">is.na</span>(Org.Decimal.Longitude)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(Org.Decimal.Latitude, Org.Decimal.Longitude, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Plot all unique points (no clustering)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">leaflet</span>(df_unique_locs) <span class="sc">%&gt;%</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap) <span class="sc">%&gt;%</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addCircleMarkers</span>(</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">lng         =</span> <span class="sc">~</span>Org.Decimal.Longitude,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">lat         =</span> <span class="sc">~</span>Org.Decimal.Latitude,</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">radius      =</span> <span class="dv">4</span>,</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">color       =</span> <span class="st">"blue"</span>,</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">fillOpacity =</span> <span class="fl">0.5</span>,</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">popup       =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Monitoring Location: "</span>, Monitoring.Location.ID</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>      <span class="co"># clusterOptions removed to show every point at all zoom levels</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Map of sampling sites.</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check for missing lat/lon</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">all</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Latitude)) <span class="sc">||</span> <span class="fu">all</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Longitude))) {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Cannot make map: All rows have missing latitude or longitude."</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(leaflet)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. Filter out rows &amp; keep only one per unique lat/lon</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  df_unique_locs <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Org.Decimal.Latitude), <span class="sc">!</span><span class="fu">is.na</span>(Org.Decimal.Longitude)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(Org.Decimal.Latitude, Org.Decimal.Longitude, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2. Plot all unique points (no clustering)</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">leaflet</span>(df_unique_locs) <span class="sc">%&gt;%</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap) <span class="sc">%&gt;%</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">lng         =</span> <span class="sc">~</span>Org.Decimal.Longitude,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">lat         =</span> <span class="sc">~</span>Org.Decimal.Latitude,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">radius      =</span> <span class="dv">4</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">color       =</span> <span class="st">"blue"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">fillOpacity =</span> <span class="fl">0.5</span>,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">popup       =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Monitoring Location: "</span>, Monitoring.Location.ID</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>      <span class="co"># clusterOptions removed to show every point at all zoom levels</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-bc86b0d850952ad7ce40" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-bc86b0d850952ad7ce40">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.7286667,25.7102333,25.6780139,25.7933892,25.68568,25.5999564,25.7483333,25.8150757,25.7375383,25.19725,25.2850348],[-80.2084333,-80.2462,-80.2433917,-80.1809772,-80.1835687,-80.23627190000001,-80.1997222,-80.1752699,-80.1834006,-80.3980167,-80.3950348],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: AN01","Monitoring Location: AN02","Monitoring Location: AN03","Monitoring Location: BB16","Monitoring Location: BB32","Monitoring Location: BB36","Monitoring Location: BB54","Monitoring Location: BB15","Monitoring Location: BB27","Monitoring Location: BB56","Monitoring Location: FLAB02"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.19725,25.8150757],"lng":[-80.3980167,-80.1752699]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-2b6511da5cf758fe84e5" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-2b6511da5cf758fe84e5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[25.7286667,25.7102333,25.6780139,25.7933892,25.68568,25.5999564,25.7483333,25.8150757,25.7375383,25.19725,25.2850348],[-80.2084333,-80.2462,-80.2433917,-80.1809772,-80.1835687,-80.23627190000001,-80.1997222,-80.1752699,-80.1834006,-80.3980167,-80.3950348],4,null,null,{"interactive":true,"className":"","stroke":true,"color":"blue","weight":5,"opacity":0.5,"fill":true,"fillColor":"blue","fillOpacity":0.5},null,null,["Monitoring Location: AN01","Monitoring Location: AN02","Monitoring Location: AN03","Monitoring Location: BB16","Monitoring Location: BB32","Monitoring Location: BB36","Monitoring Location: BB54","Monitoring Location: BB15","Monitoring Location: BB27","Monitoring Location: BB56","Monitoring Location: FLAB02"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[25.19725,25.8150757],"lng":[-80.3980167,-80.1752699]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>visualize distribution of points through time</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe with unique sampling events</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sampling_events <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Activity.Start.Date.Time, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Activity.Start.Date.Time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Create time distribution plot</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sampling_events, <span class="fu">aes</span>(<span class="at">x =</span> Activity.Start.Date.Time)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Sampling Events Over Time"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Sampling Events"</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Temporal distribution of sampling effort.</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataframe with unique sampling events</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sampling_events <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Activity.Start.Date.Time, Monitoring.Location.ID) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Activity.Start.Date.Time)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sampling_events, <span class="fu">aes</span>(<span class="at">x =</span> Activity.Start.Date.Time)) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Sampling Events Over Time"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Sampling Events"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="BBWW_files/figure-html/time distribution plot-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="BBWW_files/figure-html/prep data through time-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
 <details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap of sampling locations over time</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># drop rows with missing dates or IDs</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sampling_events <span class="ot">&lt;-</span> sampling_events <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time), <span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># if sampling_events is empty, skip this plot</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(sampling_events) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(sampling_events, </span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">x =</span> Activity.Start.Date.Time, </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> Monitoring.Location.ID)) <span class="sc">+</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Sampling Locations Over Time"</span>,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Date"</span>,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Monitoring.Location.ID"</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">+</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"No sampling events with valid dates &amp; IDs"</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Plot spatiotemporal sample locations.</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop rows with missing dates or IDs</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sampling_events <span class="ot">&lt;-</span> sampling_events <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Activity.Start.Date.Time), <span class="sc">!</span><span class="fu">is.na</span>(Monitoring.Location.ID))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># if sampling_events is empty, skip this plot</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">nrow</span>(sampling_events) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(sampling_events, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">x =</span> Activity.Start.Date.Time, </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> Monitoring.Location.ID)) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Sampling Locations Over Time"</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Date"</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Monitoring.Location.ID"</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">+</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"No sampling events with valid dates &amp; IDs"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -410,107 +444,210 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>date_range <span class="ot">&lt;-</span> <span class="fu">range</span>(df<span class="sc">$</span><span class="st">`</span><span class="at">Activity.Start.Date.Time</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Earliest sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">1</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Earliest sampling date:  2015-07-08 00:00:00 </code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Latest   sampling date: "</span>, <span class="fu">format</span>(date_range[<span class="dv">2</span>], <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Latest   sampling date:  2019-08-10 00:00:00 </code></pre>
-</div>
-</div>
 <section id="missing-data" class="level2">
 <h2 class="anchored" data-anchor-id="missing-data">Missing Data</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Track which rows we’ve already printed</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">integer</span>(<span class="dv">0</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>DEP.Result.Value.Number) <span class="sc">|</span> df<span class="sc">$</span>DEP.Result.Value.Number <span class="sc">==</span> <span class="st">""</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'value's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Track which rows we’ve already printed</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">integer</span>(<span class="dv">0</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>DEP.Result.Value.Number) <span class="sc">|</span> df<span class="sc">$</span>DEP.Result.Value.Number <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'value's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0 Invalid 'value's</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_value, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_value, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-0b929c6ddfe878072257" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0b929c6ddfe878072257">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.Value.Number","targets":1},{"name":"Activity.Start.Date.Time","targets":2},{"name":"Monitoring.Location.ID","targets":3},{"name":"DEP.Analyte.Name","targets":4},{"name":"Org.Decimal.Latitude","targets":5},{"name":"Org.Decimal.Longitude","targets":6},{"name":"program","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f142931c93b12b7fd089" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f142931c93b12b7fd089">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.ID<\/th>\n      <th>ProgramID<\/th>\n      <th>ProgramName<\/th>\n      <th>Habitat<\/th>\n      <th>IndicatorID<\/th>\n      <th>IndicatorName<\/th>\n      <th>ParameterID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>DEP.Result.Unit<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>AreaID<\/th>\n      <th>ManagedAreaName<\/th>\n      <th>Region<\/th>\n      <th>Activity.Type<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Year<\/th>\n      <th>Month<\/th>\n      <th>Activity.Depth<\/th>\n      <th>RelativeDepth<\/th>\n      <th>TotalDepth_m<\/th>\n      <th>MDL<\/th>\n      <th>PQL<\/th>\n      <th>DetectionUnit<\/th>\n      <th>Value.Qualifier<\/th>\n      <th>ValueQualifierSource<\/th>\n      <th>SampleFraction<\/th>\n      <th>Result.Comments<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>SEACAR_QAQCFlagCode<\/th>\n      <th>SEACAR_QAQC_Description<\/th>\n      <th>Include<\/th>\n      <th>Activity.ID<\/th>\n      <th>MADup<\/th>\n      <th>ExportVersion<\/th>\n      <th>RowID<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[16,17,18,19,29,30]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.ID","targets":1},{"name":"ProgramID","targets":2},{"name":"ProgramName","targets":3},{"name":"Habitat","targets":4},{"name":"IndicatorID","targets":5},{"name":"IndicatorName","targets":6},{"name":"ParameterID","targets":7},{"name":"DEP.Analyte.Name","targets":8},{"name":"DEP.Result.Unit","targets":9},{"name":"Monitoring.Location.ID","targets":10},{"name":"AreaID","targets":11},{"name":"ManagedAreaName","targets":12},{"name":"Region","targets":13},{"name":"Activity.Type","targets":14},{"name":"Activity.Start.Date.Time","targets":15},{"name":"DEP.Result.Value.Number","targets":16},{"name":"Year","targets":17},{"name":"Month","targets":18},{"name":"Activity.Depth","targets":19},{"name":"RelativeDepth","targets":20},{"name":"TotalDepth_m","targets":21},{"name":"MDL","targets":22},{"name":"PQL","targets":23},{"name":"DetectionUnit","targets":24},{"name":"Value.Qualifier","targets":25},{"name":"ValueQualifierSource","targets":26},{"name":"SampleFraction","targets":27},{"name":"Result.Comments","targets":28},{"name":"Org.Decimal.Latitude","targets":29},{"name":"Org.Decimal.Longitude","targets":30},{"name":"SEACAR_QAQCFlagCode","targets":31},{"name":"SEACAR_QAQC_Description","targets":32},{"name":"Include","targets":33},{"name":"Activity.ID","targets":34},{"name":"MADup","targets":35},{"name":"ExportVersion","targets":36},{"name":"RowID","targets":37},{"name":"program","targets":38}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>Monitoring.Location.ID) <span class="sc">|</span> df<span class="sc">$</span>Monitoring.Location.ID <span class="sc">==</span> <span class="st">""</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'site's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>invalid_value <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(df<span class="sc">$</span>Monitoring.Location.ID) <span class="sc">|</span> df<span class="sc">$</span>Monitoring.Location.ID <span class="sc">==</span> <span class="st">""</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_value)} Invalid 'site's"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0 Invalid 'site's</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_value, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_value, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-3d52dbd155e949adab01" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3d52dbd155e949adab01">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.Value.Number","targets":1},{"name":"Activity.Start.Date.Time","targets":2},{"name":"Monitoring.Location.ID","targets":3},{"name":"DEP.Analyte.Name","targets":4},{"name":"Org.Decimal.Latitude","targets":5},{"name":"Org.Decimal.Longitude","targets":6},{"name":"program","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2f3ac4f264e450898629" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2f3ac4f264e450898629">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.ID<\/th>\n      <th>ProgramID<\/th>\n      <th>ProgramName<\/th>\n      <th>Habitat<\/th>\n      <th>IndicatorID<\/th>\n      <th>IndicatorName<\/th>\n      <th>ParameterID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>DEP.Result.Unit<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>AreaID<\/th>\n      <th>ManagedAreaName<\/th>\n      <th>Region<\/th>\n      <th>Activity.Type<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Year<\/th>\n      <th>Month<\/th>\n      <th>Activity.Depth<\/th>\n      <th>RelativeDepth<\/th>\n      <th>TotalDepth_m<\/th>\n      <th>MDL<\/th>\n      <th>PQL<\/th>\n      <th>DetectionUnit<\/th>\n      <th>Value.Qualifier<\/th>\n      <th>ValueQualifierSource<\/th>\n      <th>SampleFraction<\/th>\n      <th>Result.Comments<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>SEACAR_QAQCFlagCode<\/th>\n      <th>SEACAR_QAQC_Description<\/th>\n      <th>Include<\/th>\n      <th>Activity.ID<\/th>\n      <th>MADup<\/th>\n      <th>ExportVersion<\/th>\n      <th>RowID<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[16,17,18,19,29,30]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.ID","targets":1},{"name":"ProgramID","targets":2},{"name":"ProgramName","targets":3},{"name":"Habitat","targets":4},{"name":"IndicatorID","targets":5},{"name":"IndicatorName","targets":6},{"name":"ParameterID","targets":7},{"name":"DEP.Analyte.Name","targets":8},{"name":"DEP.Result.Unit","targets":9},{"name":"Monitoring.Location.ID","targets":10},{"name":"AreaID","targets":11},{"name":"ManagedAreaName","targets":12},{"name":"Region","targets":13},{"name":"Activity.Type","targets":14},{"name":"Activity.Start.Date.Time","targets":15},{"name":"DEP.Result.Value.Number","targets":16},{"name":"Year","targets":17},{"name":"Month","targets":18},{"name":"Activity.Depth","targets":19},{"name":"RelativeDepth","targets":20},{"name":"TotalDepth_m","targets":21},{"name":"MDL","targets":22},{"name":"PQL","targets":23},{"name":"DetectionUnit","targets":24},{"name":"Value.Qualifier","targets":25},{"name":"ValueQualifierSource","targets":26},{"name":"SampleFraction","targets":27},{"name":"Result.Comments","targets":28},{"name":"Org.Decimal.Latitude","targets":29},{"name":"Org.Decimal.Longitude","targets":30},{"name":"SEACAR_QAQCFlagCode","targets":31},{"name":"SEACAR_QAQC_Description","targets":32},{"name":"Include","targets":33},{"name":"Activity.ID","targets":34},{"name":"MADup","targets":35},{"name":"ExportVersion","targets":36},{"name":"RowID","targets":37},{"name":"program","targets":38}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>invalid_units <span class="ot">&lt;-</span> <span class="fu">which</span>((<span class="fu">is.na</span>(df<span class="sc">$</span>units) <span class="sc">|</span> df<span class="sc">$</span>units <span class="sc">==</span> <span class="st">""</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_units)} Invalid 'units' (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_value)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>invalid_units <span class="ot">&lt;-</span> <span class="fu">which</span>((<span class="fu">is.na</span>(df<span class="sc">$</span>units) <span class="sc">|</span> df<span class="sc">$</span>units <span class="sc">==</span> <span class="st">""</span>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_units)} Invalid 'units' (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0 Invalid 'units' (excluding already printed)</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_units, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_units, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-ad438601d6f9ca38ccc9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ad438601d6f9ca38ccc9">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.Value.Number","targets":1},{"name":"Activity.Start.Date.Time","targets":2},{"name":"Monitoring.Location.ID","targets":3},{"name":"DEP.Analyte.Name","targets":4},{"name":"Org.Decimal.Latitude","targets":5},{"name":"Org.Decimal.Longitude","targets":6},{"name":"program","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-280ae3b76211f45c3457" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-280ae3b76211f45c3457">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.ID<\/th>\n      <th>ProgramID<\/th>\n      <th>ProgramName<\/th>\n      <th>Habitat<\/th>\n      <th>IndicatorID<\/th>\n      <th>IndicatorName<\/th>\n      <th>ParameterID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>DEP.Result.Unit<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>AreaID<\/th>\n      <th>ManagedAreaName<\/th>\n      <th>Region<\/th>\n      <th>Activity.Type<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Year<\/th>\n      <th>Month<\/th>\n      <th>Activity.Depth<\/th>\n      <th>RelativeDepth<\/th>\n      <th>TotalDepth_m<\/th>\n      <th>MDL<\/th>\n      <th>PQL<\/th>\n      <th>DetectionUnit<\/th>\n      <th>Value.Qualifier<\/th>\n      <th>ValueQualifierSource<\/th>\n      <th>SampleFraction<\/th>\n      <th>Result.Comments<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>SEACAR_QAQCFlagCode<\/th>\n      <th>SEACAR_QAQC_Description<\/th>\n      <th>Include<\/th>\n      <th>Activity.ID<\/th>\n      <th>MADup<\/th>\n      <th>ExportVersion<\/th>\n      <th>RowID<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[16,17,18,19,29,30]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.ID","targets":1},{"name":"ProgramID","targets":2},{"name":"ProgramName","targets":3},{"name":"Habitat","targets":4},{"name":"IndicatorID","targets":5},{"name":"IndicatorName","targets":6},{"name":"ParameterID","targets":7},{"name":"DEP.Analyte.Name","targets":8},{"name":"DEP.Result.Unit","targets":9},{"name":"Monitoring.Location.ID","targets":10},{"name":"AreaID","targets":11},{"name":"ManagedAreaName","targets":12},{"name":"Region","targets":13},{"name":"Activity.Type","targets":14},{"name":"Activity.Start.Date.Time","targets":15},{"name":"DEP.Result.Value.Number","targets":16},{"name":"Year","targets":17},{"name":"Month","targets":18},{"name":"Activity.Depth","targets":19},{"name":"RelativeDepth","targets":20},{"name":"TotalDepth_m","targets":21},{"name":"MDL","targets":22},{"name":"PQL","targets":23},{"name":"DetectionUnit","targets":24},{"name":"Value.Qualifier","targets":25},{"name":"ValueQualifierSource","targets":26},{"name":"SampleFraction","targets":27},{"name":"Result.Comments","targets":28},{"name":"Org.Decimal.Latitude","targets":29},{"name":"Org.Decimal.Longitude","targets":30},{"name":"SEACAR_QAQCFlagCode","targets":31},{"name":"SEACAR_QAQC_Description","targets":32},{"name":"Include","targets":33},{"name":"Activity.ID","targets":34},{"name":"MADup","targets":35},{"name":"ExportVersion","targets":36},{"name":"RowID","targets":37},{"name":"program","targets":38}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_units)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>invalid_latlon <span class="ot">&lt;-</span> <span class="fu">which</span>((</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Latitude) <span class="sc">|</span> df<span class="sc">$</span>Org.Decimal.Latitude <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Longitude) <span class="sc">|</span> df<span class="sc">$</span>Org.Decimal.Longitude <span class="sc">==</span> <span class="st">""</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_units)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>invalid_latlon <span class="ot">&lt;-</span> <span class="fu">which</span>((</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Latitude) <span class="sc">|</span> df<span class="sc">$</span>Org.Decimal.Latitude <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(df<span class="sc">$</span>Org.Decimal.Longitude) <span class="sc">|</span> df<span class="sc">$</span>Org.Decimal.Longitude <span class="sc">==</span> <span class="st">""</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">&amp;</span> <span class="sc">!</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(df)) <span class="sc">%in%</span> printed_rows))</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">glue</span>(<span class="st">"{length(invalid_latlon)} Invalid spatial coordinates (excluding already printed)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0 Invalid spatial coordinates (excluding already printed)</code></pre>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_latlon, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(df[invalid_latlon, ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-ad1d4cfc86b4e985b633" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ad1d4cfc86b4e985b633">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.Value.Number","targets":1},{"name":"Activity.Start.Date.Time","targets":2},{"name":"Monitoring.Location.ID","targets":3},{"name":"DEP.Analyte.Name","targets":4},{"name":"Org.Decimal.Latitude","targets":5},{"name":"Org.Decimal.Longitude","targets":6},{"name":"program","targets":7}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-0ae1b6e0ff1653de1ace" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0ae1b6e0ff1653de1ace">{"x":{"filter":"none","vertical":false,"data":[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DEP.Result.ID<\/th>\n      <th>ProgramID<\/th>\n      <th>ProgramName<\/th>\n      <th>Habitat<\/th>\n      <th>IndicatorID<\/th>\n      <th>IndicatorName<\/th>\n      <th>ParameterID<\/th>\n      <th>DEP.Analyte.Name<\/th>\n      <th>DEP.Result.Unit<\/th>\n      <th>Monitoring.Location.ID<\/th>\n      <th>AreaID<\/th>\n      <th>ManagedAreaName<\/th>\n      <th>Region<\/th>\n      <th>Activity.Type<\/th>\n      <th>Activity.Start.Date.Time<\/th>\n      <th>DEP.Result.Value.Number<\/th>\n      <th>Year<\/th>\n      <th>Month<\/th>\n      <th>Activity.Depth<\/th>\n      <th>RelativeDepth<\/th>\n      <th>TotalDepth_m<\/th>\n      <th>MDL<\/th>\n      <th>PQL<\/th>\n      <th>DetectionUnit<\/th>\n      <th>Value.Qualifier<\/th>\n      <th>ValueQualifierSource<\/th>\n      <th>SampleFraction<\/th>\n      <th>Result.Comments<\/th>\n      <th>Org.Decimal.Latitude<\/th>\n      <th>Org.Decimal.Longitude<\/th>\n      <th>SEACAR_QAQCFlagCode<\/th>\n      <th>SEACAR_QAQC_Description<\/th>\n      <th>Include<\/th>\n      <th>Activity.ID<\/th>\n      <th>MADup<\/th>\n      <th>ExportVersion<\/th>\n      <th>RowID<\/th>\n      <th>program<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[16,17,18,19,29,30]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DEP.Result.ID","targets":1},{"name":"ProgramID","targets":2},{"name":"ProgramName","targets":3},{"name":"Habitat","targets":4},{"name":"IndicatorID","targets":5},{"name":"IndicatorName","targets":6},{"name":"ParameterID","targets":7},{"name":"DEP.Analyte.Name","targets":8},{"name":"DEP.Result.Unit","targets":9},{"name":"Monitoring.Location.ID","targets":10},{"name":"AreaID","targets":11},{"name":"ManagedAreaName","targets":12},{"name":"Region","targets":13},{"name":"Activity.Type","targets":14},{"name":"Activity.Start.Date.Time","targets":15},{"name":"DEP.Result.Value.Number","targets":16},{"name":"Year","targets":17},{"name":"Month","targets":18},{"name":"Activity.Depth","targets":19},{"name":"RelativeDepth","targets":20},{"name":"TotalDepth_m","targets":21},{"name":"MDL","targets":22},{"name":"PQL","targets":23},{"name":"DetectionUnit","targets":24},{"name":"Value.Qualifier","targets":25},{"name":"ValueQualifierSource","targets":26},{"name":"SampleFraction","targets":27},{"name":"Result.Comments","targets":28},{"name":"Org.Decimal.Latitude","targets":29},{"name":"Org.Decimal.Longitude","targets":30},{"name":"SEACAR_QAQCFlagCode","targets":31},{"name":"SEACAR_QAQC_Description","targets":32},{"name":"Include","targets":33},{"name":"Activity.ID","targets":34},{"name":"MADup","targets":35},{"name":"ExportVersion","targets":36},{"name":"RowID","targets":37},{"name":"program","targets":38}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_latlon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>printed_rows <span class="ot">&lt;-</span> <span class="fu">c</span>(printed_rows, invalid_latlon)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+<hr>
+</section>
+</section>
+<section id="seacar-quality-assurance-known-issues" class="level1">
+<h1>SEACAR Quality Assurance &amp; Known Issues</h1>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define generic checkcol function</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>checkColumn <span class="ot">&lt;-</span> <span class="cf">function</span>(df, colName){ </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="sc">!</span>colName <span class="sc">%in%</span> <span class="fu">names</span>(df)){</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, colName, <span class="st">"not found in dataframe"</span>))</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate percent missing</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> df[[colName]]</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(vals)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  n_missing <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(vals))</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  pct_missing <span class="ot">&lt;-</span> (n_missing <span class="sc">/</span> n) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"</span><span class="sc">\n\n</span><span class="st">'%s': missing %d values (%.2f%%)</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>              colName, n_missing, pct_missing))</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If missing, show first few rows with missing</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(n_missing <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\t</span><span class="st">First few rows with missing values:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">head</span>(df[<span class="fu">is.na</span>(vals), , <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="co"># convert data to SEACAR format</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/mutateWINToSEACAR.R"</span>))</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>df_seacar <span class="ot">&lt;-</span> <span class="fu">mutateWINToSEACAR</span>(df)</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="co"># call checkCol fn on important columns:</span></span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> </span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"ProgramID"</span>, <span class="st">"SampleDate"</span>, <span class="st">"ResultValue"</span>,</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>          <span class="st">"OriginalLatitude"</span>, <span class="st">"OriginalLongitude"</span>,</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>          <span class="st">"ProgramLocationID"</span>, <span class="st">"DetectionUnit"</span>), </span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(col){</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">checkColumn</span>(df_seacar, col)</span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+'ProgramID': missing 0 values (0.00%)
+
+
+'SampleDate': missing 0 values (0.00%)
+
+
+'ResultValue': missing 0 values (0.00%)
+
+
+'OriginalLatitude': missing 0 values (0.00%)
+
+
+'OriginalLongitude': missing 0 values (0.00%)
+
+
+'ProgramLocationID': missing 0 values (0.00%)
+
+
+'DetectionUnit': missing 910 values (100.00%)
+    First few rows with missing values:
+  ProgramID ProgramName      Habitat IndicatorID IndicatorName ParameterID
+1      4057        BBWW Water Column           7 Water Quality           3
+2      4057        BBWW Water Column           7 Water Quality           3
+3      4057        BBWW Water Column           7 Water Quality           3
+4      4057        BBWW Water Column           7 Water Quality           3
+5      4057        BBWW Water Column           7 Water Quality           3
+6      4057        BBWW Water Column           7 Water Quality           3
+  AreaID               ManagedAreaName Region Year Month RelativeDepth
+1      6 Biscayne Bay Aquatic Preserve     SE 2015     8       Surface
+2      6 Biscayne Bay Aquatic Preserve     SE 2017     1       Surface
+3      6 Biscayne Bay Aquatic Preserve     SE 2016    12       Surface
+4      6 Biscayne Bay Aquatic Preserve     SE 2018     3       Surface
+5      6 Biscayne Bay Aquatic Preserve     SE 2016     5       Surface
+6      6 Biscayne Bay Aquatic Preserve     SE 2017    10       Surface
+  TotalDepth_m  MDL  PQL DetectionUnit ValueQualifierSource SEACAR_QAQCFlagCode
+1         &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;          &lt;NA&gt;                 &lt;NA&gt;                  6Q
+2         &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;          &lt;NA&gt;                 &lt;NA&gt;                  6Q
+3         &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;          &lt;NA&gt;                 &lt;NA&gt;                  6Q
+4         &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;          &lt;NA&gt;                 &lt;NA&gt;                  6Q
+5         &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;          &lt;NA&gt;                 &lt;NA&gt;                  6Q
+6         &lt;NA&gt; &lt;NA&gt; &lt;NA&gt;          &lt;NA&gt;                 &lt;NA&gt;                  6Q
+          SEACAR_QAQC_Description Include MADup           ExportVersion RowID
+1 6Q - Within threshold tolerance       1     1 2024-08-30 16:54:53.913  &lt;NA&gt;
+2 6Q - Within threshold tolerance       1     1 2024-08-30 16:54:53.913  &lt;NA&gt;
+3 6Q - Within threshold tolerance       1     1 2024-08-30 16:54:53.913  &lt;NA&gt;
+4 6Q - Within threshold tolerance       1     1 2024-08-30 16:54:53.913  &lt;NA&gt;
+5 6Q - Within threshold tolerance       1     1 2024-08-30 16:54:53.913  &lt;NA&gt;
+6 6Q - Within threshold tolerance       1     1 2024-08-30 16:54:53.913  &lt;NA&gt;
+      ParameterName ProgramLocationID ActivityType SampleDate ResultValue
+1 Water Temperature              AN01        Field 2015-08-03       30.15
+2 Water Temperature              AN01        Field 2017-01-13       22.05
+3 Water Temperature              AN02        Field 2016-12-08       26.65
+4 Water Temperature              AN02        Field 2018-03-30       24.70
+5 Water Temperature              AN01        Field 2016-05-02       29.65
+6 Water Temperature              AN01        Field 2017-10-06       27.10
+  ActivityDepth_m ValueQualifier ResultComments OriginalLatitude
+1              NA           &lt;NA&gt;           &lt;NA&gt;         25.72867
+2              NA           &lt;NA&gt;           &lt;NA&gt;         25.72867
+3              NA           &lt;NA&gt;           &lt;NA&gt;         25.71023
+4              NA           &lt;NA&gt;           &lt;NA&gt;         25.71023
+5              NA           &lt;NA&gt;           &lt;NA&gt;         25.72867
+6              NA           &lt;NA&gt;           &lt;NA&gt;         25.72867
+  OriginalLongitude SEACAR_EventID ParameterUnits
+1         -80.20843             NA      Degrees C
+2         -80.20843             NA      Degrees C
+3         -80.24620             NA      Degrees C
+4         -80.24620             NA      Degrees C
+5         -80.20843             NA      Degrees C
+6         -80.20843             NA      Degrees C</code></pre>
+</div>
 </div>
 
 
