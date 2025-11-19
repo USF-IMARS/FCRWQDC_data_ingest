@@ -81,8 +81,8 @@ ggplot(df, aes(x = DEP.Analyte.Name, y = DEP.Result.Value.Number)) +
 
 ```
 
-```{R analyte presence table, fig.width=10, fig.height=min(max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2),20)}
-#| code-summary: Table of site sampling effort.
+```{R, Prepare Presense Sampling Table}
+#| code-summary : Prepare presence sampling table.
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -95,6 +95,10 @@ heat_long <- getPresenceHeatmapTable(
   site_col = "Monitoring.Location.ID",
   value_col = "DEP.Result.Value.Number"
 )
+```
+
+```{R analyte presence table, fig.width=10, fig.height=min(max(6, length(unique(heat_long$Monitoring.Location.ID)) * 0.2),20)}
+#| code-summary: Table of site sampling effort.
 
 plotHeatmap(
   heat_long, 
