@@ -23,7 +23,8 @@ getSTORETData <- function(programName, fpath=NULL){
     Organization.ID = programName,
     Sampling.Agency.Name = programName,
     Monitoring.Location.ID = as.character(Station),
-    Activity.Start.Date.Time = as.Date(gsub("'", NA, Date), format = "%m/%d/%y"),
+    Date_clean = gsub("'", "", Date),  # remove single quotes
+    Activity.Start.Date.Time = as.Date(Date_clean, format = "%m/%d/%y"),
     # special exception for DERM_BBWQ (missing depth)
     Activity.Depth = if ("Depth" %in% colnames(.)) .data$Depth else NA_real_,
     DEP.Analyte.Name = Parameter,
@@ -46,6 +47,7 @@ getSTORETData <- function(programName, fpath=NULL){
       "Temperature, water" = "Water Temperature"
     )
   )
+  df <- df %>% select(-Date_clean)
   return(df)
 }
 # ===================================================
