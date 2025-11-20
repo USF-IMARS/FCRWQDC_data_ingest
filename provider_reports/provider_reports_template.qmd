@@ -229,26 +229,41 @@ printed_rows <- c(printed_rows, invalid_latlon)
 # SEACAR Quality Assurance & Known Issues
 ```{R, Check for missing values}
 # define generic checkcol function
-checkColumn <- function(df, colName){ 
-  if(!colName %in% names(df)){
+checkColumn <- function(df, colName) {
+
+  if (!colName %in% names(df)) {
     stop(paste("Column", colName, "not found in dataframe"))
   }
-  
-  # Calculate percent missing
+
   vals <- df[[colName]]
   n <- length(vals)
   n_missing <- sum(is.na(vals))
   pct_missing <- (n_missing / n) * 100
-  
-  cat(sprintf("\n\n'%s': missing %d values (%.2f%%)\n",
-              colName, n_missing, pct_missing))
-  
-  # If missing, show first few rows with missing
-  if(n_missing > 0){
-    cat("\tFirst few rows with missing values:\n")
-    print(head(df[is.na(vals), , drop = FALSE]))
+
+  # --- HEADER ---------------------------------------------------------------
+  cat("\n## Column:", colName, "\n")
+  cat(sprintf("**Missing values:** %d (%.2f%%)",
+              n_missing, pct_missing))
+
+  # --- SHOW TABLE OF MISSING ROWS (QUARTO-FRIENDLY) -------------------------
+  if (n_missing > 0) {
+    tbl <- head(df[is.na(vals), , drop = FALSE])
+
+    # print() forces Quarto/knitr to display the table even inside functions
+    print(
+      knitr::kable(
+        tbl,
+        format = "simple",
+        caption = paste("**First rows with", colName, "missing:")
+      )
+    )
+
+    cat("\n---------------------------------------------------------------------------\n")
   }
+
+  invisible(NULL)
 }
+
 
 # convert data to SEACAR format
 source(here::here("R/mutateWINToSEACAR.R"))
