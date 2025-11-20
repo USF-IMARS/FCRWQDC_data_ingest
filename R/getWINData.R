@@ -141,6 +141,20 @@ getWINData <- function(programName=NULL, fpath=NULL){
       )
     )
       
+  # drop rows with missing critical values
+  # NOTE: could we instead filter for Activity.Type == "Sample"?
+  result_df <- result_df %>%
+    # found in BBAP dataset
+    filter(`Activity.Type` != "Matrix Spike") %>%
+    filter(`Activity.Type` != "Matrix Spike Replicate") %>%
+    filter(`Activity.Type` != "Laboratory Control Sample") %>%
+    filter(`Activity.Type` != "Lab Replicate") %>%
+    filter(`Activity.Type` != "Laboratory Control Sample Replicate") %>%
+    filter(`Activity.Type` != "Method Blank") %>%
+    filter(`Activity.Type` != "Field Blank")
+    
+    
+    
   # Return the dataframe
   return(result_df)
 }
