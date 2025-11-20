@@ -47,7 +47,7 @@ getWINData <- function(programName=NULL, fpath=NULL){
   }
   
   # In case any data remains in temp_row, add it as a record
-  if (is.na(temp_row)) {
+  if (!is.na(temp_row)) {
     combined_rows <- c(combined_rows, temp_row)
   }
   
@@ -151,7 +151,10 @@ getWINData <- function(programName=NULL, fpath=NULL){
     filter(`Activity.Type` != "Lab Replicate") %>%
     filter(`Activity.Type` != "Laboratory Control Sample Replicate") %>%
     filter(`Activity.Type` != "Method Blank") %>%
-    filter(`Activity.Type` != "Field Blank")
+    filter(`Activity.Type` != "Field Blank") %>%
+    # found from BROWARD
+    filter(`Activity.Type` != "Equipment Blank")
+  
     
     
     

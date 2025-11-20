@@ -13,11 +13,12 @@ Additional data is provided in custom formats by some providers:
   * newer FIU data from a custom file format
   * MiamiBeach data is a custom format
 
-Some datasets are missing crucial values and have other unhandled issues:
-  * AOML_FBBB 
+### Known Issues
+  * AOML_FBBB :
     * Missing Units for most analytes
-  * BBAP
-    * source data has rows with missing critical fields when Activity.Type is "Blank", "Replicate", or similar. These rows are dropped by getWINData()
+  * BBAP, BROWARD, PALMBEACH :
+    * source data has rows with missing critical fields when Activity.Type is "Blank", "Replicate", or similar. These rows are dropped by getWINData().
+      * This filtering is also applied to other WIN datasets.
   * SFER data has no units
   * `data/FIU_recent_all.csv` has no units
   * Miami Beach some sites have an extra '#' in front (site1 and #site1)
