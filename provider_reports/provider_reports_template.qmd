@@ -260,7 +260,7 @@ cols <-
 lapply(
   c("ProgramID", "SampleDate", "ResultValue",
           "OriginalLatitude", "OriginalLongitude",
-          "ProgramLocationID", "DetectionUnit"), 
+          "ProgramLocationID", "ParameterUnits"), 
   function(col){
     checkColumn(df_seacar, col)
   }

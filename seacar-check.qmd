@@ -220,8 +220,8 @@ percentage_table <- total_counts %>%
 print(percentage_table)
 ```
 
-```{R, show percent missing DetectionUnit}
-#| code-summary: show percent of missing DetectionUnit
+```{R, show percent missing ParameterUnits}
+#| code-summary: show percent of missing ParameterUnits
 library(dplyr)
 library(scales)
 # show percentage of missing or na rows 
