@@ -40,6 +40,7 @@ getData <- function(programName) {
     df <- getFBBBData()
   } else {
     # Default case - use WIN data
+    # BBAP, BROWARD, DEP, DERM_BBWQ, FIU_WQMP, PALMBEACH
     df <- getWINData(programName)
   }
   
