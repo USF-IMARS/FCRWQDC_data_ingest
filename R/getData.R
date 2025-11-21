@@ -46,21 +46,21 @@ getData <- function(programName) {
   
   # set SEACAR `ProgramID`s
   program_ids <- c(
-    AOML_FBBB = NA,
+    AOML_FBBB = 3,
     BBAP = 5026,
     BBWW = 4057,
     BROWARD = 10013,
-    BROWARD_STORET = NA,
+    BROWARD_STORET = 10013,
     DEP = 5033,
     DERM_BBWQ = 4018,
-    DERM_BBWQ_STORET = NA,
+    DERM_BBWQ_STORET = 4018,
     FIU_Estuaries = 509,
     FIU_WQMP = 297,
-    FIU_WQMP_HISTORICAL = NA,
-    FIU_WQMP_RECENT = NA,
+    FIU_WQMP_HISTORICAL = 297,
+    FIU_WQMP_RECENT = 297,
     MiamiBeach = 4058,
     PALMBEACH = 10012,
-    PALMBEACH_STORET = NA,
+    PALMBEACH_STORET = 10012,
     SFER = 3
   )
   df$ProgramID <- program_ids[[programName]]
