@@ -24,12 +24,6 @@ getData <- function(programName) {
   # Determine which data source to use based on program name
   if(programName == "SFER") {
     df <- getSFERData(programName)
-  } else if (programName %in% c("BROWARD", "DERM_BBWQ", "PALMBEACH")) {
-    # cat("\n--- Loading WIN Data ---\n")
-    df <- getWINData(programName) %>%
-      mutate(
-        RowID = as.character(RowID)
-    )
   } else if (programName %in% c("BROWARD_STORET", "DERM_BBWQ_STORET", "PALMBEACH_STORET")) {
     df <- getSTORETData(programName)
   } else if (programName == "MiamiBeach") {
