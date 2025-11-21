@@ -34,7 +34,5 @@ format:
     code-fold: true
     message: false
     warning: false
-    page-layout: full
-    anchor-sections: false
 
 
