@@ -497,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Get the number of NA rows for each program</span></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>na_counts <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(DetectionUnit)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(ParameterUnits)) <span class="sc">%&gt;%</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(ProgramName, <span class="at">name =</span> <span class="st">"missing_rows"</span>)</span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Combine total and NA counts, calculate percentage</span></span>
@@ -525,21 +525,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>           ProgramName missing_rows total_rows percentage
-1            AOML_FBBB        43401      43401     100.0%
-2                 BBAP        10594      10594     100.0%
-3                 BBWW          910        910     100.0%
-4              BROWARD        15142      15142     100.0%
-5       BROWARD_STORET        24290      24290     100.0%
-6                  DEP        99792      99792     100.0%
-7            DERM_BBWQ       144946     144946     100.0%
-8     DERM_BBWQ_STORET       442825     442825     100.0%
-9        FIU_Estuaries       388128     388128     100.0%
-10            FIU_WQMP        62621      62621     100.0%
-11 FIU_WQMP_HISTORICAL       484218     484218     100.0%
+1            AOML_FBBB            0      43401       0.0%
+2                 BBAP            0      10594       0.0%
+3                 BBWW            0        910       0.0%
+4              BROWARD            0      15142       0.0%
+5       BROWARD_STORET            0      24290       0.0%
+6                  DEP            0      99792       0.0%
+7            DERM_BBWQ            0     144946       0.0%
+8     DERM_BBWQ_STORET            0     442825       0.0%
+9        FIU_Estuaries            0     388128       0.0%
+10            FIU_WQMP            0      62621       0.0%
+11 FIU_WQMP_HISTORICAL            0     484218       0.0%
 12     FIU_WQMP_RECENT         4020       4020     100.0%
-13          MiamiBeach        25318      27484      92.1%
-14           PALMBEACH         7658       7658     100.0%
-15    PALMBEACH_STORET        13145      13145     100.0%
+13          MiamiBeach            0      27484       0.0%
+14           PALMBEACH            0       7658       0.0%
+15    PALMBEACH_STORET            0      13145       0.0%
 16                SFER        76230      76230     100.0%</code></pre>
 </div>
 </div>
