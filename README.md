@@ -16,9 +16,11 @@ Additional data is provided in custom formats by some providers:
 ### Known Issues
   * AOML_FBBB :
     * Missing Units for most analytes
-  * BBAP, BROWARD, PALMBEACH :
+  * BBAP, BROWARD, DEP, DERM, FIU_WQMP, PALMBEACH :
     * source data has rows with missing critical fields when Activity.Type is "Blank", "Replicate", or similar. These rows are dropped by getWINData().
       * This filtering is also applied to other WIN datasets.
+  * DEP :
+    * small number of rows missing Lat+Lon
   * SFER data has no units
   * `data/FIU_recent_all.csv` has no units
   * Miami Beach some sites have an extra '#' in front (site1 and #site1)
