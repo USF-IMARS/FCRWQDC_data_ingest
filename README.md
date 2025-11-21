@@ -21,8 +21,14 @@ Additional data is provided in custom formats by some providers:
       * This filtering is also applied to other WIN datasets.
   * DEP :
     * small number of rows missing Lat+Lon
+  * STORET data (BROWARD_STORET, DERM_BBWQ_STORET, PALMBEACH_STORET)
+    * no latitude+longitude included in raw source files
+  * FIU_WQMP_RECENT (`data/FIU_recent_all.csv` )
+    * no lat+lon included in raw source files
+    * raw source file has no units
+  * WIN dataset PALMBEACH
+    *has lat+lon provided only in `DD MM SS`, conversion to decimal not implemented
   * SFER data has no units
-  * `data/FIU_recent_all.csv` has no units
   * Miami Beach some sites have an extra '#' in front (site1 and #site1)
 
 ### Notes about the final data
