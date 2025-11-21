@@ -231,7 +231,7 @@ total_counts <- df %>%
 
 # 2. Get the number of NA rows for each program
 na_counts <- df %>%
-  filter(is.na(DetectionUnit)) %>%
+  filter(is.na(ParameterUnits)) %>%
   count(ProgramName, name = "missing_rows")
 
 # 3. Combine total and NA counts, calculate percentage
