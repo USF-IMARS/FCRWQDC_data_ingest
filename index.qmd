@@ -2,15 +2,14 @@
 title: "Florida’s Coral Reef Water Quality Data Compilation (FCRWQDC)"
 ---
 
-Data ingestion and initial analysis from FL WIN water quality database and other sources.
-Below are some statistics on data across all analytes and programs.
-For more information on specific analytes and providers, see the [analyte reports](analyte_reports/analyte_reports.qmd) and [provider reports](provider_reports/provider_reports.qmd).
+This website is a collection of research notebooks including data ingestion, quality control, and initial analysis of water quality data ingested from multiple providers in Florida. 
+Section of source code for reproducing these analyses can be expanded, and the full source code (including code for making this website) has been published on GitHub.
 
-Data for each analyte can be downloaded from the relevant analyte report.
-The full compiled data can be downloaded [here](https://drive.google.com/drive/folders/1QMUpJOwfAMG9dB_fYT0Yva3IBVRg27fr?usp=drive_link)
+For information on specific analytes and data providers, see the [analyte reports](analyte_reports/analyte_reports.qmd) and [provider reports](provider_reports/provider_reports.qmd).
 
-Florida Coral Reef Water Quality Database Compilation (FCRWQDC).
-This work is a product of the University of South Florida Institute for Marine Remote Sensing (IMaRS), funded by the Florida Department of Environmental Protection (FDEP).
+Files of unified data produced by these research notebooks can be downloaded [here](https://drive.google.com/drive/folders/1QMUpJOwfAMG9dB_fYT0Yva3IBVRg27fr?usp=drive_link)
+
+This work is a product of the University of South Florida Institute for Marine Remote Sensing ([IMaRS](https://imars.usf.edu/)), funded by the Florida Department of Environmental Protection.
 
 ```{R, get data across all programs}
 #| code-summary: get data across all programs
@@ -20,160 +19,8 @@ library("here")
 df_all <- read.csv(here("data/exports/allDataRaw.csv"))
 ```
 
-```{R, show percent missing station IDs}
-#| code-summary: show percent of missing station IDs
-library(dplyr)
-library(scales)
-# show percentage of missing or na rows in df$Monitoring.Location.ID grouped by df$program
-# 1. Get the total number of rows for each program
-total_counts <- df_all %>%
-  count(program, name = "total_rows")
-
-# 2. Get the number of NA rows for each program
-na_counts <- df_all %>%
-  filter(is.na(Monitoring.Location.ID)) %>%
-  count(program, name = "missing_rows")
-
-# 3. Combine total and NA counts, calculate percentage
-percentage_table <- total_counts %>%
-  left_join(na_counts, by = "program") %>%
-  mutate(
-    # If a program had no NAs, na_counts will be NA. Replace with 0.
-    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
-    
-    # Calculate the percentage
-    percentage_raw = missing_rows / total_rows,
-    
-    # Format the percentage for clean table output
-    percentage = scales::percent(percentage_raw, accuracy = 0.1)
-  ) %>%
-  
-  # Select and order the columns for the final table
-  select(program, missing_rows, total_rows, percentage) %>%
-  
-  # Sort by program name
-  arrange(program)
-
-# 4. Print the final data frame (which R displays as a table)
-print(percentage_table)
-```
-
-```{R, show percent missing coordinates}
-#| code-summary: show percent of missing coordinates
-library(dplyr)
-library(scales)
-# show percentage of missing or na rows in df$Monitoring.Location.ID grouped by df$program
-# 1. Get the total number of rows for each program
-total_counts <- df_all %>%
-  count(program, name = "total_rows")
-
-# 2. Get the number of NA rows for each program
-na_counts <- df_all %>%
-  filter(is.na(Org.Decimal.Latitude) | is.na(Org.Decimal.Longitude)) %>%
-  count(program, name = "missing_rows")
-
-# 3. Combine total and NA counts, calculate percentage
-percentage_table <- total_counts %>%
-  left_join(na_counts, by = "program") %>%
-  mutate(
-    # If a program had no NAs, na_counts will be NA. Replace with 0.
-    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
-    
-    # Calculate the percentage
-    percentage_raw = missing_rows / total_rows,
-    
-    # Format the percentage for clean table output
-    percentage = scales::percent(percentage_raw, accuracy = 0.1)
-  ) %>%
-  
-  # Select and order the columns for the final table
-  select(program, missing_rows, total_rows, percentage) %>%
-  
-  # Sort by program name
-  arrange(program)
-
-# 4. Print the final data frame (which R displays as a table)
-print(percentage_table)
-```
-
-```{R, show percent missing date}
-#| code-summary: show percent of missing date
-library(dplyr)
-library(scales)
-# show percentage of missing or na rows in df$Monitoring.Location.ID grouped by df$program
-# 1. Get the total number of rows for each program
-total_counts <- df_all %>%
-  count(program, name = "total_rows")
-
-# 2. Get the number of NA rows for each program
-na_counts <- df_all %>%
-  filter(is.na(Activity.Start.Date.Time)) %>%
-  count(program, name = "missing_rows")
-
-# 3. Combine total and NA counts, calculate percentage
-percentage_table <- total_counts %>%
-  left_join(na_counts, by = "program") %>%
-  mutate(
-    # If a program had no NAs, na_counts will be NA. Replace with 0.
-    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
-    
-    # Calculate the percentage
-    percentage_raw = missing_rows / total_rows,
-    
-    # Format the percentage for clean table output
-    percentage = scales::percent(percentage_raw, accuracy = 0.1)
-  ) %>%
-  
-  # Select and order the columns for the final table
-  select(program, missing_rows, total_rows, percentage) %>%
-  
-  # Sort by program name
-  arrange(program)
-
-# 4. Print the final data frame (which R displays as a table)
-print(percentage_table)
-```
-
-```{R, show percent missing value}
-#| code-summary: show percent of missing value
-library(dplyr)
-library(scales)
-# show percentage of missing or na rows in df$Monitoring.Location.ID grouped by df$program
-# 1. Get the total number of rows for each program
-total_counts <- df_all %>%
-  count(program, name = "total_rows")
-
-# 2. Get the number of NA rows for each program
-na_counts <- df_all %>%
-  filter(is.na(DEP.Result.Value.Number)) %>%
-  count(program, name = "missing_rows")
-
-# 3. Combine total and NA counts, calculate percentage
-percentage_table <- total_counts %>%
-  left_join(na_counts, by = "program") %>%
-  mutate(
-    # If a program had no NAs, na_counts will be NA. Replace with 0.
-    missing_rows = ifelse(is.na(missing_rows), 0, missing_rows),
-    
-    # Calculate the percentage
-    percentage_raw = missing_rows / total_rows,
-    
-    # Format the percentage for clean table output
-    percentage = scales::percent(percentage_raw, accuracy = 0.1)
-  ) %>%
-  
-  # Select and order the columns for the final table
-  select(program, missing_rows, total_rows, percentage) %>%
-  
-  # Sort by program name
-  arrange(program)
-
-# 4. Print the final data frame (which R displays as a table)
-print(percentage_table)
-```
-
 ```{R, select subset}
-#| code-summary: select subset
+#| code-summary: select subset & create unified csv
 # select subset of reported analytes
 source(here("R/dropNonStandardAnalytes.R"))
 df <- dropNonStandardAnalytes(df_all)
@@ -182,16 +29,13 @@ df <- dropNonStandardAnalytes(df_all)
 df <- filter(
   df,
   is.na(Activity.Depth) | Activity.Depth <= 1)
-```
 
-```{R, create .csv of all data}
-#| code-summary: create .csv of all data
 source(here("R/mutateWINTo2025.R"))
 # reduce to only cols we need & save to csv
 write.csv(mutateWINTo2025(df), here("data", "exports", "allData.csv"))
 ```
 
-### List of Analytes:
+### Included Samples by Analyte & Program:
 ```{R, Plot providers row count grouped by analyte}
 #| code-summary: Plot providers row count grouped by analyte
 library(ggplot2)
@@ -212,9 +56,8 @@ ggplot(df, aes(x = program, fill = DEP.Analyte.Name)) +
   )
 ```
 
+### Excluded Analytes:
 The following analytes are reported by some programs but not included in the output csv files or other analyses. These may be analytes that are not included in the SEACAR vocabulary or they may not have been properly mapped to the SEACAR vocabulary.
-
-
 ```{R, print excluded analytes & associated programs}
 #| code-summary: print excluded analytes & associated programs
 library(dplyr)
@@ -232,7 +75,6 @@ analyte_programs_summary <- df_all %>%
 DT::datatable(analyte_programs_summary)
 
 ```
-
 
 ### Overall statistics:
 ```{R, skimr on all data}
