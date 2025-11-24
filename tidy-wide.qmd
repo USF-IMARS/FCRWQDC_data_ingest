@@ -1,0 +1,168 @@
+---
+title: "Tidy Wide Format"
+---
+
+The allData.csv file is in "long" format, with "analyte name" as a column. 
+This document transforms the data to "wide" "tidy" format, with "analyte name" on the columns.
+This is done by  pivoting on the analyte name column. 
+
+```{R setup}
+#| code-summary: load libraries
+#| message: false
+#| warning: false
+librarian::shelf(
+  dplyr,
+  tidyr,
+  here,
+  DT
+)
+```
+
+```{R load-data}
+#| code-summary: load allData.csv
+library("here")
+df_long <- read.csv(here("data/exports/allData.csv"))
+
+# Show dimensions of long format data
+cat("Long format dimensions:\n")
+cat("  Rows:", nrow(df_long), "\n")
+cat("  Columns:", ncol(df_long), "\n")
+```
+
+## Transform to Wide Format
+
+The transformation uses `tidyr::pivot_wider()` to convert the dataset from long format (where each row is one measurement of one analyte) to wide format (where each row represents all measurements at a specific location and time).
+
+```{R transform-wide}
+#| code-summary: pivot from long to wide format
+library(dplyr)
+library(tidyr)
+
+# Pivot to wide format using the actual column names from allData.csv
+# Columns: source, site, datetime, analyte, value, units, latitude, longitude, sample_depth
+df_wide <- df_long %>%
+  pivot_wider(
+    id_cols = c(source, site, datetime, units, latitude, longitude, sample_depth),
+    names_from = analyte,
+    values_from = value,
+    values_fn = mean  # aggregate duplicates by taking mean
+  )
+
+# Show dimensions of wide format data
+cat("Wide format dimensions:\n")
+cat("  Rows:", nrow(df_wide), "\n")
+cat("  Columns:", ncol(df_wide), "\n")
+cat("\nNumber of analyte columns created:", ncol(df_wide) - 7, "\n")
+```
+
+## Preview Wide Format Data
+
+```{R preview-wide}
+#| code-summary: preview the first few rows of wide format data
+# Display first 100 rows with scrolling
+DT::datatable(
+  head(df_wide, 100),
+  options = list(
+    scrollX = TRUE,
+    scrollY = "400px",
+    pageLength = 10
+  ),
+  caption = "First 100 rows of wide format data (scroll to see all columns)"
+)
+```
+
+```{R summary-stats}
+#| code-summary: summary statistics of wide format data
+library(skimr)
+
+# Skim the numeric columns (analyte measurements)
+numeric_cols <- sapply(df_wide, is.numeric)
+if (sum(numeric_cols) > 0) {
+  cat("Summary of numeric analyte columns:\n\n")
+  skim(df_wide[, numeric_cols])
+} else {
+  cat("No numeric columns found in wide format data.\n")
+}
+```
+
+## Additional Cleanup
+To make analysis easier, an unique ID is given to each row to identify the spatial location.
+This identifier is built from `{source}-{site}-{depth}`.
+
+```{R create-id-column}
+#| code-summary: create identifier column
+df_wide$site_id <- paste(
+  df_wide$source, 
+  df_wide$site, 
+  ifelse(is.na(df_wide$sample_depth), "NA", df_wide$sample_depth), 
+  sep = "-"
+)
+
+# Display first 100 rows with scrolling
+DT::datatable(
+  head(df_wide, 100),
+  options = list(
+    scrollX = TRUE,
+    scrollY = "400px",
+    pageLength = 10
+  ),
+  caption = "Wide format data with site_id column (scroll to see all columns)"
+)
+```
+
+```{R column-subset}
+#| code-summary: reduce to only needed columns
+# desired remaining columns: analytes, datetime, site_id, depth
+# Get analyte column names (all columns except the id columns)
+id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id")
+analyte_columns <- setdiff(names(df_wide), id_columns)
+
+# Keep only datetime, site_id, sample_depth, and all analyte columns
+df_wide <- df_wide %>%
+  select(site_id, datetime, sample_depth, all_of(analyte_columns))
+
+# Display first 100 rows with scrolling
+DT::datatable(
+  head(df_wide, 100),
+  options = list(
+    scrollX = TRUE,
+    scrollY = "400px",
+    pageLength = 10
+  ),
+  caption = "Cleaned wide format data with selected columns (scroll to see all columns)"
+)
+```
+
+```{R summary-stats-final}
+#| code-summary: summary statistics of cleaned wide format data
+library(skimr)
+
+# Skim the numeric columns (analyte measurements)
+numeric_cols <- sapply(df_wide, is.numeric)
+if (sum(numeric_cols) > 0) {
+  cat("Summary of numeric analyte columns:\n\n")
+  skim(df_wide[, numeric_cols])
+} else {
+  cat("No numeric columns found in wide format data.\n")
+}
+```
+
+## Export Wide Format Data
+
+```{R export-wide}
+#| code-summary: save wide format data to CSV
+#| eval: false
+
+# Export the wide format data
+write.csv(df_wide, here("data", "exports", "allData_wide.csv"), row.names = FALSE)
+
+cat("Wide format data exported to: data/exports/allData_wide.csv\n")
+```
+
+---
+
+**Note:** Ideas for next steps:
+- Multivariate analysis where you need multiple parameters as separate variables
+- Creating correlation matrices between different analytes
+- Machine learning tasks that expect features as columns
+- Quick comparison of multiple parameters at the same observation point

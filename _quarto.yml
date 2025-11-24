@@ -7,6 +7,7 @@ project:
   render:
     - index.qmd
     - seacar-check.qmd
+    - tidy-wide.qmd
     - analyte_reports/analyte_reports/*.qmd
     - analyte_reports/analyte_reports.qmd
     - provider_reports/provider_reports/*.qmd
@@ -22,8 +23,12 @@ website:
         text: Home
       - analyte_reports/analyte_reports.qmd
       - provider_reports/provider_reports.qmd
-      - href: seacar-check.qmd
-        text: SEACAR Export
+      - text: "Data Exports"
+        menu:
+          - href: seacar-check.qmd
+            text: SEACAR Export
+          - href: tidy-wide.qmd
+            text: Tidy Wide Format
       - href: https://github.com/USF-IMaRS/WIN_data_ingest
         text: Source Code on GitHub
 format:
