@@ -46,6 +46,17 @@ df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
 df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d")
 ```
 
+# Quality Checks
+```{R, print number of duplicate rows}
+#| code-summary: print number of duplicate rows
+library(dplyr)
+
+df %>%
+  mutate(duplicate = duplicated(.)) %>%
+  summarise(n_duplicates = sum(duplicate))
+
+```
+
 # Summary Statistics
 ```{R print start + end dates}
 date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
