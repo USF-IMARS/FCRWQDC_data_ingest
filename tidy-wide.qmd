@@ -31,6 +31,23 @@ cat("  Columns:", ncol(df_long), "\n")
 
 ## Transform to Wide Format
 
+### Pre-Pivot Collision Check
+
+Before pivoting we assess how many collisions will occur.
+
+```{R, check for ID collisions}
+#| code-summary: check for ID collisions
+df_long %>%
+  group_by(source, site, datetime, sample_depth, analyte) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  filter(n > 1)
+```
+
+These rows will collide with `n` other rows (see column on far right).
+An example cause of this is samples that were taken at the same time on the same day.
+Collisions in this pivot are averaged with a mean.
+
+### Pivot
 The transformation uses `tidyr::pivot_wider()` to convert the dataset from long format (where each row is one measurement of one analyte) to wide format (where each row represents all measurements at a specific location and time).
 
 ```{R transform-wide}
@@ -86,9 +103,11 @@ if (sum(numeric_cols) > 0) {
 ```
 
 ## Additional Cleanup
+### ID column
 To make analysis easier, an unique ID is given to each row to identify the spatial location.
-This identifier is built from `{source}-{site}-{depth}`.
+This identifier can be built from `{source}-{site}-{depth}`.
 
+#### ID column Creation
 ```{R create-id-column}
 #| code-summary: create identifier column
 df_wide$site_id <- paste(
@@ -133,6 +152,17 @@ DT::datatable(
 )
 ```
 
+## Final Wide Table Stats/Visualizations
+
+```{R number of values for each analyte}
+#| code-summary: print number of non-na values for each analyte column
+id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id")
+analyte_columns <- setdiff(names(df_wide), id_columns)
+
+df_wide %>%
+  summarise(across(all_of(analyte_columns), ~ sum(!is.na(.))))
+```
+
 ```{R summary-stats-final}
 #| code-summary: summary statistics of cleaned wide format data
 library(skimr)
@@ -145,6 +175,54 @@ if (sum(numeric_cols) > 0) {
 } else {
   cat("No numeric columns found in wide format data.\n")
 }
+```
+
+#### Analyte Co-Occurrence
+```{R, show co-occurrence matrix}
+library(dplyr)
+library(tidyr)
+
+# analyte_columns is your vector of column names
+# analyte_columns <- c("A", "B", "C", ...)
+
+# Step 1: convert selected columns to logical presence (TRUE = valid numeric)
+presence <- df_wide %>%
+  mutate(across(all_of(analyte_columns),
+                ~ !is.na(suppressWarnings(as.numeric(.))))) %>%
+  select(all_of(analyte_columns))
+
+# Step 2: compute co-occurrence matrix
+cooccurrence_matrix <- t(presence) %*% as.matrix(presence)
+
+# === plot the matrix
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# Convert co-occurrence matrix to tidy format
+cooccurrence_df <- as.data.frame(cooccurrence_matrix) %>%
+  mutate(Analyte1 = row.names(.)) %>%
+  pivot_longer(-Analyte1,
+               names_to = "Analyte2",
+               values_to = "Cooccurrence")
+
+ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
+  geom_tile() +
+  scale_fill_gradientn(
+    colors = rainbow(7)  # rainbow with n colors, low -> high
+  ) +
+  labs(title = "Analyte Co-occurrence Matrix",
+       x = NULL,   # remove x-axis label
+       y = NULL,   # remove y-axis label
+       fill = "Co-occurrence") +
+  coord_fixed() +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, size = 6, vjust = 0.5, hjust = 1),
+    axis.text.y = element_text(angle = 45, size = 6, hjust = 1),
+    panel.grid = element_blank()
+  )
+
 ```
 
 ## Export Wide Format Data
