@@ -159,8 +159,18 @@ DT::datatable(
 id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id")
 analyte_columns <- setdiff(names(df_wide), id_columns)
 
+library(dplyr)
+library(tidyr)
+library(knitr)
+
 df_wide %>%
-  summarise(across(all_of(analyte_columns), ~ sum(!is.na(.))))
+  summarise(across(all_of(analyte_columns), ~ sum(!is.na(.)))) %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "Analyte",
+    values_to = "Valid_Count"
+  ) %>%
+  kable(caption = "Number of Valid Values per Analyte")
 ```
 
 ```{R summary-stats-final}
