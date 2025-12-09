@@ -56,6 +56,18 @@ ggplot(df, aes(x = program, fill = DEP.Analyte.Name)) +
   )
 ```
 
+### Included Analytes:
+```{R, print analyte sample count}
+#| code-summary: print analyte sample count
+library(dplyr)
+library(knitr)
+
+df %>%
+  count(DEP.Analyte.Name, sort = TRUE) %>%
+  rename(Count = n) %>%
+  kable()
+```
+
 ### Excluded Analytes:
 The following analytes are reported by some programs but not included in the output csv files or other analyses. These may be analytes that are not included in the SEACAR vocabulary or they may not have been properly mapped to the SEACAR vocabulary.
 ```{R, print excluded analytes & associated programs}
