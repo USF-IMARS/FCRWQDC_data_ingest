@@ -133,7 +133,7 @@ DT::datatable(
 #| code-summary: reduce to only needed columns
 # desired remaining columns: analytes, datetime, site_id, depth
 # Get analyte column names (all columns except the id columns)
-id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id")
+id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id", "datetime")
 analyte_columns <- setdiff(names(df_wide), id_columns)
 
 # Keep only datetime, site_id, sample_depth, and all analyte columns
@@ -156,7 +156,7 @@ DT::datatable(
 
 ```{R number of values for each analyte}
 #| code-summary: print number of non-na values for each analyte column
-id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id")
+id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id", "datetime")
 analyte_columns <- setdiff(names(df_wide), id_columns)
 
 library(dplyr)
@@ -191,40 +191,49 @@ if (sum(numeric_cols) > 0) {
 ```{R, show co-occurrence matrix}
 library(dplyr)
 library(tidyr)
-
-# analyte_columns is your vector of column names
-# analyte_columns <- c("A", "B", "C", ...)
-
-# Step 1: convert selected columns to logical presence (TRUE = valid numeric)
-presence <- df_wide %>%
-  mutate(across(all_of(analyte_columns),
-                ~ !is.na(suppressWarnings(as.numeric(.))))) %>%
-  select(all_of(analyte_columns))
-
-# Step 2: compute co-occurrence matrix
-cooccurrence_matrix <- t(presence) %*% as.matrix(presence)
-
-# === plot the matrix
-library(dplyr)
-library(tidyr)
 library(ggplot2)
 
-# Convert co-occurrence matrix to tidy format
+# 1. compute analyte order (most -> least)
+analyte_order <- df_wide %>%
+  summarise(across(all_of(analyte_columns), ~ sum(!is.na(.)))) %>%
+  pivot_longer(everything(), names_to = "Analyte", values_to = "Count") %>%
+  arrange(desc(Count)) %>%
+  pull(Analyte)
+
+# 2. presence matrix using sorted analytes
+presence <- df_wide %>%
+  mutate(across(all_of(analyte_order),
+                ~ !is.na(suppressWarnings(as.numeric(.))))) %>%
+  select(all_of(analyte_order))
+
+# 3. co-occurrence matrix (rows/cols are in analyte_order)
+cooccurrence_matrix <- t(presence) %*% as.matrix(presence)
+
+# 4. tidy it and set factor levels explicitly so ggplot uses that order
 cooccurrence_df <- as.data.frame(cooccurrence_matrix) %>%
   mutate(Analyte1 = row.names(.)) %>%
   pivot_longer(-Analyte1,
                names_to = "Analyte2",
-               values_to = "Cooccurrence")
+               values_to = "Cooccurrence") %>%
+  mutate(
+    Analyte1 = factor(Analyte1, levels = analyte_order),
+    # if you want the same visual order top->bottom as left->right, use analyte_order:
+    Analyte2 = factor(Analyte2, levels = analyte_order)
+    # if you'd prefer the top row to show the most frequent analyte (mirror x),
+    # uncomment the next line instead:
+    # Analyte2 = factor(Analyte2, levels = rev(analyte_order))
+  )
 
+# 5. plot
 ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
   geom_tile() +
-  scale_fill_gradientn(
-    colors = rainbow(7)  # rainbow with n colors, low -> high
+  scale_fill_gradientn(colors = rainbow(7)) +
+  labs(
+    title = "Analyte Co-occurrence Matrix (Sorted by Observation Count)",
+    x = NULL,
+    y = NULL,
+    fill = "Co-occurrence"
   ) +
-  labs(title = "Analyte Co-occurrence Matrix",
-       x = NULL,   # remove x-axis label
-       y = NULL,   # remove y-axis label
-       fill = "Co-occurrence") +
   coord_fixed() +
   theme_minimal() +
   theme(
@@ -232,6 +241,7 @@ ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
     axis.text.y = element_text(angle = 45, size = 6, hjust = 1),
     panel.grid = element_blank()
   )
+
 
 ```
 
