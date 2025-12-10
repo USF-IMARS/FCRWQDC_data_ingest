@@ -209,7 +209,7 @@ presence <- df_wide %>%
 # 3. co-occurrence matrix (rows/cols are in analyte_order)
 cooccurrence_matrix <- t(presence) %*% as.matrix(presence)
 
-# 4. tidy it and set factor levels explicitly so ggplot uses that order
+# 4. tidy it and set factor levels explicitly
 cooccurrence_df <- as.data.frame(cooccurrence_matrix) %>%
   mutate(Analyte1 = row.names(.)) %>%
   pivot_longer(-Analyte1,
@@ -217,19 +217,18 @@ cooccurrence_df <- as.data.frame(cooccurrence_matrix) %>%
                values_to = "Cooccurrence") %>%
   mutate(
     Analyte1 = factor(Analyte1, levels = analyte_order),
-    # if you want the same visual order top->bottom as left->right, use analyte_order:
     Analyte2 = factor(Analyte2, levels = analyte_order)
-    # if you'd prefer the top row to show the most frequent analyte (mirror x),
-    # uncomment the next line instead:
-    # Analyte2 = factor(Analyte2, levels = rev(analyte_order))
-  )
+  ) %>%
+  # Keep only the lower triangle (row >= column)
+  filter(as.numeric(Analyte1) <= as.numeric(Analyte2))
 
-# 5. plot
+# 5. plot with y-axis reversed
 ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
-  geom_tile() +
+  geom_tile(color = "white") +
   scale_fill_gradientn(colors = rainbow(7)) +
+  scale_y_discrete(limits = rev(levels(cooccurrence_df$Analyte2))) +  # <-- reverse y-axis
   labs(
-    title = "Analyte Co-occurrence Matrix (Sorted by Observation Count)",
+    title = "Analyte Co-occurrence Matrix (Lower Triangle, Diagonal Top-Left → Bottom-Right)",
     x = NULL,
     y = NULL,
     fill = "Co-occurrence"
@@ -241,7 +240,6 @@ ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
     axis.text.y = element_text(angle = 45, size = 6, hjust = 1),
     panel.grid = element_blank()
   )
-
 
 ```
 
