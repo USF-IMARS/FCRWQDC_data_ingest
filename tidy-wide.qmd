@@ -228,7 +228,7 @@ ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
   scale_fill_gradientn(colors = rainbow(7)) +
   scale_y_discrete(limits = rev(levels(cooccurrence_df$Analyte2))) +  # <-- reverse y-axis
   labs(
-    title = "Analyte Co-occurrence Matrix (Lower Triangle, Diagonal Top-Left → Bottom-Right)",
+    title = "Analyte Co-occurrence Matrix",
     x = NULL,
     y = NULL,
     fill = "Co-occurrence"
