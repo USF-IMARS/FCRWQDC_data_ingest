@@ -104,6 +104,7 @@ ggplot(df, aes(x = source, y = value)) +
 
 ```
 
+
 ### Station Statistics:
 ```{R, create station statistics dataframe}
 #| code-summary: create station statistics dataframe

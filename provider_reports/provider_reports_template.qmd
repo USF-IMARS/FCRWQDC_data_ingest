@@ -303,6 +303,54 @@ ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
 
 ```
 
+
+### Analytes in Space/Time
+```{R, Prepare analyte Sampling Table}
+#| code-summary : Prepare analyte sampling table.
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+source(here::here("R/presenceTable.R"))
+
+heat_long <- getPresenceHeatmapTable(
+  df, 
+  analyte_col = "Monitoring.Location.ID",  # kluge swap analyte & site 
+  site_col = "DEP.Analyte.Name",
+  value_col = "DEP.Result.Value.Number"
+)
+
+sampling_events <- df %>%
+  distinct(Activity.Start.Date.Time, DEP.Analyte.Name) %>%
+  arrange(Activity.Start.Date.Time)
+
+```
+
+```{R analytes heatmap, fig.width=10, fig.height=min(max(6, length(unique(heat_long$analyte)) * 0.2),20)}
+#| code-summary: Plot spatiotemporal sample analytes
+# drop rows with missing dates or IDs
+sampling_events <- sampling_events %>%
+  filter(!is.na(Activity.Start.Date.Time), !is.na(DEP.Analyte.Name))
+# if sampling_events is empty, skip this plot
+if (nrow(sampling_events) > 0) {
+  ggplot(sampling_events, 
+          aes(x = Activity.Start.Date.Time, 
+              y = DEP.Analyte.Name)) +
+      geom_point(color = "steelblue", alpha = 0.7) +
+      labs(
+        title = "Analyte Sampling Over Time",
+        x = "Date",
+        y = "DEP.Analyte.Name"
+      ) +
+      theme_minimal() +
+      theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        panel.grid.minor = element_blank()
+      )
+} else {
+  print("No sampling events with valid dates & IDs")
+}
+```
 ## Missing Data
 ```{R print rows with missing values in critical columns}
 # Track which rows we’ve already printed
