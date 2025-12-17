@@ -2,9 +2,9 @@
 title: "BROWARD Data"
 format: html
 params: 
-  # org_id: BROWARD # org_id must be BROWARD before `quarto publish`
+  org_id: BROWARD # org_id must be BROWARD before `quarto publish`
   # org_id: BROWARD_STORET  # this dataset has no lat+lon
-  org_id: FIU_WQMP_RECENT  # this dataset has no units
+  # org_id: FIU_WQMP_RECENT  # this dataset has no units
 
 ---
 
