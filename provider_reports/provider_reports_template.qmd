@@ -202,7 +202,106 @@ if (nrow(sampling_events) > 0) {
 }
 ```
 
+```{R, show co-occurrence matrix}
+source(here::here("R/mutateWINTo2025.R"))
+df_long <- mutateWINTo2025(df)
 
+library(dplyr)
+library(tidyr)
+
+# Pivot to wide format using the actual column names from allData.csv
+# Columns: source, site, datetime, analyte, value, units, latitude, longitude, sample_depth
+df_wide <- df_long %>%
+  pivot_wider(
+    id_cols = c(source, site, datetime, units, latitude, longitude, sample_depth),
+    names_from = analyte,
+    values_from = value,
+    values_fn = mean  # aggregate duplicates by taking mean
+  )
+
+#| code-summary: create identifier column
+df_wide$site_id <- paste(
+  df_wide$source, 
+  df_wide$site, 
+  ifelse(is.na(df_wide$sample_depth), "NA", df_wide$sample_depth), 
+  sep = "-"
+)
+
+# desired remaining columns: analytes, datetime, site_id, depth
+# Get analyte column names (all columns except the id columns)
+id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id", "datetime")
+analyte_columns <- setdiff(names(df_wide), id_columns)
+
+# Keep only datetime, site_id, sample_depth, and all analyte columns
+df_wide <- df_wide %>%
+  select(site_id, datetime, sample_depth, all_of(analyte_columns))
+
+# Display first 100 rows with scrolling
+DT::datatable(
+  head(df_wide, 100),
+  options = list(
+    scrollX = TRUE,
+    scrollY = "400px",
+    pageLength = 10
+  ),
+  caption = "Cleaned wide format data with selected columns (scroll to see all columns)"
+)
+
+
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# 1. compute analyte order (most -> least)
+analyte_order <- df_wide %>%
+  summarise(across(all_of(analyte_columns), ~ sum(!is.na(.)))) %>%
+  pivot_longer(everything(), names_to = "Analyte", values_to = "Count") %>%
+  arrange(desc(Count)) %>%
+  pull(Analyte)
+
+# 2. presence matrix using sorted analytes
+presence <- df_wide %>%
+  mutate(across(all_of(analyte_order),
+                ~ !is.na(suppressWarnings(as.numeric(.))))) %>%
+  select(all_of(analyte_order))
+
+# 3. co-occurrence matrix (rows/cols are in analyte_order)
+cooccurrence_matrix <- t(presence) %*% as.matrix(presence)
+
+# 4. tidy it and set factor levels explicitly
+cooccurrence_df <- as.data.frame(cooccurrence_matrix) %>%
+  mutate(Analyte1 = row.names(.)) %>%
+  pivot_longer(-Analyte1,
+               names_to = "Analyte2",
+               values_to = "Cooccurrence") %>%
+  mutate(
+    Analyte1 = factor(Analyte1, levels = analyte_order),
+    Analyte2 = factor(Analyte2, levels = analyte_order)
+  ) %>%
+  # Keep only the lower triangle (row >= column)
+  filter(as.numeric(Analyte1) <= as.numeric(Analyte2))
+
+# 5. plot with y-axis reversed
+ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
+  geom_tile(color = "white") +
+  scale_fill_gradientn(colors = rainbow(7)) +
+  scale_y_discrete(limits = rev(levels(cooccurrence_df$Analyte2))) +  # <-- reverse y-axis
+  labs(
+    title = "Analyte Co-occurrence Matrix",
+    x = NULL,
+    y = NULL,
+    fill = "Co-occurrence"
+  ) +
+  coord_fixed() +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, size = 6, vjust = 0.5, hjust = 1),
+    axis.text.y = element_text(angle = 45, size = 6, hjust = 1),
+    panel.grid = element_blank()
+  )
+
+```
 
 ## Missing Data
 ```{R print rows with missing values in critical columns}
@@ -292,3 +391,4 @@ lapply(
   }
 )
 ```
+
