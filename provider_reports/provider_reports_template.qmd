@@ -2,7 +2,8 @@
 title: "BROWARD Data"
 format: html
 params: 
-  org_id: BROWARD #FIU_WQMP #AOML_BBWW #DERM_BBWQ  # must be BROWARD before `quarto publish`
+  org_id: BROWARD # org_id must be BROWARD before `quarto publish`
+  # org_id: BROWARD_STORET  # this dataset has no lat+lon
 ---
 
 
@@ -204,16 +205,25 @@ if (nrow(sampling_events) > 0) {
 
 ```{R, show co-occurrence matrix}
 source(here::here("R/mutateWINTo2025.R"))
+
+if (!("Org.Decimal.Latitude" %in% names(df))) {
+  df$Org.Decimal.Latitude <- as.numeric(NA)
+}
+
+if (!("Org.Decimal.Longitude" %in% names(df))) {
+  df$Org.Decimal.Longitude <- as.numeric(NA)
+}
+
 df_long <- mutateWINTo2025(df)
 
 library(dplyr)
 library(tidyr)
 
 # Pivot to wide format using the actual column names from allData.csv
-# Columns: source, site, datetime, analyte, value, units, latitude, longitude, sample_depth
+# Columns: source, site, datetime, analyte, value, units, sample_depth
 df_wide <- df_long %>%
   pivot_wider(
-    id_cols = c(source, site, datetime, units, latitude, longitude, sample_depth),
+    id_cols = c(source, site, datetime, units, sample_depth),
     names_from = analyte,
     values_from = value,
     values_fn = mean  # aggregate duplicates by taking mean
@@ -228,7 +238,7 @@ df_wide$site_id <- paste(
 )
 
 # desired remaining columns: analytes, datetime, site_id, depth
-# Get analyte column names (all columns except the id columns)
+# Get analyte column names (all columns except listed)
 id_columns <- c("source", "site", "units", "latitude", "longitude", "sample_depth", "site_id", "datetime")
 analyte_columns <- setdiff(names(df_wide), id_columns)
 
