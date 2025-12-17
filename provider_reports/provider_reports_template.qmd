@@ -2,8 +2,10 @@
 title: "BROWARD Data"
 format: html
 params: 
-  org_id: BROWARD # org_id must be BROWARD before `quarto publish`
+  # org_id: BROWARD # org_id must be BROWARD before `quarto publish`
   # org_id: BROWARD_STORET  # this dataset has no lat+lon
+  org_id: FIU_WQMP_RECENT  # this dataset has no units
+
 ---
 
 
@@ -212,6 +214,14 @@ if (!("Org.Decimal.Latitude" %in% names(df))) {
 
 if (!("Org.Decimal.Longitude" %in% names(df))) {
   df$Org.Decimal.Longitude <- as.numeric(NA)
+}
+
+if (!("Activity.Depth" %in% names(df))) {
+  df$Activity.Depth <- as.numeric(NA)
+}
+
+if (!("DEP.Result.Unit" %in% names(df))) {
+  df$DEP.Result.Unit <- NA
 }
 
 df_long <- mutateWINTo2025(df)
