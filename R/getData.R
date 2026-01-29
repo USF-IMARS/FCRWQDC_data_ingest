@@ -248,13 +248,13 @@ processDMSCoordinates <- function(df) {
   # Function to convert DMS to decimal degrees
   dms_to_decimal <- function(dms_str) {
     # Skip if the string is empty or NA
-    if(is.na(dms_str) || dms_str == NA) {
+    if(is.na(dms_str) || dms_str == "") {
       return(NA)
     }
     
     # Parse the DMS string - expected format like: "26 5 7.1880" or "26° 5' 7.1880"
     # First, clean the string by removing degree, minute, and second symbols
-    clean_str <- gsub("[°'\"]", NA, dms_str)
+    clean_str <- gsub("[°'\"]", "", dms_str)
     
     # Split by spaces
     parts <- strsplit(clean_str, "\\s+")[[1]]
@@ -266,10 +266,13 @@ processDMSCoordinates <- function(df) {
       seconds <- as.numeric(parts[3])
       
       # Calculate decimal degrees: degrees + minutes/60 + seconds/3600
-      decimal <- degrees + minutes/60 + seconds/3600
+      # Handle negative degrees (western longitude or southern latitude)
+      if(degrees < 0) {
+        decimal <- degrees - minutes/60 - seconds/3600
+      } else {
+        decimal <- degrees + minutes/60 + seconds/3600
+      }
       
-      # Apply negative sign for western longitudes or southern latitudes if needed
-      # (typically handled by the sign in the degrees component)
       return(decimal)
     } else {
       # If the format doesn't match expectations, return NA
@@ -278,7 +281,7 @@ processDMSCoordinates <- function(df) {
   }
   
   # Apply the conversion to rows with missing decimal coordinates
-  missing_lat <- is.na(df$`Org.Decimal.Latitude`) | df$`Org.Decimal.Latitude` == NA
+  missing_lat <- is.na(df$`Org.Decimal.Latitude`) | df$`Org.Decimal.Latitude` == ""
   missing_lon <- is.na(df$`Org.Decimal.Longitude`) | df$`Org.Decimal.Longitude` == ""
   
   # Only process rows that have missing decimal coordinates but have DMS values
@@ -287,7 +290,7 @@ processDMSCoordinates <- function(df) {
     df$`Org.Decimal.Latitude`[rows_to_process] <- sapply(df$`Org.Latitude..DD.MM.SS.SSSS.`[rows_to_process], dms_to_decimal)
   }
   
-  rows_to_process <- which(missing_lon & !is.na(df$`Org.Longitude..DD.MM.SS.SSSS.`) & df$`Org.Longitude..DD.MM.SS.SSSS.` != NA)
+  rows_to_process <- which(missing_lon & !is.na(df$`Org.Longitude..DD.MM.SS.SSSS.`) & df$`Org.Longitude..DD.MM.SS.SSSS.` != "")
   if(length(rows_to_process) > 0) {
     # Apply negative sign for western longitudes (in the western hemisphere)
     lon_decimals <- sapply(df$`Org.Longitude..DD.MM.SS.SSSS.`[rows_to_process], dms_to_decimal)

@@ -28,8 +28,6 @@ Additional data is provided in custom formats by some providers:
   * FIU_WQMP_RECENT (`data/FIU_recent_all.csv` )
     * no lat+lon included in raw source files
     * raw source file has no units
-  * WIN dataset PALMBEACH
-    *has lat+lon provided only in `DD MM SS`, conversion to decimal not implemented
   * SFER data has no units
   * Miami Beach some sites have an extra '#' in front (site1 and #site1)
 
