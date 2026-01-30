@@ -154,6 +154,17 @@ if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude)))
 }
 ```
 
+```{R plot depth distribution of samples}
+#| code-summary: Depth Distribution of Samples Grouped by Analyte
+ggplot(df, aes(x = DEP.Analyte.Name, y = Activity.Depth, fill = DEP.Analyte.Name)) +
+  geom_violin() +
+  theme_bw() +
+  labs(title = "Activity Depth by Analyte",
+       x = "DEP Analyte Name",
+       y = "Activity Depth")
+
+```
+
 ```{R prep data through time}
 #| code-summary: Temporal distribution of sampling effort.
 library(ggplot2)

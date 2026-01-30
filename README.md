@@ -68,3 +68,12 @@ testthat::test_dir(here::here('tests/testthat'))
     * new `get{provider}Data` call
     * analyte name mappings
  
+# TODOs
+
+Notes from Dan [here](https://github.com/dotis/FK_WQ/blob/main/Y6_Notes.md).
+
+  * drop deep values before export into shiny
+  * too many values per sample*day (>2 is sus)
+    * Tylar confirmed samples are from multiple depths. Sometimes SFER collects surface+mid1+mid2+...+bottom. SFER data appears to have no Activity.Depth
+      * TODO: add depth distribution view to Provider report?
+      * check for exact duplicates (error? warning? drop?)
