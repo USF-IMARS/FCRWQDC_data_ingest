@@ -32,7 +32,33 @@ df <- filter(
 
 source(here("R/mutateWINTo2025.R"))
 # reduce to only cols we need & save to csv
-write.csv(mutateWINTo2025(df), here("data", "exports", "allData.csv"))
+FCRWQDC_df <- mutateWINTo2025(df)
+
+# check for duplicates
+if (anyDuplicated(FCRWQDC_df) > 0) {
+  # Find which rows are duplicated
+  dup_rows <- duplicated(FCRWQDC_df) | duplicated(FCRWQDC_df, fromLast = TRUE)
+  dup_indices <- which(dup_rows)
+  
+  # Get the actual duplicated data
+  dup_data <- FCRWQDC_df[dup_rows, ]
+  
+  # Print debug information
+  cat("=== DUPLICATE ROWS DETECTED ===\n")
+  cat("Number of duplicate rows:", sum(duplicated(FCRWQDC_df)), "\n")
+  cat("Row indices with duplicates:", paste(dup_indices, collapse = ", "), "\n\n")
+  cat("Duplicated rows:\n")
+  print(dup_data)
+  
+  # Raise an error
+  stop("Error: Duplicate rows found in FCRWQDC_df")
+}
+cat("No duplicate rows found.\n")
+
+# TODO:?check for group_by(site, day) must be <2?
+
+# write output
+write.csv(FCRWQDC_df, here("data", "exports", "allData.csv"))
 ```
 
 ### Included Samples by Analyte & Program:
