@@ -84,6 +84,11 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
         "notes"            = "Notes",
         
       ),
+      # `Activity.ID` = Activity.ID,
+      # `Monitoring.Location.ID` = Monitoring.Location.ID,
+      # `Org.Decimal.Longitude` = Org.Decimal.Longitude,
+      # `Org.Decimal.Latitude` = Org.Decimal.Latitude,
+      # Activity.Depth = Activity.Depth,
       RowID = NA,
       ProgramID = NA,
       Habitat = NA,
@@ -95,7 +100,6 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
       Activity.Type = NA,
       Year = year,
       Month = month,
-      Activity.Depth = NA,
       RelativeDepth = depth_class,
       TotalDepth_m = NA,
       MDL = NA,
@@ -110,7 +114,6 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
       MADup = NA,
       ExportVersion = NA,
       Region = NA,
-      Activity.ID = NA
     )
   
   df$DEP.Result.Unit = NA
