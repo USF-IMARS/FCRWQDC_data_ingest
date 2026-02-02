@@ -24,7 +24,7 @@ getSTORETData <- function(programName, fpath=NULL){
     Sampling.Agency.Name = programName,
     Monitoring.Location.ID = as.character(Station),
     Date_clean = gsub("'", "", Date),  # remove single quotes
-    Activity.Start.Date.Time = as.Date(Date_clean, format = "%m/%d/%y"),
+    Activity.Start.Date.Time = as.Date(Date_clean, format = "%m/%d/%Y"),
     # special exception for DERM_BBWQ (missing depth)
     Activity.Depth = if ("Depth" %in% colnames(.)) .data$Depth else NA_real_,
     DEP.Analyte.Name = Parameter,
