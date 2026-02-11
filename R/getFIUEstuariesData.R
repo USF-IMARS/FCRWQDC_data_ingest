@@ -56,7 +56,7 @@ getFIUEstuariesData <- function(){
            "NH4"      = "Ammonium, Filtered (NH4)",
            "TN"       = "Total Nitrogen",
            "DIN"      = "Inorganic Nitrogen",
-           "TON"      = "Total Kjeldahl Nitrogen",
+           "TON"      = "Nitrogen, organic",
            "TP"       = "Total Phosphorus",
            "SRP"      = "Phosphate, Filtered (PO4)",
            "APA"      = "Alkaline_Phosphatase_Activity",
