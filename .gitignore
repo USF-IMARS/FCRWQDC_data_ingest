@@ -1,7 +1,7 @@
 # files too big for github:
 data/exports/allData.csv
 data/exports/allDataSTORET.csv
-*csv 
+*csv
 
 # generated reports
 analyte_reports/analyte_reports/*
@@ -23,3 +23,5 @@ site_libs/*
 
 *-listing.json
 *.html
+
+**/*.quarto_ipynb
