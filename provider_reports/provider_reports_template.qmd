@@ -154,6 +154,32 @@ if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude)))
 }
 ```
 
+```{R show depth distribution}
+#| code-summary: Show depth distribution
+library('ggplot2')
+library(scales)
+
+reverselog_trans <- function(base = 10) {
+  trans_new(
+    name = "reverselog",
+    transform = function(x) -log(x, base),
+    inverse = function(x) base^(-x),
+    breaks = log_breaks(base = base),
+    domain = c(1e-100, Inf)
+  )
+}
+
+ggplot(df, aes(y = Activity.Depth + 0.1)) +  # + tiny offset to prevent log10(0) errors
+  geom_histogram(fill = "#427355", colour = "white", bins = 30) +
+  scale_y_continuous(trans = reverselog_trans(10), labels = function(x) round(x)) +
+  labs(
+    y = "Activity Depth (log scale)",
+    x = "Count",
+    title = "Distribution of Activity Depth"
+  ) +
+  theme_minimal()
+```
+
 ```{R prep data through time}
 #| code-summary: Temporal distribution of sampling effort.
 library(ggplot2)
