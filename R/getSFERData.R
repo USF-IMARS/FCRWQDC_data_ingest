@@ -95,7 +95,6 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
       Activity.Type = NA,
       Year = year,
       Month = month,
-      Activity.Depth = NA,
       RelativeDepth = depth_class,
       TotalDepth_m = NA,
       MDL = NA,
