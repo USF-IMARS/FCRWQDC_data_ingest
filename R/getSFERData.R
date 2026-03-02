@@ -79,7 +79,7 @@ getSFERData <- function(programName=NULL, fpath=NULL) {
         "no3_no2"          = "NO2+3, Filtered",
         "po4"              = "Phosphate, Filtered (PO4)",
         "si"               = "Silicate",
-        "avg_chl_a"        = "Chlorophyll a, corrected for pheophytin",
+        "avg_chl_a"        = "Chlorophyll a, Corrected for Pheophytin",
         "avg_phaeo"        = "Pheophytin",
         "notes"            = "Notes",
         

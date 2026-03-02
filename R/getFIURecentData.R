@@ -24,6 +24,7 @@ getFIURecentData <- function(programName=NULL, fpath=NULL) {
   
   df <- df %>%
     mutate(
+      Activity.Depth = NA,
       Monitoring.Location.ID = as.character(Station),
       Activity.Start.Date.Time = as.Date(
         Date, 

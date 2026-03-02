@@ -60,7 +60,7 @@ getFIUEstuariesData <- function(){
            "TP"       = "Total Phosphorus",
            "SRP"      = "Phosphate, Filtered (PO4)",
            "APA"      = "Alkaline_Phosphatase_Activity",
-           "CHLA"     = "Chlorophyll a, uncorrected for pheophytin",
+           "CHLA"     = "Chlorophyll a, Uncorrected for Pheophytin",
            "TOC"      = "Total_Organic_Carbon",
            "SiO2"     = "Silicate",
            "TURB"     = "Turbidity",
