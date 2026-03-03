@@ -50,6 +50,27 @@ df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = 
 ```
 
 # Quality Checks
+```{R, show non-standard analytes}
+#| code-summary: show non-standard analytes
+# compare unique(df$DEP.Analyte.Name) before & after dropNonStandardAnalytes
+source(here::here("R/dropNonStandardAnalytes.R"))
+df_dropped_analytes <- dropNonStandardAnalytes(df)
+
+analytes_before <- sort(unique(df$DEP.Analyte.Name))
+analytes_after  <- sort(unique(df_dropped_analytes$DEP.Analyte.Name))
+
+analytes_removed <- setdiff(analytes_before, analytes_after)
+
+if (length(analytes_removed) > 0) {
+  cat(glue::glue(
+    "Non-Standard Analytes Present: {length(analytes_removed)}\n",
+  ))
+  cat("\nNon-Standard Analytes Removed Before Exporting Data:\n")
+  print(analytes_removed)
+}
+
+```
+
 ```{R, print number of duplicate rows}
 #| code-summary: print number of duplicate rows
 library(dplyr)
