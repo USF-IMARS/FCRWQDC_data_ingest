@@ -1,3 +1,6 @@
+# TODO:
+Test out the provider listing summary and merge it into main branch if it looks good.
+If feeling frisky: create icons with tooltips in the summary
 
 ## Data
 Data for this repo is staged in `/data`.

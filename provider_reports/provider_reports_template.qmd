@@ -187,6 +187,25 @@ if (all(is.na(df$Org.Decimal.Latitude)) || all(is.na(df$Org.Decimal.Longitude)))
 library('ggplot2')
 library(scales)
 
+# Add depth data to summary
+has_depth <- !all(is.na(df$Activity.Depth))
+summary_data$has_depth_data <- has_depth
+
+if (has_depth) {
+  depth_stats <- df %>% 
+    filter(!is.na(Activity.Depth)) %>%
+    summarise(
+      min_depth = min(Activity.Depth, na.rm = TRUE),
+      max_depth = max(Activity.Depth, na.rm = TRUE),
+      mean_depth = mean(Activity.Depth, na.rm = TRUE)
+    )
+  summary_data$depth_range <- list(
+    min = round(depth_stats$min_depth, 1),
+    max = round(depth_stats$max_depth, 1),
+    mean = round(depth_stats$mean_depth, 1)
+  )
+}
+
 reverselog_trans <- function(base = 10) {
   trans_new(
     name = "reverselog",
@@ -525,6 +544,8 @@ cat(glue("Total Records: {summary_data$total_records}\n"))
 cat(glue("Unique Monitoring Sites: {summary_data$unique_sites}\n"))
 cat(glue("Unique Analytes: {summary_data$unique_analytes}\n"))
 cat(glue("Date Range: {summary_data$earliest_date} to {summary_data$latest_date}\n"))
+cat(glue("Sites with Coordinates: {summary_data$sites_with_coordinates}/{summary_data$unique_sites}\n"))
+cat(glue("Has Depth Data: {if(summary_data$has_depth_data) '✓ Yes' else '✗ No'}\n"))
 cat("============================\n")
 
 # Save summary data for potential use in listing page
