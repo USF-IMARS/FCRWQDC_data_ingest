@@ -4,7 +4,15 @@ Data for this repo is staged in `/data`.
 
 Final data is also stored in gdrive [here](https://drive.google.com/drive/folders/1QMUpJOwfAMG9dB_fYT0Yva3IBVRg27fr?usp=drive_link).
 
+-------------------------------------------------------------
+
 The final data produced by this ingestion is visualized further using [this shiny data dashboard](https://github.com/USF-IMARS/FCRWQDC_data_dashboard).
+
+-------------------------------------------------------------
+
+Details on the data files ingested by program is in the [SEACAR program name/id mapping gsheet](https://docs.google.com/spreadsheets/d/1GVJ4kyze9s_XfiOls81FaKKY4B1dH7Ex08UM7B6A_pc/edit?usp=sharing).
+
+Additional details on the upstream data files are below.
 
 Data from WIN is pulled manually for each program and put into `data/`.
 This data is staged at [this box.com link](https://usf.app.box.com/s/6j6ipvgh1ncu8qcmgw9o0ygxogcg8371).
