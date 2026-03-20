@@ -47,6 +47,13 @@ df <- getData(params$org_id)
 
 df$DEP.Result.Value.Number <- as.numeric(df$DEP.Result.Value.Number)
 df$Activity.Start.Date.Time <- as.POSIXct(df$Activity.Start.Date.Time, format = "%Y-%m-%d")
+
+# Initialize summary list to build throughout the document
+summary_data <- list()
+summary_data$provider <- params$org_id
+summary_data$total_records <- nrow(df)
+summary_data$unique_sites <- length(unique(df$Monitoring.Location.ID))
+summary_data$unique_analytes <- length(unique(df$DEP.Analyte.Name))
 ```
 
 # Quality Checks
@@ -84,8 +91,8 @@ df %>%
 # Summary Statistics
 ```{R print start + end dates}
 date_range <- range(df$`Activity.Start.Date.Time`, na.rm = TRUE)
-  cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
-  cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Earliest sampling date: ", format(date_range[1], "%Y-%m-%d %H:%M:%S"), "\n")
+cat("Latest   sampling date: ", format(date_range[2], "%Y-%m-%d %H:%M:%S"), "\n")
   
 # TODO: show source file. NOTE: could use dict in getData:
 #       {
@@ -505,5 +512,28 @@ lapply(
     checkColumn(df_seacar, col)
   }
 )
+```
+
+# Comprehensive Data Summary
+```{R display final summary}
+#| code-summary: Display complete data summary
+
+# Display formatted summary
+cat("=== COMPREHENSIVE DATA SUMMARY ===\n")
+cat(glue("Provider: {summary_data$provider}\n"))
+cat(glue("Total Records: {summary_data$total_records}\n"))
+cat(glue("Unique Monitoring Sites: {summary_data$unique_sites}\n"))
+cat(glue("Unique Analytes: {summary_data$unique_analytes}\n"))
+cat(glue("Date Range: {summary_data$earliest_date} to {summary_data$latest_date}\n"))
+cat("============================\n")
+
+# Save summary data for potential use in listing page
+# This creates a JSON file that could be read by the main listing page
+if (!dir.exists(here("data", "summaries"))) {
+  dir.create(here("data", "summaries"), showWarnings = FALSE)
+}
+summary_file <- here("data", "summaries", glue("{summary_data$provider}_summary.json"))
+jsonlite::write_json(summary_data, summary_file, pretty = TRUE, auto_unbox = TRUE)
+cat(glue("\nSummary data saved to: {summary_file}\n"))
 ```
 
