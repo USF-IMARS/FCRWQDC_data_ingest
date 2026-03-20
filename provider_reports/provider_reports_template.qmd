@@ -24,7 +24,7 @@ source(here("R/getData.R"))
 df <- getData(params$org_id)
 
 # === read from cleaned file generated in pre-render
-# df_allData <- read.csv(here("data", "exports", "allData.csv")) %>%
+# df_allData <- read.csv(here("data", "exports", "dashboardData.csv")) %>%
 #   filter(source == params$org_id)
 # df <- df_allData
 
@@ -276,7 +276,7 @@ df_long <- mutateWINTo2025(df)
 library(dplyr)
 library(tidyr)
 
-# Pivot to wide format using the actual column names from allData.csv
+# Pivot to wide format using the actual column names from dashboardData.csv
 # Columns: source, site, datetime, analyte, value, units, sample_depth
 df_wide <- df_long %>%
   pivot_wider(

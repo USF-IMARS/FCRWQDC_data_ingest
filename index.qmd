@@ -32,14 +32,14 @@ df <- filter(
 
 source(here("R/mutateWINTo2025.R"))
 # reduce to only cols we need & save to csv
-write.csv(mutateWINTo2025(df), here("data", "exports", "allData.csv"))
+write.csv(mutateWINTo2025(df), here("data", "exports", "dashboardData.csv"))
 ```
 
 ```{R, create parquet file}
 #| code-summary: create parquet file
 arrow::write_parquet(
   df,
-  here("data", "exports", "allData.parquet"),
+  here("data", "exports", "dashboardData.parquet"),
   compression = "snappy"
 )
 ```

@@ -2,7 +2,7 @@
 title: "Tidy Wide Format"
 ---
 
-The allData.csv file is in "long" format, with "analyte name" as a column. 
+The dashboardData.csv file is in "long" format, with "analyte name" as a column. 
 This document transforms the data to "wide" "tidy" format, with "analyte name" on the columns.
 This is done by  pivoting on the analyte name column. 
 
@@ -19,9 +19,9 @@ librarian::shelf(
 ```
 
 ```{R load-data}
-#| code-summary: load allData.csv
+#| code-summary: load dashboardData.csv
 library("here")
-df_long <- read.csv(here("data/exports/allData.csv"))
+df_long <- read.csv(here("data/exports/dashboardData.csv"))
 
 # Show dimensions of long format data
 cat("Long format dimensions:\n")
@@ -55,7 +55,7 @@ The transformation uses `tidyr::pivot_wider()` to convert the dataset from long 
 library(dplyr)
 library(tidyr)
 
-# Pivot to wide format using the actual column names from allData.csv
+# Pivot to wide format using the actual column names from dashboardData.csv
 # Columns: source, site, datetime, analyte, value, units, latitude, longitude, sample_depth
 df_wide <- df_long %>%
   pivot_wider(
@@ -250,9 +250,9 @@ ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
 #| eval: false
 
 # Export the wide format data
-write.csv(df_wide, here("data", "exports", "allData_wide.csv"), row.names = FALSE)
+write.csv(df_wide, here("data", "exports", "dashboardData_wide.csv"), row.names = FALSE)
 
-cat("Wide format data exported to: data/exports/allData_wide.csv\n")
+cat("Wide format data exported to: data/exports/dashboardData_wide.csv\n")
 ```
 
 ---

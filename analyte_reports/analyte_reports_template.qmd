@@ -29,7 +29,7 @@ source(here("R/getAllData.R"))
 # )
 
 # read from cached file produced by index.qmd
-full_df <- read.csv(here("data", "exports", "allData.csv"))
+full_df <- read.csv(here("data", "exports", "dashboardData.csv"))
 
 df <- filter(full_df, analyte == params$analyte)
 ```
