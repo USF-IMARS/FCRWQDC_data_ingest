@@ -5,4 +5,90 @@ code-fold: true
 listing:
   contents: provider_reports
   type: grid
+  fields:
+    - title
+    - description
+    - custom-summary
 ---
+
+```{r setup summary data}
+#| echo: false
+library(jsonlite)
+library(dplyr)
+library(glue)
+
+# Function to read summary data and create custom summary
+create_provider_summary <- function(provider_name) {
+  summary_file <- here("data", "summaries", glue("{provider_name}_summary.json"))
+  
+  if (file.exists(summary_file)) {
+    summary_data <- fromJSON(summary_file)
+    
+    # Build summary string with available data
+    summary_parts <- c()
+    
+    # Add basic metrics if available
+    if (!is.null(summary_data$total_records)) {
+      summary_parts <- append(summary_parts, glue("{summary_data$total_records:,} records"))
+    }
+    
+    if (!is.null(summary_data$unique_sites)) {
+      summary_parts <- append(summary_parts, glue("{summary_data$unique_sites} sites"))
+    }
+    
+    if (!is.null(summary_data$unique_analytes)) {
+      summary_parts <- append(summary_parts, glue("{summary_data$unique_analytes} analytes"))
+    }
+    
+    # Add coordinate info
+    if (!is.null(summary_data$sites_with_coordinates) && !is.null(summary_data$unique_sites)) {
+      coord_ratio <- summary_data$sites_with_coordinates / summary_data$unique_sites
+      if (coord_ratio == 1) {
+        summary_parts <- append(summary_parts, "📍 All sites have coordinates")
+      } else {
+        summary_parts <- append(summary_parts, glue("📍 {summary_data$sites_with_coordinates}/{summary_data$unique_sites} sites with coordinates"))
+      }
+    }
+    
+    # Add depth info with emoji
+    if (!is.null(summary_data$has_depth_data)) {
+      if (summary_data$has_depth_data) {
+        summary_parts <- append(summary_parts, "📏 Has depth data")
+        if (!is.null(summary_data$depth_range)) {
+          summary_parts <- append(summary_parts, glue("📏 Depth: {summary_data$depth_range$min}-{summary_data$depth_range$max}m"))
+        }
+      } else {
+        summary_parts <- append(summary_parts, "❌ No depth data")
+      }
+    }
+    
+    # Add date range
+    if (!is.null(summary_data$earliest_date) && !is.null(summary_data$latest_date)) {
+      # Extract just the year if full datetime
+      start_year <- substr(summary_data$earliest_date, 1, 4)
+      end_year <- substr(summary_data$latest_date, 1, 4)
+      if (start_year == end_year) {
+        summary_parts <- append(summary_parts, glue("📅 {start_year}"))
+      } else {
+        summary_parts <- append(summary_parts, glue("📅 {start_year}-{end_year}"))
+      }
+    }
+    
+    # Add duplicate info if significant
+    if (!is.null(summary_data$duplicate_records) && summary_data$duplicate_records > 0) {
+      summary_parts <- append(summary_parts, glue("⚠️ {summary_data$duplicate_records} duplicates"))
+    }
+    
+    # Add non-standard analyte info
+    if (!is.null(summary_data$non_standard_analytes) && summary_data$non_standard_analytes > 0) {
+      summary_parts <- append(summary_parts, glue("⚠️ {summary_data$non_standard_analytes} non-standard analytes"))
+    }
+    
+    return(paste(summary_parts, collapse = " • "))
+  } else {
+    return("Summary data not available")
+  }
+}
+
+# This function will be used by Quarto to generate custom summaries
+```
