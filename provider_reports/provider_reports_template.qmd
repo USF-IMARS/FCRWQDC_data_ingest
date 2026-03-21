@@ -13,7 +13,7 @@ params:
 #| include: false
 
 # Read the summary data that was saved at the end of this document
-summary_file <- here("data", "summaries", glue("{params$org_id}_summary.json"))
+summary_file <- here::here("data", "summaries", glue::glue("{params$org_id}_summary.json"))
 
 if (file.exists(summary_file)) {
   summary_data <- jsonlite::fromJSON(summary_file)
