@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-description','listing-custom-summary',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
       searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
     };
@@ -229,10 +229,9 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1774060667796" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1774125046426" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/AOML_FBBB.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/AOML_FBBB_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 AOML_FBBB Data
@@ -240,30 +239,35 @@ AOML_FBBB Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : AOML_FBBB...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1774060667827" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1774125046457" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/BBAP.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/BBAP_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 BBAP Data
@@ -271,30 +275,35 @@ BBAP Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : BBAP...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read in…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1774060667771" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1774125046397" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/BBWW.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/BBWW_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 BBWW Data
@@ -302,30 +311,35 @@ BBWW Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : BBWW...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read in…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1774060667833" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1774125046464" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/BROWARD.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/BROWARD_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 BROWARD Data
@@ -333,30 +347,35 @@ BROWARD Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : BROWARD...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1774060667802" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1774125046433" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/BROWARD_STORET.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/BROWARD_STORET_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 BROWARD_STORET Data
@@ -364,30 +383,35 @@ BROWARD_STORET Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : BROWARD_STORET...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1774060667839" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1774125046472" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/DEP.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/DEP_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 DEP Data
@@ -395,30 +419,35 @@ DEP Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : DEP...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read in data</summary>…<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1774060667844" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1774125046479" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/DERM_BBWQ.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/DERM_BBWQ_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 DERM_BBWQ Data
@@ -426,30 +455,35 @@ DERM_BBWQ Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : DERM_BBWQ...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1774060667810" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1774125046440" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/DERM_BBWQ_STORET.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/DERM_BBWQ_STORET_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 DERM_BBWQ_STORET Data
@@ -457,30 +491,34 @@ DERM_BBWQ_STORET Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : DERM_BBWQ_STORET...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">…<summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="8" data-listing-file-modified-sort="1774060667777" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="8" data-listing-file-modified-sort="1774125046403" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/FIU_Estuaries.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/FIU_Estuaries_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 FIU_Estuaries Data
@@ -488,30 +526,35 @@ FIU_Estuaries Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : FIU_Estuaries...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>r…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="9" data-listing-file-modified-sort="1774060667850" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="9" data-listing-file-modified-sort="1774125046486" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/FIU_WQMP.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/FIU_WQMP_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 FIU_WQMP Data
@@ -519,30 +562,35 @@ FIU_WQMP Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : FIU_WQMP...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="10" data-listing-file-modified-sort="1774060667790" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="10" data-listing-file-modified-sort="1774125046419" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/FIU_WQMP_HISTORICAL.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/FIU_WQMP_HISTORICAL_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 FIU_WQMP_HISTORICAL Data
@@ -550,30 +598,32 @@ FIU_WQMP_HISTORICAL Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER …</code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="11" data-listing-file-modified-sort="1774060667784" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="11" data-listing-file-modified-sort="1774125046410" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/FIU_WQMP_RECENT.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/FIU_WQMP_RECENT_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 FIU_WQMP_RECENT Data
@@ -581,30 +631,35 @@ FIU_WQMP_RECENT Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : FIU_WQMP_RECENT...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="12" data-listing-file-modified-sort="1774060667765" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="12" data-listing-file-modified-sort="1774125046390" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/MiamiBeach.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/MiamiBeach_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 MiamiBeach Data
@@ -612,30 +667,35 @@ MiamiBeach Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : MiamiBeach...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="13" data-listing-file-modified-sort="1774060667857" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="13" data-listing-file-modified-sort="1774125046492" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/PALMBEACH.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/PALMBEACH_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 PALMBEACH Data
@@ -643,30 +703,35 @@ PALMBEACH Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : PALMBEACH...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">
+<summary>read…</summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="14" data-listing-file-modified-sort="1774060667821" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="14" data-listing-file-modified-sort="1774125046450" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/PALMBEACH_STORET.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/PALMBEACH_STORET_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 PALMBEACH_STORET Data
@@ -674,30 +739,34 @@ PALMBEACH_STORET Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : PALMBEACH_STORET...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<details class="code-fold">…<summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co"></span></span><span id="cb3-2"><span class="co"></span></span><span id="cb3-3"><span class="co"></span></span><span id="cb3-4"><span class="co"></span></span><span id="cb3-5"></span><span id="cb3-6"><span class="co"></span></span><span id="cb3-7"><span class="co"></span></span><span id="cb3-8"><span class="co"></span></span><span id="cb3-9"><span class="co"></span></span><span id="cb3-10"><span class="co"></span></span><span id="cb3-11"><span class="co"></span></span><span id="cb3-12"><span class="co"></span></span><span id="cb3-13"><span class="co"></span></span><span id="cb3-14"><span class="co"></span></span><span id="cb3-15"><span class="co"></span></span><span id="cb3-16"><span class="co"></span></span><span id="cb3-17"><span class="co"></span></span><span id="cb3-18"><span class="co"></span></span><span id="cb3-19"><span class="co"></span></span><span id="cb3-20"><span class="co"></span></span><span id="cb3-21"></span><span id="cb3-22"></span><span id="cb3-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb3-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb3-25"></span><span id="cb3-26"><span class="co"></span></span><span id="cb3-27"><span class="ot"></span><span class="fu"></span></span><span id="cb3-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="15" data-listing-file-modified-sort="1774060667754" data-listing-reading-time-sort="12" data-listing-word-count-sort="2234">
+<div class="g-col-1" data-index="15" data-listing-file-modified-sort="1774125046381" data-listing-reading-time-sort="14" data-listing-word-count-sort="2632">
 <a href="../provider_reports/provider_reports/SFER.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top"><img src="provider_reports/SFER_files/figure-html/create violin plot-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
 SFER Data
@@ -705,23 +774,29 @@ SFER Data
 <div class="card-text listing-description delink">
 
 <details class="code-fold">
-<summary>Load libraries &amp; read in data</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">librarian<span class="sc">::</span><span class="fu">shelf</span>(</span>
-<span id="cb1-2">  dplyr,</span>
-<span id="cb1-3">  glue,</span>
-<span id="cb1-4">  here,</span>
-<span id="cb1-5">  tidyr</span>
-<span id="cb1-6">)</span>
-<span id="cb1-7"></span>
-<span id="cb1-8"><span class="co"># === read data from source files (can take a long time)</span></span>
-<span id="cb1-9"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
-<span id="cb1-10">df <span class="ot">…</span><span class="fu"></span><span class="sc"></span></span></code></pre></div></div></details><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><div class="cell-output cell-output-stdout"><pre><code></code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co"></span></span><span id="cb4-2"><span class="co"></span></span><span id="cb4-3"><span class="co"></span></span><span id="cb4-4"><span class="co"></span></span><span id="cb4-5"></span><span id="cb4-6"><span class="co"></span></span><span id="cb4-7"><span class="co"></span></span><span id="cb4-8"><span class="co"></span></span><span id="cb4-9"><span class="co"></span></span><span id="cb4-10"><span class="co"></span></span><span id="cb4-11"><span class="co"></span></span><span id="cb4-12"><span class="co"></span></span><span id="cb4-13"><span class="co"></span></span><span id="cb4-14"><span class="co"></span></span><span id="cb4-15"><span class="co"></span></span><span id="cb4-16"><span class="co"></span></span><span id="cb4-17"><span class="co"></span></span><span id="cb4-18"><span class="co"></span></span><span id="cb4-19"><span class="co"></span></span><span id="cb4-20"><span class="co"></span></span><span id="cb4-21"></span><span id="cb4-22"></span><span id="cb4-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb4-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb4-25"></span><span id="cb4-26"><span class="co"></span></span><span id="cb4-27"><span class="ot"></span><span class="fu"></span></span><span id="cb4-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+<summary>read in data</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co"># === read data from source files (can take a long time)</span></span>
+<span id="cb1-2"><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"R/getData.R"</span>))</span>
+<span id="cb1-3">df <span class="ot">&lt;-</span> <span class="fu">getData</span>(params<span class="sc">$</span>org_id)</span></code></pre></div></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== LOADING PROVIDER : SFER...</code></pre>
 </div>
-<div class="card-attribution card-text-small start">
-<div class="listing-author">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "WARN…</code></pre></div><details class="code-fold"><summary></summary><div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="co"></span></span><span id="cb4-2"><span class="co"></span></span><span id="cb4-3"><span class="co"></span></span><span id="cb4-4"><span class="co"></span></span><span id="cb4-5"></span><span id="cb4-6"><span class="co"></span></span><span id="cb4-7"><span class="co"></span></span><span id="cb4-8"><span class="co"></span></span><span id="cb4-9"><span class="co"></span></span><span id="cb4-10"><span class="co"></span></span><span id="cb4-11"><span class="co"></span></span><span id="cb4-12"><span class="co"></span></span><span id="cb4-13"><span class="co"></span></span><span id="cb4-14"><span class="co"></span></span><span id="cb4-15"><span class="co"></span></span><span id="cb4-16"><span class="co"></span></span><span id="cb4-17"><span class="co"></span></span><span id="cb4-18"><span class="co"></span></span><span id="cb4-19"><span class="co"></span></span><span id="cb4-20"><span class="co"></span></span><span id="cb4-21"></span><span id="cb4-22"></span><span id="cb4-23"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span></span><span id="cb4-24"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="st"></span></span><span id="cb4-25"></span><span id="cb4-26"><span class="co"></span></span><span id="cb4-27"><span class="ot"></span><span class="fu"></span></span><span id="cb4-28"><span class="sc"></span><span class="ot"></span><span class="sc"></span></span></code></pre></div></div></details>
+</div>
+<table class="card-other-values">
 
-</div>
-</div>
+<tbody><tr>
+<td>
+custom-summary
+</td>
+<td class="custom-summary">
+&nbsp;
+</td>
+</tr>
+
+</tbody></table>
 </div>
 </div></a>
 </div>
