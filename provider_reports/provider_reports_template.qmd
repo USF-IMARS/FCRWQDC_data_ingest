@@ -8,12 +8,24 @@ params:
 
 ---
 
+```{R setup}
+#| code-summary: Load libraries
+#| echo: false
+#| include: false
+librarian::shelf(
+  dplyr,
+  glue,
+  here,
+  tidyr
+)
+```
+
 ```{r generate custom summary for listing}
 #| echo: false
 #| include: false
 
 # Read the summary data that was saved at the end of this document
-summary_file <- here::here("data", "summaries", glue::glue("{params$org_id}_summary.json"))
+summary_file <- here("data", "summaries", glue("{params$org_id}_summary.json"))
 
 if (file.exists(summary_file)) {
   summary_data <- jsonlite::fromJSON(summary_file)
@@ -85,15 +97,8 @@ if (file.exists(summary_file)) {
 ```
 
 
-```{R setup and load data}
-#| code-summary: Load libraries & read in data
-
-librarian::shelf(
-  dplyr,
-  glue,
-  here,
-  tidyr
-)
+```{R load data}
+#| code-summary: read in data
 
 # === read data from source files (can take a long time)
 source(here("R/getData.R"))
@@ -133,7 +138,7 @@ summary_data$provider <- params$org_id
 ```{R, show non-standard analytes}
 #| code-summary: show non-standard analytes
 # compare unique(df$DEP.Analyte.Name) before & after dropNonStandardAnalytes
-source(here::here("R/dropNonStandardAnalytes.R"))
+source(here("R/dropNonStandardAnalytes.R"))
 df_dropped_analytes <- dropNonStandardAnalytes(df)
 
 analytes_before <- sort(unique(df$DEP.Analyte.Name))
@@ -142,7 +147,7 @@ analytes_after  <- sort(unique(df_dropped_analytes$DEP.Analyte.Name))
 analytes_removed <- setdiff(analytes_before, analytes_after)
 
 if (length(analytes_removed) > 0) {
-  cat(glue::glue(
+  cat(glue(
     "Non-Standard Analytes Present: {length(analytes_removed)}\n",
   ))
   cat("\nNon-Standard Analytes Removed Before Exporting Data:\n")
@@ -184,7 +189,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-source(here::here("R/presenceTable.R"))
+source(here("R/presenceTable.R"))
 
 heat_long <- getPresenceHeatmapTable(
   df, 
@@ -334,7 +339,7 @@ if (nrow(sampling_events) > 0) {
 ```
 
 ```{R, show co-occurrence matrix}
-source(here::here("R/mutateWINTo2025.R"))
+source(here("R/mutateWINTo2025.R"))
 
 if (!("Org.Decimal.Latitude" %in% names(df))) {
   df$Org.Decimal.Latitude <- as.numeric(NA)
@@ -459,7 +464,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-source(here::here("R/presenceTable.R"))
+source(here("R/presenceTable.R"))
 
 heat_long <- getPresenceHeatmapTable(
   df, 
@@ -572,7 +577,7 @@ checkColumn <- function(df, colName) {
 
 
 # convert data to SEACAR format
-source(here::here("R/mutateWINToSEACAR.R"))
+source(here("R/mutateWINToSEACAR.R"))
 df_seacar <- mutateWINToSEACAR(df)
 
 # call checkCol fn on important columns:
