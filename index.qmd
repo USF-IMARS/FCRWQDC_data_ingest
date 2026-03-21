@@ -35,15 +35,6 @@ source(here("R/mutateWINTo2025.R"))
 write.csv(mutateWINTo2025(df), here("data", "exports", "dashboardData.csv"))
 ```
 
-```{R, create parquet file}
-#| code-summary: create parquet file
-arrow::write_parquet(
-  df,
-  here("data", "exports", "dashboardData.parquet"),
-  compression = "snappy"
-)
-```
-
 ### Included Samples by Analyte & Program:
 ```{R, Plot providers row count grouped by analyte}
 #| code-summary: Plot providers row count grouped by analyte
