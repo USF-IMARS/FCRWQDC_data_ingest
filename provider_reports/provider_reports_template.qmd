@@ -1,10 +1,11 @@
 ---
-title: "BROWARD Data"
+title: "BROWARD"
 format: html
 params: 
   org_id: BROWARD # org_id must be BROWARD before `quarto publish`
   # org_id: BROWARD_STORET  # this dataset has no lat+lon
   # org_id: FIU_WQMP_RECENT  # this dataset has no units
+image: "summary_images/BROWARD.png"  # must be `BROWARD`
 
 ---
 
@@ -19,83 +20,6 @@ librarian::shelf(
   tidyr
 )
 ```
-
-```{r generate custom summary for listing}
-#| echo: false
-#| include: false
-
-# Read the summary data that was saved at the end of this document
-summary_file <- here("data", "summaries", glue("{params$org_id}_summary.json"))
-
-if (file.exists(summary_file)) {
-  summary_data <- jsonlite::fromJSON(summary_file)
-  
-  # Build summary string for listing page
-  summary_parts <- c()
-  
-  # Add basic metrics
-  if (!is.null(summary_data$total_records)) {
-    summary_parts <- append(summary_parts, glue("{summary_data$total_records:,} records"))
-  }
-  
-  if (!is.null(summary_data$unique_sites)) {
-    summary_parts <- append(summary_parts, glue("{summary_data$unique_sites} sites"))
-  }
-  
-  if (!is.null(summary_data$unique_analytes)) {
-    summary_parts <- append(summary_parts, glue("{summary_data$unique_analytes} analytes"))
-  }
-  
-  # Add coordinate info
-  if (!is.null(summary_data$sites_with_coordinates) && !is.null(summary_data$unique_sites)) {
-    coord_ratio <- summary_data$sites_with_coordinates / summary_data$unique_sites
-    if (coord_ratio == 1) {
-      summary_parts <- append(summary_parts, "📍 All sites have coordinates")
-    } else {
-      summary_parts <- append(summary_parts, glue("📍 {summary_data$sites_with_coordinates}/{summary_data$unique_sites} sites with coordinates"))
-    }
-  }
-  
-  # Add depth info with emoji
-  if (!is.null(summary_data$has_depth_data)) {
-    if (summary_data$has_depth_data) {
-      summary_parts <- append(summary_parts, "📏 Has depth data")
-      if (!is.null(summary_data$depth_range)) {
-        summary_parts <- append(summary_parts, glue("📏 Depth: {summary_data$depth_range$min}-{summary_data$depth_range$max}m"))
-      }
-    } else {
-      summary_parts <- append(summary_parts, "❌ No depth data")
-    }
-  }
-  
-  # Add date range
-  if (!is.null(summary_data$earliest_date) && !is.null(summary_data$latest_date)) {
-    start_year <- substr(summary_data$earliest_date, 1, 4)
-    end_year <- substr(summary_data$latest_date, 1, 4)
-    if (start_year == end_year) {
-      summary_parts <- append(summary_parts, glue("📅 {start_year}"))
-    } else {
-      summary_parts <- append(summary_parts, glue("📅 {start_year}-{end_year}"))
-    }
-  }
-  
-  # Add warnings if any
-  if (!is.null(summary_data$duplicate_records) && summary_data$duplicate_records > 0) {
-    summary_parts <- append(summary_parts, glue("⚠️ {summary_data$duplicate_records} duplicates"))
-  }
-  
-  if (!is.null(summary_data$non_standard_analytes) && summary_data$non_standard_analytes > 0) {
-    summary_parts <- append(summary_parts, glue("⚠️ {summary_data$non_standard_analytes} non-standard analytes"))
-  }
-  
-  # Set the custom summary for Quarto listing
-  custom_summary <- paste(summary_parts, collapse = " • ")
-  
-} else {
-  custom_summary <- "Summary data not available"
-}
-```
-
 
 ```{R load data}
 #| code-summary: read in data
@@ -184,7 +108,6 @@ ggplot(df, aes(x = DEP.Analyte.Name, y = DEP.Result.Value.Number)) +
 ```
 
 ```{R, Prepare Presense Sampling Table}
-#| code-summary : Prepare presence sampling table.
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -459,7 +382,6 @@ ggplot(cooccurrence_df, aes(x = Analyte1, y = Analyte2, fill = Cooccurrence)) +
 
 ### Analytes in Space/Time
 ```{R, Prepare analyte Sampling Table}
-#| code-summary : Prepare analyte sampling table.
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -619,14 +541,59 @@ cat(paste(summary_data$earliest_date, "/", summary_data$latest_date, "\n"))
 cat(paste("Depth?:", if(summary_data$has_depth_data) "✓ Yes" else "✗ No", "\n"))
 cat("============================\n")
 
-# Save summary data for potential use in listing page
-# This creates a JSON file that could be read by the main listing page
-if (!dir.exists(here("data", "summaries"))) {
-  dir.create(here("data", "summaries"), showWarnings = FALSE)
+
+# Generate summary image for listing page
+# Create a visual summary card with key metrics
+if (!dir.exists("provider_reports/summary_images")) {
+  dir.create("provider_reports/summary_images", recursive = TRUE)
 }
-summary_file <- here("data", "summaries", glue("{summary_data$provider}_summary.json"))
-jsonlite::write_json(summary_data, summary_file, pretty = TRUE, auto_unbox = TRUE)
-cat(glue("\nSummary data saved to: {summary_file} for use in listing.\n"))
+
+# Load required libraries for image generation
+library(ggplot2)
+library(gridExtra)
+library(grid)
+
+# Create a text-based summary with checkmarks
+p <- ggplot() +     
+  # Add date range (top)
+  annotate("text", x = 0.1, y = 0.85, label = "📅", size = 8, color = "#6c757d") +
+  annotate("text", x = 0.2, y = 0.85, 
+           label = ifelse(!is.null(summary_data$earliest_date) && !is.null(summary_data$latest_date),
+                         paste(substr(summary_data$earliest_date, 1, 4), "-", substr(summary_data$latest_date, 1, 4)),
+                         "Date range not available"), 
+           size = 5, hjust = 0, color = "black") +
+    
+  # Add depth data status (middle)
+  annotate("text", x = 0.1, y = 0.5, label = ifelse(summary_data$has_depth_data, "✓", "✗"), size = 10, 
+           color = ifelse(summary_data$has_depth_data, "#28a745", "#dc3545")) +
+  annotate("text", x = 0.2, y = 0.5, label = paste("Depth Data:", ifelse(summary_data$has_depth_data, "Available", "Not Available")), 
+           size = 5, hjust = 0, color = "black") +
+    
+  # Set limits and remove axes
+  scale_x_continuous(limits = c(0, 1)) +
+  scale_y_continuous(limits = c(0, 1)) +
+  
+  # Minimal theme
+  theme_void() +
+  theme(
+    plot.margin = margin(10, 15, 10, 15),
+    panel.background = element_rect(fill = "white", color = "white")
+  )
+
+# Add depth range conditionally if depth data is available
+if (summary_data$has_depth_data && !is.null(summary_data$depth_range)) {
+  p <- p + 
+    annotate("text", x = 0.1, y = 0.15, label = "📏", size = 6, color = "#17a2b8") +
+    annotate("text", x = 0.2, y = 0.15, 
+             label = paste("Depth Range:", summary_data$depth_range$min, "-", summary_data$depth_range$max, "m"), 
+             size = 4, hjust = 0, color = "black")
+}
+
+# Save the plot with directory creation (wider, less tall dimensions)
+summary_image_path <- glue(here("provider_reports/provider_reports/summary_images/{params$org_id}.png"))
+ggsave(summary_image_path, plot = p, width = 5, height = 3, dpi = 150, bg = "white", create.dir = TRUE)
+
+cat(glue("Summary image saved to: {summary_image_path}\n"))
 ```
 
 

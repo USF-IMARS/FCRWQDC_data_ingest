@@ -6,3 +6,5 @@ listing:
   contents: analyte_reports
   type: grid
 ---
+
+Click on an analyte below for more details.
